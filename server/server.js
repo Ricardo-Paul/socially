@@ -10,21 +10,40 @@ app.use(cors());
 const dbName = "sociallydb";
 const mongoURL = `mongodb://127.0.0.1/${dbName}`;
 
+// models (once the program hit that line)
+// it creates the users collection
+// 
+import models from './models';
+const { User } = models;
+
+
+// const newUser = new User({
+//     fullName: 'Newton',
+//     email: 'newtonisac@gmail.com'
+// }).save();
+
+// if(newUser){
+//     console.log('New user created')
+// }
+// User
 // apollo server
 const schema = gql`
-# we can query field fullName on type User
-    type User {
-        fullName: String
-        username: String
-        city: String
-    }
-
-
-# field we can query on type Query (users)
-# the uppermost level
-
     type Query{
         users: [User]
+    }
+
+    type User{
+        fullName: String
+        email: String
+    }
+
+    input SignupInput{
+        fullName: String
+        email: String
+    }
+
+    type Mutation{
+        signup(input: SignupInput): User
     }
 `
 // use mongo db models as users
@@ -34,10 +53,14 @@ const users = [{
     fullName: "Ricardo Paul"
 }]
 
-
+import userResolver from './resolvers/userResolver'
+const { Mutation: { signup } } = userResolver;
 const resolverObject = {
     Query: {
         users: () => users
+    },
+    Mutation: {
+        signup
     }
 }
 
