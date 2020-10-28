@@ -1,7 +1,0 @@
-# Dependencies
-# finish with /: matches directories only
-# no / at beginning: directory anywery
-node_modules/
-
-# pattern doesnt start with/: matches files and directories anywhere
-ln_more.txt
