@@ -4,4 +4,4 @@
 node_modules/
 
 # pattern doesnt start with/: matches files and directories anywhere
-lnmore.txt
+ln_more.txt
