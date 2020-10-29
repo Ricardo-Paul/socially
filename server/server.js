@@ -2,7 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { createApolloServer } from './utils/apolloServer';
-import { gql } from 'apollo-server-express';
+
+import resolvers from './resolvers';
+import models from './models';
+import { schema } from './schema';
+
 
 const app = express();
 app.use(cors());
@@ -14,50 +18,17 @@ const DB_NAME = process.env.DB_NAME;
 const HOST =   process.env.HOST;
 
 
-// models (once the program hit that line)
-// it creates the users collection
-// 
-import models from './models';
-const { User } = models;
 
-const schema = gql`
-    type Query{
-        users: [User]
-    }
+// ditch the resolver object by passing the
+// resolvers as an array
 
-    type User{
-        fullName: String
-        email: String
-    }
+// const resolverObject = {
+//     Mutation: {
+//         signup
+//     }
+// }
 
-    input SignupInput{
-        fullName: String
-        email: String
-    }
-
-    type Mutation{
-        signup(input: SignupInput): User
-    }
-`
-// use mongo db models as users
-const users = [{
-    username: "Ricardo",
-    city: "PetionVille",
-    fullName: "Ricardo Paul"
-}]
-
-import userResolver from './resolvers/userResolver'
-const { Mutation: { signup } } = userResolver;
-const resolverObject = {
-    Query: {
-        users: () => users
-    },
-    Mutation: {
-        signup
-    }
-}
-
-const apolloServer = createApolloServer(schema, resolverObject);
+const apolloServer = createApolloServer(schema, resolvers);
 apolloServer.applyMiddleware({ app })
 
 // express sever
