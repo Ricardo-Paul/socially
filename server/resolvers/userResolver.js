@@ -1,4 +1,6 @@
 import models from '../models';
+import getUserToken from '../utils/getUserToken';
+
 
 const Query = {
     username: () => 'Ricardo'
@@ -17,16 +19,29 @@ const Mutation = {
         if(existedUser){
             const fieldValue = existedUser.username === username?username: email
             throw new Error(`User with ${fieldValue} already existed`);
-            return existedUser;
         }
 
-        const createdUser = await new User({
+        // make sure all required values are provided
+        // this is also  handled in the SignupInput schema
+        if(!fullName || !email || !username || !password){
+            throw new Error('Please provide a value for each field');
+        }
+        if(fullName.length > 20){
+            throw new Error('Fullname can\'t be longer thant 20 characters')
+        }
+        // TODO: validate username with regex
+
+        const newUser = await new User({
             fullName,
             email,
             username,
             password
         }).save();
-        return createdUser
+
+        let signupToken = getUserToken(newUser);
+        return {signupToken};
+        //important for return value to be an object to fit the schema
+        // type Token{ signupToken }
     }
 }
 
