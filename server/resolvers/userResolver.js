@@ -1,6 +1,6 @@
 import models from '../models';
 import getUserToken from '../utils/getUserToken';
-
+import bcrypt from 'bcryptjs';
 
 const Query = {
     username: () => 'Ricardo'
@@ -45,7 +45,6 @@ const Mutation = {
     },
 
     signin: async(root, { input: {emailOrUsername, password} }, { User }) => {
-
         const user = await User.findOne({
             $or: [
                 {email: emailOrUsername},
@@ -55,6 +54,12 @@ const Mutation = {
         if(!user){
             throw new Error('User not found');
         }
+        // TODO: compare password with then hashed one in the db
+        const isCorrectPassword = await bcrypt.compare(password, user.password)
+        if(!isCorrectPassword) throw new Error('Invalid password');
+
+        let signinToken = getUserToken(user);
+        return {signinToken};
     }
 }
 
