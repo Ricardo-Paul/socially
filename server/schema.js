@@ -1,7 +1,11 @@
 import { gql } from 'apollo-server-express';
 // non-null fields !
 
-const schema1 = gql`
+export const schema = gql`
+    type Query{
+        username: String
+    }
+
     type Token{
         token: String
     }
@@ -12,10 +16,16 @@ const schema1 = gql`
         email: String!
         username: String!
         password: String!
+        image: String
+        imagePublicId: String
+        coverImage: String
+        coverImagePublicId: String
+        passwordResetToken: String
+        passwordResetTokenExpiry: String
     }
 
     type Mutation{
-        signup(input: SignupInput): Token
+        signup(input: SignupInput): User
     }
 
     input SignupInput{
@@ -25,7 +35,7 @@ const schema1 = gql`
         password: String!
     }
 `
-export const schema = gql`
+export const schemaTest = gql`
     type Query{
         users: [User]
     }
