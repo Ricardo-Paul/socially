@@ -42,6 +42,19 @@ const Mutation = {
         return {signupToken};
         //important for return value to be an object to fit the schema
         // type Token{ signupToken }
+    },
+
+    signin: async(root, { input: {emailOrUsername, password} }, { User }) => {
+
+        const user = await User.findOne({
+            $or: [
+                {email: emailOrUsername},
+                {username: emailOrUsername}
+            ]
+        });
+        if(!user){
+            throw new Error('User not found');
+        }
     }
 }
 

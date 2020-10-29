@@ -9,4 +9,7 @@ const postSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }
+},{
+    timestamps: true,
+    versionKey: 'vKey'
 })

@@ -8,6 +8,7 @@ export const schema = gql`
 
     type Token{
         signupToken: String
+        signinToken: String
     }
 
     type User{
@@ -26,12 +27,18 @@ export const schema = gql`
 
     type Mutation{
         signup(input: SignupInput!): Token
+        signin(input: SigninInput!): Token
     }
 
     input SignupInput{
         fullName: String!
         email: String!
         username: String!
+        password: String!
+    }
+
+    input SigninInput{
+        emailOrUsername: String!
         password: String!
     }
 `
