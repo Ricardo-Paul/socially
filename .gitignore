@@ -5,3 +5,6 @@ node_modules/
 
 # pattern doesnt start with/: matches files and directories anywhere
 lnmore.txt
+
+# environment var
+.env

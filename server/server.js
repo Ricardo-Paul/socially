@@ -7,8 +7,12 @@ import { gql } from 'apollo-server-express';
 const app = express();
 app.use(cors());
 
-const dbName = "sociallydb";
-const mongoURL = `mongodb://127.0.0.1/${dbName}`;
+// env var
+const API_PORT = process.env.API_PORT;
+const MONGO_URL = process.env.MONGO_URL;
+const DB_NAME = process.env.DB_NAME;
+const HOST =   process.env.HOST;
+
 
 // models (once the program hit that line)
 // it creates the users collection
@@ -16,17 +20,6 @@ const mongoURL = `mongodb://127.0.0.1/${dbName}`;
 import models from './models';
 const { User } = models;
 
-
-// const newUser = new User({
-//     fullName: 'Newton',
-//     email: 'newtonisac@gmail.com'
-// }).save();
-
-// if(newUser){
-//     console.log('New user created')
-// }
-// User
-// apollo server
 const schema = gql`
     type Query{
         users: [User]
@@ -68,13 +61,14 @@ const apolloServer = createApolloServer(schema, resolverObject);
 apolloServer.applyMiddleware({ app })
 
 // express sever
-const PORT = '8080'
-app.listen(PORT, ()=>{
-    console.log('app is running on port', PORT+apolloServer.graphqlPath);
+app.listen(API_PORT, ()=>{
+    console.log(`API is running on port: ${HOST}${API_PORT}
+    graphQL Playground: ${HOST}${API_PORT}/${apolloServer.graphqlPath}
+    `);
 })
 
-mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(`${MONGO_URL}/${DB_NAME}`, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
-    console.log('DB connected')
+    console.log(`API Connected to the databse: ${DB_NAME}`)
 })
 .catch(err => console.error(err))

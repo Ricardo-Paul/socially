@@ -9,13 +9,16 @@ const Query = {
 // they are meant to cause writes in the db
 const Mutation = {
     signup: async (root, { input: { fullName, email } }) => {
-        const User = models.User;
-        const createdUser = new User({
-            fullName,
-            email
-        }).save();
-        console.log('User Added')
-        return createdUser;
+        try{
+            const User = models.User;
+            const createdUser = new User({
+                fullName,
+                email
+            }).save()
+            return createdUser;
+        } catch(err) {
+            console.error(err)
+        }
     }
 }
 
