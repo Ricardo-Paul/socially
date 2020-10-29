@@ -28,7 +28,7 @@ const HOST =   process.env.HOST;
 //     }
 // }
 
-const apolloServer = createApolloServer(schema, resolvers);
+const apolloServer = createApolloServer(schema, resolvers, models);
 apolloServer.applyMiddleware({ app })
 
 // express sever

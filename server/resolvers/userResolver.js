@@ -5,7 +5,7 @@ const Query = {
 }
 
 const Mutation = {
-    signup: async (_,{ input: { fullName, email }}, {User}) => {
+    signup: async (root, { input: { fullName, email }}, { User }) => {
         try{
             // const User = models.User;
             const createdUser = new User({
