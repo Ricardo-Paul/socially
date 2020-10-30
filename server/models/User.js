@@ -32,7 +32,7 @@ const userSchema = new Schema({
     coverImagePublicId: String,
     // password Reset
     passwordResetToken: String,
-    passwordResetTokenExpiry: String,
+    passwordResetTokenExpiryDate: Date,
     posts: {
         type: Schema.Types.ObjectId,
         ref: 'Post'

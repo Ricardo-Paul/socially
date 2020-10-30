@@ -22,12 +22,13 @@ export const schema = gql`
         coverImage: String
         coverImagePublicId: String
         passwordResetToken: String
-        passwordResetTokenExpiry: String
+        passwordResetTokenExpiryDate: String
     }
 
     type Mutation{
         signup(input: SignupInput!): Token
         signin(input: SigninInput!): Token
+        requestPassReset(input: PassResetInput!): User
     }
 
     input SignupInput{
@@ -41,4 +42,10 @@ export const schema = gql`
         emailOrUsername: String!
         password: String!
     }
+
+    input PassResetInput{
+        email: String!
+    }
+
+
 `

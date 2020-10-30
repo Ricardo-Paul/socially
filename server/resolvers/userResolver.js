@@ -1,6 +1,10 @@
 import models from '../models';
-import getUserToken from '../utils/getUserToken';
+import generateToken from '../utils/generateToken';
 import bcrypt from 'bcryptjs';
+import ms from 'ms'
+
+const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
+const PASS_RESET_TOKEN_DURATION = '3600000' // 60mns token duration white password-resetting
 
 const Query = {
     username: () => 'Ricardo'
@@ -38,7 +42,7 @@ const Mutation = {
             password
         }).save();
 
-        let signupToken = getUserToken(newUser);
+        let signupToken = generateToken(newUser, AUTH_TOKEN_EXPIRY);
         return {signupToken};
         //important for return value to be an object to fit the schema
         // type Token{ signupToken }
@@ -58,9 +62,33 @@ const Mutation = {
         const isCorrectPassword = await bcrypt.compare(password, user.password)
         if(!isCorrectPassword) throw new Error('Invalid password');
 
-        let signinToken = getUserToken(user);
+        let signinToken = generateToken(user, AUTH_TOKEN_EXPIRY);
         return {signinToken};
+    },
+
+    requestPassReset: async (root, {input: {email}}, {User}) => {
+        console.log('mutation hit', email)
+        const user = await User.findOne({ email });
+
+        if(!user) {
+            console.log('User not found')
+            throw new Error('Password Reset: User not found')
+        }
+
+        const passwordResetToken = generateToken(user, PASS_RESET_TOKEN_DURATION);
+        const passwordResetTokenExpiryDate = new Date(Date.now()) + PASS_RESET_TOKEN_DURATION;
+
+        const updatedUser = await User.findOneAndUpdate(
+            {_id: user.id},
+            { passwordResetToken,
+              passwordResetTokenExpiryDate
+            },
+            { new: true } //returns the document with the new update
+        )
+
+        return updatedUser
     }
+
 }
 
 export default {
