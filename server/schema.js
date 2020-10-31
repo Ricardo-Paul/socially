@@ -2,6 +2,10 @@ import { gql } from 'apollo-server-express';
 // non-null fields !
 
 export const schema = gql`
+
+#-------------------------------------------------------
+# QUERY ROOT
+#-------------------------------------------------------
     type Query{
         username: String
     }
@@ -25,10 +29,18 @@ export const schema = gql`
         passwordResetTokenExpiryDate: String
     }
 
+#-------------------------------------------------------
+# MUTATION
+#-------------------------------------------------------
+
     type Mutation{
         signup(input: SignupInput!): Token
         signin(input: SigninInput!): Token
-        requestPassReset(input: PassResetInput!): User
+        requestPassReset(input: PassResetInput!): SuccessMessage
+    }
+
+    type SuccessMessage{
+        message: String
     }
 
     input SignupInput{

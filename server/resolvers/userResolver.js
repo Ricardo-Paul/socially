@@ -2,6 +2,7 @@ import models from '../models';
 import generateToken from '../utils/generateToken';
 import bcrypt from 'bcryptjs';
 import ms from 'ms'
+import { sendEmail } from '../utils/sendEmail';
 
 const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000' // 60mns token duration white password-resetting
@@ -67,12 +68,11 @@ const Mutation = {
     },
 
     requestPassReset: async (root, {input: {email}}, {User}) => {
-        console.log('mutation hit', email)
         const user = await User.findOne({ email });
 
         if(!user) {
             console.log('User not found')
-            throw new Error('Password Reset: User not found')
+            throw new Error(`Can't find user with email: ${email} on our system`);
         }
 
         const passwordResetToken = generateToken(user, PASS_RESET_TOKEN_DURATION);
@@ -86,7 +86,21 @@ const Mutation = {
             { new: true } //returns the document with the new update
         )
 
-        return updatedUser
+        const CLIENT_URL = 'http://localhost:3000';
+
+        const mailOptions = {
+            to: updatedUser.email,
+            subject: 'Socially | Password Reset',
+            html: `Click the following link to reset your password: 
+            ${CLIENT_URL}/reset-password?email=${updatedUser.email}&&passwordResetToken=${updatedUser.passwordResetToken}`
+        }
+
+        sendEmail(mailOptions);
+        return {
+            message: `We have sent an email to: ${updatedUser.email}.
+            Please check your inbox to continue with the password reset
+            `
+        }
     }
 
 }
