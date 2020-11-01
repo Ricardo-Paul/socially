@@ -121,19 +121,13 @@ const Mutation = {
 
         user.save();
 
-        // const updatedUser = await User.findOneAndUpdate({_id: user.id},
-        //     {password, passwordResetToken:"", passwordResetTokenExpiryDate:"" },
-        //     {new: true}
-        //     );
-
-        // sendEmail({
-        //     to: updatedUser.email,
-        //     subject: 'Successfully reset password',
-        //     html: 'You have successfully reset your password'
-        // })
+        sendEmail({
+            to: updatedUser.email,
+            subject: 'Successfully reset password',
+            html: 'You have successfully reset your password'
+        })
         return user;
     }
-
 }
 
 export default {
