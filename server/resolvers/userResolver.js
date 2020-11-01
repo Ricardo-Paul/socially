@@ -11,9 +11,11 @@ const Query = {
 
     getLoggedInUser: async (_, args, {loggedInUser, User}) => {
         // third arguments are returned form context by apolloServer
+        // they are called context BTW
         if(!loggedInUser) throw new Error(`User not logged in`);
-
-        return loggedInUser;
+        const {email, username} = loggedInUser;
+        const user = User.findOne({email, username});
+        return user;
     }
 }
 

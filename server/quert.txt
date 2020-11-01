@@ -1,0 +1,10 @@
+query{
+  getLoggedInUser{
+    email
+    username
+    fullName
+    password
+    passwordResetToken
+    passwordResetTokenExpiryDate
+  }
+}

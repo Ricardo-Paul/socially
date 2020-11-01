@@ -11,7 +11,6 @@ export const createApolloServer = (schema, resolvers, models) => {
             if(req){
                 if(req.headers){
                     const token = req.headers["authorization"];
-
                    const  loggedInUser = jwt.decode(token, process.env.SECRET)
                     return Object.assign({loggedInUser}, models)
                 }
