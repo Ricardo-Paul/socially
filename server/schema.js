@@ -37,16 +37,24 @@ export const schema = gql`
         signup(input: SignupInput!): Token
         signin(input: SigninInput!): Token
         requestPassReset(input: PassResetInput!): SuccessMessage
+        resetPassword(input: ResetPasswordInput!): User
     }
 
     type SuccessMessage{
         message: String
     }
 
+
     input SignupInput{
         fullName: String!
         email: String!
         username: String!
+        password: String!
+    }
+
+    input ResetPasswordInput{
+        email: String!
+        passwordResetToken: String!
         password: String!
     }
 

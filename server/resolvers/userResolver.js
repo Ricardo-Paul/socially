@@ -5,7 +5,7 @@ import ms from 'ms'
 import { sendEmail } from '../utils/sendEmail';
 
 const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
-const PASS_RESET_TOKEN_DURATION = '3600000' // 60mns token duration white password-resetting
+const PASS_RESET_TOKEN_DURATION = '3600000' // 1 hour token duration while password-resetting
 
 const Query = {
     username: () => 'Ricardo'
@@ -101,6 +101,37 @@ const Mutation = {
             Please check your inbox to continue with the password reset
             `
         }
+    },
+
+    resetPassword: async (root, {input: {email, passwordResetToken, password}} , {User}) => {
+        if(!password) throw new Error('Please enter you new password');
+        
+        const shouldExpireAt = Date.now() - PASS_RESET_TOKEN_DURATION;
+
+        const user = await User.findOne({email, passwordResetToken,
+            passwordResetTokenExpiryDate: {
+                $gte: shouldExpireAt
+            }
+        })
+        if(!user) throw new Error('Not found');
+
+        user.password = password;
+        user.passwordResetToken = "";
+        user.passwordResetTokenExpiryDate = "";
+
+        user.save();
+
+        // const updatedUser = await User.findOneAndUpdate({_id: user.id},
+        //     {password, passwordResetToken:"", passwordResetTokenExpiryDate:"" },
+        //     {new: true}
+        //     );
+
+        // sendEmail({
+        //     to: updatedUser.email,
+        //     subject: 'Successfully reset password',
+        //     html: 'You have successfully reset your password'
+        // })
+        return user;
     }
 
 }
