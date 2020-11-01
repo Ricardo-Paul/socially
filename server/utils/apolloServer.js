@@ -1,4 +1,4 @@
-import { ApolloServer, AuthenticationError } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
 
@@ -8,10 +8,10 @@ export const createApolloServer = (schema, resolvers, models) => {
         resolvers,
 // the context object is used for auth
         context: async ({req, connection})=> {
-            if(req){
-                if(req.headers){
-                    const token = req.headers["authorization"];
-                   const  loggedInUser = jwt.decode(token, process.env.SECRET)
+        if(req){
+            if(req.headers){
+                const token = req.headers["x-social-key"];
+                const  loggedInUser = jwt.decode(token, process.env.SECRET)
                     return Object.assign({loggedInUser}, models)
                 }
 

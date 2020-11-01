@@ -13,3 +13,5 @@ const postSchema = new Schema({
     timestamps: true,
     versionKey: 'vKey'
 })
+
+export default mongoose.model('Post', postSchema);
