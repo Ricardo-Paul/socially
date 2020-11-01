@@ -1,4 +1,3 @@
-import models from '../models';
 import generateToken from '../utils/generateToken';
 import bcrypt from 'bcryptjs';
 import ms from 'ms'
@@ -8,11 +7,15 @@ const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000' // 1 hour token duration while password-resetting
 
 const Query = {
-    username: () => 'Ricardo'
-}
+    username: () => 'Ricardo',
 
-// TODO: add password confirmation
-// send email for account verification
+    getLoggedInUser: async (_, args, {loggedInUser, User}) => {
+        // third arguments are returned form context by apolloServer
+        if(!loggedInUser) throw new Error(`User not logged in`);
+
+        return loggedInUser;
+    }
+}
 
 const Mutation = {
     signup: async (root, { input: { fullName, email, username, password }}, { User }) => {
@@ -44,9 +47,9 @@ const Mutation = {
         }).save();
 
         let signupToken = generateToken(newUser, AUTH_TOKEN_EXPIRY);
-        return {signupToken};
-        //important for return value to be an object to fit the schema
-        // type Token{ signupToken }
+        return {
+            signupToken
+        };
     },
 
     signin: async(root, { input: {emailOrUsername, password} }, { User }) => {

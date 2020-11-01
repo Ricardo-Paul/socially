@@ -8,6 +8,7 @@ export const schema = gql`
 #-------------------------------------------------------
     type Query{
         username: String
+        getLoggedInUser: User
     }
 
     type Token{
