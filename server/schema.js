@@ -45,7 +45,7 @@ export const schema = gql`
         requestPassReset(input: PassResetInput!): SuccessMessage
         resetPassword(input: ResetPasswordInput!): User
 
-        createPost(input: CreatePostInput!): TestMessage
+        createPost(image: Upload!): String
     }
 
     type TestMessage {
@@ -84,8 +84,8 @@ export const schema = gql`
     #----------------------------------------
 
     input CreatePostInput {
-        image: Upload
-        title: String!
+        image: Upload!
+        title: String
     }
 
 

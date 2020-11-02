@@ -3,13 +3,14 @@ const Query = {
     postname: () => 'get postname'
 }
 
+// any file sent is a promise that returns
+// filename, mimetype, encoding, createReadStream
+
 const Mutation = {
-    createPost: async (_, {input: {title}}, {User, Post}) => {
-        let t = title
-        console.log(t)
-        return{
-            title: 'testing args'
-        }
+    createPost: async (_, { image }, {User, Post}) => {
+        let f = await image
+        console.log(image)
+        return "the string"
     }
 }
 
