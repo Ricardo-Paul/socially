@@ -4,11 +4,13 @@ import { gql } from 'apollo-server-express';
 export const schema = gql`
 
 #-------------------------------------------------------
-# QUERY ROOT
+# QUERY ROOT && QUERIES
 #-------------------------------------------------------
     type Query{
         username: String
         getLoggedInUser: User
+
+        postname: String
     }
 
     type Token{
@@ -30,15 +32,24 @@ export const schema = gql`
         passwordResetTokenExpiryDate: String
     }
 
-#-------------------------------------------------------
-# MUTATION
-#-------------------------------------------------------
+    type Post {
+        image: String
+    }
 
+#-------------------------------------------------------
+# MUTATION ROOT && MUTATIONS
+#-------------------------------------------------------
     type Mutation{
         signup(input: SignupInput!): Token
         signin(input: SigninInput!): Token
         requestPassReset(input: PassResetInput!): SuccessMessage
         resetPassword(input: ResetPasswordInput!): User
+
+        createPost(input: CreatePostInput!): TestMessage
+    }
+
+    type TestMessage {
+        title: String!
     }
 
     type SuccessMessage{
@@ -66,6 +77,15 @@ export const schema = gql`
 
     input PassResetInput{
         email: String!
+    }
+
+    #----------------------------------------
+    # POST INPUTS
+    #----------------------------------------
+
+    input CreatePostInput {
+        image: Upload
+        title: String!
     }
 
 

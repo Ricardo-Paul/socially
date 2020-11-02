@@ -17,8 +17,6 @@ const MONGO_URL = process.env.MONGO_URL;
 const DB_NAME = process.env.DB_NAME;
 const HOST =   process.env.HOST;
 
-
-
 // ditch the resolver object by passing the
 // resolvers as an array
 
