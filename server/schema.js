@@ -45,7 +45,7 @@ export const schema = gql`
         requestPassReset(input: PassResetInput!): SuccessMessage
         resetPassword(input: ResetPasswordInput!): User
 
-        createPost(image: Upload!): String
+        createPost(input: CreatePostInput!): String
     }
 
     type TestMessage {

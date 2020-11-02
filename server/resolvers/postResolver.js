@@ -7,8 +7,8 @@ const Query = {
 // filename, mimetype, encoding, createReadStream
 
 const Mutation = {
-    createPost: async (_, { image }, {User, Post}) => {
-        let f = await image
+    createPost: async (_, { input: { image } }, {User, Post}) => {
+        const { createReadStream } = await image;
         console.log(image)
         return "the string"
     }
