@@ -29,6 +29,12 @@ const Query = {
 
     deletePost: async (_, { id }, { Post, authenticatedUser }) => {
         if(!authenticatedUser) throw new Error(`Unauthenticated`);
+
+        const postToDelete = await Post.findOne({ _id: id})
+        if(!postToDelete) throw new Error(`Post not found`)
+        await Post.deleteOne({ _id: postToDelete._id })
+        
+        return "Post deleted"
     }
 }
 
