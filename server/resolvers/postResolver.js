@@ -25,6 +25,10 @@ const Query = {
         .populate("author")
 
         return post
+    },
+
+    deletePost: async (_, { id }, { Post, authenticatedUser }) => {
+        if(!authenticatedUser) throw new Error(`Unauthenticated`);
     }
 }
 
