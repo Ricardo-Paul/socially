@@ -4,10 +4,8 @@ const { uploadToCloudinary, uploadToLocal } = uploads;
 
 const Query = {
     postname: () => 'get postname',
-    // return an object with an array of Post and count
-    getPosts: async (_, { authUserId }, { Post }) => {
-        console.log(authUserId)
 
+    getPosts: async (_, { authUserId }, { Post }) => {
     // TODO: also search for posts where image is non-nul
     const query = { $and: [{ author: { $ne: authUserId }}] }
 
@@ -19,6 +17,14 @@ const Query = {
             posts,
             count
         }
+    },
+    getPost: async (_, { id }, { Post }) => {
+        // remember to populate an instance to be able to 
+        // query its value
+        const post = await Post.findOne({ _id: id })
+        .populate("author")
+
+        return post
     }
 }
 
