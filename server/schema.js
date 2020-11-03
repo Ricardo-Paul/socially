@@ -11,6 +11,7 @@ export const schema = gql`
         getAuthUser: User
 
         postname: String
+        getPosts(authUserId: ID!): PostsPayload
     }
 
     type Token{
@@ -79,6 +80,11 @@ type PostPayload{
     author: UserPayload!
 }
 
+type PostsPayload{
+    posts: [PostPayload]
+    count: String
+}
+
 #-------------------------------------------------------
 # MUTATION ROOT && MUTATIONS
 #-------------------------------------------------------
@@ -130,6 +136,5 @@ type PostPayload{
         title: String!
         authorId: ID
     }
-
 
 `

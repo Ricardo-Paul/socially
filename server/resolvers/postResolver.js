@@ -3,7 +3,23 @@ import uploads from '../utils/fileUploads'
 const { uploadToCloudinary, uploadToLocal } = uploads;
 
 const Query = {
-    postname: () => 'get postname'
+    postname: () => 'get postname',
+    // return an object with an array of Post and count
+    getPosts: async (_, { authUserId }, { Post }) => {
+        console.log(authUserId)
+
+    // TODO: also search for posts where image is non-nul
+    const query = { $and: [{ author: { $ne: authUserId }}] }
+
+    // countDocument is applied directly on the query
+    const posts = await Post.find(query);
+    const count = await Post.find(query).countDocuments();
+
+        return {
+            posts,
+            count
+        }
+    }
 }
 
 // any file sent is a promise that resolves an object:
@@ -45,7 +61,8 @@ const Mutation = {
             author: authorId
         }).save();
 
-        await User.findOneAndUpdate({_id: authorId}, { $push: { posts: newPost } }) //push post to user
+        // $push is an atomic operator
+        await User.findOneAndUpdate({_id: authorId}, { $push: { posts: newPost.id } }) //or just posts: newPost
         console.log(await authenticatedUser);
         return newPost;
     }
@@ -55,3 +72,6 @@ export default {
     Query,
     Mutation
 }
+
+// reset posts to [] for specif user
+// db.users.findOneAndUpdate({username:"ricky"}, { $set: {posts: []}})
