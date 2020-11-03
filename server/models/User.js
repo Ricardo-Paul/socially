@@ -33,10 +33,11 @@ const userSchema = new Schema({
     // password Reset
     passwordResetToken: String,
     passwordResetTokenExpiryDate: Date,
-    posts: {
-        type: Schema.Types.ObjectId,
-        ref: 'Post'
-    }
+    posts: [
+        {type: Schema.Types.ObjectId,
+         ref: "Post"
+        }
+    ]
 },{
     timestamps: true,
     versionKey: '_vKey'

@@ -1,5 +1,6 @@
-const fs = require('fs');
-const path = require('path');
+import uploads from '../utils/fileUploads'
+
+const { uploadToCloudinary, uploadToLocal } = uploads;
 
 const Query = {
     postname: () => 'get postname'
@@ -16,32 +17,18 @@ const Query = {
 
 const Mutation = {
     createPost: async (_, { input: { image } }, {User, Post}) => {
-        console.log(image)
-
         const { createReadStream, filename, mimetype, encoding } = await image;
+        const stream = createReadStream(); // stream is the file itself
+        const args = {
+            stream,
+            filename,
+            mimetype,
+            encoding
+        }
 
-        console.log(path.join('dirname:', __dirname, '../public/uploads'));
-        const stream = createReadStream();
-        const uploadsPath = path.join(__dirname, '../public/');
+        false && uploadToLocal(args); //disable local upload
 
-         new Promise((resolve, reject) => {
-            stream.pipe(fs.createWriteStream(uploadsPath))
-            .on('finish', () => {
-                console.log(
-                    {
-                        message: 'Sucess',
-                        location: uploadsPath,
-                        filename, mimetype, encoding
-                    }
-                );
-                resolve({
-                    message: 'Sucess',
-                    location: uploadsPath,
-                    filename, mimetype, encoding
-                })
-            })
-        })
-
+        uploadToCloudinary(stream, "userpost");
         return "sor"
     }
 }
