@@ -9,11 +9,11 @@ const PASS_RESET_TOKEN_DURATION = '3600000' // 1 hour token duration while passw
 const Query = {
     username: () => 'Ricardo',
 
-    getLoggedInUser: async (_, args, {loggedInUser, User}) => {
+    getAuthUser: async (_, args, {authenticatedUser, User}) => {
         // third arguments are returned form context by apolloServer
         // they are called context BTW
-        if(!loggedInUser) throw new Error(`User not logged in`);
-        const {email, username} = loggedInUser;
+        if(!authenticatedUser) throw new Error(`User not logged in`);
+        const {email, username} = authenticatedUser;
         const user = User.findOne({email, username});
         return user;
     }

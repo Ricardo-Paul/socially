@@ -8,7 +8,7 @@ export const schema = gql`
 #-------------------------------------------------------
     type Query{
         username: String
-        getLoggedInUser: User
+        getAuthUser: User
 
         postname: String
     }
@@ -30,11 +30,54 @@ export const schema = gql`
         coverImagePublicId: String
         passwordResetToken: String
         passwordResetTokenExpiryDate: String
+
+        posts: [Post]
     }
 
     type Post {
-        image: String
+        image: File  # set as string in the PayLoad
+        imagePublicId: String
+        title: String!
+        author: User!
     }
+
+    type File {
+        filename: String!
+        mimetype: String!
+        encoding: String!
+    }
+
+#-------------------------------------------------------
+# PAYLOADS
+#-------------------------------------------------------
+
+type UserPayload{
+    id: ID!
+    fullName: String!
+    email: String!
+    username: String!
+    password: String!
+    image: String
+    imagePublicId: String
+    coverImage: String
+    coverImagePublicId: String 
+    passwordResetToken: String
+    passwordResetTokenExpiryDate: String
+
+    createdAt: String
+    updatedAt: String
+
+    posts: [Post]
+}
+
+type PostPayload{
+    id: ID!
+    title: String!
+    image: File
+    imagePublicId: String
+
+    author: UserPayload!
+}
 
 #-------------------------------------------------------
 # MUTATION ROOT && MUTATIONS
@@ -45,7 +88,7 @@ export const schema = gql`
         requestPassReset(input: PassResetInput!): SuccessMessage
         resetPassword(input: ResetPasswordInput!): User
 
-        createPost(input: CreatePostInput!): String
+        createPost(input: CreatePostInput!): PostPayload
     }
 
     type TestMessage {
@@ -55,7 +98,6 @@ export const schema = gql`
     type SuccessMessage{
         message: String
     }
-
 
     input SignupInput{
         fullName: String!
@@ -84,8 +126,9 @@ export const schema = gql`
     #----------------------------------------
 
     input CreatePostInput {
-        image: Upload!
-        title: String
+        image: Upload
+        title: String!
+        authorId: ID
     }
 
 

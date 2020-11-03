@@ -11,8 +11,8 @@ export const createApolloServer = (schema, resolvers, models) => {
         if(req){
             if(req.headers){
                 const token = req.headers["x-social-key"];
-                const  loggedInUser = jwt.decode(token, process.env.SECRET)
-                    return Object.assign({loggedInUser}, models)
+                const  authenticatedUser = jwt.decode(token, process.env.SECRET)
+                    return Object.assign({authenticatedUser}, models)
                 }
 
                 return Object.assign({}, models)
