@@ -47,6 +47,9 @@ const userSchema = new Schema({
 
 // we're using a pre-save hook on the document
 // to hash the password whenenver it changes
+
+// using an arrow function here would change the
+// context of this
 userSchema.pre("save", async function(next){
     if(!this.isModified("password")){
       return next();

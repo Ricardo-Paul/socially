@@ -33,11 +33,10 @@ cloudinary.config({
 // public_id : image file name
 const uploadToCloudinary = async (stream, folder, imagePublicId) => {
 
-    // if client provide a public_id overwrite the default one
+    // if client provides a public_id overwrite the default one
     // if no we generate one with uuid under a client chosen folder
     const options = imagePublicId? { public_id: imagePublicId, overwrite: true } :
     { public_id: `${folder}/${uuidv4()}`};
-
 
      return new Promise((resolve, reject) => {
        const cloud_stream = cloudinary.v2.uploader.upload_stream(options, (result, error) => {
@@ -50,7 +49,7 @@ const uploadToCloudinary = async (stream, folder, imagePublicId) => {
             }
         });
 
-        // piping our read stream into the cloud write stream
+        // piping our read stream to the cloud write stream
         stream.pipe(cloud_stream)
 
     });
@@ -64,8 +63,8 @@ export default {
 // uploader.upload
 // uploader.upload_stream for stream upload
 
-// basically cloudinary generate a public_id for each resource
-// but we want to specify ours in case our client doesn't provide
+// basically cloudinary generates a public_id for each resource
+// but we want to specify ours in case our client doesn't provide one
 
 // our cloudinary write stream
 // stream = createReadStream() // read stream
