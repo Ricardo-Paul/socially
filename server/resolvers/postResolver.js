@@ -7,6 +7,7 @@ const Query = {
 
     getPosts: async (_, { authUserId }, { Post }) => {
     // TODO: also search for posts where image is non-nul
+    // that's why the $and operator
     const query = { $and: [{ author: { $ne: authUserId }}] }
 
     // countDocument is applied directly on the query
