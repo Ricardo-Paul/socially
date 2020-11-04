@@ -15,5 +15,18 @@ const seed = {
         }
         return users;
     },
+
+    generateDummyPosts: function(users){
+        let posts = []
+        for(let i=0; i<15; i++){
+            const newPost = {
+                title: faker.lorem.words(9),
+                author: _.sample(users)._id
+            }
+            posts.push(newPost)
+        }
+        return posts;
+    }
+
 }
 export default seed;
