@@ -11,7 +11,7 @@ export const schema = gql`
         getAuthUser: User
 
         postname: String
-        getPosts(authUserId: ID!): PostsPayload
+        getPosts(authUserId: ID!, skip:Int, limit:Int): PostsPayload
         getPost(id: ID!): PostPayload
         deletePost(id: ID!): String
     }
@@ -37,14 +37,14 @@ export const schema = gql`
         posts: [Post]
     }
 
-    type Post {
+    type Post{
         image: File  # set as string in the PayLoad
         imagePublicId: String
         title: String!
         author: User!
     }
 
-    type File {
+    type File{
         filename: String!
         mimetype: String!
         encoding: String!
@@ -99,7 +99,7 @@ type PostsPayload{
         createPost(input: CreatePostInput!): PostPayload
     }
 
-    type TestMessage {
+    type TestMessage{
         title: String!
     }
 

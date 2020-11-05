@@ -5,13 +5,13 @@ const { uploadToCloudinary, uploadToLocal } = uploads;
 const Query = {
     postname: () => 'get postname',
 
-    getPosts: async (_, { authUserId }, { Post }) => {
+    getPosts: async (_, { authUserId, skip, limit }, { Post }) => {
     // TODO: also search for posts where image is non-nul
     // that's why the $and operator
     const query = { $and: [{ author: { $ne: authUserId }}] }
 
     // countDocument is applied directly on the query
-    const posts = await Post.find(query).skip(13).limit(1);
+    const posts = await Post.find(query).skip(skip).limit(limit);
     const count = await Post.find(query).countDocuments();
 
         return {
