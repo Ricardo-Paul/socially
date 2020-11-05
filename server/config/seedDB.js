@@ -14,6 +14,7 @@ const DB_NAME = process.env.DB_NAME;
         mongoose.connect(`${MONGO_URL}/${DB_NAME}`)
         .then(() => console.log(`Connected for seeding: ${DB_NAME}`));
 
+        
         const userCount = await User.find().countDocuments();
         if(userCount > 10) return console.log(`Records are enough: DB hit > 10 users`);
 

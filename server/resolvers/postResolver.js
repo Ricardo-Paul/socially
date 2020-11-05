@@ -11,7 +11,7 @@ const Query = {
     const query = { $and: [{ author: { $ne: authUserId }}] }
 
     // countDocument is applied directly on the query
-    const posts = await Post.find(query);
+    const posts = await Post.find(query).skip(13).limit(1);
     const count = await Post.find(query).countDocuments();
 
         return {
@@ -45,8 +45,8 @@ const Query = {
 // createReadStream can be used to pipe the file
 // to a local location or a cloud storage provider (S3, cloudinary)
 
-// stream.pipe() takes a readable stream,
-// connect it to a writable stream
+// stream.pipe() :: pipe() pipes a readable stream
+// to a writable stream
 
 const Mutation = {
     createPost: async (_, { input: { title, image, authorId } }, {authenticatedUser ,User, Post}) => {
@@ -54,7 +54,7 @@ const Mutation = {
 
         // it is required that we send the authorId
         // we cannot get it from the authenticatedUser
-        // const authorId = User.findOne({email: authenticatedUser.email})._id; //no we can do that
+        // const authorId = User.findOne({email: authenticatedUser.email})._id;
 
         let newPost;
         if(image){

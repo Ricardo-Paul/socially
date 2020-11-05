@@ -1,3 +1,4 @@
+// use faker instead
 const users = [
     {
       fullName: 'Marie Clark',
