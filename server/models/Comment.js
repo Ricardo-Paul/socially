@@ -2,9 +2,8 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const CommentSchema = new Schema({
-    content:{
+    comment:{
         type: String,
-        required: true
     },
     post: {
         type: mongoose.Types.ObjectId,
@@ -14,6 +13,9 @@ const CommentSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: "User"
     }
+},{
+    timestamps: true,
+    "versionKey": "_vKey"
 });
 
 export default mongoose.model('Comment', CommentSchema);

@@ -8,12 +8,13 @@ export const schema = gql`
 #-------------------------------------------------------
     type Query{
         username: String
+        getComment: String
+
         getAuthUser: User
 
         postname: String
         getPosts(authUserId: ID!, skip:Int, limit:Int): PostsPayload
         getPost(id: ID!): PostPayload
-        deletePost(id: ID!): String
     }
 
     type Token{
@@ -35,6 +36,7 @@ export const schema = gql`
         passwordResetTokenExpiryDate: String
 
         posts: [Post]
+        comments: [Comment]
     }
 
     type Post{
@@ -42,6 +44,12 @@ export const schema = gql`
         imagePublicId: String
         title: String!
         author: User!
+    }
+
+    type Comment{
+        authorId: ID!
+        postId: ID!
+        comment: String!
     }
 
     type File{
@@ -82,6 +90,12 @@ type PostPayload{
     author: UserPayload!
 }
 
+type CommentPayload{
+    authorId: ID!
+    postId: ID!
+    comment: String!
+}
+
 type PostsPayload{
     posts: [PostPayload]
     count: String
@@ -97,6 +111,9 @@ type PostsPayload{
         resetPassword(input: ResetPasswordInput!): User
 
         createPost(input: CreatePostInput!): PostPayload
+        deletePost(id: ID!): String
+
+        createComment(input: CreateCommentInput!): CommentPayload
     }
 
     type TestMessage{
@@ -127,6 +144,12 @@ type PostsPayload{
 
     input PassResetInput{
         email: String!
+    }
+
+    input CreateCommentInput{
+        authorId: ID!
+        postId: ID!
+        comment: String!
     }
 
     #----------------------------------------

@@ -9,10 +9,18 @@ const postSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId, //stored in author._id
         ref: 'User'
-    }
+    },
+
+    // a post has many comments
+    comments:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
 },{
     timestamps: true,
-    versionKey: 'vKey'
+    versionKey: '_vKey'
 })
 
 export default mongoose.model('Post', postSchema);

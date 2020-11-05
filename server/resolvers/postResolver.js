@@ -26,16 +26,6 @@ const Query = {
         .populate("author")
 
         return post
-    },
-
-    deletePost: async (_, { id }, { Post, authenticatedUser }) => {
-        if(!authenticatedUser) throw new Error(`Unauthenticated`);
-
-        const postToDelete = await Post.findOne({ _id: id})
-        if(!postToDelete) throw new Error(`Post not found`)
-        await Post.deleteOne({ _id: postToDelete._id })
-        
-        return "Post deleted"
     }
 }
 
@@ -66,7 +56,7 @@ const Mutation = {
                     image: uploadedImage.secure_url,
                     imagePublicId: uploadedImage.public_id,
                     title,
-                    author: User.findOne({email: authenticatedUser.email})._id
+                    author: authorId
                 }).save();
             } else {
                 throw new Error(`Something went wrong while attempting to upload image`);
@@ -76,12 +66,22 @@ const Mutation = {
         newPost = await new Post({
             title,
             author: authorId
-        }).save();
+        }).save()
 
         // $push is an atomic operator
         await User.findOneAndUpdate({_id: authorId}, { $push: { posts: newPost.id } }) //or just posts: newPost
         console.log(await authenticatedUser);
         return newPost;
+    },
+
+    deletePost: async (_, { id }, { Post, authenticatedUser }) => {
+        if(!authenticatedUser) throw new Error(`Unauthenticated`);
+
+        const postToDelete = await Post.findOne({ _id: id})
+        if(!postToDelete) throw new Error(`Post not found`)
+        await Post.deleteOne({ _id: postToDelete._id })
+        
+        return "Post deleted"
     }
 }
 
