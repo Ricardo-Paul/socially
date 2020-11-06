@@ -17,6 +17,13 @@ const postSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Comment"
         }
+    ],
+    // a post has many likes
+    likes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Like"
+        }
     ]
 },{
     timestamps: true,

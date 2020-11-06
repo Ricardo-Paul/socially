@@ -9,6 +9,7 @@ export const schema = gql`
     type Query{
         username: String
         getComment: String
+        getLike: String
 
         getAuthUser: User
 
@@ -52,6 +53,11 @@ export const schema = gql`
         comment: String!
     }
 
+    type Like{
+        post: ID!
+        user: ID!
+    }
+
     type File{
         filename: String!
         mimetype: String!
@@ -78,7 +84,9 @@ type UserPayload{
     createdAt: String
     updatedAt: String
 
-    posts: [Post]
+    posts: [PostPayload]
+    comments: [CommentPayload]
+    likes: [Like]
 }
 
 type PostPayload{
@@ -87,7 +95,9 @@ type PostPayload{
     image: File
     imagePublicId: String
 
-    author: UserPayload!
+    author: UserPayload
+    comments: [CommentPayload]
+    likes: [Like] #Like has no payload for now
 }
 
 type CommentPayload{
@@ -100,6 +110,7 @@ type PostsPayload{
     posts: [PostPayload]
     count: String
 }
+
 
 #-------------------------------------------------------
 # MUTATION ROOT && MUTATIONS
@@ -114,6 +125,8 @@ type PostsPayload{
         deletePost(id: ID!): String
 
         createComment(input: CreateCommentInput!): CommentPayload
+
+        createLike(input: CreateLikeInput!): Like
     }
 
     type TestMessage{
@@ -150,6 +163,11 @@ type PostsPayload{
         authorId: ID!
         postId: ID!
         comment: String!
+    }
+
+    input CreateLikeInput{
+        postId: ID!
+        userId: ID!
     }
 
     #----------------------------------------
