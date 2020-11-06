@@ -9,7 +9,6 @@ export const schema = gql`
     type Query{
         username: String
         getComment: String
-        getLike: String
 
         getAuthUser: User
 
@@ -127,6 +126,7 @@ type PostsPayload{
         createComment(input: CreateCommentInput!): CommentPayload
 
         createLike(input: CreateLikeInput!): Like
+        deleteLike(input: DeleteLikeInput!): Like
     }
 
     type TestMessage{
@@ -168,6 +168,10 @@ type PostsPayload{
     input CreateLikeInput{
         postId: ID!
         userId: ID!
+    }
+
+    input DeleteLikeInput{
+        likeId: ID!
     }
 
     #----------------------------------------
