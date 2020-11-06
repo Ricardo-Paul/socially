@@ -1,11 +1,12 @@
 import userResolver from './userResolver'; //basically we are importing Query and Mutation
 import postResolver from './postResolver';
 import commentResolver from './commentResolver';
-
+import likeResolver from './likeResolver';
 
 export default [
     userResolver,
     postResolver,
-    commentResolver
+    commentResolver,
+    likeResolver
 ]
 
