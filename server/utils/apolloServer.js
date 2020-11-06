@@ -10,12 +10,13 @@ export const createApolloServer = (schema, resolvers, models) => {
         context: async ({req, connection})=> {
         if(req){
             if(req.headers){
+                // TODO: verify token expiry date
                 const token = req.headers["x-social-key"];
-                const  authenticatedUser = jwt.decode(token, process.env.SECRET)
+                const  authenticatedUser = jwt.verify(token, process.env.SECRET);
                     return Object.assign({authenticatedUser}, models)
                 }
 
-                return Object.assign({}, models)
+                return Object.assign({}, models);
             }
         }
     })
