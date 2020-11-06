@@ -7,8 +7,6 @@ const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000' // 1 hour token duration while password-resetting
 
 const Query = {
-    username: () => 'Ricardo',
-
     getAuthUser: async (_, args, {authenticatedUser, User}) => {
         // third arguments are returned form context by apolloServer
         // they are called context BTW

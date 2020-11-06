@@ -7,9 +7,6 @@ export const schema = gql`
 # QUERY ROOT && QUERIES
 #-------------------------------------------------------
     type Query{
-        username: String
-        getComment: String
-
         getAuthUser: User
 
         postname: String
@@ -100,8 +97,8 @@ type PostPayload{
 }
 
 type CommentPayload{
-    authorId: ID!
-    postId: ID!
+    author: ID!
+    post: ID!
     comment: String!
 }
 
@@ -124,6 +121,7 @@ type PostsPayload{
         deletePost(id: ID!): String
 
         createComment(input: CreateCommentInput!): CommentPayload
+        deleteComment(input: DeleteCommentInput): CommentPayload
 
         createLike(input: CreateLikeInput!): Like
         deleteLike(input: DeleteLikeInput!): Like
@@ -172,6 +170,10 @@ type PostsPayload{
 
     input DeleteLikeInput{
         likeId: ID!
+    }
+
+    input DeleteCommentInput{
+        commentId: ID!
     }
 
     #----------------------------------------

@@ -1,6 +1,3 @@
-const Query = {
-    getComment: ()=> 'get comment tested'
-}
 
 const Mutation = {
     createComment: async(_, { input: {comment, authorId, postId }}, {Comment, User, Post, authenticatedUser }) => {
@@ -17,10 +14,19 @@ const Mutation = {
         await User.findOneAndUpdate({_id: authorId },{ $push: { comments: newComment._id } })
 
         return newComment
+    },
+
+    deleteComment: async(_, {input: {commentId}}, { User, Post, Comment }) => {
+        const comment = await Comment.findOneAndDelete({ _id: commentId });
+        if(!comment) throw new Error(`not found`)
+
+        await Post.findOneAndUpdate({ _id: comment.post }, { $pull: { comments: comment._id} });
+        await User.findOneAndUpdate({ _id: comment.author }, { $pull: { comments: comment._id }});
+
+        return comment;
     }
 }
 
 export default{
-    Query,
     Mutation
 }
