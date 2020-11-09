@@ -38,6 +38,7 @@ export const schema = gql`
     }
 
     type Post{
+        id: ID!
         image: File  # set as string in the PayLoad
         imagePublicId: String
         title: String!
@@ -58,6 +59,21 @@ export const schema = gql`
     type Follow{
         following: ID!
         follower: ID!
+    }
+
+    type Notification{
+        id: ID!
+        sender: User!
+        receiver: User!
+        
+        post: ID!
+
+        like: Like
+        comment: Comment
+        follow: Follow
+
+        seen: Boolean
+        createdAt: String
     }
 
     type File{
@@ -113,6 +129,12 @@ type PostsPayload{
     count: String
 }
 
+enum NotificationType{
+    COMMENT
+    LIKE
+    FOLLOW
+}
+
 
 #-------------------------------------------------------
 # MUTATION ROOT && MUTATIONS
@@ -134,6 +156,9 @@ type PostsPayload{
 
         createFollow(input: CreateFollowInput): Follow
         deleteFollow(input: DeleteFollowInput): Follow
+
+        deleteNotification(input: DeleteNotificationInput): Notification
+        createNotification(input: CreateNotificationInput): Notification
     }
 
     type TestMessage{
@@ -142,6 +167,17 @@ type PostsPayload{
 
     type SuccessMessage{
         message: String
+    }
+
+    input DeleteNotificationInput{
+        senderId: ID!
+    }
+
+    input CreateNotificationInput{
+        receiverId: ID!
+        senderId: ID!
+        postId: ID!
+        notificationType: NotificationType!
     }
 
     input SignupInput{
@@ -193,6 +229,7 @@ type PostsPayload{
     input DeleteFollowInput{
         followId: ID!
     }
+
 
     #----------------------------------------
     # POST INPUTS

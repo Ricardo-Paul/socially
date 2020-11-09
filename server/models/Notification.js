@@ -3,18 +3,17 @@ const { Schema } = mongoose;
 
 const notificationSchema = new Schema(
   {
-    author: {
+    sender: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-    user: {
+    receiver: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-    post: {
-      type: Schema.Types.ObjectId,
-      ref: 'Post',
-    },
+    // has no reference to post
+    // thus in the schema -- post: ID! and not post: Post
+    post: Schema.Types.ObjectId,
     comment: {
       type: Schema.Types.ObjectId,
       ref: 'Comment',
@@ -22,6 +21,10 @@ const notificationSchema = new Schema(
     like: {
       type: Schema.Types.ObjectId,
       ref: 'Like',
+    },
+    follow: {
+      type: Schema.Types.ObjectId,
+      ref: "Follow"
     },
     seen: {
       type: Boolean,
@@ -32,5 +35,10 @@ const notificationSchema = new Schema(
     timestamps: true,
   }
 );
+
+// notification has a notificationType field
+// not in the model
+// 
+
 
 export default mongoose.model('Notification', notificationSchema);
