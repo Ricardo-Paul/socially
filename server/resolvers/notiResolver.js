@@ -1,7 +1,5 @@
-const Mutation = {
-
-}
+const Mutation = {};
 
 export default {
-    Mutation
-}
+  Mutation,
+};

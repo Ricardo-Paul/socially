@@ -6,12 +6,4 @@ import likeResolver from './likeResolver';
 import followResolver from './followResolver';
 import notiResolver from './notiResolver';
 
-export default [
-    userResolver,
-    postResolver,
-    commentResolver,
-    likeResolver,
-
-    followResolver,
-    notiResolver
-]
+export default [userResolver, postResolver, commentResolver, likeResolver, followResolver, notiResolver];

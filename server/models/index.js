@@ -6,10 +6,10 @@ import Follow from './Follow';
 import Notification from './Notification';
 
 export default {
-    User,
-    Post,
-    Comment,
-    Like,
-    Follow,
-    Notification
+  User,
+  Post,
+  Comment,
+  Like,
+  Follow,
+  Notification,
 };

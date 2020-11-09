@@ -9,6 +9,9 @@
     "db:seed": "node -r dotenv/config -r esm ./config/seedDB.js",
     "eslint": "eslint",
     "prettier": "prettier",
+    "format:resolvers": "prettier ./resolvers/ --write",
+    "format:models": "prettier ./models/ --write",
+    "format:utils": "prettier ./utils/ --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

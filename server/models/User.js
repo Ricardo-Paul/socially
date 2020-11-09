@@ -3,27 +3,28 @@ import bcrypt from 'bcryptjs';
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
     fullName: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true,
-        lowercase: true
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+      lowercase: true,
     },
     username: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     // image and coverImage
     image: String,
@@ -33,39 +34,37 @@ const userSchema = new Schema({
     // password Reset
     passwordResetToken: String,
     passwordResetTokenExpiryDate: Date, //type String in schema
-    posts: [
-        {type: Schema.Types.ObjectId,
-         ref: "Post"
-        }
-    ],
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     comments: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Comment"
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
+      },
     ],
     likes: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Like"
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Like',
+      },
     ],
     followers: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
     ],
-    following:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        }
-    ]
-},{
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+  },
+  {
     timestamps: true,
-    versionKey: '_vKey'
-})
+    versionKey: '_vKey',
+  }
+);
 // we change versionKey value from __v to vKey
 // a versionKey of 0 means user is just created
 
@@ -74,17 +73,17 @@ const userSchema = new Schema({
 
 // using an arrow function here would change the
 // context of this
-userSchema.pre("save", async function(next){
-    if(!this.isModified("password")){
-      return next();
-    }
-    try{
-        const salt = await bcrypt.genSalt(10);
-        const hash = await bcrypt.hash(this.password, salt)
-        this.password = hash;
-    } catch(err){
-        return next(err)
-    }
-})
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(this.password, salt);
+    this.password = hash;
+  } catch (err) {
+    return next(err);
+  }
+});
 
 export default mongoose.model('User', userSchema);
