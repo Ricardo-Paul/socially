@@ -7,6 +7,9 @@ const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000' // 1 hour token duration while password-resetting
 
 const Query = {
+    /**
+     * get current user
+     */
     getAuthUser: async (_, args, {authenticatedUser, User}) => {
         // third arguments are returned form context by apolloServer
         // they are called context BTW
@@ -14,7 +17,23 @@ const Query = {
         const {email, username} = authenticatedUser;
         const user = User.findOne({email, username});
         return user;
-    }
+    },
+
+    /**
+     * get user by username
+     */
+
+     getUser: async (_, { username }, { User }) => {
+        const user = await User.findOne({ username })
+        .populate({
+            path: "posts",
+            options:{ sort: { createdAt: "desc" } }
+        })
+        .populate("comments")
+        .populate("likes")
+
+        return user
+     }
 }
 
 const Mutation = {

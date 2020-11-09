@@ -1,5 +1,5 @@
 import fs from 'fs'
-import path, { resolve } from 'path';
+import path from 'path';
 
 import cloudinary from 'cloudinary'
 import { v4 as uuidv4 } from 'uuid';

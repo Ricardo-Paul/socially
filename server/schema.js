@@ -8,6 +8,7 @@ export const schema = gql`
 #-------------------------------------------------------
     type Query{
         getAuthUser: User
+        getUser(username: String!): UserPayload
 
         postname: String
         getPosts(authUserId: ID!, skip:Int, limit:Int): PostsPayload
@@ -93,7 +94,7 @@ type PostPayload{
 
     author: UserPayload
     comments: [CommentPayload]
-    likes: [Like] #Like has no payload for now
+    likes: [Like]
 }
 
 type CommentPayload{
