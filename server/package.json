@@ -7,6 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "db:seed": "node -r dotenv/config -r esm ./config/seedDB.js",
+    "eslint": "eslint",
+    "prettier": "prettier",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -27,6 +29,8 @@
     "uuid": "^8.3.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "eslint": "^7.12.1",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.1.2"
   }
 }

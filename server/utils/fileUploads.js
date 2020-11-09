@@ -1,5 +1,5 @@
 import fs from 'fs'
-import path from 'path';
+import path, { resolve } from 'path';
 
 import cloudinary from 'cloudinary'
 import { v4 as uuidv4 } from 'uuid';
@@ -24,6 +24,19 @@ const uploadToLocal = ({ stream, filename, mimetype, encoding}) => {
      })
 };
 
+/**
+ * 
+ * @param {string} filename filename will be resolved from the image promise
+ */
+
+const deleteFromLocal = ({ filename }) => {
+    const filePath = path.resolve(__dirname, '../uploads', filename)
+        fs.unlink(filename, (err) => {
+            if(err) throw new Error(err)
+            console.log(`file deleted`)
+        });
+}
+
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
@@ -32,7 +45,6 @@ cloudinary.config({
 
 // public_id : image file name
 const uploadToCloudinary = async (stream, folder, imagePublicId) => {
-
     // if client provides a public_id overwrite the default one
     // if no we generate one with uuid under a client chosen folder
     const options = imagePublicId? { public_id: imagePublicId, overwrite: true } :
@@ -53,11 +65,21 @@ const uploadToCloudinary = async (stream, folder, imagePublicId) => {
         stream.pipe(cloud_stream)
 
     });
+};
+
+
+const deleteFromCloudinary = async(imagePublicId) => {
+    return new Promise((resolve, reject) => {
+        cloudinary.v2.uploader.destroy(imagePublicId, (result, err)=>{
+            if(result) resolve(result)
+            else reject(err)
+        })
+    })
 }
 
 export default {
-    uploadToLocal,
-    uploadToCloudinary
+    uploadToCloudinary,
+    deleteFromCloudinary
 }
 
 // uploader.upload

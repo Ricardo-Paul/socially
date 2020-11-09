@@ -1,6 +1,6 @@
 import uploads from '../utils/fileUploads'
 
-const { uploadToCloudinary, uploadToLocal } = uploads;
+const { uploadToCloudinary, deleteFromCloudinary } = uploads;
 
 const Query = {
     postname: () => 'get postname',
@@ -73,14 +73,48 @@ const Mutation = {
         console.log(await authenticatedUser);
         return newPost;
     },
+    
 
-    deletePost: async (_, { id }, { Post, authenticatedUser }) => {
+
+    deletePost: async (_, { id, imagePublicId }, { Post, User, authenticatedUser }) => {
         if(!authenticatedUser) throw new Error(`Unauthenticated`);
 
         const postToDelete = await Post.findOne({ _id: id})
         if(!postToDelete) throw new Error(`Post not found`)
         await Post.deleteOne({ _id: postToDelete._id })
         
+        // TODO: delete associated post picture on cloudinary
+        if(imagePublicId){
+            const deletedImage = await deleteFromCloudinary(imagePublicId)
+            if(deletedImage.result != 'ok'){
+                throw new Error(`Something went wrong while trying to delete image`);
+            }
+        }
+
+        // TODO: pull the post out of author collection
+        await User.findOneAndUpdate({ _id: postToDelete.author }, {$pull: { posts: postToDelete._id }});
+
+        // TODO: delete comments associated to the post from Comment collection
+        await Comment.find({ post: postToDelete._id }).deleteMany();
+
+        // TODO: delete post comments from user collection
+
+        // take all the comments id from the post
+        // check them against the comments in the user collection
+        postToDelete.comments.map(async commentId => {
+            await User.where({ comments: commentId }).update({ $pull: { comments: commentId} });
+        })
+
+        // delete post likes from user collection
+        postToDelete.likes.map(async likeId => {
+            await User.where({ likes: likeId }).update({ $pull: { likes: likeId } });
+        });
+
+        // post has likes - user has likes
+        // take the likes id from post post.likes.map(likeId)
+        // now check in User where likes have this id User.where({ likes: likeId })
+
+        // TODO: remove notifications (upcoming)
         return "Post deleted"
     }
 }
