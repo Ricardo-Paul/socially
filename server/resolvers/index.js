@@ -3,10 +3,15 @@ import postResolver from './postResolver';
 import commentResolver from './commentResolver';
 import likeResolver from './likeResolver';
 
+import followResolver from './followResolver';
+import notiResolver from './notiResolver';
+
 export default [
     userResolver,
     postResolver,
     commentResolver,
-    likeResolver
-]
+    likeResolver,
 
+    followResolver,
+    notiResolver
+]

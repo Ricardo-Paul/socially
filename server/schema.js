@@ -55,6 +55,11 @@ export const schema = gql`
         user: ID!
     }
 
+    type Follow{
+        following: ID!
+        follower: ID!
+    }
+
     type File{
         filename: String!
         mimetype: String!
@@ -126,6 +131,9 @@ type PostsPayload{
 
         createLike(input: CreateLikeInput!): Like
         deleteLike(input: DeleteLikeInput!): Like
+
+        createFollow(input: CreateFollowInput): Follow
+        deleteFollow(input: DeleteFollowInput): Follow
     }
 
     type TestMessage{
@@ -175,6 +183,15 @@ type PostsPayload{
 
     input DeleteCommentInput{
         commentId: ID!
+    }
+
+    input CreateFollowInput{
+        currentUserId: ID!
+        followedUserId: ID!
+    }
+
+    input DeleteFollowInput{
+        followId: ID!
     }
 
     #----------------------------------------
