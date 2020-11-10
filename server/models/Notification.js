@@ -36,9 +36,11 @@ const notificationSchema = new Schema(
   }
 );
 
-// notification has a notificationType field
-// not in the model
-// 
+/**
+ * notification has a notificationType field
+ * that is dynamic - it can be
+ * COMMENT/LIKE/FOLLOW
+ */
 
 
 export default mongoose.model('Notification', notificationSchema);

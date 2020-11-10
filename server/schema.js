@@ -135,7 +135,6 @@ enum NotificationType{
     FOLLOW
 }
 
-
 #-------------------------------------------------------
 # MUTATION ROOT && MUTATIONS
 #-------------------------------------------------------
@@ -159,6 +158,7 @@ enum NotificationType{
 
         deleteNotification(input: DeleteNotificationInput): Notification
         createNotification(input: CreateNotificationInput): Notification
+        updateNotificationSeen(input: UpdateNotificationInput!): Boolean
     }
 
     type TestMessage{
@@ -170,7 +170,7 @@ enum NotificationType{
     }
 
     input DeleteNotificationInput{
-        senderId: ID!
+        notificationId: ID!
     }
 
     input CreateNotificationInput{
@@ -178,6 +178,7 @@ enum NotificationType{
         senderId: ID!
         postId: ID!
         notificationType: NotificationType!
+        notificationTypeId: ID
     }
 
     input SignupInput{
@@ -230,6 +231,9 @@ enum NotificationType{
         followId: ID!
     }
 
+    input UpdateNotificationInput{
+        receiverId: ID!
+    }
 
     #----------------------------------------
     # POST INPUTS
