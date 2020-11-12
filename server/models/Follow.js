@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const followSchema = new Schema(
   {
-    following: {
+    following: { // the actual user
       type: Schema.Types.ObjectId,
       ref: 'User',
     },

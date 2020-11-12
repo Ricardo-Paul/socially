@@ -13,6 +13,7 @@ export const schema = gql`
         postname: String
         getPosts(authUserId: ID!, skip:Int, limit:Int): PostsPayload
         getPost(id: ID!): PostPayload
+        getFollowedPosts(userId: ID!, skip:Int, limit:Int): PostsPayload
     }
 
     type Token{

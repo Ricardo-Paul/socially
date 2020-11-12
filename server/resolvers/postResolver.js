@@ -1,3 +1,4 @@
+import Follow from '../models/Follow';
 import uploads from '../utils/fileUploads';
 
 const { uploadToCloudinary, deleteFromCloudinary } = uploads;
@@ -26,6 +27,38 @@ const Query = {
 
     return post;
   },
+
+  /**
+   * Find the posts the current user is following
+   * 
+   * @param {string} userId the current user
+   */
+
+  getFollowedPosts: async(_, {userId, skip, limit}, {Post, User}) => {
+    // find the users that the current user is following
+
+    let followedUsers = [];
+    const follow = await Follow.find({ follower: userId }).select("follower")
+    // these are instances where the user is the follower { follower, following }
+    // we only select the follower field, people that the user is following
+
+    // push these celebrities in the array (this name helps identify)
+    follow.map((f) => followedUsers.push(f.follower));
+
+    // check in the Post collection where the authors are these celebrities
+    // also where author is the current user
+    const query = {$or: [{author: { $in: followedUsers }}, { author: userId }]};
+    const postCount = Post.find(query).countDocuments();
+
+    // TODO: populate the posts
+    // TODO: seed db to test this method
+    const followedPosts = Post.find(query);
+
+    return{
+      count: postCount,
+      posts: followedPosts
+    }
+  }
 };
 
 // any file sent is a promise that resolves an object:
@@ -47,7 +80,8 @@ const Mutation = {
 
     let newPost;
     if (image) {
-      const { createReadStream, filename, mimetype, encoding } = await image;
+      // filename mimetype encoding
+      const { createReadStream } = await image;
       const stream = createReadStream();
       const uploadedImage = await uploadToCloudinary(stream, 'userpost');
       if (uploadedImage.secure_url) {
