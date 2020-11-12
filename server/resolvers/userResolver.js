@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 import ms from 'ms';
 import { sendEmail } from '../utils/sendEmail';
 import Follow from '../models/Follow';
-import { map } from 'lodash';
 
 const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000'; // 1 hour token duration while password-resetting
@@ -120,10 +119,33 @@ const Query = {
     * 
     */
    suggestPeople: async(_, {userId}, {User, Follow}) => {
+     const LIMIT = 6;
     // find the people the user is following
     const followedUsers = [];
     const follow = await Follow.find({ follower: userId }, {_id: 0}).select("following");
-    follow.map((f) => followedUsers.push(f.following));
+    follow.map((f) => followedUsers.push(f.following)); //the array contains ids
+    followedUsers.push(userId); // we'll also exclude the user from the suggestions
+    
+    const query = { _id: { $nin: followedUsers } }
+    const usersCount = await User.find(query).countDocuments();
+
+    // skip a random amount of users from the total
+    // and make sure we return only six
+    // const random = Math.floor(Math.random() * usersCount);
+
+    // let usersLeft = usersCount - random;
+    // if(usersLeft < 6){
+    //   random = random - ()
+    // }
+
+    // a quick one liner solution
+    const usersFound = await User.find(query);
+    let randomUsers = usersFound.sort(()=> Math.random() - Math.random()).slice(0, LIMIT); //that will cut it
+
+    return {
+      users: randomUsers,
+      count: randomUsers.length
+    }
    }
 
 };

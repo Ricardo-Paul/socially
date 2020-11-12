@@ -19,6 +19,7 @@ export const schema = gql`
 
         getUsers(userId: ID!): UsersPayload
         searchUsers(searchQuery: String): [UserPayload]
+        suggestPeople(userId: ID!): UsersPayload
     }
 
     type UsersPayload{
