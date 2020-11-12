@@ -2,6 +2,8 @@ import generateToken from '../utils/generateToken';
 import bcrypt from 'bcryptjs';
 import ms from 'ms';
 import { sendEmail } from '../utils/sendEmail';
+import Follow from '../models/Follow';
+import { map } from 'lodash';
 
 const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000'; // 1 hour token duration while password-resetting
@@ -21,6 +23,8 @@ const Query = {
 
   /**
    * get user by username
+   * 
+   * @param {string} username
    */
 
   getUser: async (_, { username }, { User }) => {
@@ -34,6 +38,94 @@ const Query = {
 
     return user;
   },
+
+  /**
+   * get user posts
+   * @param {string} username
+   * @param {number} skip how many posts to skip
+   * @param {number} limit how many posts to fetch
+   * 
+   */
+
+  //  not yet tested
+   getUserPosts: async(_, {username, skip, limit}, {User, Post}) => {
+    const user = await User.findOne({username});
+
+    const query = { author: user._id };
+    const count = Post.find(query).countDocuments();
+
+    // TODO: populate posts
+    const posts = await Post.find({ author: user._id })
+    .populate("author")
+    .skip(skip)
+    .limit(limit);
+
+    return{
+      count,
+      posts
+    }
+   },
+  /**
+   * get all users the current user is not following
+   */
+
+  getUsers: async(_, {userId, skip, limit}, { User }) => {
+    let followedUsers = []; //array of ids of celebrities the current user is following
+    // we say celebrities here to make sense of the logic
+    
+    /**
+     * find the instances where the user is the @follower
+     * and select the celebrities he's following
+     */
+    // the second arg is a projection
+    // we supress the _id from the result by setting it to 0
+    const follow = await Follow.find({ follower: userId }, {_id: 0}).select("following");
+
+    follow.map(f => followedUsers.push(f.follower));
+    const query = { $and:[{ _id: { $nin: followedUsers } }, { _id: { $ne: userId } }] }
+    const count = User.find(query).countDocuments();
+
+    // TODO: populate posts
+    const users = User.find(query)
+    .populate("posts")
+    .skip(skip)
+    .limit(limit)
+
+    return{
+      users, 
+      count
+    }
+  },
+
+  /**
+   * search for users by username or fullName
+   */
+
+   searchUsers: async(_, {searchQuery, limit=50}, {User}) => {
+    if(!searchQuery) return [];
+
+    // perform a sensitive search on the User collection
+    let regexSearch = new RegExp(searchQuery, "i");
+    const query = {$or: [{username: regexSearch}, {fullName: regexSearch }]};
+
+    const users = User.find(query)
+    .limit(limit)
+
+    const count = User.find(query).countDocuments();
+    return users;
+   },
+
+   /**
+    * suggest the user 6 people to follow
+    * 
+    */
+   suggestPeople: async(_, {userId}, {User, Follow}) => {
+    // find the people the user is following
+    const followedUsers = [];
+    const follow = await Follow.find({ follower: userId }, {_id: 0}).select("following");
+    follow.map((f) => followedUsers.push(f.following));
+   }
+
 };
 
 const Mutation = {
@@ -103,6 +195,7 @@ const Mutation = {
       { new: true } //returns the document with the new update
     );
 
+    // TODO: move declaration to .env
     const CLIENT_URL = 'http://localhost:3000';
 
     const mailOptions = {

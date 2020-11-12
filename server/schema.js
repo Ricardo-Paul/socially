@@ -11,9 +11,19 @@ export const schema = gql`
         getUser(username: String!): UserPayload
 
         postname: String
+
         getPosts(authUserId: ID!, skip:Int, limit:Int): PostsPayload
         getPost(id: ID!): PostPayload
         getFollowedPosts(userId: ID!, skip:Int, limit:Int): PostsPayload
+        getUserPosts(userId: ID!, skip: Int, limit: Int): PostsPayload
+
+        getUsers(userId: ID!): UsersPayload
+        searchUsers(searchQuery: String): [UserPayload]
+    }
+
+    type UsersPayload{
+        users: [UserPayload]
+        count: String!
     }
 
     type Token{
@@ -127,7 +137,7 @@ type CommentPayload{
 
 type PostsPayload{
     posts: [PostPayload]
-    count: String
+    count: String!
 }
 
 enum NotificationType{

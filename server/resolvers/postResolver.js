@@ -38,12 +38,13 @@ const Query = {
     // find the users that the current user is following
 
     let followedUsers = [];
-    const follow = await Follow.find({ follower: userId }).select("follower")
+    let follow = await Follow.find({ follower: userId }, {_id: 0}).select("following");
+    // we suppress the id so we're dealing with two fields now { follower, following }
     // these are instances where the user is the follower { follower, following }
     // we only select the follower field, people that the user is following
 
     // push these celebrities in the array (this name helps identify)
-    follow.map((f) => followedUsers.push(f.follower));
+    follow.map((f) => followedUsers.push(f.following));
 
     // check in the Post collection where the authors are these celebrities
     // also where author is the current user
@@ -52,7 +53,10 @@ const Query = {
 
     // TODO: populate the posts
     // TODO: seed db to test this method
-    const followedPosts = Post.find(query);
+    const followedPosts = Post.find(query)
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: "desc" });
 
     return{
       count: postCount,
