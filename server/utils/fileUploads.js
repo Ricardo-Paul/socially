@@ -45,11 +45,13 @@ cloudinary.config({
 
 // public_id : image file name
 const uploadToCloudinary = async (stream, folder, imagePublicId) => {
+
     // if client provides a public_id overwrite the default one
     // if no we generate one with uuid under a client chosen folder
     const options = imagePublicId? { public_id: imagePublicId, overwrite: true } :
     { public_id: `${folder}/${uuidv4()}`};
 
+    // options only have the public_id value
      return new Promise((resolve, reject) => {
        const cloud_stream = cloudinary.v2.uploader.upload_stream(options, (result, error) => {
             if(result){

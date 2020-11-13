@@ -9,6 +9,7 @@ export const schema = gql`
     type Query{
         getAuthUser: User
         getUser(username: String!): UserPayload
+        verifyResetPasswordToken(email: String!, token: String!): SuccessMessage
 
         postname: String
 
@@ -171,6 +172,8 @@ enum NotificationType{
         deleteNotification(input: DeleteNotificationInput): Notification
         createNotification(input: CreateNotificationInput): Notification
         updateNotificationSeen(input: UpdateNotificationInput!): Boolean
+
+        uploadUserPhoto(input: UploadUserPhotoInput!): UserPayload
     }
 
     type TestMessage{
@@ -179,6 +182,13 @@ enum NotificationType{
 
     type SuccessMessage{
         message: String
+    }
+
+    input UploadUserPhotoInput{
+        userId: ID!
+        image: Upload!
+        imagePublicId: String
+        isCover: Boolean
     }
 
     input DeleteNotificationInput{

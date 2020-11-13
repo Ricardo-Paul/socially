@@ -3,9 +3,12 @@ import bcrypt from 'bcryptjs';
 import ms from 'ms';
 import { sendEmail } from '../utils/sendEmail';
 import Follow from '../models/Follow';
+import fileUploads from '../utils/fileUploads';
 
 const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000'; // 1 hour token duration while password-resetting
+
+const { uploadToCloudinary } = fileUploads;
 
 const Query = {
   /**
@@ -146,7 +149,25 @@ const Query = {
       users: randomUsers,
       count: randomUsers.length
     }
-   }
+   },
+
+  /**
+   * verify resetPassword token
+   * by make sure it's the actual token and then
+   * it's not yet expired
+   */
+  verifyResetPasswordToken: async (_, {email, token}, {User}) => {
+    const user = await User.findOne({
+      email,
+      passwordResetToken: token,
+      passwordResetTokenExpiryDate: { $gte: Date.now() - PASS_RESET_TOKEN_DURATION}
+    });
+
+    if(!user)throw new Error("token is either invalid or expired");
+    return{
+      message: "verify token success"
+    }
+  }
 
 };
 
@@ -262,6 +283,40 @@ const Mutation = {
     });
     return user;
   },
+
+  /**
+   * upload user photo
+   * @param {string} userId
+   * @param {obj} image the actual file 
+   * @param {imagePublicId} string image name, we'll overwrite the default public_id value provided by cloudinary
+   */
+
+
+   uploadUserPhoto: async(_, {input: {userId, image, imagePublicId, isCover}}, {User}) => {
+    const { createReadStream } = await image;
+    const stream = createReadStream();
+    const uploadImage = uploadToCloudinary(stream, "user", imagePublicId);
+
+    // set the photo as either image or cover image
+    // based on client choice
+    if(uploadImage.secure_url){
+      let fieldsToUpdate = {};
+      if(isCover){
+        fieldsToUpdate.coverImage = uploadImage.secure_url;
+        fieldsToUpdate.coverImagePublicId = uploadImage.public_id;
+      }else{
+        fieldsToUpdate.image = uploadImage.secure_url;
+        fieldsToUpdate.imagePublicId = uploadImage.public_id;
+      }
+    }
+
+    const updatedUser = await User.findOneAndUpdate({_id: userId}, {...fieldsToUpdate},{
+      new: true
+    }).populate("posts")
+      .populate("likes");
+
+    return updatedUser;
+  }
 };
 
 export default {

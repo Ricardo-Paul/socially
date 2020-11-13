@@ -27,10 +27,10 @@ const userSchema = new Schema(
       required: true,
     },
     // image and coverImage
-    image: String,
-    coverImage: String,
-    imagePublicId: String,
-    coverImagePublicId: String,
+    image: String, //cloudinary return a @secure_url on upload success, we store then url here
+    coverImage: String, //if the client send (isCover) we'll update that field with the same image secure_url
+    imagePublicId: String, //the image name
+    coverImagePublicId: String, // cover image name
     // password Reset
     passwordResetToken: String,
     passwordResetTokenExpiryDate: Date, //type String in schema
@@ -71,6 +71,7 @@ const userSchema = new Schema(
     versionKey: '_vKey',
   }
 );
+// 
 // we change versionKey value from __v to vKey
 // a versionKey of 0 means user is just created
 
