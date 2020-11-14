@@ -1,6 +1,12 @@
-import { filter } from 'lodash';
 
 const Mutation = {
+  /**
+   * check user authentication and create a like
+   * 
+   * @param {string} userId - id of the current user
+   * @param {string} postId - id of the post to be liked
+   * @returns {obj} a new like object
+   */
   createLike: async (_, { input: { userId, postId } }, { User, Post, Like, authenticatedUser }) => {
     // TODO: put this logic in the middleware
     // an identical logic is described in getAuthUser query but will probably
