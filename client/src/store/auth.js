@@ -25,6 +25,5 @@ export const authReducer = (state = authInitialState, action) => {
                 ...authInitialState
             }
         default: return authInitialState
-            break;
     }
 }
