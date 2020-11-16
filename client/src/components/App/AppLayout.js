@@ -7,7 +7,6 @@ import * as Routes from '../../routes';
 import Home from '../../pages/Home';
 
 
-
 /**
  * renders the app building blocks
  * and all the app routes
