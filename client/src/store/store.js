@@ -9,7 +9,7 @@ import { messageInitialState, messageReducer } from './message';
 /**
  * create context
  */
-const storeContext = createContext();
+const StoreContext = createContext();
 
 /**
  * combine inital states
@@ -34,14 +34,21 @@ const reducers = (store, action) => ({
  * 
  * @param {*} children wrapped components
  */
-export const ContextProvider = ({children}) => {
-    <storeContext.Provider value={useReducer(reducers, store)}>
-        {children}
-    </storeContext.Provider>
+
+ // store should return something
+export const StoreProvider = ({children}) => {
+    return <StoreContext.Provider value={useReducer(reducers, store)}>
+         { children }
+    </StoreContext.Provider>
 }
 
+/**
+ * custom hook for consuming the store
+ */
 
-export const useStore = useContext(storeContext);
+ const useStore = () => useContext(StoreContext);
+
+
 
 //sort of a custom useStore
 // when importing into a file

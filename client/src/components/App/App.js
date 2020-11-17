@@ -1,4 +1,5 @@
 import React from 'react';
+import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AuthLayout from '../../pages/Auth/AuthLayout';
 
@@ -22,7 +23,6 @@ import AppLayout from './AppLayout';
   */
 
 const App = () => {
-
     return(
         <Router>
             <Switch>
