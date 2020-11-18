@@ -22,8 +22,12 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1"
   },
+  "devDependencies": {
+    "prettier": "^2.1.2"
+  },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "format:pages": "prettier ./src/pages --write"
   },
   "browserslist": {
     "production": [
