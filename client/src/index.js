@@ -16,21 +16,21 @@ import { StoreProvider } from './store/store';
 
 const uri = "http://localhost:8080/graphql"
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4444/graphql',
+const testClient = new ApolloClient({
+  uri: 'http://localhost:8080/graphql',
   cache: new InMemoryCache()
 });
 
-const c = createApolloClient(uri);
+const client = createApolloClient(uri);
 
 render(
-  <ApolloHooksProvider client={client}>
+  // <ApolloHooksProvider client={client}>
     <ApolloProvider client={client}>
           <StoreProvider>
             <App />
           </StoreProvider>
-    </ApolloProvider>
-  </ApolloHooksProvider>,
+    </ApolloProvider>,
+  // </ApolloHooksProvider>,
     document.getElementById("root")
   );
 

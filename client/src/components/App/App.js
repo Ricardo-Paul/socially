@@ -1,10 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import AuthLayout from '../../pages/Auth/AuthLayout';
 
 //layouts
 import AppLayout from './AppLayout';
+import AuthLayout from '../../pages/Auth/AuthLayout';
+
 
 /**
  * as the app top level component

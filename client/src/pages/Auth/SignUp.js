@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { SIGN_UP, MUT } from '../../graphql/user';
+import { SIGN_UP } from '../../graphql/user';
 
 const SignUp = () => { 
     const [values, setValues] = useState({
@@ -9,35 +9,26 @@ const SignUp = () => {
         email: "",
         password: ""
     });
-
-    const [ signup ] = useMutation(SIGN_UP);
-let data = {
-    "input": {
-      "fullName":"Jean be",
-      "email":"bbfid@gmail.com",
-      "username":"hfi",
-      "password":"any"
-    }
-  }
-
+    const { fullName, username, email, password } = values;
+    const [ signup, { loading, error } ] = useMutation(SIGN_UP);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('submit hit')
-       
         try {
             const response = await signup({
-                variables:{input:{ fullName:"He bn", email:"ricardopayl33@gmail.com", username:"rddwww", password:"ricardo00"}}
+                variables: {input: {
+                  fullName, username, email, password
+                }}
             });
-            // localStorage.setItem('token', response.data.signup.token);
             console.log(response.data)
-            // await refetch();
-            // history.push(Routes.HOME);
+            console.log(`response: ${response.data},
+              loading: ${loading},
+              error: ${error}
+            `);
           } catch (error) {
-            // console.log(error.graphQLErrors[0].message);
-            console.log(error)
+            console.log(error.graphQLErrors[0].message);
           }
-
     };
 
         const handleChange = e => {
@@ -46,10 +37,7 @@ let data = {
                 ...values,
                 [name]: value
             })
-            console.log(name, value)
         };
-
-    const { fullName, username, email, password } = values;
 
      return(
          <form onSubmit={(e) => handleSubmit(e, signup)}>

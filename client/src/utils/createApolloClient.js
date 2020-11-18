@@ -32,8 +32,10 @@ export const createApolloClient = (apiURL) => {
         uri: apiURL
     });
 
+    // the auth link middleware is causing trouble
+    // leave out for a moment
     return new ApolloClient({
-        link: ApolloLink.from([handleErrors(),authLink, uploadLink]),
+        link: ApolloLink.from([handleErrors(), uploadLink]),
         cache
     });
 }
