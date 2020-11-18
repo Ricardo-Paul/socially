@@ -1,9 +1,17 @@
-import gql from "graphql-tag";
+import { gql } from "@apollo/client"
 
-export const SIGNUP = gql`
-    mutation($input: SignupInput!){
-        signup(input: $input){
-            signupToken
-        }
+
+export const SIGN_UP = gql`
+  mutation($input: SignupInput!) {
+    signup(input: $input) {
+        signupToken
     }
+  }
+`
+export const MUT = gql`
+mutation($input: SignupInput!){
+    signup(input: $input){
+      signupToken
+    }
+  }
 `

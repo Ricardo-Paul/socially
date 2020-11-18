@@ -28,11 +28,12 @@ const HOST =   process.env.HOST;
 
 const apolloServer = createApolloServer(schema, resolvers, models);
 apolloServer.applyMiddleware({ app })
-
+const PORT='4444'
+// API_PORT
 // express sever
-app.listen(API_PORT, ()=>{
-    console.log(`API is running on port: ${HOST}${API_PORT}
-    graphQL Playground: ${HOST}${API_PORT}/${apolloServer.graphqlPath}
+app.listen(PORT, ()=>{
+    console.log(`API is running on port: ${HOST}${PORT}
+    graphQL Playground: ${HOST}${PORT}/${apolloServer.graphqlPath}
     `);
 })
 

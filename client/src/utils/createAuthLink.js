@@ -10,7 +10,7 @@ import { ApolloLink, Observable } from 'apollo-link';
          const token = localStorage.getItem("token");
          operation.setContext({
              headers: {
-                "x-social-token": token
+                "x-social-key": token
              }
          })
      };

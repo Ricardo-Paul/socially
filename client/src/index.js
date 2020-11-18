@@ -3,25 +3,34 @@ import React from 'react';
 import { render } from 'react-dom';
 
 
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
-// import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
+
+import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 
 // root component
 import App from './components/App/App';
 import { createApolloClient } from './utils/createApolloClient';
 
-// store
 import { StoreProvider } from './store/store';
 
-const apiUrl = 'http://localhost:8080';
+const uri = "http://localhost:8080/graphql"
 
-const apolloClient = createApolloClient(apiUrl);
+const client = new ApolloClient({
+  uri: 'http://localhost:4444/graphql',
+  cache: new InMemoryCache()
+});
+
+const c = createApolloClient(uri);
 
 render(
-    <ApolloProvider client={apolloClient}>
+  <ApolloHooksProvider client={client}>
+    <ApolloProvider client={client}>
           <StoreProvider>
             <App />
           </StoreProvider>
-    </ApolloProvider>,
+    </ApolloProvider>
+  </ApolloHooksProvider>,
     document.getElementById("root")
   );
+

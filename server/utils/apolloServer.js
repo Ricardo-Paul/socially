@@ -2,23 +2,39 @@ import { ApolloServer } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
 
+const checkAuthorization = (token) => {
+    return new Promise(async (resolve, reject) => {
+      const authenticatedUser = await jwt.verify(token, process.env.SECRET);
+  
+      if (authenticatedUser) {
+        resolve(authenticatedUser);
+      } else {
+        reject("Couldn't authenticate user");
+      }
+    });
+  };
+
+
 export const createApolloServer = (schema, resolvers, models) => {
     return new ApolloServer({
         typeDefs: schema,
         resolvers,
-// the context object is used for auth
-        context: async ({req, connection})=> {
-        if(req){
-            if(req.headers){
-                // TODO: verify token expiry date
-                const token = req.headers["x-social-key"];
-                const  authenticatedUser = jwt.verify(token, process.env.SECRET);
-                    return Object.assign({authenticatedUser}, models)
-                }
-
-                return Object.assign({}, models);
+        context: async ({ req, connection }) => {
+            if (connection) {
+            //   return connection.context;
+              return Object.assign({}, models);
             }
-        }
+      
+            // let authenticatedUser;
+            // if (req.headers.authorization !== 'null') {
+            //   const user = await checkAuthorization(req.headers['authorization']);
+            //   if (user) {
+            //     authenticatedUser = user;
+            //   }
+            // }
+      
+            return Object.assign({}, models);
+          },
     })
 };
 

@@ -1,4 +1,4 @@
-import { ApolloClient } from 'apollo-client'; 
+import { ApolloClient } from '@apollo/client'; 
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { createUploadLink } from 'apollo-upload-client';
@@ -18,13 +18,13 @@ const handleErrors = () => {
         }
     })
 }
-
+// 
 /**
  * create a apollo client
  *
  * @param {string} apiURL 
  */
-export const createApolloClient = apiURL => {
+export const createApolloClient = (apiURL) => {
     const cache = new InMemoryCache();
     const authLink = createAuthLink();
 
@@ -33,7 +33,7 @@ export const createApolloClient = apiURL => {
     });
 
     return new ApolloClient({
-        link: ApolloLink.from([handleErrors(), authLink, uploadLink]),
+        link: ApolloLink.from([handleErrors(),authLink, uploadLink]),
         cache
     });
 }
