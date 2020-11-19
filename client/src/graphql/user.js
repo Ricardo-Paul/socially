@@ -16,3 +16,11 @@ export const SIGN_IN = gql`
     }
   }
 `
+
+export const REQUEST_PASS_RESET = gql`
+  mutation($input: PassResetInput!){
+    requestPassReset(input: $input){
+      message
+    }
+  }
+`

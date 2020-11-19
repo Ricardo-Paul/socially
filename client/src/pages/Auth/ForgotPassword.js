@@ -4,18 +4,40 @@ import { formStyles } from "../../styles/formStyles";
 import { MainContainer } from "../../components/Layout";
 import TextField from "../../components/TextField";
 import { Button, Typography } from "@material-ui/core";
-import { theme } from "../../utils/theme";
 import { Link } from "react-router-dom";
-import { SIGNIN } from "../../routes";
+import * as Routes from '../../routes'
+import { REQUEST_PASS_RESET } from "../../graphql/user";
+
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  // const [ requestPassReset, {loading}] = useMutation()
-  const requestPassReset = () => {
+  const text = `We will email you a link to reset your password`;
 
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const [subText, setSubText] = useState(text);
+  const [ requestPassReset ] = useMutation(REQUEST_PASS_RESET);
+
+  const handleChange = e => {
+    const { value } = e.target;
+    setEmail(value)
   }
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(!email) return setError(`Please enter your email`);
+
+    try{
+      const result = await requestPassReset({
+        variables: {input: { email }}
+      })
+      console.log(result);
+      setSubText(`EMAIL SENT`);
+      setError(result.data.requestPassReset.message);
+    } catch(error){
+      setError(error.graphQLErrors[0].message);
+    }
 
   }
 
@@ -25,21 +47,28 @@ const ForgotPassword = () => {
     <>
     <MainContainer>
       <div className={classes.paper}>
+        {error}
       <Typography variant="h6" style={{marginBottom: "20px"}}>
         REQUEST PASSWORD RESET
       </Typography>
       <Typography align="center" className={classes.subText}>
-        Enter your email below, <br/> we will email you a link to reset your password
+        {subText}
       </Typography>
+
       <form onSubmit={(e) => handleSubmit(e, requestPassReset)} className={classes.form}>
-        <TextField label="email"variant="outlined" type="email" name="email" value={email} />
-        <Button className={classes.submit} color="primary" variant="contained">
+        <TextField 
+          label="email"
+          variant="outlined" 
+          onChange={handleChange} 
+           />
+
+        <Button type="submit" className={classes.submit} color="primary" variant="contained">
           Request Password Reset
         </Button> <br />
 
         <Typography>
-        <Link to={SIGNIN}>
-          I want to retry
+        <Link to={Routes.SIGNIN}>
+          Let me retry to login
         </Link>
       </Typography>
       </form>
