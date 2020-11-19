@@ -24,3 +24,19 @@ export const REQUEST_PASS_RESET = gql`
     }
   }
 `
+
+export const VERIFY_RESET_PASSWORD_TOKEN = gql`
+  query($email: String!, $token: String!){
+    verifyResetPasswordToken(email: $email, token: $token){
+      message
+    }
+  }
+`
+
+export const RESET_PASSWORD = gql`
+mutation ($input: ResetPasswordInput!){
+  resetPassword(input: $input){
+    token
+  }
+}
+`
