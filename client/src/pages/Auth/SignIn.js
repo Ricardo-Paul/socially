@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../../graphql/user";
+import * as Routes from '../../routes';
+
+// components
+import TextField from "../../components/TextField";
+import AppBar from '../../components/App/AppBar';
+import { Button, Toolbar, Typography } from "@material-ui/core";
+import { MainContainer } from "../../components/Layout";
+import { formStyles } from "../../styles/formStyles";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
+  const [error, setError] = useState("");
   const [values, setValues] = useState({
     emailOrUsername: "",
     password: "",
   });
 
+
   const { emailOrUsername, password } = values;
   const [signin] = useMutation(SIGN_IN);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +32,7 @@ const SignIn = () => {
       console.log(response.data);
     } catch (err) {
       console.log(err.graphQLErrors[0].message);
+      setError(err.graphQLErrors[0].message);
     }
   };
 
@@ -32,24 +45,57 @@ const SignIn = () => {
     console.log(name, value);
   };
 
+  const classes = formStyles();
+
   return (
-    <form onSubmit={(e) => handleSubmit(e, signin)}>
-      username{" "}
-      <input
+    <>
+    <AppBar>
+      <Toolbar>
+        Export Toolbar
+      </Toolbar>
+    </AppBar>
+
+  <MainContainer>
+
+    <div className={classes.paper}>
+      {error}
+      <Typography variant="h6">
+        SIGN IN
+      </Typography>
+    <form onSubmit={(e) => handleSubmit(e, signin)} className={classes.form}>
+      <TextField
         type="text"
         onChange={handleChange}
         name="emailOrUsername"
         value={emailOrUsername}
+
+        variant="outlined"
+        label="username or email"
       />
-      password{" "}
-      <input
+      <TextField
         type="password"
         onChange={handleChange}
         name="password"
         value={password}
+
+        variant="outlined"
+        label="password"
       />
-      <input type="submit" />
+      
+      <Button className={classes.submit} variant="contained" type="submit" color="primary">
+        LOGIN
+      </Button> <br />
+      <Typography>
+        Don't have an acount? <Link to={Routes.HOME}> Sign up </Link>
+      </Typography>
+      <Typography>
+        Forgot Password ? <Link to={Routes.FORGOT_PASSWORD}> Reset Password </Link>
+      </Typography>
     </form>
+    </div>
+  
+    </MainContainer>    
+    </>
   );
 };
 

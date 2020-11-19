@@ -5,6 +5,7 @@ import * as Routes from "../../routes";
 // Auth pages
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import ForgotPassword from "./ForgotPassword"
 
 /**
  * The Auth layout returns routes for user authentication
@@ -14,12 +15,9 @@ import SignIn from "./SignIn";
 const AuthLayout = ({ refetch }) => {
   return (
     <Switch>
-      <Route
-        exact
-        path={Routes.HOME}
-        render={() => <SignUp refetch={refetch} />}
-      />
+      <Route exact path={Routes.HOME} render={() => <SignUp refetch={refetch} />} />
       <Route exact path={Routes.SIGNIN} render={() => <SignIn />} />
+      <Route exact path={Routes.FORGOT_PASSWORD} render={() => <ForgotPassword />} />
       <Redirect to={Routes.HOME} />
     </Switch>
   );

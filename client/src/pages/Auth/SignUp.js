@@ -2,51 +2,27 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../../graphql/user";
 
-/**
- * styles imports
- */
 import {
-  Box,
   Button,
-  Container,
   CssBaseline,
-  Grid,
-  makeStyles,
-  Paper,
   Toolbar,
   Typography,
 } from "@material-ui/core";
 
+// styles
 import MuiAlert from '@material-ui/lab/Alert'
-
+import { MainContainer } from '../../components/Layout';
 import TextField from '../../components/TextField';
 import AppBar from '../../components/App/AppBar';
+import { formStyles } from "../../styles/formStyles";
 
+// utils
 import validate from '../../utils/validate';
 
-const useStyles = makeStyles((theme) => ({
-    paper:{
-        paddingTop: theme.spacing(4),
-        display: "flex",
-        flexDirection:"column",
-        alignItems: "center",
-    },
-    form:{
-        display: "flex",
-        flexDirection: "column",
-        width: "35%",
-        [theme.breakpoints.down('xs')]: {
-            width: "100%"
-        }
-    },
-    submit: {
-        marginTop: theme.spacing(2)
-    },
-    signupText:{
-        marginTop: theme.spacing(1),
-        marginBottom: -10
-    }
-}));
+// routes
+import { Link } from "react-router-dom";
+import { SIGNIN } from "../../routes";
+
 
 const SignUp = () => {
   const [values, setValues] = useState({
@@ -85,6 +61,10 @@ const SignUp = () => {
               loading: ${loading},
               error: ${error}
             `);
+    // save signupToken in localstorate
+    const signupToken = response.data.signupToken;
+    localStorage.setItem('signupToken', signupToken);
+
     } catch (error) {
         if(!error.graphQLErrors){
             return;
@@ -102,7 +82,7 @@ const SignUp = () => {
     });
   };
 
-  const classes = useStyles();
+  const classes = formStyles();
 
   return (
     <>
@@ -112,13 +92,11 @@ const SignUp = () => {
         </Toolbar>
     </AppBar>
 
-      <Container style={{ marginTop:"10%"}}>
+      <MainContainer >
         <CssBaseline />
-        { error && <MuiAlert severity="error" elevation={6}>
-            {error}
-        </MuiAlert>}
 
         <div className={classes.paper}>
+         {error}
         <Typography variant="h6" className={classes.signupText}>
             SIGN UP
         </Typography>
@@ -163,10 +141,13 @@ const SignUp = () => {
 
           <Button variant="contained" className={classes.submit} color="primary" type="submit">
             Submit
-          </Button>
+          </Button> <br />
+          <Typography>
+              Already have an account? <Link to={SIGNIN}> Sign In</Link>
+          </Typography>
         </form>
         </div>
-      </Container>
+      </MainContainer>
     </>
   );
 };
