@@ -26,9 +26,9 @@ const client = createApolloClient(uri);
 render(
   // <ApolloHooksProvider client={client}>
     <ApolloProvider client={client}>
-          <StoreProvider>
+      <StoreProvider>
             <App />
-          </StoreProvider>
+        </StoreProvider>
     </ApolloProvider>,
   // </ApolloHooksProvider>,
     document.getElementById("root")

@@ -1,2 +1,2 @@
-### This folder includes all of the app components
+### This directory contains all of the app components
 ### organized by folder
