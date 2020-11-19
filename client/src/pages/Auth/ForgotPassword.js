@@ -5,7 +5,7 @@ import { MainContainer } from "../../components/Layout";
 import TextField from "../../components/TextField";
 import { Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import * as Routes from '../../routes'
+import * as Routes from "../../routes";
 import { REQUEST_PASS_RESET } from "../../graphql/user";
 import validate from "../../utils/validate";
 
@@ -16,69 +16,73 @@ const ForgotPassword = () => {
   const [error, setError] = useState("");
 
   const [subText, setSubText] = useState(text);
-  const [ requestPassReset, { loading } ] = useMutation(REQUEST_PASS_RESET);
+  const [requestPassReset, { loading }] = useMutation(REQUEST_PASS_RESET);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { value } = e.target;
-    setEmail(value)
-  }
-
+    setEmail(value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!email) return setError(`Please enter your email`);
-    const errors = validate({email});
-    if(errors){
-      setError(errors)
+    if (!email) return setError(`Please enter your email`);
+    const errors = validate({ email });
+    if (errors) {
+      setError(errors);
       return false;
     }
 
-    try{
+    try {
       const result = await requestPassReset({
-        variables: {input: { email }}
-      })
+        variables: { input: { email } },
+      });
       console.log(result);
       setSubText(`EMAIL SENT`);
       setError(result.data.requestPassReset.message);
-    } catch(error){
+    } catch (error) {
       setError(error.graphQLErrors[0].message);
     }
-
-  }
+  };
 
   const classes = formStyles();
 
   return (
     <>
-    <MainContainer>
-      <div className={classes.paper}>
-        {error}
-      <Typography variant="h6" style={{marginBottom: "20px"}}>
-        REQUEST PASSWORD RESET
-      </Typography>
-      <Typography align="center" className={classes.subText}>
-        {subText}
-      </Typography>
+      <MainContainer>
+        <div className={classes.paper}>
+          {error}
+          <Typography variant="h6" style={{ marginBottom: "20px" }}>
+            REQUEST PASSWORD RESET
+          </Typography>
+          <Typography align="center" className={classes.subText}>
+            {subText}
+          </Typography>
 
-      <form onSubmit={(e) => handleSubmit(e, requestPassReset)} className={classes.form}>
-        <TextField 
-          label="email"
-          variant="outlined" 
-          onChange={handleChange} 
-           />
-
-        <Button disabled={loading} type="submit" className={classes.submit} color="primary" variant="contained">
-          Request Password Reset
-        </Button> <br />
-
-        <Typography>
-        <Link to={Routes.SIGNIN}>
-          Let me retry to login
-        </Link>
-      </Typography>
-      </form>
-      </div>
-    </MainContainer>
+          <form
+            onSubmit={(e) => handleSubmit(e, requestPassReset)}
+            className={classes.form}
+          >
+            <TextField
+              label="email"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <Button
+              disabled={loading}
+              type="submit"
+              className={classes.submit}
+              color="primary"
+              variant="contained"
+            >
+              Request Password Reset
+            </Button>{" "}
+            <br />
+            <Typography>
+              <Link to={Routes.SIGNIN}>Let me retry to login</Link>
+            </Typography>
+          </form>
+        </div>
+      </MainContainer>
     </>
   );
 };

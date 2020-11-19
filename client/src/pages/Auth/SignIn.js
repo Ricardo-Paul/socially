@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../../graphql/user";
-import * as Routes from '../../routes';
+import * as Routes from "../../routes";
 
 // components
 import TextField from "../../components/TextField";
-import AppBar from '../../components/App/AppBar';
+import AppBar from "../../components/App/AppBar";
 import { Button, Toolbar, Typography } from "@material-ui/core";
 import { MainContainer } from "../../components/Layout";
 import { formStyles } from "../../styles/formStyles";
@@ -18,10 +18,8 @@ const SignIn = () => {
     password: "",
   });
 
-
   const { emailOrUsername, password } = values;
   const [signin] = useMutation(SIGN_IN);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,52 +47,53 @@ const SignIn = () => {
 
   return (
     <>
-    <AppBar>
-      <Toolbar>
-        Export Toolbar
-      </Toolbar>
-    </AppBar>
+      <AppBar>
+        <Toolbar>Export Toolbar</Toolbar>
+      </AppBar>
 
-  <MainContainer>
-
-    <div className={classes.paper}>
-      {error}
-      <Typography variant="h6">
-        SIGN IN
-      </Typography>
-    <form onSubmit={(e) => handleSubmit(e, signin)} className={classes.form}>
-      <TextField
-        type="text"
-        onChange={handleChange}
-        name="emailOrUsername"
-        value={emailOrUsername}
-
-        variant="outlined"
-        label="username or email"
-      />
-      <TextField
-        type="password"
-        onChange={handleChange}
-        name="password"
-        value={password}
-
-        variant="outlined"
-        label="password"
-      />
-      
-      <Button className={classes.submit} variant="contained" type="submit" color="primary">
-        LOGIN
-      </Button> <br />
-      <Typography>
-        Don't have an acount? <Link to={Routes.HOME}> Sign up </Link>
-      </Typography>
-      <Typography>
-        Forgot Password ? <Link to={Routes.FORGOT_PASSWORD}> Reset Password </Link>
-      </Typography>
-    </form>
-    </div>
-  
-    </MainContainer>    
+      <MainContainer>
+        <div className={classes.paper}>
+          {error}
+          <Typography variant="h6">SIGN IN</Typography>
+          <form
+            onSubmit={(e) => handleSubmit(e, signin)}
+            className={classes.form}
+          >
+            <TextField
+              type="text"
+              onChange={handleChange}
+              name="emailOrUsername"
+              value={emailOrUsername}
+              variant="outlined"
+              label="username or email"
+            />
+            <TextField
+              type="password"
+              onChange={handleChange}
+              name="password"
+              value={password}
+              variant="outlined"
+              label="password"
+            />
+            <Button
+              className={classes.submit}
+              variant="contained"
+              type="submit"
+              color="primary"
+            >
+              LOGIN
+            </Button>{" "}
+            <br />
+            <Typography>
+              Don't have an acount? <Link to={Routes.HOME}> Sign up </Link>
+            </Typography>
+            <Typography>
+              Forgot Password ?{" "}
+              <Link to={Routes.FORGOT_PASSWORD}> Reset Password </Link>
+            </Typography>
+          </form>
+        </div>
+      </MainContainer>
     </>
   );
 };

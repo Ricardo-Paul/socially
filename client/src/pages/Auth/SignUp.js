@@ -2,27 +2,21 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../../graphql/user";
 
-import {
-  Button,
-  CssBaseline,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { Button, CssBaseline, Toolbar, Typography } from "@material-ui/core";
 
 // styles
-import MuiAlert from '@material-ui/lab/Alert'
-import { MainContainer } from '../../components/Layout';
-import TextField from '../../components/TextField';
-import AppBar from '../../components/App/AppBar';
+import MuiAlert from "@material-ui/lab/Alert";
+import { MainContainer } from "../../components/Layout";
+import TextField from "../../components/TextField";
+import AppBar from "../../components/App/AppBar";
 import { formStyles } from "../../styles/formStyles";
 
 // utils
-import validate from '../../utils/validate';
+import validate from "../../utils/validate";
 
 // routes
 import { Link } from "react-router-dom";
 import { SIGNIN } from "../../routes";
-
 
 const SignUp = () => {
   const [values, setValues] = useState({
@@ -39,9 +33,9 @@ const SignUp = () => {
     e.preventDefault();
 
     const error = validate(values);
-    if(error){
-        setError(error)
-        return false;
+    if (error) {
+      setError(error);
+      return false;
     }
 
     try {
@@ -61,16 +55,15 @@ const SignUp = () => {
               loading: ${loading},
               error: ${error}
             `);
-    // save signupToken in localstorate
-    const signupToken = response.data.signupToken;
-    localStorage.setItem('signupToken', signupToken);
-
+      // save signupToken in localstorate
+      const signupToken = response.data.signupToken;
+      localStorage.setItem("signupToken", signupToken);
     } catch (error) {
-        if(!error.graphQLErrors){
-            return;
-        }
-        setError(error.graphQLErrors[0].message);
-        console.log(error.graphQLErrors[0].message);
+      if (!error.graphQLErrors) {
+        return;
+      }
+      setError(error.graphQLErrors[0].message);
+      console.log(error.graphQLErrors[0].message);
     }
   };
 
@@ -86,66 +79,69 @@ const SignUp = () => {
 
   return (
     <>
-    <AppBar>
-        <Toolbar>
-            Socially
-        </Toolbar>
-    </AppBar>
+      <AppBar>
+        <Toolbar>Socially</Toolbar>
+      </AppBar>
 
-      <MainContainer >
+      <MainContainer>
         <CssBaseline />
 
         <div className={classes.paper}>
-         {error}
-        <Typography variant="h6" className={classes.signupText}>
+          {error}
+          <Typography variant="h6" className={classes.signupText}>
             SIGN UP
-        </Typography>
-        <hr/>
-
-        <form className={classes.form} onSubmit={(e) => handleSubmit(e, signup)}>
-            <TextField
-            type="text"
-            onChange={handleChange}
-            name="fullName"
-            value={fullName}
-            variant="outlined"
-            label="Fullname"
-          />
-
-          <TextField
-            type="text"
-            onChange={handleChange}
-            name="email"
-            value={email}
-            variant="outlined"
-            label="email"
-          />
-
-          <TextField
-            type="text"
-            onChange={handleChange}
-            name="username"
-            value={username}
-            label="User name"
-            variant="outlined"
-          />
-
-          <TextField
-            type="password"
-            onChange={handleChange}
-            name="password"
-            value={password}
-            label="password"
-            variant="outlined"
-          />
-
-          <Button variant="contained" className={classes.submit} color="primary" type="submit">
-            Submit
-          </Button> <br />
-          <Typography>
-              Already have an account? <Link to={SIGNIN}> Sign In</Link>
           </Typography>
-        </form>
+          <hr />
+
+          <form
+            className={classes.form}
+            onSubmit={(e) => handleSubmit(e, signup)}
+          >
+            <TextField
+              type="text"
+              onChange={handleChange}
+              name="fullName"
+              value={fullName}
+              variant="outlined"
+              label="Fullname"
+            />
+            <TextField
+              type="text"
+              onChange={handleChange}
+              name="email"
+              value={email}
+              variant="outlined"
+              label="email"
+            />
+            <TextField
+              type="text"
+              onChange={handleChange}
+              name="username"
+              value={username}
+              label="User name"
+              variant="outlined"
+            />
+            <TextField
+              type="password"
+              onChange={handleChange}
+              name="password"
+              value={password}
+              label="password"
+              variant="outlined"
+            />
+            <Button
+              variant="contained"
+              className={classes.submit}
+              color="primary"
+              type="submit"
+            >
+              Submit
+            </Button>{" "}
+            <br />
+            <Typography>
+              Already have an account? <Link to={SIGNIN}> Sign In</Link>
+            </Typography>
+          </form>
         </div>
       </MainContainer>
     </>
