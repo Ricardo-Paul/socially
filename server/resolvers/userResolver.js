@@ -281,7 +281,12 @@ const Mutation = {
       subject: 'Successfully reset password',
       html: 'You have successfully reset your password',
     });
-    return user;
+
+    // return user;
+    let token = generateToken(user, AUTH_TOKEN_EXPIRY);
+    return {
+      token
+    };
   },
 
   /**

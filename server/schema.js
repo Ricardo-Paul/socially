@@ -31,6 +31,7 @@ export const schema = gql`
     type Token{
         signupToken: String
         signinToken: String
+        token: String
     }
 
     type User{
@@ -155,7 +156,7 @@ enum NotificationType{
         signup(input: SignupInput!): Token
         signin(input: SigninInput!): Token
         requestPassReset(input: PassResetInput!): SuccessMessage
-        resetPassword(input: ResetPasswordInput!): User
+        resetPassword(input: ResetPasswordInput!): Token
 
         createPost(input: CreatePostInput!): PostPayload
         deletePost(id: ID!): String

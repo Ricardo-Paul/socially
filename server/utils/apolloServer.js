@@ -1,39 +1,42 @@
 import { ApolloServer } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
-
-const checkAuthorization = (token) => {
-    return new Promise(async (resolve, reject) => {
-      const authenticatedUser = await jwt.verify(token, process.env.SECRET);
-  
-      if (authenticatedUser) {
-        resolve(authenticatedUser);
-      } else {
-        reject("Couldn't authenticate user");
-      }
-    });
-  };
-
+/**
+ * verify token
+ * returns username and email if resolved
+ * 
+ * @param {*} token 
+ */
+const checkAuth = (token) => {
+  return new Promise((resolve, reject) => {
+    let authUser = jwt.verify(token, process.env.SECRET);
+    if(authUser){
+      resolve(authUser)
+    }
+    reject(`Authentication failed`)
+  })
+}
 
 export const createApolloServer = (schema, resolvers, models) => {
     return new ApolloServer({
         typeDefs: schema,
         resolvers,
         context: async ({ req, connection }) => {
-            if (connection) {
-            //   return connection.context;
+          let authenticatedUser;
+
+          if(req.headers){
+            const token = req.headers["x-social-key"];
+           let user = await checkAuth(token);
+          //  user will return if only the Promise has resolved
+           if(user)
+            authenticatedUser = user;
+          }
+
+            if (connection) { //we'll deal with connnecion later
               return Object.assign({}, models);
             }
-      
-            // let authenticatedUser;
-            // if (req.headers.authorization !== 'null') {
-            //   const user = await checkAuthorization(req.headers['authorization']);
-            //   if (user) {
-            //     authenticatedUser = user;
-            //   }
-            // }
-      
-            return Object.assign({}, models);
+
+            return Object.assign({authenticatedUser}, models);
           },
     })
 };
