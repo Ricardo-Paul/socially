@@ -22,9 +22,7 @@ const ResetPassword = ({ location }) => {
             variables: {email, token}
         });
 
-        const [resetPassword, { loading }] = useMutation(RESET_PASSWORD);
-
-
+        const [resetPassword, { loading: mutationLoading }] = useMutation(RESET_PASSWORD);
 
   const [values, setValues] = useState({
     newPassword: "",
@@ -45,14 +43,14 @@ const ResetPassword = ({ location }) => {
     e.preventDefault();
     try{
         const result = await resetPassword({
-            variables: {input: { email: "bfy", password:"huf", passwordResetToken:"hiuf"}}
-        });
-    
-        console.log(resetPassword);
+            variables: {input: { email:email, password:newPassword, passwordResetToken:token}}
+        });    
+        console.log(result.data);
+        setErrors("Password Successfully Reset");
     } catch(error){
         console.log(error)
+        setErrors(error.graphQLErrors[0].message);
     }
-    
   }
 
   const classes = formStyles();
@@ -61,6 +59,7 @@ const ResetPassword = ({ location }) => {
     <>
       <MainContainer>
         <div className={classes.paper}>
+            {errors}
           <Typography>RESET PASSWORD</Typography>
           <form className={classes.form} onSubmit={(e) => handleSubmit(e, resetPassword)} >
             <TextField
@@ -83,6 +82,7 @@ const ResetPassword = ({ location }) => {
               variant="contained"
               color="primary"
               type="sumbit"
+              disabled={mutationLoading}
             >
               RESET PASSWORD
             </Button>

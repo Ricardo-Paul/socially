@@ -28,6 +28,7 @@ const SignIn = () => {
         variables: { input: { emailOrUsername, password } },
       });
       console.log(response.data);
+      setError("")
     } catch (err) {
       console.log(err.graphQLErrors[0].message);
       setError(err.graphQLErrors[0].message);

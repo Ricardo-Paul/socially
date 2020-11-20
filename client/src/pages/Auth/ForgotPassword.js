@@ -7,7 +7,6 @@ import { Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import * as Routes from "../../routes";
 import { REQUEST_PASS_RESET } from "../../graphql/user";
-import validate from "../../utils/validate";
 
 const ForgotPassword = () => {
   const text = `We will email you a link to reset your password`;
@@ -26,11 +25,6 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) return setError(`Please enter your email`);
-    const errors = validate({ email });
-    if (errors) {
-      setError(errors);
-      return false;
-    }
 
     try {
       const result = await requestPassReset({
