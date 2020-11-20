@@ -16,19 +16,11 @@ import ResetPassword from "./ResetPassword";
 const AuthLayout = ({ refetch }) => {
   return (
     <Switch>
-      <Route
-        exact
-        path={Routes.HOME}
-        render={() => <SignUp refetch={refetch} />}
-      />
+      <Route exact path={Routes.SIGNUP} render={() => <SignUp refetch={refetch} />} />
       <Route exact path={Routes.SIGNIN} render={() => <SignIn refetch={refetch} />} />
-      <Route
-        exact
-        path={Routes.FORGOT_PASSWORD}
-        render={() => <ForgotPassword />}
-      />
+      <Route  exact path={Routes.FORGOT_PASSWORD} render={() => <ForgotPassword />} />
       <Route exact path={Routes.RESET_PASSWORD} component={ResetPassword} />
-      <Redirect to={Routes.HOME} />
+      <Redirect to={Routes.SIGNUP} />
     </Switch>
   );
 };

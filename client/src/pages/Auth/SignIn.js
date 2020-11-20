@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../../graphql/user";
 import * as Routes from "../../routes";
+
+import PropTypes from 'prop-types';
 
 // components
 import TextField from "../../components/TextField";
@@ -9,9 +11,9 @@ import AppBar from "../Auth/AuthHeader";
 import { Button, Toolbar, Typography } from "@material-ui/core";
 import { MainContainer } from "../../components/Layout";
 import { formStyles } from "../../styles/formStyles";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-const SignIn = ({ refetch }) => {
+const SignIn = ({ location, history, refetch }) => {
   const [error, setError] = useState("");
   const [values, setValues] = useState({
     emailOrUsername: "",
@@ -27,7 +29,9 @@ const SignIn = ({ refetch }) => {
       const response = await signin({
         variables: { input: { emailOrUsername, password } },
       });
-      refetch();
+      refetch(); 
+      history.push(Routes.HOME);
+
       console.log(response.data);
       localStorage.setItem('token', response.data.signin.signinToken);
       setError("")
@@ -37,6 +41,11 @@ const SignIn = ({ refetch }) => {
       setError(err.graphQLErrors[0].message);
     }
   };
+
+  // empty error when location changes
+  useEffect(() => {
+    setError("");
+  },[location.pathname]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -102,4 +111,9 @@ const SignIn = ({ refetch }) => {
   );
 };
 
-export default SignIn;
+SignIn.prototype = {
+  history: PropTypes.object.isRequired,
+  refetch: PropTypes.func.isRequired
+}
+
+export default withRouter(SignIn);

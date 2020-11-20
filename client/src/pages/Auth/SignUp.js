@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../../graphql/user";
-
+import * as Routes from '../../routes';
 import { Button, CssBaseline, Toolbar, Typography } from "@material-ui/core";
-
 // styles
 import { MainContainer } from "../../components/Layout";
 import TextField from "../../components/TextField";
@@ -14,10 +13,10 @@ import { formStyles } from "../../styles/formStyles";
 import validate from "../../utils/validate";
 
 // routes
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { SIGNIN } from "../../routes";
 
-const SignUp = () => {
+const SignUp = ({ refetch, location, history }) => {
   const [values, setValues] = useState({
     fullName: "",
     username: "",
@@ -55,8 +54,9 @@ const SignUp = () => {
               error: ${error}
             `);
       // save signupToken in localstorate
-      const signupToken = response.data.signupToken;
-      localStorage.setItem("signupToken", signupToken);
+      localStorage.setItem("token", response.data.signup.signupToken);
+      refetch();
+      history.push(Routes.HOME);
     } catch (error) {
       if (!error.graphQLErrors) {
         return;
@@ -147,4 +147,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default withRouter(SignUp);
