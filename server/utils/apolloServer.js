@@ -22,22 +22,28 @@ export const createApolloServer = (schema, resolvers, models) => {
         typeDefs: schema,
         resolvers,
         context: async ({ req, connection }) => {
-          let authenticatedUser;
-
-          if(req.headers){
-            const token = req.headers["x-social-key"];
-           let user = await checkAuth(token);
-          //  user will return if only the Promise has resolved
-           if(user)
-            authenticatedUser = user;
+          if(connection){
+            return connection.context;
           }
+          console.log('HEADERS API :',req.headers.authorization);
+          let bool = Boolean(req.headers.authorization);
+          console.log('BOOL ', bool);
+          
+          if(bool){
+            console.log('headers present')
+            const token = req.headers.authorization;
+            let user = await checkAuth(token);
+            if(user){
+              let authenticatedUser = user;
+              return Object.assign({authenticatedUser}, models);
+             }
+          } else {
+            console.log('no headers')
+            return Object.assign({}, models);
+          };
 
-            if (connection) { //we'll deal with connnecion later
-              return Object.assign({}, models);
-            }
-
-            return Object.assign({authenticatedUser}, models);
-          },
+          return Object.assign({}, models);
+        },
     })
 };
 
