@@ -1,10 +1,12 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //layouts
 import AppLayout from './AppLayout';
 import AuthLayout from '../../pages/Auth/AuthLayout';
+import { GET_AUTH_USER } from '../../graphql/user';
+import { useQuery } from '@apollo/client';
+
 
 
 /**
@@ -23,12 +25,28 @@ import AuthLayout from '../../pages/Auth/AuthLayout';
   * @AppLayout for authenticated user
   */
 
+  /**
+   * @AuthUser render layouts based on
+   * user auth
+   */
+
 const App = () => {
+    const { loading, data, error, refetch } = useQuery(GET_AUTH_USER);
+
+    useEffect(() => {
+        console.log('Authenticated User :',data);
+        console.log('ERROR', error);
+        console.log('LOADING: ', loading);
+    })
+    
     return(
         <Router>
             <Switch>
-                <Route  exact component={AuthLayout} />
-                <Route exact component={AppLayout} />
+                {!loading && data.getAuthUser? (
+                    <Route exact render={() => <AppLayout authUser={data.getAuthUser} /> } />
+                ):(
+                    <Route  exact render={() => <AuthLayout refetch={refetch} /> } />
+                )}
             </Switch>
         </Router>
     );
@@ -38,4 +56,3 @@ export default App;
 
 //use exact to disable the partial matching
 // of the route
-// 

@@ -5,13 +5,36 @@ import { createUploadLink } from 'apollo-upload-client';
 
 import { onError } from 'apollo-link-error';
 import { createAuthLink } from './createAuthLink';
+
+import { setContext } from '@apollo/client/link/context';
+
+const myAuthLink = setContext((_,{ headers }) => {
+    const token = localStorage.getItem("token");
+    if(!token){
+        return;
+    }
+    return {
+        headers: {
+            ...headers,
+            authorization: token
+        }
+    }
+});
+
+/**
+ * auth link
+ */
+
+ 
+
+
 /**
  * error handling function
  */
 const handleErrors = () => {
     return onError(({graphQLErrors, networkError}) => {
         if(graphQLErrors){
-            console.log(`graphQLErrors: ${graphQLErrors}`);
+            console.log(`graphQLErrors: ${graphQLErrors[0].message}`);
         }
         if(networkError){
             console.log(`Network Error: ${networkError}`);
@@ -32,10 +55,9 @@ export const createApolloClient = (apiURL) => {
         uri: apiURL
     });
 
-    // the auth link middleware is causing trouble
-    // leave out for a moment
+    // using myAuthLink for now inst
     return new ApolloClient({
-        link: ApolloLink.from([handleErrors(), uploadLink]),
+        link: ApolloLink.from([handleErrors(), myAuthLink, uploadLink]),
         cache
     });
 }

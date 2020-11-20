@@ -11,7 +11,7 @@ import { MainContainer } from "../../components/Layout";
 import { formStyles } from "../../styles/formStyles";
 import { Link } from "react-router-dom";
 
-const SignIn = () => {
+const SignIn = ({ refetch }) => {
   const [error, setError] = useState("");
   const [values, setValues] = useState({
     emailOrUsername: "",
@@ -27,9 +27,12 @@ const SignIn = () => {
       const response = await signin({
         variables: { input: { emailOrUsername, password } },
       });
+      refetch();
       console.log(response.data);
+      localStorage.setItem('token', response.data.signin.signinToken);
       setError("")
     } catch (err) {
+      console.log(err)
       console.log(err.graphQLErrors[0].message);
       setError(err.graphQLErrors[0].message);
     }

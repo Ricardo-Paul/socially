@@ -21,7 +21,7 @@ const AuthLayout = ({ refetch }) => {
         path={Routes.HOME}
         render={() => <SignUp refetch={refetch} />}
       />
-      <Route exact path={Routes.SIGNIN} render={() => <SignIn />} />
+      <Route exact path={Routes.SIGNIN} render={() => <SignIn refetch={refetch} />} />
       <Route
         exact
         path={Routes.FORGOT_PASSWORD}
