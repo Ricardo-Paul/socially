@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { MainContainer } from "../../components/Layout";
 import { formStyles } from "../../styles/formStyles";
 import TextField from "../../components/TextField";
-import validate from "../../utils/validate";
 import { RESET_PASSWORD, VERIFY_RESET_PASSWORD_TOKEN } from "../../graphql/user";
+import AuthHeader from "./AuthHeader";
 
 const ResetPassword = ({ location }) => {
   const url = new URLSearchParams(location.search);
@@ -57,6 +57,9 @@ const ResetPassword = ({ location }) => {
 
   return (
     <>
+    <AuthHeader />
+
+    
       <MainContainer>
         <div className={classes.paper}>
             {errors}

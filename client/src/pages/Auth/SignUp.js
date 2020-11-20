@@ -5,10 +5,9 @@ import { SIGN_UP } from "../../graphql/user";
 import { Button, CssBaseline, Toolbar, Typography } from "@material-ui/core";
 
 // styles
-import MuiAlert from "@material-ui/lab/Alert";
 import { MainContainer } from "../../components/Layout";
 import TextField from "../../components/TextField";
-import AppBar from "../../components/App/AppBar";
+import AppBar from "../Auth/AuthHeader";
 import { formStyles } from "../../styles/formStyles";
 
 // utils

@@ -5,7 +5,7 @@ import * as Routes from "../../routes";
 
 // components
 import TextField from "../../components/TextField";
-import AppBar from "../../components/App/AppBar";
+import AppBar from "../Auth/AuthHeader";
 import { Button, Toolbar, Typography } from "@material-ui/core";
 import { MainContainer } from "../../components/Layout";
 import { formStyles } from "../../styles/formStyles";
