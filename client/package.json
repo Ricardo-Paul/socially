@@ -31,7 +31,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "format:pages": "prettier ./src/pages --write"
+    "format:pages": "prettier ./src/pages --write",
+    "format:components": "prettier ./src/components --write"
   },
   "browserslist": {
     "production": [
