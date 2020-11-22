@@ -43,8 +43,6 @@ const ForgotPassword = () => {
 
   return (
     <>
-        <AuthHeader />
-
       <MainContainer>
         <div className={classes.paper}>
           {error}

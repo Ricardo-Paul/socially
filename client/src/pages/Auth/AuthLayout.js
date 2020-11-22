@@ -7,7 +7,7 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
-
+import AuthHeader from "./AuthHeader";
 /**
  * The Auth layout returns routes for user authentication
  * meaning when not signed in (signin/signup/reset password)
@@ -15,6 +15,8 @@ import ResetPassword from "./ResetPassword";
 
 const AuthLayout = ({ refetch }) => {
   return (
+    <>
+    <AuthHeader />
     <Switch>
       <Route exact path={Routes.SIGNUP} render={() => <SignUp refetch={refetch} />} />
       <Route exact path={Routes.SIGNIN} render={() => <SignIn refetch={refetch} />} />
@@ -22,6 +24,7 @@ const AuthLayout = ({ refetch }) => {
       <Route exact path={Routes.RESET_PASSWORD} component={ResetPassword} />
       <Redirect to={Routes.SIGNUP} />
     </Switch>
+    </>
   );
 };
 

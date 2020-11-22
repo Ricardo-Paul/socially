@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../../graphql/user";
 import * as Routes from '../../routes';
 import { Button, CssBaseline, Toolbar, Typography } from "@material-ui/core";
+
 // styles
 import { MainContainer } from "../../components/Layout";
 import TextField from "../../components/TextField";
@@ -78,10 +79,6 @@ const SignUp = ({ refetch, location, history }) => {
 
   return (
     <>
-      <AppBar>
-        <Toolbar>Socially</Toolbar>
-      </AppBar>
-
       <MainContainer>
         <CssBaseline />
 

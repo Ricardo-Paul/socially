@@ -27,7 +27,7 @@ const SignIn = ({ location, history, refetch }) => {
     e.preventDefault();
     try {
       const response = await signin({
-        variables: { input: { emailOrUsername, password } },
+        variables: { input: { emailOrUsername, password } }
       });
       refetch(); 
       history.push(Routes.HOME);
@@ -60,10 +60,6 @@ const SignIn = ({ location, history, refetch }) => {
 
   return (
     <>
-      <AppBar>
-        <Toolbar>Export Toolbar</Toolbar>
-      </AppBar>
-
       <MainContainer>
         <div className={classes.paper}>
           {error}

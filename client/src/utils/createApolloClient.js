@@ -8,6 +8,8 @@ import { createAuthLink } from './createAuthLink';
 
 import { setContext } from '@apollo/client/link/context';
 
+
+// a partial solution while I don't debug {createAuthLink}
 const myAuthLink = setContext((_,{ headers }) => {
     const token = localStorage.getItem("token");
     if(!token){
@@ -21,16 +23,12 @@ const myAuthLink = setContext((_,{ headers }) => {
     }
 });
 
-/**
- * auth link
- */
-
- 
-
 
 /**
  * error handling function
+ * boilerplate provided by the onError link itself
  */
+
 const handleErrors = () => {
     return onError(({graphQLErrors, networkError}) => {
         if(graphQLErrors){

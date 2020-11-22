@@ -57,8 +57,6 @@ const ResetPassword = ({ location }) => {
 
   return (
     <>
-    <AuthHeader />
-
       <MainContainer>
         <div className={classes.paper}>
             {errors}
