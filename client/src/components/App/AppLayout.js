@@ -30,6 +30,11 @@ const appLayoutStyles = makeStyles(theme => ({
     }
   },
   
+  middle: {
+    backgroundColor: colors.darkGrey,
+    paddingTop: 60, // use that for all grid item
+  },
+
   grid: {
     position:"relative",
 
@@ -47,16 +52,17 @@ const appLayoutStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]:{
       display: "block"
     },
-    height: "100vh",
     //show the sidbar from medium all the way up
 
   },
-  middle: {
-    backgroundColor: colors.darkGrey
-  },
   suggestions:{
     // backgroundColor: "orange"
-  }
+  },
+
+  gridItem:{
+    paddingTop: 60, // use that for all grid item
+    height: "100vh",
+  },
 }))
 
 /**
@@ -79,7 +85,7 @@ const AppLayout = ({ authUser }) => {
       type: SET_AUTH_USER,
       payload: authUser
     })
-  }, [authUser, dispatch]);
+  }, [authUser, dispatch]); // dispatch and authUser used as dependencies
 
   return (
     <>
@@ -88,16 +94,16 @@ const AppLayout = ({ authUser }) => {
     <div className={classes.root}>
       <CssBaseline />
       <Grid container className={classes.grid}>
-        <Grid item md={3} xs={12} className={classes.sidebar}>
+        <Grid item md={3} xs={12} className={classes.sidebar} className={classes.gridItem}>
             <Sidebar />
         </Grid>
-        <Grid item md={6} xs={12} className={classes.middle}>
+        <Grid item md={6} xs={12} className={classes.gridItem} className={classes.middle}>
           <Switch>
             <Route exact path={Routes.HOME} render={ () => <Home /> } />
             <Redirect to={Routes.HOME} />
         </Switch>
         </Grid>
-        <Grid item md={3} xs={12} className={classes.suggestions}>
+        <Grid item md={3} xs={12} className={classes.suggestions} className={classes.gridItem}>
           User suggestions
         </Grid>
       </Grid>
