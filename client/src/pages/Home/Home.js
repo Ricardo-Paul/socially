@@ -13,8 +13,8 @@ const Home = () => {
 
   return <>
   <div className={classes.home}>
-  <CreatePost />
     HOME PAGE
+    <CreatePost />
   </div>
   </>
 };

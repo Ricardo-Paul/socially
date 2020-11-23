@@ -19,14 +19,14 @@ import { AccountCircle } from '@material-ui/icons';
 const Navigation = () => {
     const [{auth}] = useStore();
 
+    // set the user to local so we can access
+    // its properties
     const [user, setUser] = useState({});
     useEffect(() => {
         if(auth.user){
             setUser(auth.user)
         }
     }, [auth])
-
-    console.log("USER NAV", user.fullName);
 
 
     const options = [
