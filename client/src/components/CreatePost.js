@@ -1,7 +1,12 @@
-import {  Container, IconButton, makeStyles } from '@material-ui/core';
-import React from 'react';
+import {  Button, IconButton, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
 import { useStore } from '../store';
 import { AccountCircle, AddAPhoto } from '@material-ui/icons';
+
+// mutation
+import { CREATE_POST } from '../graphql/post';
+import { useMutation } from '@apollo/client'
+
 
 const postStyles = makeStyles(theme => ({
     container:{
@@ -31,13 +36,32 @@ const postStyles = makeStyles(theme => ({
 }))
 
 const CreatePost = () => {
+    const [title, setTitle] = useState("");
     const [{auth}] = useStore();
     const classes = postStyles();
 
-    // a form with text area, image selector and submit button
+    const [createPost, { loading, data, error }] = useMutation(CREATE_POST);
+
+    const handleChange = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try{
+            const res = await createPost({
+                variables:{ input: { title, authorId: auth.user.id } }
+            })
+            console.log(res);
+        } catch(error){
+            console.log(error)
+        }
+
+    }
+
     return(
         <>
-        <form>
+        <form onSubmit={(e) => handleSubmit(e, createPost)}>
         <h4> CREATE POST </h4>
             <div className={classes.container}>
                 <div className={classes.avatar}>
@@ -46,14 +70,18 @@ const CreatePost = () => {
                 <textarea 
                 className={classes.textarea}
                 placeholder="What's on your mind..."
+                value={title}
+                onChange={handleChange}
                 />
                 <IconButton className={classes.uploadIcon}>
                     <AddAPhoto />
                 </IconButton>
             </div>
+            <Button color="primary" type="submit">
+                CREATE POST
+            </Button>
         </form>
         </>
     )
 }
-
 export default CreatePost;
