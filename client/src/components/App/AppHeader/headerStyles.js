@@ -1,7 +1,10 @@
+import { theme , colors} from "../../../utils/theme";
+
 const { makeStyles } = require("@material-ui/core");
 
 const headerStyles = makeStyles((theme) => ({
     appBar:{
+        position:"absolute",
         backgroundColor:"black",
         display: "flex",
         justifyContent:"center"
@@ -38,7 +41,7 @@ const headerStyles = makeStyles((theme) => ({
         height: "90%"
     },
     badge: {
-        color: theme.palette.secondary
+        // color: "red",
     },
     grow: {
         flexGrow: 1
@@ -50,7 +53,10 @@ const headerStyles = makeStyles((theme) => ({
         }
     },
     appName: {
-        display: "none"
+        color: colors.lighRed,
+        [theme.breakpoints.down(`${theme.screen.sm}`)]:{
+            display: "none"
+        }
     }
 }));
 

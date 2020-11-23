@@ -2,4 +2,4 @@
  * export the store
  */
 
- export { ContextProvider, useStore } from './store';
+ export { StoreProvider, useStore } from './store';

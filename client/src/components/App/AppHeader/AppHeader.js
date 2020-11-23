@@ -13,8 +13,9 @@ import Notification from './Notification';
 import User from './user';
 import Navigation from '../Navigation';
 
-const AppHeader = ({ toggleDrawer }) => {
+const AppHeader = () => {
     const classes = headerStyles();
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     // isMenuOpen relies on the anchorEl
     // we set the current target of the user icon button as the anchor El
@@ -30,20 +31,17 @@ const AppHeader = ({ toggleDrawer }) => {
     }
 
     const renderMenu = (
-        <Menu nchorEl={anchorEl} open={isMenuOpen} ose={CloseProfileMenu}  >
+        <Menu anchorEl={anchorEl} open={isMenuOpen} onClose={CloseProfileMenu} >
             <MenuItem onClick={CloseProfileMenu}> Profile </MenuItem>
             <MenuItem onClick={CloseProfileMenu}> My Account </MenuItem>
         </Menu>
-    );
-
-    // Drawer
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    )
 
     return(
         <>
          <AppBar className={classes.appBar}>
            <Toolbar className={classes.toolBar}>
-               <IconButton color="secondary" onClick={() => setIsDrawerOpen(!isDrawerOpen)} className={classes.menuIcon}>
+               <IconButton color="secondary" onClick={()=> setIsDrawerOpen(!isDrawerOpen)} className={classes.menuIcon}>
                    <MenuIcon />
                </IconButton>
                <Typography variant="h6" className={classes.appName}>
@@ -57,7 +55,7 @@ const AppHeader = ({ toggleDrawer }) => {
            </Toolbar>
        </AppBar>
        {renderMenu}
-       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} >
         <Navigation />
        </Drawer>
     </>

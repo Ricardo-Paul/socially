@@ -1,34 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import * as Routes from "../../routes";
-
 import Sidebar from './Sidebar';
-import { MainContainer } from "../Layout";
+import { colors } from '../../utils/theme';
+
+// actions
+import {SET_AUTH_USER} from '../../store/auth';
 
 // hooks
 import useWindowSize from "../../hooks/useWindowSize";
+import { useStore } from "../../store";
+
 
 // pages
 import Home from "../../pages/Home";
 import AppHeader from "./AppHeader/AppHeader";
 import { theme } from "../../utils/theme";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles, CssBaseline } from "@material-ui/core";
 
 const appLayoutStyles = makeStyles(theme => ({
+  '@global': {
+    '*::-webkit-scrollbar': {
+      width: '0.4em',
+      height: '0.4em'
+    },
+    '*::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(0,0,0,.4)',
+      outline: '1px solid slategrey'
+    }
+  },
+  
+  grid: {
+    position:"relative",
+
+  },
+  root: {
+    backgroundColor: colors.black,
+    color: colors.lighRed,
+    [theme.breakpoints.down("xs")]:{
+    },
+  },
+
   sidebar:{
+    paddingLeft: 20,
     display: "none",
-    backgroundColor: "orange",
     [theme.breakpoints.up("sm")]:{
       display: "block"
-    }
+    },
+    height: "100vh",
     //show the sidbar from medium all the way up
 
   },
   middle: {
-    backgroundColor: "yellow"
+    backgroundColor: colors.darkGrey
   },
   suggestions:{
-    backgroundColor: "orange"
+    // backgroundColor: "orange"
   }
 }))
 
@@ -36,7 +63,9 @@ const appLayoutStyles = makeStyles(theme => ({
  * 
  * 
  */
-const AppLayout = () => {
+const AppLayout = ({ authUser }) => {
+  const [{auth}, dispatch] = useStore();
+
   const windowSize = useWindowSize();
   const isDesktop = windowSize.width >= parseInt(theme.screen.md);
 
@@ -45,11 +74,20 @@ const AppLayout = () => {
 // sidebar is stable in the layout
 // drawer can be toggled
 
+  useEffect(() => {
+    dispatch({
+      type: SET_AUTH_USER,
+      payload: authUser
+    })
+  }, [authUser, dispatch]);
+
   return (
     <>
     <AppHeader toggleSidbar={() => setIsSidebarOpen(!isSidebarOpen)} />
-    <MainContainer>
-      <Grid container justify="center" spacing={3}>
+
+    <div className={classes.root}>
+      <CssBaseline />
+      <Grid container className={classes.grid}>
         <Grid item md={3} xs={12} className={classes.sidebar}>
             <Sidebar />
         </Grid>
@@ -63,7 +101,7 @@ const AppLayout = () => {
           User suggestions
         </Grid>
       </Grid>
-    </MainContainer>
+    </div>
     </>
   );
 };

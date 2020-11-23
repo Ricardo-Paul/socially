@@ -22,7 +22,7 @@ const store = {
 /**
  * 
  * @param {obj} store the combined state object
- * @param {obj} action action tye and payload
+ * @param {obj} action action type and payload
  */
 const reducers = (store, action) => ({
     auth: authReducer(store.auth, action),
@@ -46,7 +46,7 @@ export const StoreProvider = ({children}) => {
  * custom hook for consuming the store
  */
 
- const useStore = () => useContext(StoreContext);
+ export const useStore = () => useContext(StoreContext);
 
 
 

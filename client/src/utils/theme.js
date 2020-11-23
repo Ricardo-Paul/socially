@@ -3,6 +3,7 @@ import { createMuiTheme } from "@material-ui/core";
 export const theme = createMuiTheme({
     /**
      * colors
+     *
      */
     palette: {
         primary:{
@@ -10,8 +11,13 @@ export const theme = createMuiTheme({
             light: "#757575"
         }, 
         secondary:{
-            main: "#ff9800"
+            main: "#ff5722"
         }
+    },
+
+    colors: {
+        darkGrey: "#424242",
+        lighRed: "#ff5722"
     },
     /**
      * breakpoints
@@ -24,3 +30,9 @@ export const theme = createMuiTheme({
         xl: 1230
     }
 })
+
+export const colors = {
+    darkGrey: "#424242",
+    lighRed: "#ff5722",
+    black: "black"
+}

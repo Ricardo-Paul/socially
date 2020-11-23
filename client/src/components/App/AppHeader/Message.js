@@ -9,7 +9,7 @@ const Message = () => {
 
     return <IconButton color="inherit">
         <Badge badgeContent={4} color="secondary">
-            <MailIcon fontSize="small" />
+            <MailIcon fontSize="small"/>
         </Badge>
     </IconButton>
 }
