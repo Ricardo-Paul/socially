@@ -25,12 +25,12 @@ export const createApolloServer = (schema, resolvers, models) => {
           if(connection){
             return connection.context;
           }
-          console.log('HEADERS API :',req.headers.authorization);
+         // console.log('HEADERS API :',req.headers.authorization);
           let bool = Boolean(req.headers.authorization);
-          console.log('BOOL ', bool);
+        //  console.log('BOOL ', bool);
           
           if(bool){
-            console.log('headers present')
+           // console.log('headers present')
             const token = req.headers.authorization;
             let user = await checkAuth(token);
             if(user){
@@ -38,7 +38,7 @@ export const createApolloServer = (schema, resolvers, models) => {
               return Object.assign({authenticatedUser}, models);
              }
           } else {
-            console.log('no headers')
+      //      console.log('no headers')
             return Object.assign({}, models);
           };
 
