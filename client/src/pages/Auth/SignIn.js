@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
 
 // components
 import TextField from "../../components/TextField";
-import AppBar from "../Auth/AuthHeader";
-import { Button, Toolbar, Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { MainContainer } from "../../components/Layout";
 import { formStyles } from "../../styles/formStyles";
 import { Link, withRouter } from "react-router-dom";

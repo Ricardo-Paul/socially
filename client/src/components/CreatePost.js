@@ -1,12 +1,13 @@
 import {  Button, IconButton, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useStore } from '../store';
-import { AccountCircle, AddAPhoto } from '@material-ui/icons';
+import { AccountCircle } from '@material-ui/icons';
+import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSizeLimit'
 
 // mutation
 import { CREATE_POST } from '../graphql/post';
 import { useMutation } from '@apollo/client'
-
+import UploadPostImage from './UploadPostImage';
 
 const postStyles = makeStyles(theme => ({
     container:{
@@ -37,13 +38,26 @@ const postStyles = makeStyles(theme => ({
 
 const CreatePost = () => {
     const [title, setTitle] = useState("");
+    const [uploadError, setUploadError] = useState("");
     const [{auth}] = useStore();
     const classes = postStyles();
 
     const [createPost, { loading, data, error }] = useMutation(CREATE_POST);
 
-    const handleChange = (e) => {
-        setTitle(e.target.value);
+    // title change
+    const handleChange = (e) => setTitle(e.target.value);
+
+    // image change
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]
+        if(!file){
+            return
+        };
+        alert(file.size);
+        if(file.size >= MAX_POST_IMAGE_SIZE){
+            setUploadError(`Image is size should not exceed ${ MAX_POST_IMAGE_SIZE/1000000 } mb`);
+        }
+        // TODO: make sure file size is not higher than it should be
     }
 
     const handleSubmit = async (e) => {
@@ -56,7 +70,6 @@ const CreatePost = () => {
         } catch(error){
             console.log(error)
         }
-
     }
 
     return(
@@ -73,9 +86,10 @@ const CreatePost = () => {
                 value={title}
                 onChange={handleChange}
                 />
-                <IconButton className={classes.uploadIcon}>
-                    <AddAPhoto />
-                </IconButton>
+                {/* fix upload icon styles later */}
+                <div className={classes.uploadIcon}> 
+                     <UploadPostImage handleImageChange={handleImageChange} />
+                </div>
             </div>
             <Button color="primary" type="submit">
                 CREATE POST

@@ -7,7 +7,6 @@ import { Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import * as Routes from "../../routes";
 import { REQUEST_PASS_RESET } from "../../graphql/user";
-import AuthHeader from "./AuthHeader";
 
 const ForgotPassword = () => {
   const text = `We will email you a link to reset your password`;

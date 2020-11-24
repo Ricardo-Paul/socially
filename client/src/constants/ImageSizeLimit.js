@@ -1,0 +1,1 @@
+export const MAX_POST_IMAGE_SIZE = 3000000 //3 millions bytes or 3 megabytes
