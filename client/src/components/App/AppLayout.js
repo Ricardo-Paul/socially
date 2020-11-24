@@ -31,8 +31,9 @@ const appLayoutStyles = makeStyles(theme => ({
   },
   
   middle: {
-    backgroundColor: colors.darkGrey,
+    backgroundColor: colors.indigo4,
     paddingTop: 60, // use that for all grid item
+    padding: 10
   },
 
   grid: {
@@ -40,13 +41,15 @@ const appLayoutStyles = makeStyles(theme => ({
 
   },
   root: {
-    backgroundColor: colors.black,
-    color: colors.lighRed,
+    backgroundColor: colors.indigo1,
+    color: colors.indigo9,
     [theme.breakpoints.down("xs")]:{
     },
   },
 
+  // sidebar/ control mobile display
   sidebar:{
+    backgroundColor: colors.white,
     paddingLeft: 20,
     display: "none",
     [theme.breakpoints.up("sm")]:{

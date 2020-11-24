@@ -13,7 +13,6 @@ const Home = () => {
 
   return <>
   <div className={classes.home}>
-    HOME PAGE
     <CreatePost />
   </div>
   </>

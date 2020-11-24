@@ -14,10 +14,13 @@ import MessageIcon from '@material-ui/icons/Message';
 import InfoIcon from '@material-ui/icons/Info';
 import { AccountCircle } from '@material-ui/icons';
 
+import { colors } from '../../utils/theme';
 
 // partially set all routes to home
 const Navigation = () => {
     const [{auth}] = useStore();
+    const styles = {color: colors.indigo9}
+    const nameStyles = {backgroudcolor: colors.indigo9, color: colors.white}
 
     // set the user to local so we can access
     // its properties
@@ -40,10 +43,12 @@ const Navigation = () => {
     const list = options.map((item, index) => {
 
         return (
+            <NavLink to={item.to}>
                 <ListItem key={index} >
-                    <ListItemIcon style={{color:"white"}}> {item.icon} </ListItemIcon>
+                    <ListItemIcon style={styles}> {item.icon} </ListItemIcon>
                     <ListItemText primary={item.title} />
                 </ListItem>
+            </NavLink>
         );
     })
 
@@ -51,8 +56,8 @@ const Navigation = () => {
         <>
         <List>
         <ListItem>
-            <ListItemIcon style={{color:"white"}}> <AccountCircle /> </ListItemIcon>
-            <Typography variant="h6" style={{color:"white"}} >
+            <ListItemIcon style={styles}> <AccountCircle /> </ListItemIcon>
+            <Typography variant="h4" style={nameStyles} >
                 <ListItemText primary={user.fullName} />
             </Typography>
         </ListItem>

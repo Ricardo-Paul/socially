@@ -5,13 +5,13 @@ const { makeStyles } = require("@material-ui/core");
 const headerStyles = makeStyles((theme) => ({
     appBar:{
         position:"absolute",
-        backgroundColor:"black",
+        backgroundColor:colors.indigo9,
         display: "flex",
         justifyContent:"center"
     },
     toolBar:{
         display: "flex",
-        backgroundColor:"black",
+        backgroundColor:colors.indigo9,
         width: '70%',
         margin: "0 auto",
         [theme.breakpoints.down("sm")]: {
