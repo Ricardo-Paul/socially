@@ -31,7 +31,7 @@ const appLayoutStyles = makeStyles(theme => ({
   },
   
   middle: {
-    backgroundColor: colors.indigo4,
+    backgroundColor: colors.white,
     paddingTop: 60, // use that for all grid item
     padding: 10
   },
@@ -41,7 +41,7 @@ const appLayoutStyles = makeStyles(theme => ({
 
   },
   root: {
-    backgroundColor: colors.indigo1,
+    backgroundColor: colors.white,
     color: colors.indigo9,
     [theme.breakpoints.down("xs")]:{
     },
@@ -92,7 +92,7 @@ const AppLayout = ({ authUser }) => {
 
   return (
     <>
-    <AppHeader toggleSidbar={() => setIsSidebarOpen(!isSidebarOpen)} />
+    {/* <AppHeader toggleSidbar={() => setIsSidebarOpen(!isSidebarOpen)} /> */}
 
     <div className={classes.root}>
       <CssBaseline />

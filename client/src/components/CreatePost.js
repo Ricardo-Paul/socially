@@ -17,7 +17,7 @@ const postStyles = makeStyles(theme => ({
     container:{
         display: "flex",
         flexDirection:"column",
-        backgroundColor: colors.indigo6,
+        backgroundColor: colors.indigo9,
         padding: 5,
         borderRadius: 5,
         marginTop: 10,
@@ -31,7 +31,7 @@ const postStyles = makeStyles(theme => ({
     },
     avatar:{
         padding: 5,
-        color: "white",
+        color: colors.lighRed
     },
     textarea:{
         marginLeft: 10,

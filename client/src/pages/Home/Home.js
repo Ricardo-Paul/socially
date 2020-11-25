@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
 import CreatePost from "../../components/CreatePost";
+import PostCard from "../../components/Postcard";
 
 const homeStyles = makeStyles({
   home: {
@@ -13,7 +14,8 @@ const Home = () => {
 
   return <>
   <div className={classes.home}>
-    <CreatePost />
+    {/* <CreatePost /> */}
+    <PostCard />
   </div>
   </>
 };
