@@ -67,6 +67,7 @@ const CreatePost = () => {
     const classes = postStyles();
 
     const [createPost, { loading, data, error }] = useMutation(CREATE_POST);
+    const isUploadDisabled = loading || (!loading && !title && !image);
 
     // title change
     const handleChange = (e) => setTitle(e.target.value);
@@ -91,6 +92,9 @@ const CreatePost = () => {
     }
 
     const handleSubmit = async (e) => {
+        if(!title && !image){
+            return;
+        }
         e.preventDefault();
         try{
             const res = await createPost({
@@ -99,7 +103,8 @@ const CreatePost = () => {
             console.log(res);
         } catch(error){
             console.log(error)
-        }
+        };
+        handleReset();
     }
 
     return(
@@ -108,7 +113,7 @@ const CreatePost = () => {
             <div className={classes.container}>
                 <div className={classes.row1}>
                     <div className={classes.avatar}>
-                        <AccountCircle />
+                        <AccountCircle fontSize="large" />
                     </div>
 
                     <textarea 
@@ -134,7 +139,7 @@ const CreatePost = () => {
                     size="small"  
                     onClick={handleReset} 
                     variant="outlined" >
-                        CANCEL
+                        {!title && !image?`CLOSE`:`CANCEL`}
                     </Button>
                     <Button 
                     color="secondary" 
@@ -142,7 +147,9 @@ const CreatePost = () => {
                     startIcon={<CloudUploadIcon />} 
                     variant="contained" 
                     style={{marginLeft: 5}}
-                    type="submit">
+                    type="submit"
+                    disabled={isUploadDisabled}
+                    >
                         UPLOAD
                     </Button>
                 </div>

@@ -10,7 +10,7 @@ import {SET_AUTH_USER} from '../../store/auth';
 // hooks
 import useWindowSize from "../../hooks/useWindowSize";
 import { useStore } from "../../store";
-
+import Hidden from '@material-ui/core/Hidden';
 
 // pages
 import Home from "../../pages/Home";
@@ -52,7 +52,7 @@ const appLayoutStyles = makeStyles(theme => ({
     backgroundColor: colors.white,
     paddingLeft: 20,
     display: "none",
-    [theme.breakpoints.up("sm")]:{
+    [theme.breakpoints.down("sm")]:{
       display: "block"
     },
     //show the sidbar from medium all the way up
@@ -97,18 +97,28 @@ const AppLayout = ({ authUser }) => {
     <div className={classes.root}>
       <CssBaseline />
       <Grid container className={classes.grid}>
+
+        {/* hidden on mobile */}
+        <Hidden smDown>
         <Grid item md={3} xs={12} className={classes.sidebar} className={classes.gridItem}>
             <Sidebar />
         </Grid>
+        </Hidden>
+
+        {/* Middle */}
         <Grid item md={6} xs={12} className={classes.gridItem} className={classes.middle}>
           <Switch>
             <Route exact path={Routes.HOME} render={ () => <Home /> } />
             <Redirect to={Routes.HOME} />
         </Switch>
         </Grid>
-        <Grid item md={3} xs={12} className={classes.suggestions} className={classes.gridItem}>
-          User suggestions
-        </Grid>
+
+        {/* hidden on mobile */}
+        <Hidden smDown>
+          <Grid item md={3} xs={12} className={classes.suggestions} className={classes.gridItem}>
+            User suggestions
+          </Grid>
+        </Hidden>
       </Grid>
     </div>
     </>

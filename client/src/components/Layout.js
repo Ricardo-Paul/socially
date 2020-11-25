@@ -1,7 +1,7 @@
 import { theme } from "../utils/theme";
 const { Container, withStyles } = require("@material-ui/core");
 /**
- * used as the major container for all pages 
+ * used as the major container for auth pages 
  */
 const MainContainer = withStyles({
   root: {
@@ -11,5 +11,7 @@ const MainContainer = withStyles({
     }
   },
 })(Container);
+
+
 
 export { MainContainer };
