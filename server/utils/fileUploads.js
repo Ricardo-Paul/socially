@@ -2,17 +2,18 @@ import fs from 'fs'
 import path from 'path';
 
 import cloudinary from 'cloudinary'
-import { v4 as uuidv4 } from 'uuid';
+const generateUniqueId = require('generate-unique-id');
 
-const uploadToLocal = ({ stream, filename, mimetype, encoding}) => {
+export const uploadToLocal = ({ stream, filename, mimetype, encoding}) => {
      return new Promise((resolve, reject) => {
-         const localPath = path.resolve(__dirname, '../uploads', filename);
+         const id = generateUniqueId();
+         const localPath = path.resolve(__dirname, '../uploads', id);
 
          stream.pipe(fs.createWriteStream(localPath))
          .on('finish',() => {
              resolve({
                  message: "file uploaded locally",
-                 filename,
+                 filename: id,
                  mimetype,
                  encoding,
                  localPath
@@ -44,33 +45,26 @@ cloudinary.config({
 });
 
 // public_id : image file name
-const uploadToCloudinary = async (stream, folder, imagePublicId) => {
-
-    // if client provides a public_id overwrite the default one
-    // if no we generate one with uuid under a client chosen folder
-    const options = imagePublicId? { public_id: imagePublicId, overwrite: true } :
-    { public_id: `${folder}/${uuidv4()}`};
-
-    // options only have the public_id value
-     return new Promise((resolve, reject) => {
-       const cloud_stream = cloudinary.v2.uploader.upload_stream(options, (result, error) => {
-            if(result){
-                console.log(result)
-                resolve(result)
-            } else {
-                console.warn(error)
-                reject(error)
-            }
-        });
-
-        // piping our read stream to the cloud write stream
-        stream.pipe(cloud_stream)
-
+export const uploadToCloudinary = async (stream, folder, imagePublicId) => {
+    // if imagePublicId param is presented we should overwrite the image
+    const options = imagePublicId ? { public_id: imagePublicId, overwrite: true } : { public_id: `${folder}/${uuid()}` };
+  
+    return new Promise((resolve, reject) => {
+      const streamLoad = cloudinary.v2.uploader.upload_stream(options, (error, result) => {
+        if (result) {
+          resolve(result);
+          console.log(resut);
+        } else {
+          reject(error);
+        }
+      });
+  
+      stream.pipe(streamLoad);
     });
-};
+  };
 
 
-const deleteFromCloudinary = async(imagePublicId) => {
+export const deleteFromCloudinary = async(imagePublicId) => {
     return new Promise((resolve, reject) => {
         cloudinary.v2.uploader.destroy(imagePublicId, (result, err)=>{
             if(result) resolve(result)
@@ -79,10 +73,6 @@ const deleteFromCloudinary = async(imagePublicId) => {
     })
 }
 
-export default {
-    uploadToCloudinary,
-    deleteFromCloudinary
-}
 
 // uploader.upload
 // uploader.upload_stream for stream upload

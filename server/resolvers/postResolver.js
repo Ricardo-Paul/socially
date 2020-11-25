@@ -1,7 +1,6 @@
 import Follow from '../models/Follow';
-import uploads from '../utils/fileUploads';
+import { uploadToLocal } from '../utils/fileUploads';
 
-const { uploadToCloudinary, deleteFromCloudinary } = uploads;
 
 const Query = {
   postname: () => 'get postname',
@@ -28,7 +27,12 @@ const Query = {
     return post;
   },
 
-  /**
+  /**cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET
+});
+
    * Find the posts the current user is following
    * 
    * @param {string} userId the current user
@@ -71,43 +75,41 @@ const Query = {
 // createReadStream can be used to pipe the file
 // to a local location or a cloud storage provider (S3, cloudinary)
 
-// stream.pipe() :: pipe() pipes a readable stream
+// stream.pipe() :: pipe() pipes a readable streamuploadToCloudinary
 // to a writable stream
 
 const Mutation = {
-  createPost: async (_, { input: { title, image, authorId } }, { authenticatedUser, User, Post }) => {
-    if (!authenticatedUser) throw new Error(`User not authenticated`);
+  createPost: async (_, { input: { title, image, authorId } }, { User, Post }) => {
+    if (!title && !image) {
+      throw new Error('Post title or image is required.');
+    }
 
-    // it is required that we send the authorId
-    // we cannot get it from the authenticatedUser
-    // const authorId = User.findOne({email: authenticatedUser.email})._id;
-
-    let newPost;
+    let imageUrl, imagePublicId;
     if (image) {
-      // filename mimetype encoding
-      const { createReadStream } = await image;
+      const { createReadStream, filename, mimetype, encoding } = await image;
+
+      // console.log(image, uploadToCloudinary, createReadStream);
+
       const stream = createReadStream();
-      const uploadedImage = await uploadToCloudinary(stream, 'userpost');
-      if (uploadedImage.secure_url) {
-        newPost = await new Post({
-          image: uploadedImage.secure_url,
-          imagePublicId: uploadedImage.public_id,
-          title,
-          author: authorId,
-        }).save();
-      } else {
-        throw new Error(`Something went wrong while attempting to upload image`);
+
+      const imageUpload = await uploadToLocal({ stream, filename, mimetype, encoding})
+      console.log(imageUpload);
+      if(imageUpload.localPath){
+        imageUrl = imageUpload.localPath
+        imagePublicId = imageUpload.filename
       }
     }
 
-    newPost = await new Post({
+
+    const newPost = await new Post({
       title,
+      image: imageUrl,
+      imagePublicId,
       author: authorId,
     }).save();
 
-    // $push is an atomic operator
-    await User.findOneAndUpdate({ _id: authorId }, { $push: { posts: newPost.id } }); //or just posts: newPost
-    console.log(await authenticatedUser);
+    await User.findOneAndUpdate({ _id: authorId }, { $push: { posts: newPost.id } });
+
     return newPost;
   },
 
