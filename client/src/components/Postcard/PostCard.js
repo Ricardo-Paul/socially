@@ -6,7 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import { shadows } from '../../utils/theme';
 import PostCardOptions from './PostCardOptions';
-
+import CreateComment from '../CreateComment';
 
 const postCardStyles = makeStyles({
     card:{
@@ -26,6 +26,9 @@ const postCardStyles = makeStyles({
     media: {
         height: 190,
         objectFit: "cover"
+    },
+    footer:{
+        position: "relative"
     }
 })
 
@@ -43,6 +46,8 @@ const PostCard = () => {
     const handleClick  = (event) => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
     }
+
+    const [isCommentOpen, setIsCommentOpen] = React.useState(false);
     
     return(
         <>
@@ -75,10 +80,12 @@ const PostCard = () => {
                     <IconButton>
                         <ThumbUpAlt />
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={()=>setIsCommentOpen(!isCommentOpen)}>
                         <Comment />
                     </IconButton>
                 </div>
+
+                {isCommentOpen && <CreateComment focus={isCommentOpen} />}
             </div>
         </Card>
         </>

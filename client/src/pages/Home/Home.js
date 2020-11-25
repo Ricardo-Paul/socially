@@ -14,7 +14,7 @@ const Home = () => {
 
   return <>
   <div className={classes.home}>
-    {/* <CreatePost /> */}
+    <CreatePost />
     <PostCard />
   </div>
   </>

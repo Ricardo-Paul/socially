@@ -92,7 +92,7 @@ const AppLayout = ({ authUser }) => {
 
   return (
     <>
-    {/* <AppHeader toggleSidbar={() => setIsSidebarOpen(!isSidebarOpen)} /> */}
+    <AppHeader toggleSidbar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
     <div className={classes.root}>
       <CssBaseline />
