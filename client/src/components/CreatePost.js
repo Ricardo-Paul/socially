@@ -3,22 +3,25 @@ import React, { useState } from 'react';
 import { useStore } from '../store';
 import { AccountCircle } from '@material-ui/icons';
 import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSizeLimit'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 // mutation
 import { CREATE_POST } from '../graphql/post';
 import { useMutation } from '@apollo/client'
 import UploadPostImage from './UploadPostImage';
+import ImagePreview from './ImagePreview'
 
-import { colors } from '../utils/theme';
+import { colors, shadows } from '../utils/theme';
 
 const postStyles = makeStyles(theme => ({
     container:{
         display: "flex",
         flexDirection:"column",
-        backgroundColor: colors.indigo8,
-        padding: 10,
+        backgroundColor: colors.indigo6,
+        padding: 5,
         borderRadius: 5,
-        marginTop: 10
+        marginTop: 10,
+        boxShadow: shadows.sm
     },
     row1:{
         display: "flex",
@@ -40,7 +43,8 @@ const postStyles = makeStyles(theme => ({
         paddingTop: 10,
         paddingLeft: 15,
         borderRadius: 5,
-        transition: "0.6 ease-out"
+        transition: "0.6 ease-out",
+        backgroundColor: colors.indigo1
     },
     uploadIcon:{
         padding: 5,
@@ -121,17 +125,29 @@ const CreatePost = () => {
                     </div>
                 </div>
 
-                {/* <hr style={{width: "95%"}} /> */}
+                {image && <ImagePreview imageSource={URL.createObjectURL(image)} />}
+
                 {isFocused &&
                     <div className={classes.buttons}>
-                    <Button color="primary" style={{marginLeft: 5}} onClick={handleReset} variant="contained" >
+                    <Button 
+                    color="secondary"
+                    size="small"  
+                    onClick={handleReset} 
+                    variant="outlined" >
                         CANCEL
                     </Button>
-                    <Button color="secondary" variant="contained" type="submit">
-                        SHARE
+                    <Button 
+                    color="secondary" 
+                    size="small" 
+                    startIcon={<CloudUploadIcon />} 
+                    variant="contained" 
+                    style={{marginLeft: 5}}
+                    type="submit">
+                        UPLOAD
                     </Button>
                 </div>
                 }
+
             </div>
         </form>
         </>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText, Typography, makeStyles } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import * as Routes from '../../routes';
 import { useStore } from '../../store';
@@ -16,6 +16,17 @@ import { AccountCircle } from '@material-ui/icons';
 
 import { colors } from '../../utils/theme';
 
+const navStyles = makeStyles(theme => ({
+    list:{
+        paddingLeft: 30
+    },
+    listItem:{
+        backgroundColor: colors.indigo8,
+        color: colors.white,
+        width: "70%"
+    }
+}))
+
 // partially set all routes to home
 const Navigation = () => {
     const [{auth}] = useStore();
@@ -29,7 +40,9 @@ const Navigation = () => {
         if(auth.user){
             setUser(auth.user)
         }
-    }, [auth])
+    }, [auth]);
+
+    const classes = navStyles();
 
 
     const options = [
@@ -44,7 +57,7 @@ const Navigation = () => {
 
         return (
             <NavLink to={item.to}>
-                <ListItem key={index} >
+                <ListItem key={index} className={classes.listItem} >
                     <ListItemIcon style={styles}> {item.icon} </ListItemIcon>
                     <ListItemText primary={item.title} />
                 </ListItem>
@@ -54,7 +67,7 @@ const Navigation = () => {
 
     return(
         <>
-        <List>
+        <List className={classes.list}>
         <ListItem>
             <ListItemIcon style={styles}> <AccountCircle /> </ListItemIcon>
             <Typography variant="h4" style={nameStyles} >
