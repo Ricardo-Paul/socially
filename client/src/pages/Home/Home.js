@@ -27,7 +27,6 @@ const Home = () => {
 
   const variables = {
     userId: auth.user.id,
-    skip: 0,
     limit: HOME_PAGE_POSTS_LIMIT
   }
 

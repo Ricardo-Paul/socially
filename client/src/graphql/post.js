@@ -16,12 +16,9 @@ export const GET_FOLLOWED_POSTS = gql`
             posts {
                 id
                 title
-                image{
-                    filename
-                    mimetype
-                    encoding
-                }
+                image
                 imagePublicId
+                createdAt
             }
         }
     }
