@@ -43,7 +43,6 @@ const postStyles = makeStyles(theme => ({
         paddingTop: 10,
         paddingLeft: 15,
         borderRadius: 5,
-        transition: "0.6 ease-out",
         backgroundColor: colors.indigo1
     },
     uploadIcon:{
@@ -150,7 +149,7 @@ const CreatePost = () => {
                     type="submit"
                     disabled={isUploadDisabled}
                     >
-                        UPLOAD
+                        SHARE
                     </Button>
                 </div>
                 }

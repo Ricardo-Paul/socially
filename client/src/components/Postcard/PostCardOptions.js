@@ -8,6 +8,7 @@ const PostCardOptions = () => {
         <MenuList>
             <MenuItem> Copy URL</MenuItem>
             <MenuItem> Delete </MenuItem>
+            <MenuItem> Follow </MenuItem>
          </MenuList>
        </Paper>
     </>
