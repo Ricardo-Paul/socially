@@ -125,8 +125,9 @@ type UserPayload{
 type PostPayload{
     id: ID!
     title: String!
-    image: File
+    image: String
     imagePublicId: String
+    createdAt: String
 
     author: UserPayload
     comments: [CommentPayload]

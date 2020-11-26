@@ -60,7 +60,10 @@ const Query = {
     const followedPosts = Post.find(query)
     .skip(skip)
     .limit(limit)
-    .sort({ createdAt: "desc" });
+    .sort({ createdAt: "desc" })
+    .populate("author")
+    .populate("comments")
+    .populate("likes")
 
     return{
       count: postCount,
@@ -99,7 +102,6 @@ const Mutation = {
         imagePublicId = imageUpload.filename
       }
     }
-
 
     const newPost = await new Post({
       title,
