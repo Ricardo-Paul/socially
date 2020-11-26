@@ -42,15 +42,15 @@ const Query = {
     // find the users that the current user is following
 
     let followedUsers = [];
-    let follow = await Follow.find({ follower: userId }, {_id: 0}).select("following");
+    let follow = await Follow.find({ following: userId }, {_id: 0}).select("follower");
     // we suppress the id so we're dealing with two fields now { follower, following }
-    // these are instances where the user is the follower { follower, following }
+    // these are instances where the user is the following //refer to the followResolver
     // we only select the follower field, people that the user is following
 
     // push these celebrities in the array (this name helps identify)
-    follow.map((f) => followedUsers.push(f.following));
+    follow.map((f) => followedUsers.push(f.follower));
 
-    // check in the Post collection where the authors are these celebrities
+    // select in the post collecion all posts where the authors are in this array (followeUsers)
     // also where author is the current user
     const query = {$or: [{author: { $in: followedUsers }}, { author: userId }]};
     const postCount = Post.find(query).countDocuments();

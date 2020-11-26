@@ -11,7 +11,7 @@ const Mutation = {
   createFollow: async (_, { input: { currentUserId, followedUserId } }, { Follow, User }) => {
     const newFollow = await new Follow({
       following: currentUserId,
-      follower: followedUserId,
+      follower: followedUserId, //follwer: the use I am following
     }).save();
 
     // push the relationship to the followedUser

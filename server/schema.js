@@ -34,6 +34,12 @@ export const schema = gql`
         token: String
     }
 
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
+
     type User{
         id: ID!
         fullName: String!
@@ -90,11 +96,6 @@ export const schema = gql`
         createdAt: String
     }
 
-    type File{
-        filename: String!
-        mimetype: String!
-        encoding: String!
-    }
 
 #-------------------------------------------------------
 # PAYLOADS
