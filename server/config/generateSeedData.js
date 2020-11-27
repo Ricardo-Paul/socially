@@ -2,7 +2,12 @@ const _ = require('lodash');
 const faker = require('faker');
 
 
-const imageNames = ['bike.jpg', 'dessert.jpg', 'imagecon-group.jpg', 'sheep.jpg'];
+const cloudImages = [
+    "https://res.cloudinary.com/socially/image/upload/v1604363431/samples/bike.jpg",
+    "https://res.cloudinary.com/socially/image/upload/v1604363429/samples/sheep.jpg",
+    "https://res.cloudinary.com/socially/image/upload/v1604363439/samples/cloudinary-group.jpg",
+    "https://res.cloudinary.com/socially/image/upload/v1604363435/samples/ecommerce/car-interior-design.jpg"
+];
 
 
 const seed = {
@@ -24,15 +29,13 @@ const seed = {
         let posts = []
         for(let i=0; i<15; i++){
 
-            let random = _.sample(imageNames); //choose a random name
-            let image = `/home/ricardo/Desktop/MongoDB/socially/server/uploads/${random}`; //retrieve it from
-            let imagePublicId = random; // in a normal situation the id is unique
+            let random = _.sample(cloudImages)
 
             const newPost = {
                 title: faker.lorem.words(9),
                 author: _.sample(users)._id, //select a random user
-                image: image,
-                imagePublicId: imagePublicId
+                image: random, //we set image and imagePublicId to the same value 
+                imagePublicId: random
             }
             posts.push(newPost)
         }

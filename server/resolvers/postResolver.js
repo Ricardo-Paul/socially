@@ -1,6 +1,13 @@
 import Follow from '../models/Follow';
-import { uploadToLocal } from '../utils/fileUploads';
+import cloudinary from 'cloudinary'
+import { uploadToLocal, uploadToCloudinary } from '../utils/fileUploads';
+const generateUniqueId = require('generate-unique-id');
 
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: process.env.CLOUD_API_KEY,
+//   api_secret: process.env.CLOUD_API_SECRET
+// });
 
 const Query = {
   postname: () => 'get postname',
@@ -87,19 +94,20 @@ const Mutation = {
       throw new Error('Post title or image is required.');
     }
 
+    // always remember to catch error
+
     let imageUrl, imagePublicId;
     if (image) {
-      const { createReadStream, filename, mimetype, encoding } = await image;
-
-      // console.log(image, uploadToCloudinary, createReadStream);
-
+      const { createReadStream } = await image;
       const stream = createReadStream();
-
-      const imageUpload = await uploadToLocal({ stream, filename, mimetype, encoding})
-      console.log(imageUpload);
-      if(imageUpload.localPath){
-        imageUrl = imageUpload.localPath
-        imagePublicId = imageUpload.filename
+      try{
+        const upload = await uploadToCloudinary(stream, 'postimages', generateUniqueId());
+        if(upload.secure_url){
+          imageUrl = upload.secure_url
+          imagePublicId = upload.public_id
+        }
+      } catch(err){
+        console.log(err)
       }
     }
 
