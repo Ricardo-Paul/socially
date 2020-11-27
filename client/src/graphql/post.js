@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const CREATE_POST = gql`
+// mutations
+export const CREATE_POST =gql`
     mutation($input: CreatePostInput!){
         createPost(input: $input){
             title
@@ -8,7 +9,37 @@ export const CREATE_POST = gql`
         }
     }
 `
-// userId: String! (useId: ID! in schema)
+
+// payloads
+const postAuthorPayload = `
+    author {
+        id
+        username
+        image
+        fullName
+    }
+`
+const postCommentsPayload = `
+comments {
+    id
+    comment
+    author {
+        id
+        username
+        fullName
+        image
+    }
+}
+`
+const postLikePayload =`
+    likes {
+        id
+        user
+        post
+    }
+`
+
+// queries
 export const GET_FOLLOWED_POSTS = gql`
     query($userId: ID!, $skip: Int, $limit: Int){
         getFollowedPosts(userId: $userId, skip: $skip, limit: $limit){
@@ -19,6 +50,8 @@ export const GET_FOLLOWED_POSTS = gql`
                 image
                 imagePublicId
                 createdAt
+                ${postAuthorPayload}
+                ${postCommentsPayload}
             }
         }
     }

@@ -37,5 +37,6 @@ export const colors = {
     indigo1: "#c5cae9",
     indigo0: "#e8eaf6",
     white: "white",
-    black: "black"
+    black: "black",
+    lightGrey: "#e0e0e0"
 }

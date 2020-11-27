@@ -5,6 +5,8 @@ import PostCard from "../../components/Postcard";
 import { HOME_PAGE_POSTS_LIMIT }from '../../constants/DataLimit';
 import { useQuery } from '@apollo/client';
 import { useStore } from '../../store';
+import Modal from "../../components/Modal";
+
 
 import { GET_FOLLOWED_POSTS } from '../../graphql/post';
 
@@ -54,14 +56,17 @@ const Home = () => {
         <PostCard 
         title={post.title}
         image={post.image}
+        username={post.author.username}
+        avatar={post.author.image}
         />
       ))
     }
   }
-
+// 
 
   return <>
   <div className={classes.home}>
+    <Modal open={true} />
     <CreatePost />
     {renderContent()}
   </div>

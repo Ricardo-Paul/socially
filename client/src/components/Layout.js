@@ -12,6 +12,16 @@ const MainContainer = withStyles({
   },
 })(Container);
 
+// a layer covering the whole screen
+const Overlay = withStyles({
+  postion:"fixed",
+  width: "100%",
+  top: 0,
+  bottom:0,
+  left:0,
+  right:0,
+  zIndex: 100,
+  backgroundColor: "rgba(0,0,0,0.8)"
+})
 
-
-export { MainContainer };
+export { MainContainer, Overlay };

@@ -30,8 +30,12 @@ const appLayoutStyles = makeStyles(theme => ({
   },
   
   middle: {
-    backgroundColor: "grey",
-    padding: 10,
+    backgroundColor: colors.lightGrey,
+    paddingLeft: 25,
+    paddingRight: 25,
+    [theme.breakpoints.down("sm")]:{
+      padding: 0
+    }
   },
   extreme:{
     backgroundColor: colors.black,
