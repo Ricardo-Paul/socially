@@ -17,14 +17,14 @@ const overlayStyles = makeStyles({
     }
 });
 
-const Modal = ({ open, children, type, ...props }) => {
+const Modal = ({ open, children, onClose, type, ...props }) => {
     const classes = overlayStyles();
     if(!open) return null;
 
     return(
         <>
         <div className={classes.overlay}>
-          {/* {type === 'confirm' ? <Confirm {...props} /> : children } */}
+          {type === 'confirm' ? <Confirm {...props} /> : children }
         </div>
         </>
     )
@@ -35,5 +35,6 @@ export default Modal;
 Modal.propTypes = {
     open: PropTypes.bool,
     type: PropTypes.oneOf(["", "confirm"]),
-    children: PropTypes.node
+    children: PropTypes.node,
+    onClose: PropTypes.func.isRequired
 }

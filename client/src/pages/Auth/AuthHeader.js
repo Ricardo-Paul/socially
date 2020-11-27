@@ -1,5 +1,5 @@
-import React from 'react';
-import AppInfo from '../../constants/AppInfo.json';
+import React from "react";
+import AppInfo from "../../constants/AppInfo.json";
 const { AppBar, Toolbar, Typography } = require("@material-ui/core");
 
 /**
@@ -7,13 +7,11 @@ const { AppBar, Toolbar, Typography } = require("@material-ui/core");
  */
 
 export default () => {
-    return(
-        <AppBar>
-            <Toolbar>
-                <Typography varaiant="h4">
-                {AppInfo.name}
-                </Typography>
-            </Toolbar>
-        </AppBar>
-    )
-}
+  return (
+    <AppBar>
+      <Toolbar>
+        <Typography varaiant="h4">{AppInfo.name}</Typography>
+      </Toolbar>
+    </AppBar>
+  );
+};

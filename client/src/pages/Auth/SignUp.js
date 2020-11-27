@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../../graphql/user";
-import * as Routes from '../../routes';
+import * as Routes from "../../routes";
 import { Button, CssBaseline, Toolbar, Typography } from "@material-ui/core";
 
 // styles

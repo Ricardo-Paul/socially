@@ -16,14 +16,26 @@ import AuthHeader from "./AuthHeader";
 const AuthLayout = ({ refetch }) => {
   return (
     <>
-    <AuthHeader />
-    <Switch>
-      <Route exact path={Routes.SIGNUP} render={() => <SignUp refetch={refetch} />} />
-      <Route exact path={Routes.SIGNIN} render={() => <SignIn refetch={refetch} />} />
-      <Route  exact path={Routes.FORGOT_PASSWORD} render={() => <ForgotPassword />} />
-      <Route exact path={Routes.RESET_PASSWORD} component={ResetPassword} />
-      <Redirect to={Routes.SIGNUP} />
-    </Switch>
+      <AuthHeader />
+      <Switch>
+        <Route
+          exact
+          path={Routes.SIGNUP}
+          render={() => <SignUp refetch={refetch} />}
+        />
+        <Route
+          exact
+          path={Routes.SIGNIN}
+          render={() => <SignIn refetch={refetch} />}
+        />
+        <Route
+          exact
+          path={Routes.FORGOT_PASSWORD}
+          render={() => <ForgotPassword />}
+        />
+        <Route exact path={Routes.RESET_PASSWORD} component={ResetPassword} />
+        <Redirect to={Routes.SIGNUP} />
+      </Switch>
     </>
   );
 };

@@ -4,7 +4,10 @@ import React, { useEffect, useState } from "react";
 import { MainContainer } from "../../components/Layout";
 import { formStyles } from "../../styles/formStyles";
 import TextField from "../../components/TextField";
-import { RESET_PASSWORD, VERIFY_RESET_PASSWORD_TOKEN } from "../../graphql/user";
+import {
+  RESET_PASSWORD,
+  VERIFY_RESET_PASSWORD_TOKEN,
+} from "../../graphql/user";
 import AuthHeader from "./AuthHeader";
 
 const ResetPassword = ({ location }) => {
@@ -12,17 +15,18 @@ const ResetPassword = ({ location }) => {
   const email = url.get("email");
   const token = url.get("passwordResetToken");
 
-
   const [errors, setErrors] = useState("");
 
-//   validate email and token
-// error is the value returned,
-// we assign it to the queryError variable
-        const { _, error} =  useQuery(VERIFY_RESET_PASSWORD_TOKEN, {
-            variables: {email, token}
-        });
+  //   validate email and token
+  // error is the value returned,
+  // we assign it to the queryError variable
+  const { _, error } = useQuery(VERIFY_RESET_PASSWORD_TOKEN, {
+    variables: { email, token },
+  });
 
-        const [resetPassword, { loading: mutationLoading }] = useMutation(RESET_PASSWORD);
+  const [resetPassword, { loading: mutationLoading }] = useMutation(
+    RESET_PASSWORD
+  );
 
   const [values, setValues] = useState({
     newPassword: "",
@@ -41,17 +45,23 @@ const ResetPassword = ({ location }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-        const result = await resetPassword({
-            variables: {input: { email:email, password:newPassword, passwordResetToken:token}}
-        });    
-        console.log(result.data);
-        setErrors("Password Successfully Reset");
-    } catch(error){
-        console.log(error)
-        setErrors(error.graphQLErrors[0].message);
+    try {
+      const result = await resetPassword({
+        variables: {
+          input: {
+            email: email,
+            password: newPassword,
+            passwordResetToken: token,
+          },
+        },
+      });
+      console.log(result.data);
+      setErrors("Password Successfully Reset");
+    } catch (error) {
+      console.log(error);
+      setErrors(error.graphQLErrors[0].message);
     }
-  }
+  };
 
   const classes = formStyles();
 
@@ -59,9 +69,12 @@ const ResetPassword = ({ location }) => {
     <>
       <MainContainer>
         <div className={classes.paper}>
-            {errors}
+          {errors}
           <Typography>RESET PASSWORD</Typography>
-          <form className={classes.form} onSubmit={(e) => handleSubmit(e, resetPassword)} >
+          <form
+            className={classes.form}
+            onSubmit={(e) => handleSubmit(e, resetPassword)}
+          >
             <TextField
               variant="outlined"
               name="newPassword"

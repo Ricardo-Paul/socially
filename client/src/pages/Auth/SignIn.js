@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../../graphql/user";
 import * as Routes from "../../routes";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 // components
 import TextField from "../../components/TextField";
@@ -26,16 +26,16 @@ const SignIn = ({ location, history, refetch }) => {
     e.preventDefault();
     try {
       const response = await signin({
-        variables: { input: { emailOrUsername, password } }
+        variables: { input: { emailOrUsername, password } },
       });
-      refetch(); 
+      refetch();
       history.push(Routes.HOME);
 
       console.log(response.data);
-      localStorage.setItem('token', response.data.signin.signinToken);
-      setError("")
+      localStorage.setItem("token", response.data.signin.signinToken);
+      setError("");
     } catch (err) {
-      console.log(err)
+      console.log(err);
       console.log(err.graphQLErrors[0].message);
       setError(err.graphQLErrors[0].message);
     }
@@ -44,7 +44,7 @@ const SignIn = ({ location, history, refetch }) => {
   // empty error when location changes
   useEffect(() => {
     setError("");
-  },[location.pathname]);
+  }, [location.pathname]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -108,7 +108,7 @@ const SignIn = ({ location, history, refetch }) => {
 
 SignIn.prototype = {
   history: PropTypes.object.isRequired,
-  refetch: PropTypes.func.isRequired
-}
+  refetch: PropTypes.func.isRequired,
+};
 
 export default withRouter(SignIn);
