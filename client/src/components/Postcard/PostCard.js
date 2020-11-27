@@ -11,8 +11,13 @@ import CreateComment from '../CreateComment';
 const postCardStyles = makeStyles({
     card:{
         marginTop: 20,
-        maxWidth: "100%",
-        boxShadow: shadows.md
+        maxWidth: "70%",
+        boxShadow: shadows.md,
+
+        // transform: "translate(-50%, -50%)",
+        // backgroundColor: "white",
+        // position: "absolute",
+        // width: "30%"
     },
     cardData:{
         display: "flex",

@@ -59,7 +59,7 @@ const Home = () => {
       return posts.map((post) => (
         <Fragment key={post.id}>
           <Modal open={postId === post.id} onClose={closeModal}>
-           <PostPopUp closeModal={closeModal} />
+           <PostPopUp closeModal={closeModal} postImage={post.image} />
           </Modal>
 
           <PostCard
