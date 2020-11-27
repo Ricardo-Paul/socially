@@ -39,7 +39,7 @@ const AppHeader = () => {
 
     return(
         <>
-         <AppBar className={classes.appBar}>
+         <AppBar position="sticky" className={classes.appBar}>
            <Toolbar className={classes.toolBar}>
                <IconButton color="secondary" onClick={()=> setIsDrawerOpen(!isDrawerOpen)} className={classes.menuIcon}>
                    <MenuIcon />

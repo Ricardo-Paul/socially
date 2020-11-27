@@ -19,26 +19,24 @@ import { colors, shadows } from '../../utils/theme';
 const navStyles = makeStyles(theme => ({
     navContainer:{
         paddingTop: 20,
-        // backgroundColor: "red",
-        position:"relative",
-
+        backgroundColor: colors.black, //match that color with layout extreme color
+        [theme.breakpoints.up("sm")]:{ //not for sm screen
+            position:"fixed",
+            width: "20%",
+            left: "2%"
+        }
     },
     list:{
         // these styles are enabled for small screen
         // all the way up.. not for xs 
         [theme.breakpoints.up("sm")]:{
-            color: colors.white,
-            width: "70%",
+            width: "100%",
             paddingLeft: 40,
-            position:"absolute",
-            boxShadow: shadows.md,
+            // boxShadow: shadows.md,
             padding: 15,
-            left: "50%",
-            transform: "translateX(-50%)"
           },
     },
     listItem:{
-        // backgroundColor: colors.indigo1,
         width: "100%",
     }
 }))
@@ -46,8 +44,8 @@ const navStyles = makeStyles(theme => ({
 // partially set all routes to home
 const Navigation = () => {
     const [{auth}] = useStore();
-    const styles = {color: colors.indigo9}
-    const nameStyles = {backgroudcolor: colors.indigo9, color: colors.white}
+    const styles = {color: colors.lighRed}
+    const nameStyles = {backgroudcolor: colors.indigo9, color: colors.lighRed, marginBottom:15}
 
     // set the user to local so we can access
     // its properties
@@ -72,7 +70,7 @@ const Navigation = () => {
     const list = options.map((item, index) => {
 
         return (
-            <NavLink to={item.to}>
+            <NavLink to={item.to} style={{textDecoration:"none", color: colors.white}}>
                 <ListItem key={index} className={classes.listItem} >
                     <ListItemIcon style={styles}> {item.icon} </ListItemIcon>
                     <ListItemText primary={item.title} />
@@ -86,14 +84,16 @@ const Navigation = () => {
         <CssBaseline />
         <div className={classes.navContainer}>
         <List className={classes.list}>
-        <ListItem>
+            <div className={classes.fixList}>
+            <ListItem>
             <ListItemIcon style={styles}> <AccountCircle /> </ListItemIcon>
             <Typography variant="h4" style={nameStyles} >
                 <ListItemText primary={user.fullName} />
             </Typography>
-        </ListItem>
+            </ListItem>
         <Divider />
           {list}
+            </div>
         </List>
         </div>
         </>

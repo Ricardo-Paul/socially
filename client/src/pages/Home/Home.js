@@ -10,20 +10,21 @@ import { GET_FOLLOWED_POSTS } from '../../graphql/post';
 
 const homeStyles = makeStyles({
   home: {
-    padding: 10
+    padding: 10,
+    position:"relative",
   }
 })
 
 const Home = () => {
-  const [userId, setUserId] = React.useState('');
 
   const [{ auth }] = useStore();
+  const [values, setValues] = React.useState({
+    posts: [],
+    count: ""
+  });
+  const {posts, count} = values;
+
   const classes = homeStyles();
-
-  React.useEffect(() => {
-    setUserId(auth.user.id);
-  }, [userId, auth]);
-
 
   const variables = {
     userId: auth.user.id,
@@ -35,12 +36,34 @@ const Home = () => {
     notifyOnNetworkStatusChange: true,
   });
 
-  console.log('QUERY DATA', data);
+  const renderContent = () => {
+    if(loading && networkStatus === 1){
+      return <h4> loading ... </h4>
+    };
+
+
+    if(!loading){
+      const posts = data.getFollowedPosts.posts
+      console.log(data.getFollowedPosts.posts)
+
+      if(!posts.length){
+        return <h5> Follow Users, Browse </h5>
+      }
+      
+      return posts.map(post=>(
+        <PostCard 
+        title={post.title}
+        image={post.image}
+        />
+      ))
+    }
+  }
+
 
   return <>
   <div className={classes.home}>
     <CreatePost />
-    <PostCard />
+    {renderContent()}
   </div>
   </>
 };

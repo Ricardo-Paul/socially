@@ -32,11 +32,14 @@ const postCardStyles = makeStyles({
     }
 })
 
-const PostCard = () => {
+const PostCard = ({ title, username, image }) => {
 
     const classes = postCardStyles();
     const src="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512"
     const avatar = "https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
+
+    const i = "https://res.cloudinary.com/socially/image/upload/v1604363431/samples/bike.jpg"
+
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -47,8 +50,8 @@ const PostCard = () => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
     }
 
-    const [isCommentOpen, setIsCommentOpen] = React.useState(false);
-    
+    const [isCommentOpen, setIsCommentOpen] = React.useState(false);    
+
     return(
         <>
         <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
@@ -58,7 +61,7 @@ const PostCard = () => {
         <Card className={classes.card}>
             <CardHeader className={classes.header}
                 avatar={<Avatar alt="user photo" src={avatar} />}
-                title={'Ricardo Paul'}
+                title={username}
                 action={
                     <IconButton onClick={handleClick}>
                         <MoreVert />
@@ -67,9 +70,9 @@ const PostCard = () => {
                 subheader={'5 hours ago'}
             />
             <CardContent>
-                some content for the card some content for the card
+                {title}
             </CardContent>
-            <CardMedia className={classes.media} image={src} />
+            <CardMedia className={classes.media} image={image} />
             <div className={classes.footer}>
                 <div className={classes.cardData}>
                     <h5> 17 likes </h5>
@@ -93,3 +96,9 @@ const PostCard = () => {
 }
 
 export default PostCard
+
+PostCard.propTypes = {
+    title: PropTypes.string,
+    username: PropTypes.string.isRequired,
+    image: PropTypes.string
+}

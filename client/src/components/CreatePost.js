@@ -17,11 +17,14 @@ const postStyles = makeStyles(theme => ({
     container:{
         display: "flex",
         flexDirection:"column",
-        backgroundColor: colors.indigo9,
+        backgroundColor: colors.white,
         padding: 5,
         borderRadius: 5,
         marginTop: 10,
-        boxShadow: shadows.sm
+        boxShadow: shadows.sm,
+        [theme.breakpoints.down("sm")]: {
+            padding: 0,
+        },
     },
     row1:{
         display: "flex",
@@ -43,7 +46,14 @@ const postStyles = makeStyles(theme => ({
         paddingTop: 10,
         paddingLeft: 15,
         borderRadius: 5,
-        backgroundColor: colors.indigo1
+        backgroundColor: colors.indigo1,
+        [theme.breakpoints.down("sm")]: {
+            margin: 0,
+            width: "100%",
+            height: 50,
+            paddingTop: 5,
+            paddingLeft: 5,
+        }
     },
     uploadIcon:{
         padding: 5,
@@ -54,6 +64,9 @@ const postStyles = makeStyles(theme => ({
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-end",
+        [theme.breakpoints.down("sm")]: {
+            margin: 2
+        }
     }
 }))
 

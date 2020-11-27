@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import * as Routes from "../../routes";
-import Sidebar from './Sidebar';
+import Navigation from './Navigation';
 import { colors } from '../../utils/theme';
 
 // actions
 import {SET_AUTH_USER} from '../../store/auth';
 
 // hooks
-import useWindowSize from "../../hooks/useWindowSize";
 import { useStore } from "../../store";
 import Hidden from '@material-ui/core/Hidden';
 
@@ -31,41 +30,16 @@ const appLayoutStyles = makeStyles(theme => ({
   },
   
   middle: {
-    backgroundColor: colors.white,
-    paddingTop: 60, // use that for all grid item
-    padding: 10
+    backgroundColor: "grey",
+    padding: 10,
   },
-
-  grid: {
-    position:"relative",
-
+  extreme:{
+    backgroundColor: colors.black,
   },
-  root: {
-    backgroundColor: colors.white,
-    color: colors.indigo9,
-    [theme.breakpoints.down("xs")]:{
-    },
-  },
-
-  // sidebar/ control mobile display
-  sidebar:{
+  drawer:{ //control mobile display
     backgroundColor: colors.white,
     paddingLeft: 20,
-    display: "none",
-    [theme.breakpoints.down("sm")]:{
-      display: "block"
-    },
-    //show the sidbar from medium all the way up
-
-  },
-  suggestions:{
-    // backgroundColor: "orange"
-  },
-
-  gridItem:{
-    paddingTop: 60, // use that for all grid item
-    height: "100vh",
-  },
+  }
 }))
 
 /**
@@ -75,13 +49,7 @@ const appLayoutStyles = makeStyles(theme => ({
 const AppLayout = ({ authUser }) => {
   const [{auth}, dispatch] = useStore();
 
-  const windowSize = useWindowSize();
-  const isDesktop = windowSize.width >= parseInt(theme.screen.md);
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(isDesktop);
   const classes = appLayoutStyles();
-// sidebar is stable in the layout
-// drawer can be toggled
 
   useEffect(() => {
     dispatch({
@@ -92,7 +60,7 @@ const AppLayout = ({ authUser }) => {
 
   return (
     <>
-    <AppHeader toggleSidbar={() => setIsSidebarOpen(!isSidebarOpen)} />
+    <AppHeader />
 
     <div className={classes.root}>
       <CssBaseline />
@@ -100,13 +68,13 @@ const AppLayout = ({ authUser }) => {
 
         {/* hidden on mobile */}
         <Hidden smDown>
-        <Grid item md={3} xs={12} className={classes.sidebar} className={classes.gridItem}>
-            <Sidebar />
+        <Grid item md={3} xs={12} className={classes.drawer} className={classes.extreme}>
+            <Navigation />
         </Grid>
         </Hidden>
 
         {/* Middle */}
-        <Grid item md={6} xs={12} className={classes.gridItem} className={classes.middle}>
+        <Grid item md={6} xs={12}  className={classes.middle}>
           <Switch>
             <Route exact path={Routes.HOME} render={ () => <Home /> } />
             <Redirect to={Routes.HOME} />
@@ -115,7 +83,7 @@ const AppLayout = ({ authUser }) => {
 
         {/* hidden on mobile */}
         <Hidden smDown>
-          <Grid item md={3} xs={12} className={classes.suggestions} className={classes.gridItem}>
+          <Grid item md={3} xs={12} className={classes.suggestions} className={classes.extreme}>
             User suggestions
           </Grid>
         </Hidden>
