@@ -1,16 +1,18 @@
 import React from "react";
-import { MenuList, MenuItem, Paper } from "@material-ui/core";
+import { MenuList, MenuItem, Paper, ClickAwayListener } from "@material-ui/core";
 
-const PostCardOptions = () => {
+const PostCardOptions = ({ closeMenu }) => {
   return (
     <>
-      <Paper elevation={3}>
+    <ClickAwayListener onClickAway={closeMenu}>
+    <Paper elevation={3}>
         <MenuList>
           <MenuItem> Copy URL</MenuItem>
           <MenuItem> Delete </MenuItem>
           <MenuItem> Follow </MenuItem>
         </MenuList>
       </Paper>
+    </ClickAwayListener>
     </>
   );
 };

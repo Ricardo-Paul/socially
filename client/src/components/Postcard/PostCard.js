@@ -69,7 +69,7 @@ const PostCard = ({ title, username, image, avatar, openModal }) => {
   return (
     <>
       <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
-        <PostCardOptions />
+        <PostCardOptions closeMenu={() => setAnchorEl(null)} />
       </Popper>
 
       <Card className={classes.card}>
