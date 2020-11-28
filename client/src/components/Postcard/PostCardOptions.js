@@ -1,17 +1,18 @@
-import React from 'react';
-import { MenuList, MenuItem, Paper } from '@material-ui/core';
+import React from "react";
+import { MenuList, MenuItem, Paper } from "@material-ui/core";
 
 const PostCardOptions = () => {
-
-    return<>
-       <Paper elevation={3}>
+  return (
+    <>
+      <Paper elevation={3}>
         <MenuList>
-            <MenuItem> Copy URL</MenuItem>
-            <MenuItem> Delete </MenuItem>
-            <MenuItem> Follow </MenuItem>
-         </MenuList>
-       </Paper>
+          <MenuItem> Copy URL</MenuItem>
+          <MenuItem> Delete </MenuItem>
+          <MenuItem> Follow </MenuItem>
+        </MenuList>
+      </Paper>
     </>
-}
+  );
+};
 
 export default PostCardOptions;

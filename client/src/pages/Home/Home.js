@@ -49,7 +49,11 @@ const Home = () => {
 
     if (!loading) {
       const posts = data.getFollowedPosts.posts;
-      console.log(data.getFollowedPosts.posts);
+      console.log('FollowedPosts',data.getFollowedPosts.posts);
+      posts.map(p => {
+        console.log('AUTHOR: ',p.author)
+        console.log('COMMENTS', p.comments)
+      })
 
       if (!posts.length) {
         return <h5> Follow Users, Browse </h5>;
@@ -59,7 +63,7 @@ const Home = () => {
       return posts.map((post) => (
         <Fragment key={post.id}>
           <Modal open={postId === post.id} onClose={closeModal}>
-           <PostPopUp closeModal={closeModal} postImage={post.image} />
+           <PostPopUp closeModal={closeModal} comments={post.comments} postImage={post.image} />
           </Modal>
 
           <PostCard

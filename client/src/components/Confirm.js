@@ -1,10 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Confirm = () => {
-
-    return(
-        <h5> confirm </h5>
-    )
-}
+  return <h5> confirm </h5>;
+};
 
 export default Confirm;

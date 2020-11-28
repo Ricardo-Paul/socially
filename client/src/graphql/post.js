@@ -51,7 +51,13 @@ export const GET_FOLLOWED_POSTS = gql`
                 imagePublicId
                 createdAt
                 ${postAuthorPayload}
-                ${postCommentsPayload}
+                comments{
+                    comment
+                    author{
+                        fullName
+                        image
+                    }
+                }
             }
         }
     }

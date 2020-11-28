@@ -44,13 +44,16 @@ const App = () => {
   return (
     <Router>
       <Switch>
-          <ScrollTop>
+        <ScrollTop>
           {!loading && data.getAuthUser ? ( //authUser prop is available on the layout
-          <Route exact render={() => <AppLayout authUser={data.getAuthUser} />}  />
-        ) : (
-          <Route exact render={() => <AuthLayout refetch={refetch} />} />
-        )}
-          </ScrollTop>
+            <Route
+              exact
+              render={() => <AppLayout authUser={data.getAuthUser} />}
+            />
+          ) : (
+            <Route exact render={() => <AuthLayout refetch={refetch} />} />
+          )}
+        </ScrollTop>
       </Switch>
     </Router>
   );
