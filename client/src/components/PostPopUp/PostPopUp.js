@@ -36,7 +36,7 @@ const PostStyles = makeStyles({
   },
 });
 
-const PostPopUp = ({ closeModal, postImage, comments }) => {
+const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, createdAt }) => {
   const src =
     "https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512";
 
@@ -52,10 +52,10 @@ const PostPopUp = ({ closeModal, postImage, comments }) => {
               <MoreVert />
             </IconButton>
           }
-          title={"Alex Xavier"}
-          subheader={"1 hour ago"}
+          title={author}
+          subheader={createdAt}
         />
-        <CardContent> Content goes here </CardContent>
+        <CardContent> {postTitle} </CardContent>
         <CardMedia
           className={classes.media}
           image={postImage}
@@ -72,4 +72,8 @@ export default PostPopUp;
 
 PostPopUp.propTypes = {
   closeModal: PropTypes.func.isRequired,
+  comments: PropTypes.array.isRequired,
+  author: PropTypes.string.isRequired,
+  postTitle: PropTypes.string,
+  createdAt: PropTypes.string.isRequired
 };
