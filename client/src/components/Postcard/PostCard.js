@@ -17,6 +17,8 @@ import { shadows } from "../../utils/theme";
 import PostCardOptions from "./PostCardOptions";
 import CreateComment from "../CreateComment";
 
+import { colors } from '../../utils/theme'
+
 const postCardStyles = makeStyles({
   card: {
     marginTop: 20,
@@ -31,11 +33,15 @@ const postCardStyles = makeStyles({
   cardData: {
     display: "flex",
     justifyContent: "space-between",
-    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10
   },
   icons: {
+    paddingX: 0,
     display: "flex",
     justifyContent: "space-between",
+    paddingLeft: 10,
+    paddingRight: 10
   },
   media: {
     height: 190,
@@ -46,7 +52,7 @@ const postCardStyles = makeStyles({
   },
 });
 
-const PostCard = ({ title, username, image, avatar, openModal }) => {
+const PostCard = ({ title, username, image, avatar, openModal, likeNumber, commentNumber }) => {
   const classes = postCardStyles();
   const src =
     "https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512";
@@ -92,8 +98,8 @@ const PostCard = ({ title, username, image, avatar, openModal }) => {
         />
         <div className={classes.footer}>
           <div className={classes.cardData}>
-            <h5> 17 likes </h5>
-            <h5> 9 comments </h5>
+            <h5> {likeNumber} </h5>
+            <h5> {commentNumber} </h5>
           </div>
           <Divider />
           <div className={classes.icons}>

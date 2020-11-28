@@ -35,7 +35,6 @@ const postLikePayload =`
     likes {
         id
         user
-        post
     }
 `
 
@@ -51,13 +50,8 @@ export const GET_FOLLOWED_POSTS = gql`
                 imagePublicId
                 createdAt
                 ${postAuthorPayload}
-                comments{
-                    comment
-                    author{
-                        fullName
-                        image
-                    }
-                }
+                ${postCommentsPayload}
+                ${postLikePayload}
             }
         }
     }

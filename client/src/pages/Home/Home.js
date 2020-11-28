@@ -79,6 +79,8 @@ const Home = () => {
             username={post.author.username}
             avatar={post.author.image}
             openModal={() => openModal(post.id)} //save the post.id in a state var
+            likeNumber={post.likes.length}
+            commentNumber={post.comments.length}
           />
         </Fragment>
       ));
