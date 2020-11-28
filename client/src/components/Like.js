@@ -2,9 +2,16 @@ import React from 'react';
 import { ThumbUpAlt } from "@material-ui/icons";
 import { IconButton } from '@material-ui/core';
 import { useStore } from './../store';
-import { CREATE_LIKE, DELETE_LIKE } from './../graphql/like';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/client';
+import { HOME_PAGE_POSTS_LIMIT } from './../constants/DataLimit';
+
+// mutation
+import { CREATE_LIKE, DELETE_LIKE } from './../graphql/like';
+
+// queries to refetch
+import { GET_AUTH_USER } from "./../graphql/user";
+import { GET_FOLLOWED_POSTS } from "./../graphql/post";
 
 const Like = ({ likes, postId }) => {
     // decide what operation to execute
@@ -18,7 +25,7 @@ const Like = ({ likes, postId }) => {
     const options = {
         create:{
             mutation: CREATE_LIKE,
-            variables: {postId, userId: auth.user.id}
+            variables: {postId, userId: auth.user.id} //notice variables value is an object
         },
         delete:{
             mutation: DELETE_LIKE,
@@ -27,16 +34,19 @@ const Like = ({ likes, postId }) => {
     }
 
     const [mutate] = useMutation(options[operation].mutation,{
-        refetchQueries: []
+        // TODO: also refetch the user posts
+        refetchQueries: [
+            {query: GET_AUTH_USER},
+            {query: GET_FOLLOWED_POSTS, variables:{ userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT }}
+        ]
     })
 
     const handleButtonClick = async () => {
         try{
+            // spread the variables object
             const {data} = await mutate({
                 variables: { input: { ...options[operation].variables } }
             });
-
-            console.log('LIKE RESULT', existedLike, data);
         } catch(err){
             console.log(err)
         }
@@ -44,7 +54,7 @@ const Like = ({ likes, postId }) => {
 
     return(
         <IconButton onClick={() => handleButtonClick(mutate)}>
-            <ThumbUpAlt />
+            <ThumbUpAlt color={existedLike?'primary':'secondary'} />
         </IconButton>
     )
 }
