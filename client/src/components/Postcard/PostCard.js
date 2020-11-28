@@ -16,6 +16,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import { shadows } from "../../utils/theme";
 import PostCardOptions from "./PostCardOptions";
 import CreateComment from "../CreateComment";
+import Like from '../Like'
 
 import { colors } from '../../utils/theme'
 
@@ -52,7 +53,17 @@ const postCardStyles = makeStyles({
   },
 });
 
-const PostCard = ({ title, username, image, avatar, openModal, likeNumber, commentNumber }) => {
+const PostCard = ({ 
+  title, 
+  username, 
+  image, 
+  avatar, 
+  openModal, 
+  likeNumber, 
+  commentNumber,
+  likes,
+  postId
+}) => {
   const classes = postCardStyles();
   const src =
     "https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512";
@@ -98,14 +109,13 @@ const PostCard = ({ title, username, image, avatar, openModal, likeNumber, comme
         />
         <div className={classes.footer}>
           <div className={classes.cardData}>
-            <h5> {likeNumber} </h5>
-            <h5> {commentNumber} </h5>
+            <h5> {likeNumber} {likeNumber > 1? 'likes': 'like'} </h5>
+            <h5> {commentNumber} {commentNumber > 1? 'comments': 'comment'} </h5>
           </div>
           <Divider />
           <div className={classes.icons}>
-            <IconButton>
-              <ThumbUpAlt />
-            </IconButton>
+
+            <Like likes={likes} postId={postId} />
             <IconButton onClick={() => setIsCommentOpen(!isCommentOpen)}>
               <Comment />
             </IconButton>

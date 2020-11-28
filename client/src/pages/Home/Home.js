@@ -81,6 +81,8 @@ const Home = () => {
             openModal={() => openModal(post.id)} //save the post.id in a state var
             likeNumber={post.likes.length}
             commentNumber={post.comments.length}
+            likes={post.likes}
+            postId={post.id}
           />
         </Fragment>
       ));

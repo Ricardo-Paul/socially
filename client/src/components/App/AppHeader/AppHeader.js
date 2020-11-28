@@ -42,6 +42,7 @@ const AppHeader = () => {
     <Menu anchorEl={anchorEl} open={isMenuOpen} onClose={CloseProfileMenu}>
       <MenuItem onClick={CloseProfileMenu}> Profile </MenuItem>
       <MenuItem onClick={CloseProfileMenu}> My Account </MenuItem>
+      <MenuItem onClick={CloseProfileMenu}> Logout </MenuItem>
     </Menu>
   );
 
