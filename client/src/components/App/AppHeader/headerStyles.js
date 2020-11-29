@@ -4,7 +4,7 @@ const { makeStyles } = require("@material-ui/core");
 
 const headerStyles = makeStyles((theme) => ({
   appBar: {
-    position: "sticky",
+    position: "fixed",
     backgroundColor: colors.indigo8,
     display: "flex",
     justifyContent: "center",
