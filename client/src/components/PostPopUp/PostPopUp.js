@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
-import { Button, makeStyles } from "@material-ui/core";
+import React from "react";
+import {  makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { theme } from '../../utils/theme';
 import {
   Card,
   CardHeader,
@@ -26,6 +27,9 @@ const PostStyles = makeStyles({
     position: "absolute",
     width: "30%",
     zIndex: 900,
+    [theme.breakpoints.down("sm")]: {
+      width: "95%"
+    },
   },
   card: {
     height: "100%",
@@ -33,12 +37,13 @@ const PostStyles = makeStyles({
   media: {
     height: 500,
     objectFit: "cover",
+    [theme.breakpoints.down("sm")]: {
+      height: 250
+    },
   },
 });
 
 const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, createdAt }) => {
-  const src =
-    "https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512";
 
   const classes = PostStyles();
   return (

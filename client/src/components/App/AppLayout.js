@@ -31,6 +31,7 @@ const appLayoutStyles = makeStyles((theme) => ({
 
   middle: {
     height: "100vh",
+    overflow: "auto",
     backgroundColor: colors.lightGrey,
     paddingLeft: 25,
     paddingRight: 25,

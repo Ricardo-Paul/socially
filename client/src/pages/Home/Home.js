@@ -62,6 +62,7 @@ const Home = () => {
 // to decide whether to open the modal
       return posts.map((post) => (
         <Fragment key={post.id}>
+          {/* modal */}
           <Modal open={postId === post.id} onClose={closeModal}>
            <PostPopUp 
            closeModal={closeModal} 
@@ -73,6 +74,7 @@ const Home = () => {
            />
           </Modal>
 
+          {/* regualar post card */}
           <PostCard
             title={post.title}
             image={post.image}

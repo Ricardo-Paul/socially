@@ -10,7 +10,7 @@ import {
   Divider,
   Popper,
 } from "@material-ui/core";
-import { MoreVert, ThumbUpAlt, Comment } from "@material-ui/icons";
+import { MoreVert, Comment } from "@material-ui/icons";
 import CardHeader from "@material-ui/core/CardHeader";
 
 import { shadows } from "../../utils/theme";
@@ -18,7 +18,7 @@ import PostCardOptions from "./PostCardOptions";
 import CreateComment from "../CreateComment";
 import Like from '../Like'
 
-import { colors } from '../../utils/theme'
+import { colors, theme } from '../../utils/theme'
 
 const postCardStyles = makeStyles({
   card: {
@@ -30,6 +30,9 @@ const postCardStyles = makeStyles({
     // backgroundColor: "white",
     // position: "absolute",
     // width: "30%"
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "100%"
+    },
   },
   cardData: {
     display: "flex",
@@ -65,12 +68,6 @@ const PostCard = ({
   postId
 }) => {
   const classes = postCardStyles();
-  const src =
-    "https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512";
-  // const avatar = "https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
-
-  const i =
-    "https://res.cloudinary.com/socially/image/upload/v1604363431/samples/bike.jpg";
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -102,11 +99,11 @@ const PostCard = ({
           subheader={"5 hours ago"}
         />
         <CardContent>{title}</CardContent>
-        <CardMedia
+        {image && <CardMedia
           className={classes.media}
           image={image}
           onClick={openModal}
-        />
+        />}
         <div className={classes.footer}>
           <div className={classes.cardData}>
             <h5> {likeNumber} {likeNumber > 1? 'likes': 'like'} </h5>
