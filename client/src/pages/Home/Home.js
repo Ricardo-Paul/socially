@@ -7,6 +7,8 @@ import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
 import Modal from "../../components/Modal";
 import PostPopUp from "../../components/PostPopUp";
+import * as Routes from '../../routes'
+import { generatePath } from 'react-router-dom';
 
 
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
@@ -22,8 +24,10 @@ const Home = () => {
   const [{ auth }] = useStore();
   const [postId, setPostId] = React.useState(null); 
 
+  // pushState args (state, title, url)
   const openModal = (postId) => {
     setPostId(postId)
+    window.history.pushState("", "", generatePath(Routes.POST,{ id: postId }));
   }
 
   const closeModal = () =>{

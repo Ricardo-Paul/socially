@@ -9,3 +9,4 @@ export const RESET_PASSWORD='/reset-password'
 
 // app routes
 export const HOME = "/home";
+export const POST = "/post/:id"
