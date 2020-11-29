@@ -91,6 +91,7 @@ const Home = () => {
             postId={post.id}
             postAuthor={post.author}
             imagePublicId={post.imagePublicId}
+            comments={post.comments}
           />
         </Fragment>
       ));

@@ -64,14 +64,6 @@ const CreateComment = ({ focus }) => {
   return (
     <>
       <form onSubmit={handleSubmit} className={classes.form}>
-        {/* <textarea
-          className={classes.textarea}
-          onChange={handleChange}
-          value={comment}
-          ref={textareaEl}
-          placeholder="Comment..."
-          onKeyDown={handleKeyDown}
-        /> */}
         <TextField 
           inputRef={textareaEl}
           multiline
@@ -79,6 +71,8 @@ const CreateComment = ({ focus }) => {
           className={classes.textField}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          value={comment}
+          placeholder="comment..."
         />
         <Button
           size="small"

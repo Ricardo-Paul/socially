@@ -17,6 +17,7 @@ import { shadows } from "../../utils/theme";
 import PostCardOptions from "./PostCardOptions";
 import CreateComment from "../CreateComment";
 import Like from '../Like'
+import PostPopUpComments from '../PostPopUp/PostPopUpComments';
 
 import { useStore } from '../../store';
 
@@ -77,7 +78,8 @@ const PostCard = ({
   likes,
   postId,
   postAuthor,
-  imagePublicId
+  imagePublicId,
+  comments
 }) => {
   const classes = postCardStyles();
   const [{auth}] = useStore();
@@ -156,7 +158,7 @@ const PostCard = ({
               <Comment />
             </IconButton>
           </div>
-
+          { isCommentOpen && <PostPopUpComments comments={comments} /> }
           {isCommentOpen && <CreateComment focus={isCommentOpen} />}
         </div>
       </Card>

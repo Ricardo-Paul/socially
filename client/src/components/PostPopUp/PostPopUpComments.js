@@ -31,19 +31,19 @@ const PostPopUpComments = ({ comments }) => {
           <Avatar alt="user avatar" src={i} />
           </ListItemAvatar>
           <ListItemText
-          primary={"Ali Conner"}
+          primary={c.author.fullName}
           secondary={
               <Fragment>
               <Typography component="span" variant="body2">
                   2 days ago
               </Typography>
-              {"- That is perfectly accurate"}
+              - {c.comment}
               </Fragment>
           }
           />
       </ListItem>
        ))}
-        <Divider variant="inset" component="li" />
+        { comments.length > 1 && <Divider variant="inset" component="li" /> }
       </List>
   );
 };
