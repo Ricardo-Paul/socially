@@ -72,6 +72,7 @@ export const schema = gql`
     }
 
     type Like{
+	id: ID!
         post: ID!
         user: ID!
     }
@@ -120,6 +121,10 @@ type UserPayload{
     posts: [PostPayload]
     comments: [CommentPayload]
     likes: [Like]
+
+    following: [Follow]
+    followers: [Follow]
+    notifications: [Notification]
 }
 
 type PostPayload{
@@ -135,7 +140,8 @@ type PostPayload{
 }
 
 type CommentPayload{
-    author: ID!
+    id: ID!
+    author: UserPayload
     post: ID!
     comment: String!
 }
@@ -161,7 +167,7 @@ enum NotificationType{
         resetPassword(input: ResetPasswordInput!): Token
 
         createPost(input: CreatePostInput!): PostPayload
-        deletePost(id: ID!): String
+        deletePost(input: DeletePostInput!): PostPayload
 
         createComment(input: CreateCommentInput!): CommentPayload
         deleteComment(input: DeleteCommentInput): CommentPayload
@@ -186,6 +192,11 @@ enum NotificationType{
     type SuccessMessage{
         message: String
     }
+
+    input DeletePostInput {
+	id: ID!
+	imagePublicId: ID
+   }
 
     input UploadUserPhotoInput{
         userId: ID!

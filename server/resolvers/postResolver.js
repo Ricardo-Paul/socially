@@ -1,6 +1,6 @@
 import Follow from '../models/Follow';
 import cloudinary from 'cloudinary'
-import { uploadToLocal, uploadToCloudinary } from '../utils/fileUploads';
+import { deleteFromCloudinary, uploadToCloudinary } from '../utils/fileUploads';
 const generateUniqueId = require('generate-unique-id');
 
 // cloudinary.config({
@@ -63,13 +63,31 @@ const Query = {
     const postCount = Post.find(query).countDocuments();
 
     // TODO: populate the posts
-    // TODO: seed db to test this method
+    // TODO: seed db to test this method:: DONE
     const followedPosts = Post.find(query)
     .skip(skip)
     .limit(limit)
     .sort({ createdAt: "desc" })
-    .populate("author")
-    .populate("comments")
+    .populate({
+      path: 'author',
+      populate: [
+        { path: "following" },
+        { path: "followers" },
+        { path: "notifications",
+        populate: [
+          { path: "sender" },
+          { path: "follow" },
+          { path: "like" },
+          { path: "comment" }
+        ]
+      }
+      ]
+    })
+    .populate({
+      path: "comments",
+      options: { sort: { createdAt: "desc" } },
+      populate: { path: "author" }
+    })
     .populate("likes")
 
     return{
@@ -123,7 +141,7 @@ const Mutation = {
     return newPost;
   },
 
-  deletePost: async (_, { id, imagePublicId }, { Post, User, authenticatedUser }) => {
+  deletePost: async (_, {input:{ id, imagePublicId} }, { Post, User,Comment, authenticatedUser }) => {
     if (!authenticatedUser) throw new Error(`Unauthenticated`);
 
     const postToDelete = await Post.findOne({ _id: id });
@@ -132,9 +150,11 @@ const Mutation = {
 
     // TODO: delete associated post picture on cloudinary
     if (imagePublicId) {
-      const deletedImage = await deleteFromCloudinary(imagePublicId);
-      if (deletedImage.result != 'ok') {
-        throw new Error(`Something went wrong while trying to delete image`);
+      try{
+        const deletedImage = await deleteFromCloudinary(imagePublicId);
+        console.log(deletedImage)
+      } catch (err){
+        console.log(err)
       }
     }
 
@@ -162,7 +182,7 @@ const Mutation = {
     // now check in User where likes have this id User.where({ likes: likeId })
 
     // TODO: remove notifications (upcoming)
-    return 'Post deleted';
+    return postToDelete;
   },
 };
 

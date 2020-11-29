@@ -19,12 +19,12 @@ const DB_NAME = process.env.DB_NAME;
         // we'll disable this line if we still want to erase all users
         // if(userCount > 10) return console.log(`Records are enough: DB hit > 10 users`);
 
-        const customUser = await User.findOne({username:'ricky'});
+	//const customUser = await User.findOne({username:'ricky'});
         // erasing dummy data
         // will select all the user records except where username is 'ricky'
-        const namequery = { username: {$ne: customUser.username} }; 
-        const count = await User.find(namequery).countDocuments();
-        await User.deleteMany(namequery); //delete all but me
+  	//const namequery = { username: {$ne: customUser.username} }; 
+        const count = await User.find().countDocuments();
+        await User.deleteMany({}); //delete all but me
         console.log(`${count} Users deleted`);
 
 
