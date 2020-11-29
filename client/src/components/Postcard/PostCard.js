@@ -83,7 +83,7 @@ const PostCard = ({
   return (
     <>
       <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
-        <PostCardOptions closeMenu={() => setAnchorEl(null)} />
+        <PostCardOptions closeMenu={() => setAnchorEl(null)} postId={postId}  />
       </Popper>
 
       <Card className={classes.card}>

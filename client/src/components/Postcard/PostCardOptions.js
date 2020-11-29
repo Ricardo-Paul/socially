@@ -1,15 +1,23 @@
 import React from "react";
 import { MenuList, MenuItem, Paper, ClickAwayListener, Typography } from "@material-ui/core";
 import PropTypes from 'prop-types';
+import { generatePath } from 'react-router-dom';
+import * as Routes from '../../routes';
 
 
-const PostCardOptions = ({ closeMenu }) => {
+
+const PostCardOptions = ({ closeMenu, postId }) => {
   const font={fontSize: 12}
+  // REPLACE REACT_APP_CLIENT_URL when deployed,
   const copyUrl = () => {
+    let absUrl = `${process.env.REACT_APP_CLIENT_URL}${generatePath(Routes.POST,{
+      id: postId
+    })}`
+    navigator.clipboard.writeText(absUrl);
     closeMenu();
   };
 
-  
+
   return (
     <>
     <ClickAwayListener onClickAway={closeMenu}>
@@ -30,5 +38,6 @@ const PostCardOptions = ({ closeMenu }) => {
 export default PostCardOptions;
 
 PostCardOptions.propTypes = {
-  closeMenu: PropTypes.func.isRequired
+  closeMenu: PropTypes.func.isRequired,
+  postId: PropTypes.string.isRequired
 }
