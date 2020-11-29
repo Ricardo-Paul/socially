@@ -1,24 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, makeStyles } from "@material-ui/core";
+import { Button, makeStyles, TextField } from "@material-ui/core";
 import { colors, shadows, theme } from "../utils/theme";
 
 const commenStyles = makeStyles({
-  textarea: {
+  textField: {
     // marginLeft: 10,
     marginRight: 5,
-    width: "90%",
-    height: 33,
-    outline: "none",
-    border: 0,
+
     paddingTop: 10,
     paddingLeft: 15,
-    borderRadius: 5,
     // transition: "0.6 ease-out",
-    backgroundColor: colors.indigo1,
     [theme.breakpoints.down("sm")]: {
       marginBottom: 2,
-      width: "95%",
     },
   },
   form: {
@@ -50,6 +44,7 @@ const CreateComment = ({ focus }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(comment);
+    setComment("");
   };
 
   const handleKeyDown = (e) => {
@@ -69,12 +64,20 @@ const CreateComment = ({ focus }) => {
   return (
     <>
       <form onSubmit={handleSubmit} className={classes.form}>
-        <textarea
+        {/* <textarea
           className={classes.textarea}
           onChange={handleChange}
           value={comment}
           ref={textareaEl}
           placeholder="Comment..."
+          onKeyDown={handleKeyDown}
+        /> */}
+        <TextField 
+          inputRef={textareaEl}
+          multiline
+          fullWidth
+          className={classes.textField}
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
         <Button
