@@ -10,6 +10,14 @@ export const CREATE_POST =gql`
     }
 `
 
+export const DELETE_POST = gql`
+    mutation($input: DeletePostInput!){
+        deletePost(input: $input){
+            id
+        }
+    }
+`
+
 // payloads
 const postAuthorPayload = `
     author {

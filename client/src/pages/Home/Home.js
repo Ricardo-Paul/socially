@@ -90,6 +90,7 @@ const Home = () => {
             likes={post.likes}
             postId={post.id}
             postAuthor={post.author}
+            imagePublicId={post.imagePublicId}
           />
         </Fragment>
       ));
