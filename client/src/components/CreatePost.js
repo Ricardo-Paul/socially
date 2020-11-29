@@ -81,7 +81,7 @@ const CreatePost = () => {
   const [{ auth }] = useStore();
   const classes = postStyles();
 
-  const [createPost, { loading, data, error }] = useMutation(CREATE_POST,{
+  const [createPost, { loading }] = useMutation(CREATE_POST,{
     refetchQueries: [
       {query: GET_AUTH_USER},
       {query: GET_FOLLOWED_POSTS, variables:{ userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT }}

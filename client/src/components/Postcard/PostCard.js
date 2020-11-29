@@ -18,6 +18,16 @@ import PostCardOptions from "./PostCardOptions";
 import CreateComment from "../CreateComment";
 import Like from '../Like'
 
+import { useStore } from '../../store';
+
+
+// delete post imports
+import { useMutation } from '@apollo/client';
+import { DELETE_POST } from '../../graphql/post';
+import { GET_AUTH_USER } from '../../graphql/user';
+import { GET_FOLLOWED_POSTS } from '../../graphql/post';
+import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
+
 import { colors, theme } from '../../utils/theme'
 
 const postCardStyles = makeStyles({
@@ -70,6 +80,7 @@ const PostCard = ({
   imagePublicId
 }) => {
   const classes = postCardStyles();
+  const [{auth}] = useStore();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -82,6 +93,26 @@ const PostCard = ({
 
   const [isCommentOpen, setIsCommentOpen] = React.useState(false);
 
+  const [remove] = useMutation(DELETE_POST,{
+    refetchQueries: [
+      {query: GET_AUTH_USER},
+      {query: GET_FOLLOWED_POSTS, variables:{ userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT }}
+  ]
+})
+
+  const deletePost = async () => {
+    console.log(postAuthor.id, auth.user.id);
+    try{
+      const { data } = await remove({
+        variables: { input: { id: postId, imagePublicId}}
+      });
+      console.log("DELETED", data);
+    }catch(err){
+      console.log(err)
+    }
+    setAnchorEl(null);
+  }
+
   return (
     <>
       <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
@@ -90,6 +121,7 @@ const PostCard = ({
         postId={postId}  
         postAuthor={postAuthor}
         imagePublicId={imagePublicId}
+        deletePost={deletePost}
         />
       </Popper>
 
@@ -140,4 +172,5 @@ PostCard.propTypes = {
   image: PropTypes.string, //post image
   avatar: PropTypes.string, //author avatar
   openModal: PropTypes.func.isRequired, //called when image is clicked
+  imagePublicId: PropTypes.string, // used to delete the image associated to a post
 };
