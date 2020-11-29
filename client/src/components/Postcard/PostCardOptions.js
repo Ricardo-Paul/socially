@@ -3,10 +3,13 @@ import { MenuList, MenuItem, Paper, ClickAwayListener, Typography } from "@mater
 import PropTypes from 'prop-types';
 import { generatePath } from 'react-router-dom';
 import * as Routes from '../../routes';
+import { useStore } from '../../store';
 
 
 
-const PostCardOptions = ({ closeMenu, postId }) => {
+const PostCardOptions = ({ closeMenu, postId, postAuthor }) => {
+  const [{auth}] = useStore();
+
   const font={fontSize: 12}
   // REPLACE REACT_APP_CLIENT_URL when deployed,
   const copyUrl = () => {
@@ -17,6 +20,11 @@ const PostCardOptions = ({ closeMenu, postId }) => {
     closeMenu();
   };
 
+  // if the current user id matches the post author id
+  const isUserPost = postAuthor.id === auth.user.id
+  const deletePost = () => {
+    console.log(postAuthor.id, auth.user.id);
+  }
 
   return (
     <>
@@ -26,7 +34,7 @@ const PostCardOptions = ({ closeMenu, postId }) => {
           <MenuItem style={font} onClick={copyUrl}>
               Copy URL
           </MenuItem>
-          <MenuItem style={font}> Delete </MenuItem>
+          { isUserPost && <MenuItem style={font} onClick={deletePost}> Delete </MenuItem>}
           <MenuItem style={font}> Follow </MenuItem>
         </MenuList>
       </Paper>
@@ -39,5 +47,6 @@ export default PostCardOptions;
 
 PostCardOptions.propTypes = {
   closeMenu: PropTypes.func.isRequired,
-  postId: PropTypes.string.isRequired
+  postId: PropTypes.string.isRequired,
+  postAuthor: PropTypes.string.isRequired // author of the post (postAuthor)
 }

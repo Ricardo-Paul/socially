@@ -89,6 +89,7 @@ const Home = () => {
             commentNumber={post.comments.length}
             likes={post.likes}
             postId={post.id}
+            postAuthor={post.author}
           />
         </Fragment>
       ));

@@ -65,7 +65,8 @@ const PostCard = ({
   likeNumber, 
   commentNumber,
   likes,
-  postId
+  postId,
+  postAuthor
 }) => {
   const classes = postCardStyles();
 
@@ -83,7 +84,11 @@ const PostCard = ({
   return (
     <>
       <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
-        <PostCardOptions closeMenu={() => setAnchorEl(null)} postId={postId}  />
+        <PostCardOptions 
+        closeMenu={() => setAnchorEl(null)} 
+        postId={postId}  
+        postAuthor={postAuthor}
+        />
       </Popper>
 
       <Card className={classes.card}>
