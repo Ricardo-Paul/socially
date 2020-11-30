@@ -25,7 +25,7 @@ const PostPopUpComments = ({ comments }) => {
 
   return (
       <List >
-       {comments.map((c) => (
+       {comments.reverse().map((c) => (
           <ListItem>
           <ListItemAvatar>
           <Avatar alt="user avatar" src={i} />
@@ -35,9 +35,9 @@ const PostPopUpComments = ({ comments }) => {
           secondary={
               <Fragment>
               <Typography component="span" variant="body2">
-                  2 days ago
+                  {/* 2 days ago */}
               </Typography>
-              - {c.comment}
+              {c.comment}
               </Fragment>
           }
           />

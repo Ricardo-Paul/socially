@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, makeStyles, TextField } from "@material-ui/core";
+import { Button, makeStyles, TextField, IconButton } from "@material-ui/core";
 import { theme } from "../utils/theme";
 import { CREATE_COMMENT } from '../graphql/comment';
 import { useMutation } from '@apollo/client';
 import {useStore} from '../store';
+import { Send } from '@material-ui/icons';
+
+import { GET_AUTH_USER } from '../graphql/user';
+import { GET_FOLLOWED_POSTS } from '../graphql/post';
+import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
 
 const commenStyles = makeStyles({
   textField: {
@@ -22,12 +27,12 @@ const commenStyles = makeStyles({
     justifyContent: "space-between",
     alignItems: "flex-end",
     [theme.breakpoints.down("sm")]: {
-      flexDirection: "column",
+      // flexDirection: "column",
     },
   },
   button: {
     [theme.breakpoints.down("sm")]: {
-      width: "100%",
+      // width: "100%",
     },
   },
 });
@@ -39,7 +44,12 @@ const CreateComment = ({ focus, postId }) => {
 
   const [comment, setComment] = React.useState("");
   const [{auth}] = useStore();
-  const [ createComment, { data, loading } ] = useMutation(CREATE_COMMENT);
+  const [ createComment, { loading } ] = useMutation(CREATE_COMMENT,{
+    refetchQueries: [
+      {query: GET_AUTH_USER},
+      {query: GET_FOLLOWED_POSTS, variables:{ userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT }}
+  ]
+  });
 
   const handleChange = (e) => setComment(e.target.value);
 
@@ -52,8 +62,6 @@ const CreateComment = ({ focus, postId }) => {
     } catch(err){
       console.log(err)
     }
-
-    alert(comment);
     setComment("");
   };
 
@@ -84,17 +92,18 @@ const CreateComment = ({ focus, postId }) => {
           value={comment}
           placeholder="comment..."
         />
-        <Button
-          size="small"
-          variant="contained"
-          className={classes.button}
-          color="primary"
-          type="submit"
-          ref={buttonEl}
-          type="submit"
-        >
-          Comment
-        </Button>
+          <IconButton
+            size="small"
+            variant="contained"
+            className={classes.button}
+            color="primary"
+            type="submit"
+            ref={buttonEl}
+            type="submit"
+            disabled={!comment.trim()}
+          >
+             <Send />
+          </IconButton>
       </form>
     </>
   );
