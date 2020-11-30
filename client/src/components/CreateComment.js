@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button, makeStyles, TextField } from "@material-ui/core";
-import { colors, shadows, theme } from "../utils/theme";
+import { theme } from "../utils/theme";
+import { CREATE_COMMENT } from '../graphql/comment';
+import { useMutation } from '@apollo/client';
+import {useStore} from '../store';
 
 const commenStyles = makeStyles({
   textField: {
-    // marginLeft: 10,
     marginRight: 5,
-
     paddingTop: 10,
     paddingLeft: 15,
-    // transition: "0.6 ease-out",
     [theme.breakpoints.down("sm")]: {
       marginBottom: 2,
     },
@@ -32,17 +32,27 @@ const commenStyles = makeStyles({
   },
 });
 
-const CreateComment = ({ focus }) => {
+const CreateComment = ({ focus, postId }) => {
   const classes = commenStyles();
   const textareaEl = React.useRef(null);
   const buttonEl = React.useRef(null);
 
   const [comment, setComment] = React.useState("");
+  const [{auth}] = useStore();
+  const [ createComment, { data, loading } ] = useMutation(CREATE_COMMENT);
 
   const handleChange = (e) => setComment(e.target.value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try{
+      await createComment({
+        variables:{input:{ comment, authorId:auth.user.id, postId }}
+      });
+    } catch(err){
+      console.log(err)
+    }
+
     alert(comment);
     setComment("");
   };
@@ -81,6 +91,7 @@ const CreateComment = ({ focus }) => {
           color="primary"
           type="submit"
           ref={buttonEl}
+          type="submit"
         >
           Comment
         </Button>
@@ -93,4 +104,5 @@ export default CreateComment;
 
 CreateComment.propTypes = {
   focus: PropTypes.bool.isRequired,
+  postId: PropTypes.string.isRequired
 };
