@@ -12,7 +12,7 @@ import {
   IconButton,
   Paper
 } from "@material-ui/core";
-import { MoreVert } from "@material-ui/icons";
+import { MoreVert, Close } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
 
 const PostStyles = makeStyles({
@@ -61,8 +61,8 @@ const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, created
         <CardHeader
           avatar={<Avatar>A</Avatar>}
           action={
-            <IconButton>
-              <MoreVert />
+            <IconButton onClick={closeModal}>
+              <Close />
             </IconButton>
           }
           title={author}
@@ -70,12 +70,10 @@ const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, created
         />
         <CardContent> {postTitle} </CardContent>
         <div className={classes.mediaContainer}>
-          <img src={postImage} alt="post image" className={classes.media} />
-          {/* <CardMedia
-            className={classes.media}
-            image={postImage}
-            title={"post picture"}
-          /> */}
+          <img 
+          src={postImage} 
+          alt="post image" 
+          className={classes.media} />
         </div>
         <PostPopUpComments comments={comments} />
       </Card>
