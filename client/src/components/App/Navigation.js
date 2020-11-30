@@ -25,7 +25,11 @@ import { AccountCircle } from "@material-ui/icons";
 import { colors, shadows } from "../../utils/theme";
 
 const navStyles = makeStyles((theme) => ({
+  selected: {
+    backgroundColor: colors.lighRed,
+  },
   navContainer: {
+    marginTop: 5,
     paddingTop: 20,
     backgroundColor: colors.black, //match that color with layout extreme color
     [theme.breakpoints.up("sm")]: {
@@ -46,8 +50,13 @@ const navStyles = makeStyles((theme) => ({
     },
   },
   listItem: {
+    color: colors.white,
     width: "100%",
-  },
+    display:"flex",
+    "&:hover":{
+      backgroundColor: colors.indigo1
+    }
+  }
 }));
 
 // partially set all routes to home
@@ -70,26 +79,37 @@ const Navigation = () => {
   }, [auth]);
 
   const classes = navStyles();
+  const [location, setLocation] = useState(null); //hack to style the selected link
 
   const options = [
     { title: "Home", icon: <HomeIcon />, to: Routes.HOME },
-    { title: "Browse Feed", icon: <WebIcon />, to: Routes.HOME },
-    { title: "People", icon: <PeopleIcon />, to: Routes.HOME },
+    { title: "Browse Feed", icon: <WebIcon />, to: Routes.BROWSE },
+    { title: "People", icon: <PeopleIcon />, to: Routes.PEOPLE },
     {
       title: "Notifications",
       icon: <NotificationsActiveIcon />,
-      to: Routes.HOME,
+      to: Routes.NOTIFICATIONS,
     },
-    { title: "Messages", icon: <MessageIcon />, to: Routes.HOME },
-    { title: "About", icon: <InfoIcon />, to: Routes.HOME },
+    { title: "Messages", icon: <MessageIcon />, to: Routes.MESSAGE },
+    { title: "About", icon: <InfoIcon />, to: Routes.ABOUT },
   ];
   const list = options.map((item, index) => {
     return (
       <NavLink
+        key={index}
+        exact
         to={item.to}
         style={{ textDecoration: "none", color: colors.white }}
+        isActive={(location) => { //grab the location url, helps us identify the current url
+          if(location){
+            setLocation(location.url)
+          }
+        }}
       >
-        <ListItem key={index} className={classes.listItem}>
+        <ListItem 
+        key={index} 
+        className={item.to === location?classes.selected : classes.listItem}
+        >
           <ListItemIcon style={styles}> {item.icon} </ListItemIcon>
           <ListItemText primary={item.title} />
         </ListItem>
