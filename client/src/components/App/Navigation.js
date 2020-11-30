@@ -30,9 +30,9 @@ const navStyles = makeStyles((theme) => ({
     backgroundColor: colors.black, //match that color with layout extreme color
     [theme.breakpoints.up("sm")]: {
       //not for sm screen
-      position: "fixed",
-      width: "20%",
-      left: "2%",
+      position: "absolute",
+      width: "70%", //related to the left grid
+      right: "1%",
     },
   },
   list: {

@@ -18,27 +18,35 @@ import PostPopUpComments from "./PostPopUpComments";
 const PostStyles = makeStyles({
   paper: {
     maxHeight: "80%",
-    width: 900,
     overflow:"auto",
 
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     position: "absolute",
-    width: "30%",
+    maxWidth: "50%",
     zIndex: 900,
     [theme.breakpoints.down("sm")]: {
-      width: "95%"
+      maxWidth: "100%",
+      width: "100%"
     },
   },
   card: {
     height: "100%",
   },
-  media: {
+  mediaContainer:{
     height: 500,
+    width: "95%",
+    backgroundColor:"blue",
+    margin: "0 auto"
+  },
+  media: {
+    width:"100%",
+    height: "100%",
     objectFit: "cover",
     [theme.breakpoints.down("sm")]: {
-      height: 250
+      height: "100%",
+      width:"100%"
     },
   },
 });
@@ -61,11 +69,14 @@ const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, created
           subheader={createdAt}
         />
         <CardContent> {postTitle} </CardContent>
-        <CardMedia
-          className={classes.media}
-          image={postImage}
-          title={"post picture"}
-        />
+        <div className={classes.mediaContainer}>
+          <img src={postImage} alt="post image" className={classes.media} />
+          {/* <CardMedia
+            className={classes.media}
+            image={postImage}
+            title={"post picture"}
+          /> */}
+        </div>
         <PostPopUpComments comments={comments} />
       </Card>
       </Paper>

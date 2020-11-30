@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuList, MenuItem, Paper, ClickAwayListener, Typography } from "@material-ui/core";
+import { MenuList, MenuItem, Paper, ClickAwayListener } from "@material-ui/core";
 import PropTypes from 'prop-types';
 import { generatePath } from 'react-router-dom';
 import * as Routes from '../../routes';
@@ -9,7 +9,6 @@ import { useStore } from '../../store';
 const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
   const [{auth}] = useStore();
 
- 
   const font={fontSize: 12}
   // REPLACE REACT_APP_CLIENT_URL when deployed,
   const copyUrl = () => {

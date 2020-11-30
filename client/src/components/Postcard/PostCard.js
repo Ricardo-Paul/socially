@@ -21,7 +21,6 @@ import PostPopUpComments from '../PostPopUp/PostPopUpComments';
 
 import { useStore } from '../../store';
 
-
 // delete post imports
 import { useMutation } from '@apollo/client';
 import { DELETE_POST } from '../../graphql/post';
@@ -34,7 +33,7 @@ import { colors, theme } from '../../utils/theme'
 const postCardStyles = makeStyles({
   card: {
     marginTop: 20,
-    maxWidth: "70%",
+    maxWidth: "100%",
     boxShadow: shadows.md,
 
     // transform: "translate(-50%, -50%)",

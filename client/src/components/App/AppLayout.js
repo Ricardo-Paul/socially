@@ -43,6 +43,7 @@ const appLayoutStyles = makeStyles((theme) => ({
   extreme: {
     paddingTop: 60,
     backgroundColor: colors.black,
+    position: "relative"
   },
   drawer: {
     //control mobile display
@@ -78,7 +79,7 @@ const AppLayout = ({ authUser }) => {
           <Hidden smDown>
             <Grid
               item
-              md={3}
+              md={4}
               xs={12}
               className={classes.drawer}
               className={classes.extreme}
@@ -88,7 +89,7 @@ const AppLayout = ({ authUser }) => {
           </Hidden>
 
           {/* Middle */}
-          <Grid item md={6} xs={12} className={classes.middle}>
+          <Grid item md={5} xs={12} className={classes.middle}>
             <Switch>
               <Route exact path={Routes.HOME} render={() => <Home />} />
               <Redirect to={Routes.HOME} />
