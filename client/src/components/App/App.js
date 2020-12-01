@@ -46,10 +46,7 @@ const App = () => {
       <Switch>
         <ScrollTop>
           {!loading && data.getAuthUser ? ( //authUser prop is available on the layout
-            <Route
-              exact
-              render={() => <AppLayout authUser={data.getAuthUser} />}
-            />
+           <Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />
           ) : (
             <Route exact render={() => <AuthLayout refetch={refetch} />} />
           )}

@@ -56,18 +56,19 @@ const navStyles = makeStyles((theme) => ({
     "&:hover":{
       backgroundColor: colors.indigo1
     }
+  },
+  name: {
+    color: colors.indigo0,
+    fontWeight: "bold",
+    fontSize: 10
   }
 }));
 
 // partially set all routes to home
 const Navigation = () => {
   const [{ auth }] = useStore();
-  const styles = { color: colors.lighRed };
-  const nameStyles = {
-    backgroudcolor: colors.indigo9,
-    color: colors.lighRed,
-    marginBottom: 15,
-  };
+  const styles = { color: colors.indigo0 };
+
 
   // set the user to local so we can access
   // its properties
@@ -128,8 +129,8 @@ const Navigation = () => {
                 {" "}
                 <AccountCircle />{" "}
               </ListItemIcon>
-              <Typography variant="h4" style={nameStyles}>
-                <ListItemText primary={user.fullName} />
+              <Typography variant="h4">
+                <ListItemText className={classes.name} primary={user.fullName} />
               </Typography>
             </ListItem>
             <Divider />
