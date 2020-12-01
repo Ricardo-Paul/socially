@@ -1,6 +1,6 @@
 const Query = {
   getUserNotifications: async (_, { userId, skip, limit }, { Notification }) => {
-    const query = { sender: userId };
+    const query = { receiver: userId };
     const count = await Notification.where(query).countDocuments();
 
     const notifications = await Notification.where(query)
