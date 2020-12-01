@@ -1,3 +1,22 @@
+const Query = {
+  getUserNotifications: async (_, { userId, skip, limit }, { Notification }) => {
+    const query = { sender: userId };
+    const count = await Notification.where(query).countDocuments();
+
+    const notifications = await Notification.where(query)
+      .populate('sender')
+      .populate('receiver')
+      .populate('follow')
+      .populate({ path: "comment", populate: { path: "post" } })
+      .populate({ path: "like", populate: { path: "post" } })
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: "desc" })
+
+      return { notifications, count }
+  }
+}
+
 
 const Mutation = {
   createNotification: async(_, { input: { senderId, receiverId, postId, notificationType, notificationTypeId }}, { Notification, User }) => {
@@ -46,4 +65,5 @@ const Mutation = {
 
 export default {
   Mutation,
+  Query
 };

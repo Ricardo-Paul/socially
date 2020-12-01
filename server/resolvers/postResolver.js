@@ -65,22 +65,14 @@ const Query = {
     // TODO: populate the posts
     // TODO: seed db to test this method:: DONE
     const followedPosts = Post.find(query)
-    .skip(skip)
-    .limit(limit)
-    .sort({ createdAt: "desc" })
     .populate({
       path: 'author',
       populate: [
         { path: "following" },
         { path: "followers" },
-        { path: "notifications",
-        populate: [
-          { path: "sender" },
-          { path: "follow" },
-          { path: "like" },
-          { path: "comment" }
-        ]
-      }
+        {  path: 'notifications',
+        populate: [{ path: 'author' }, { path: 'follow' }, { path: 'like' }, { path: 'comment' }],
+        }
       ]
     })
     .populate({
@@ -89,6 +81,9 @@ const Query = {
       populate: { path: "author" }
     })
     .populate("likes")
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: "desc" })
 
     return{
       count: postCount,

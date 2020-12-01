@@ -21,6 +21,13 @@ export const schema = gql`
         getUsers(userId: ID!): UsersPayload
         searchUsers(searchQuery: String): [UserPayload]
         suggestPeople(userId: ID!): UsersPayload
+
+        getUserNotifications(userId:ID!, skip:Int, limit:Int): NotificationsPayload
+    }
+
+    type NotificationsPayload{
+        notifications: [Notification]
+        count: String
     }
 
     type UsersPayload{
@@ -66,18 +73,20 @@ export const schema = gql`
     }
 
     type Comment{
+        id: ID!
         authorId: ID!
         postId: ID!
         comment: String!
     }
 
     type Like{
-	id: ID!
+	    id: ID!
         post: ID!
         user: ID!
     }
 
     type Follow{
+        id: ID!
         following: ID!
         follower: ID!
     }
