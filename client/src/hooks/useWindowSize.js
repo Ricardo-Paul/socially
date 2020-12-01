@@ -5,7 +5,7 @@ const useWindowSize = () => {
 
     // here we use useCallback to prevent unnecessary re-render of
     // our function, unless isClient is false
-    // meaning window is not an object
+    // meaning if window is not an object
     const getSize = useCallback(() => {
         return {
             width: isClient ? window.innerWidth : undefined,
