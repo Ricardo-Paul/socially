@@ -29,11 +29,11 @@ const useNotification = () => {
      * we'll just need to pass our variables object to create
      * @param {object} param0 
      */
-    const create = async ({senderId, receiverId, postId, notificationType, notificationTypeId}) => {
+    const create = async ({receiverId, postId, notificationType, notificationTypeId}) => {
         try{
             await mutate(CREATE_NOTIFICATION,{
-                senderId: auth.user.id,
-                receiverId,
+                senderId: auth.user.id, //the current user
+                receiverId, // post author id
                 postId,
                 notificationType,
                 notificationTypeId
@@ -51,3 +51,5 @@ const useNotification = () => {
 
     return { create, remove }
 }
+
+export default useNotification;
