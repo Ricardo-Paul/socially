@@ -19,7 +19,21 @@ const Query = {
     // they are called context BTW
     if (!authenticatedUser) return null;
     const { email, username } = authenticatedUser;
-    const user = User.findOne({ email, username });
+    const user = User.findOne({ email, username })
+    .populate('likes')
+    .populate('followers')
+    .populate('following')
+    .populate({
+      path: 'notifications',
+      populate: [
+        { path: 'author' },
+        { path: 'follow' },
+        { path: 'like', populate: { path: 'post' } },
+        { path: 'comment', populate: { path: 'post' } },
+      ],
+      match: { seen: false },
+    });
+    
     return user;
   },
 
