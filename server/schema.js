@@ -62,6 +62,7 @@ export const schema = gql`
 
         posts: [Post]
         comments: [Comment]
+        notifications:[Notification]
     }
 
     type Post{
