@@ -9,7 +9,8 @@ import {
   Divider,
   Avatar,
   makeStyles,
-  IconButton
+  IconButton,
+  ClickAwayListener
 } from "@material-ui/core";
 
 import { Delete } from '@material-ui/icons';
@@ -30,7 +31,7 @@ import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
     }
   })
 
-const PostPopUpComments = ({ comments, userAvatar }) => {
+const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
   const classes = commentsStyles();
   const [{auth}] = useStore();
 
@@ -54,9 +55,10 @@ const PostPopUpComments = ({ comments, userAvatar }) => {
   }
 
   return (
+    <ClickAwayListener onClickAway={closeComments}>
       <List >
        {comments.reverse().map((c) => (
-          <ListItem>
+          <ListItem key={c.id}>
           <ListItemAvatar>
           <Avatar alt="user avatar" src={userAvatar} />
           </ListItemAvatar>
@@ -72,14 +74,17 @@ const PostPopUpComments = ({ comments, userAvatar }) => {
           }
           />
           <ListItemSecondaryAction>
-            <IconButton onClick={() => deleteComment(c.id)}>
-              <Delete />
-            </IconButton>
+            { auth.user.id === c.author.id && 
+              <IconButton onClick={() => deleteComment(c.id)}>
+                <Delete />
+              </IconButton>
+             }
           </ListItemSecondaryAction>
       </ListItem>
        ))}
         { comments.length > 1 && <Divider variant="inset" component="li" /> }
       </List>
+    </ClickAwayListener>
   );
 };
 

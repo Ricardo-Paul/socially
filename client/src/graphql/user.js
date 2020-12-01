@@ -48,6 +48,9 @@ query{
     fullName
     email
     username
+    notifications{
+      id
+    }
   }
 }
 `

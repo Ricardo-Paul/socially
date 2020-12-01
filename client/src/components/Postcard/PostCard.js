@@ -157,7 +157,7 @@ const PostCard = ({
               <Comment />
             </IconButton>
           </div>
-          { isCommentOpen && <PostPopUpComments comments={comments} /> }
+          { isCommentOpen && <PostPopUpComments comments={comments} closeComments={() => setIsCommentOpen(false)} /> }
           {isCommentOpen && <CreateComment postId={postId} focus={isCommentOpen} />}
         </div>
       </Card>
