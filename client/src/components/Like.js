@@ -46,16 +46,20 @@ const Like = ({ likes, postId, authorId }) => {
 
     const handleButtonClick = async () => {
         try{
-            await mutate({
+            const { data } = await mutate({
                 variables: { input: { ...options[operation].variables } } // spread the variables object
             });
+
+            // dont create like if users like their own post
+            if(auth.user.id === authorId) return;
+
             // receiver: the post authorId
             const r = await notification.create({
                  receiverId: authorId,
                  postId,
                  notificationType: 'LIKE',
-                 notificationTypeId: existedLike? existedLike.id : null
-            })
+                 notificationTypeId: data.createLike? data.createLike.id : null
+            });
             console.log('NOTIFICATION :', r);
 
         } catch(err){
