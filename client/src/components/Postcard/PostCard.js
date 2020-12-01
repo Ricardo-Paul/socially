@@ -152,7 +152,7 @@ const PostCard = ({
           <Divider />
           <div className={classes.icons}>
 
-            <Like likes={likes} postId={postId} authorId={postAuthor.id} />
+            <Like likes={likes} postId={postId} author={postAuthor} />
             <IconButton onClick={() => setIsCommentOpen(!isCommentOpen)}>
               <Comment />
             </IconButton>

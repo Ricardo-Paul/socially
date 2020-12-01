@@ -25,6 +25,23 @@ const postAuthorPayload = `
         username
         image
         fullName
+        followers{
+            follower
+            following
+        }
+        notifications {
+            id
+            seen
+            like{
+             id
+            }
+            comment{
+             id
+            }
+            follow{
+             id
+            }
+        }
     }
 `
 const postCommentsPayload = `
