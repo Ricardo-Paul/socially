@@ -80,7 +80,13 @@ const Query = {
       options: { sort: { createdAt: "desc" } },
       populate: { path: "author" }
     })
-    .populate("likes")
+    .populate({
+      path: "likes",
+      populate:[
+        {path: "user"},
+        {path: "post"}
+      ]
+    })
     .skip(skip)
     .limit(limit)
     .sort({ createdAt: "desc" })
