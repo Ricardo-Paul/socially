@@ -6,9 +6,6 @@ import Follow from '../models/Follow';
 
 const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000'; // 1 hour token duration while password-resetting
-import { uploadToLocal } from '../utils/fileUploads';
-
-
 
 const Query = {
   /**
@@ -252,8 +249,7 @@ const Mutation = {
       { new: true } //returns the document with the new update
     );
 
-    // TODO: move declaration to .env
-    const CLIENT_URL = 'http://localhost:3000';
+    const CLIENT_URL = process.env.CLIENT_URL;
 
     const mailOptions = {
       to: updatedUser.email,
