@@ -258,6 +258,7 @@ enum NotificationType{
     input CreateLikeInput{
         postId: ID!
         userId: ID!
+        authorId: ID!
     }
 
     input DeleteLikeInput{

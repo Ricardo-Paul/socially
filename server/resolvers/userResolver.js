@@ -26,14 +26,14 @@ const Query = {
     .populate({
       path: 'notifications',
       populate: [
-        { path: 'author' },
+        { path: 'sender' },
         { path: 'follow' },
         { path: 'like', populate: { path: 'post' } },
         { path: 'comment', populate: { path: 'post' } },
       ],
       match: { seen: false },
     });
-    
+
     return user;
   },
 
