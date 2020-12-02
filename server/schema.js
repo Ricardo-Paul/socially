@@ -7,7 +7,7 @@ export const schema = gql`
 # QUERY ROOT && QUERIES
 #-------------------------------------------------------
     type Query{
-        getAuthUser: User
+        getAuthUser: UserPayload
         getUser(username: String!): UserPayload
         verifyResetPasswordToken(email: String!, token: String!): SuccessMessage
 
@@ -82,8 +82,8 @@ export const schema = gql`
 
     type Like{
 	    id: ID!
-        post: ID!
-        user: ID!
+        post: PostPayload
+        user: UserPayload
     }
 
     type Follow{
@@ -97,10 +97,10 @@ export const schema = gql`
         sender: User!
         receiver: User!
         
-        post: ID!
+        post: PostPayload
 
         like: Like
-        comment: Comment
+        comment: CommentPayload
         follow: Follow
 
         seen: Boolean
@@ -152,7 +152,7 @@ type PostPayload{
 type CommentPayload{
     id: ID!
     author: UserPayload
-    post: ID!
+    post: PostPayload
     comment: String!
 }
 
