@@ -39,7 +39,6 @@ const Mutation = {
 
   deleteNotification: async(_, {input: {notificationId}}, { User, Notification } ) => {
     const notification = await Notification.findOneAndRemove({_id: notificationId});
-    console.log(notification, notificationId)
     // remove from user collection
     await User.findOneAndUpdate({_id: notification.receiver}, {$pull: { notifications: notification._id}});
     return notification;
