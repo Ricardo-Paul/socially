@@ -20,18 +20,20 @@ const Mutation = {
       post: postId,
     }).save();
 
-    const newNotification = await new Notification({
-      sender: userId,
-      receiver: authorId,
-      post: postId,
-      like: newLike.id
-    }).save();
+    if(userId != authorId){
+      const newNotification = await new Notification({
+        sender: userId,
+        receiver: authorId,
+        post: postId,
+        like: newLike.id
+      }).save();
+
+    // set a notification for the post author
+    await User.findOneAndUpdate({_id: authorId}, { $push: { notifications: newNotification._id} });
+    }
 
     await Post.findOneAndUpdate({ _id: postId }, { $push: { likes: newLike._id } });
     await User.findOneAndUpdate({ _id: userId }, { $push: { likes: newLike._id } });
-
-    // set a notification for the post author
-    await User.findOneAndUpdate({_id: authorId}, { $push: { notifications: newNotification._id} })
 
     return newLike;
   },
