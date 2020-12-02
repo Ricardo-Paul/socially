@@ -23,7 +23,7 @@ const Like = ({ likes, postId, author }) => {
     const notification = useNotification();
 
     const [{auth}] = useStore();
-    const existedLike = likes.find(like => like.user === auth.user.id);
+    const existedLike = likes.find(like => like.user.id === auth.user.id);
 
 
     const operation = existedLike ? 'delete' : 'create';
@@ -31,7 +31,7 @@ const Like = ({ likes, postId, author }) => {
     const options = {
         create:{
             mutation: CREATE_LIKE,
-            variables: {postId, userId: auth.user.id} //notice variables value is an object
+            variables: {postId, userId: auth.user.id, authorId: author.id} //notice variables value is an object
         },
         delete:{
             mutation: DELETE_LIKE,

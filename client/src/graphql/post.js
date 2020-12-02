@@ -60,7 +60,8 @@ const postLikePayload =`
     likes {
         id
         user{
-            fullName
+         id
+         fullName
         }
     }
 `
