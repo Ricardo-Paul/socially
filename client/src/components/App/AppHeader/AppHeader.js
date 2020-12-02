@@ -22,12 +22,14 @@ import Message from "./Message";
 import User from "./user";
 import Navigation from "../Navigation";
 import { useStore } from "../../../store";
+import HeaderDropDowns from "./HeaderDropDowns";
+
 
 const AppHeader = () => {
   const classes = headerStyles();
   const [{auth}] = useStore();
 
-  const [notifications, setNotifications] = React.useState('')
+  const [notifications, setNotifications] = React.useState([])
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [dropDownData, setDropDownData] = useState([]);
@@ -35,7 +37,7 @@ const AppHeader = () => {
 
     React.useEffect(() => {
       if(auth.user != null){
-        setNotifications(auth.user.notifications.length);
+        setNotifications(auth.user.notifications);
       }
     }, [auth]);
   
@@ -63,8 +65,8 @@ const AppHeader = () => {
     const handleIconClick = (dropdownType) => {
       switch(dropdownType){
         case 'NOTIFICATION':{
-          alert(dropdownType);
           setDropDownData(notifications);
+          console.log(notifications);
           setDropDownOpen(dropdownType);
         }
       };
@@ -89,7 +91,7 @@ const AppHeader = () => {
 
           {/* Right Side */}
           <IconButton color="inherit" onClick={() => handleIconClick('NOTIFICATION')}>
-            <Badge badgeContent={notifications} color="secondary">
+            <Badge badgeContent={notifications.length} color="secondary">
                 <NotificationIcon fontSize="small" />
             </Badge>
           </IconButton>
@@ -98,11 +100,16 @@ const AppHeader = () => {
 
         </Toolbar>
       </AppBar>
+
+      <HeaderDropDowns 
+      dropDownOpen={dropDownOpen}
+      dropDownData={dropDownData}
+      />
       
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <Navigation />
       </Drawer>
-      
+
     </>
   );
 };
