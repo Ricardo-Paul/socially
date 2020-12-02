@@ -6,28 +6,42 @@ import {
   MenuItem,
   Toolbar,
   Typography,
+  Badge
 } from "@material-ui/core";
+
+import { Notifications as NotificationIcon } from '@material-ui/icons';
+
 import React, { useState } from "react";
 import AppInfo from "../../../constants/AppInfo.json";
 import headerStyles from "./headerStyles";
-
-// Menu
 import MenuIcon from "@material-ui/icons/Menu";
 
 // components
 import Search from "./Search";
 import Message from "./Message";
-import Notification from "./Notification";
 import User from "./user";
 import Navigation from "../Navigation";
+import { useStore } from "../../../store";
 
 const AppHeader = () => {
   const classes = headerStyles();
+  const [{auth}] = useStore();
+
+  const [notifications, setNotifications] = React.useState('')
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [dropDownData, setDropDownData] = useState([]);
+  const [dropDownOpen, setDropDownOpen] = useState(null);
+
+    React.useEffect(() => {
+      if(auth.user != null){
+        setNotifications(auth.user.notifications.length);
+      }
+    }, [auth]);
+  
 
   // isMenuOpen relies on the anchorEl
   // we set the current target of the user icon button as the anchor El
-  const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
   const openProfileMenu = (event) => {
@@ -46,6 +60,16 @@ const AppHeader = () => {
     </Menu>
   );
 
+    const handleIconClick = (dropdownType) => {
+      switch(dropdownType){
+        case 'NOTIFICATION':{
+          alert(dropdownType);
+          setDropDownData(notifications);
+          setDropDownOpen(dropdownType);
+        }
+      };
+    }
+
   return (
     <>
       <AppBar position="sticky" className={classes.appBar}>
@@ -62,15 +86,23 @@ const AppHeader = () => {
           </Typography>
           <Search />
           <div className={classes.grow} />
-          <Notification />
+
+          {/* Right Side */}
+          <IconButton color="inherit" onClick={() => handleIconClick('NOTIFICATION')}>
+            <Badge badgeContent={notifications} color="secondary">
+                <NotificationIcon fontSize="small" />
+            </Badge>
+          </IconButton>
           <Message />
           <User openProfileMenu={openProfileMenu} />
+
         </Toolbar>
       </AppBar>
-      {renderMenu}
+      
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <Navigation />
       </Drawer>
+      
     </>
   );
 };

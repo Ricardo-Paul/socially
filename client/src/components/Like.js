@@ -5,6 +5,7 @@ import { useStore } from './../store';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/client';
 import { HOME_PAGE_POSTS_LIMIT } from './../constants/DataLimit';
+
 // mutation
 import { CREATE_LIKE, DELETE_LIKE } from './../graphql/like';
 
@@ -12,17 +13,19 @@ import { CREATE_LIKE, DELETE_LIKE } from './../graphql/like';
 import { GET_AUTH_USER } from "./../graphql/user";
 import { GET_FOLLOWED_POSTS } from "./../graphql/post";
 import useNotification from '../hooks/useNotification';
-import { NotificationType } from '../constants/NotificationType';
 
 const Like = ({ likes, postId, author }) => {
     // decide what operation to execute
     // based on whether the current user has liked
     // the post
+    const [likeId, setLikeId] = React.useState('');
 
     const notification = useNotification();
 
     const [{auth}] = useStore();
     const existedLike = likes.find(like => like.user === auth.user.id);
+
+
     const operation = existedLike ? 'delete' : 'create';
 
     const options = {
@@ -45,20 +48,15 @@ const Like = ({ likes, postId, author }) => {
     })
 
     const handleButtonClick = async () => {
-        const { data } = await mutate({
-          variables: { input: { ...options[operation].variables } },
-        });
-    
-        // Create or delete notification for like
-        if (auth.user.id === author.id) return;
-        await notification.toggle({
-          receiver: author,
-          postId,
-          hasDone: existedLike,
-          notificationType: NotificationType.LIKE,
-          notificationTypeId: data.createLike ? data.createLike.id : null,
-        });
-      };
+        try{
+            const { data } = await mutate({
+                variables: { input: { ...options[operation].variables } } // spread the variables object
+            });
+
+        } catch(err){
+            console.log(err)
+        }
+    };
 
     return(
         <IconButton onClick={() => handleButtonClick(mutate)}>
@@ -74,3 +72,5 @@ Like.propTypes = {
     postId: PropTypes.string.isRequired,
     author: PropTypes.object
 }
+
+// db.users.update({username:'mrjoe'}, {$set: {likes: []}})
