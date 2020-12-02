@@ -59,7 +59,9 @@ comments {
 const postLikePayload =`
     likes {
         id
-        user
+        user{
+            fullName
+        }
     }
 `
 

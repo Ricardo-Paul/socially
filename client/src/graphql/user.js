@@ -50,6 +50,29 @@ query{
     username
     notifications{
       id
+      sender{
+        id
+        fullName
+        username
+        image
+      }
+      follow{
+        id
+      }
+      like{
+        id
+        post{
+          id
+          image
+        }
+      }
+      comment{
+        id
+        post{
+          id
+          image
+        }
+      }
     }
   }
 }
