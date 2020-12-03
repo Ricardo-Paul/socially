@@ -3,6 +3,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import * as Routes from "../../routes";
 import Navigation from "./Navigation";
 import { colors } from "../../utils/theme";
+import classNames from "classnames";
 
 // actions
 import { SET_AUTH_USER } from "../../store/auth";
@@ -81,8 +82,9 @@ const AppLayout = ({ authUser }) => {
               item
               md={4}
               xs={12}
-              className={classes.drawer}
-              className={classes.extreme}
+              className={
+                classNames([classes.drawer], [classes.extreme])
+              }
             >
               <Navigation />
             </Grid>
@@ -102,8 +104,9 @@ const AppLayout = ({ authUser }) => {
               item
               md={3}
               xs={12}
-              className={classes.suggestions}
-              className={classes.extreme}
+              className={
+                classNames([classes.suggestions], [classes.extreme])
+              }
             >
               User suggestions
             </Grid>

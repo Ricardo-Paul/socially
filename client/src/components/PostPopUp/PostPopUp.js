@@ -51,7 +51,7 @@ const PostStyles = makeStyles({
   },
 });
 
-const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, createdAt }) => {
+const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, createdAt, closeComments }) => {
 
   const classes = PostStyles();
   return (
@@ -75,7 +75,7 @@ const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, created
           alt="post image" 
           className={classes.media} />
         </div>
-        <PostPopUpComments comments={comments} />
+        <PostPopUpComments comments={comments} closeComments={closeModal} />
       </Card>
       </Paper>
     </ClickAwayListener>

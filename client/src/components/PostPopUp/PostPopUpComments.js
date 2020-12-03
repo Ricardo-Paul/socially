@@ -32,7 +32,6 @@ import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
   })
 
 const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
-  const classes = commentsStyles();
   const [{auth}] = useStore();
 
   const [remove] = useMutation(DELETE_COMMENT,{

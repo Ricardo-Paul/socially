@@ -77,7 +77,7 @@ const Navigation = () => {
     if (auth.user) {
       setUser(auth.user);
     }
-  }, [auth]);
+  }, [auth.user]);
 
   const classes = navStyles();
   const [location, setLocation] = useState(null); //hack to style the selected link
@@ -101,11 +101,11 @@ const Navigation = () => {
         exact
         to={item.to}
         style={{ textDecoration: "none", color: colors.white }}
-        isActive={(location) => { //grab the location url, helps us identify the current url
-          if(location){
-            setLocation(location.url)
-          }
-        }}
+        // isActive={(location) => { //grab the location url, helps us identify the current url
+        //   if(location){
+        //     setLocation(location.url)
+        //   }
+        // }}
       >
         <ListItem 
         key={index} 

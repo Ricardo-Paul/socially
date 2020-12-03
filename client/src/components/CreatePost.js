@@ -74,7 +74,7 @@ const postStyles = makeStyles((theme) => ({
 }));
 
 const CreatePost = () => {
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState("false");
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [uploadError, setUploadError] = useState("");
@@ -144,7 +144,7 @@ const CreatePost = () => {
               value={title}
               onChange={handleChange}
               focus={isFocused}
-              onFocus={() => setIsFocused(true)}
+              onFocus={() => setIsFocused("true")}
             />
 
             <div className={classes.uploadIcon}>

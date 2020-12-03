@@ -26,13 +26,13 @@ const client = createApolloClient(uri);
 
 render(
   // <ApolloHooksProvider client={client}>
-  <MuiThemeProvider theme={theme}>
-   <ApolloProvider client={client}>
+  <ApolloProvider client={client}>
+    <MuiThemeProvider theme={theme}>
       <StoreProvider>
             <App />
         </StoreProvider>
-    </ApolloProvider>
-  </MuiThemeProvider>,
+    </MuiThemeProvider>
+  </ApolloProvider>,
   // </ApolloHooksProvider>,
     document.getElementById("root")
   );
