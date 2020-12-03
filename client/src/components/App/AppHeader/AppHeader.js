@@ -42,34 +42,13 @@ const AppHeader = () => {
     }, [auth]);
   
 
-  // isMenuOpen relies on the anchorEl
-  // we set the current target of the user icon button as the anchor El
-  const isMenuOpen = Boolean(anchorEl);
-
-  const openProfileMenu = (event) => {
-    setAnchorEl(event.currentTarget); // turns it to true
-  };
-
-  const CloseProfileMenu = () => {
-    setAnchorEl(null);
-  };
-
-  const renderMenu = (
-    <Menu anchorEl={anchorEl} open={isMenuOpen} onClose={CloseProfileMenu}>
-      <MenuItem onClick={CloseProfileMenu}> Profile </MenuItem>
-      <MenuItem onClick={CloseProfileMenu}> My Account </MenuItem>
-      <MenuItem onClick={CloseProfileMenu}> Logout </MenuItem>
-    </Menu>
-  );
-
     const handleIconClick = (event, dropdownType) => {
-      setAnchorEl(event.currentTarget);
+      setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
 
       switch(dropdownType){
         case 'NOTIFICATION':{
           setDropDownData(notifications);
-          setDropDownOpen(dropdownType);
-          setAnchorEl(event.currentTarget);
+          setDropDownOpen(dropdownType); //tells HeaderDropDowns which one to return
         }
       };
     }
@@ -98,7 +77,7 @@ const AppHeader = () => {
             </Badge>
           </IconButton>
           <Message />
-          <User openProfileMenu={openProfileMenu} />
+          <User />
 
         </Toolbar>
       </AppBar>
@@ -107,10 +86,9 @@ const AppHeader = () => {
       dropDownOpen={dropDownOpen}
       dropDownData={dropDownData}
       notificationAnchorEl={anchorEl}
-      isOpen={anchorEl}
+      isOpen={Boolean(anchorEl)}
       />
       
-      {/* {renderMenu} */}
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <Navigation />
       </Drawer>
