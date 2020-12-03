@@ -6,13 +6,14 @@ const previewStyles = makeStyles({
   container: {
     width: 150,
     height: 150,
-    marginLeft: 10,
+    position:"relative",
+    borderRadius: 5
   },
   image: {
+    position:"absolute",
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    boxShadow: shadows.xl,
   },
 });
 
