@@ -1,12 +1,11 @@
 import React from "react";
-import { Popper, Grow, Paper, MenuList, MenuItem } from "@material-ui/core"
-import headerStyles from "./headerStyles";
+import { MenuList, MenuItem } from "@material-ui/core"
 import MenuWrapper from "./MenuWrapper";
 
-const HeaderMessageDropDown = ({ isOpen, messageAnchorEl, messageData }) => {
+const HeaderMessageDropDown = ({ isOpen, messageAnchorEl, closeMenu, messageData }) => {
 
   return(
-   <MenuWrapper isOpen={isOpen} anchorEl={messageAnchorEl}>
+  <MenuWrapper isOpen={isOpen} anchorEl={messageAnchorEl} closeMenu={closeMenu}>
       <MenuList>
          <MenuItem> First message </MenuItem>
          <MenuItem> Second message </MenuItem>

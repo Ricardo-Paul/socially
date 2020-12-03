@@ -1,8 +1,8 @@
 import React from "react";
-import { Popper, Grow, Paper, MenuList, MenuItem } from '@material-ui/core';
+import { Popper, Grow, Paper, ClickAwayListener} from '@material-ui/core';
 import headerStyles from "./headerStyles";
 
-const MenuWrapper = ({ isOpen, anchorEl, children }) => {
+const MenuWrapper = ({ isOpen, anchorEl, closeMenu,children }) => {
   const classes = headerStyles()
 
   return (
@@ -14,9 +14,11 @@ const MenuWrapper = ({ isOpen, anchorEl, children }) => {
           transformOrigin: placement === "top" ? "center bottom" : "center top"
         }}
         >
-          <Paper elevation={5}>
-            {children}
-          </Paper>
+          <ClickAwayListener onClickAway={closeMenu}>
+            <Paper elevation={5}>
+              {children}
+            </Paper>
+          </ClickAwayListener>
         </Grow>
       )}
     </Popper>

@@ -17,12 +17,14 @@ const HeaderDropDowns = ({
     isOpen, 
     notificationAnchorEl, 
     messageAnchorEl, 
-    userAnchorEl }) => {
-        
+    userAnchorEl,
+    closeMenu
+}) => {
+
     const DropDowns = {
-        NOTIFICATION: <HeaderNotificationDropDown dropDownData={dropDownData} notificationAnchorEl={notificationAnchorEl} isOpen={isOpen} />,
-        MESSAGE: <HeaderMessageDropDown isOpen={isOpen} messageAnchorEl={messageAnchorEl} />,
-        USER: <HeaderUserDropDown isOpen={isOpen} userAnchorEl={userAnchorEl} />
+        NOTIFICATION: <HeaderNotificationDropDown dropDownData={dropDownData} notificationAnchorEl={notificationAnchorEl} isOpen={isOpen} closeMenu={closeMenu} />,
+        MESSAGE: <HeaderMessageDropDown isOpen={isOpen} messageAnchorEl={messageAnchorEl} closeMenu={closeMenu} />,
+        USER: <HeaderUserDropDown isOpen={isOpen} userAnchorEl={userAnchorEl} closeMenu={closeMenu} />
 
     };
     return dropDownOpen ? DropDowns[dropDownOpen] : null

@@ -10,12 +10,11 @@ import headerStyles from './headerStyles';
 import MenuWrapper from './MenuWrapper';
 
 
-const HeaderNotificationDropDown = ({ dropDownData, notificationAnchorEl, isOpen }) => {
-    const classes = headerStyles();
+const HeaderNotificationDropDown = ({ dropDownData, notificationAnchorEl, isOpen, closeMenu }) => {
 
     console.log('notification HD', dropDownData);
     return(
-        <MenuWrapper isOpen={isOpen} anchorEl={notificationAnchorEl}>
+        <MenuWrapper isOpen={isOpen} anchorEl={notificationAnchorEl} closeMenu={closeMenu}>
             <MenuList>
                 <MenuItem> Peter likes your post </MenuItem>
                 <MenuItem> Jake likes your post </MenuItem>

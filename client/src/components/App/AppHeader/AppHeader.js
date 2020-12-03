@@ -41,6 +41,9 @@ const AppHeader = () => {
 
     const openDropDown = (event) => setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget);
     
+    const closeDropDown = () => {
+      setAnchorEl(null);
+    }
   
     const handleIconClick = (event, dropdownType) => {
       if(dropdownType === 'MESSAGE'){
@@ -104,6 +107,7 @@ const AppHeader = () => {
       userAnchorEl={anchorEl}
 
       isOpen={Boolean(anchorEl)}
+      closeMenu={closeDropDown}
       />
       
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
