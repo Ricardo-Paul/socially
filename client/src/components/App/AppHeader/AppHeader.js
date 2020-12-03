@@ -38,21 +38,24 @@ const AppHeader = () => {
         setNotifications(auth.user.notifications);
       }
     }, [auth]);
-  
 
+    const openDropDown = (event) => setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget);
+    
+  
     const handleIconClick = (event, dropdownType) => {
       if(dropdownType === 'MESSAGE'){
-        setDropDownOpen('MESSAGE');
-        setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
+        openDropDown(event);
       }
       if(dropdownType === 'NOTIFICATION'){
-        setDropDownOpen('NOTIFICATION');
-        setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
+        setDropDownOpen(dropdownType);
+        openDropDown(event);
       }
       if(dropdownType === 'USER'){
-        setDropDownOpen('USER');
-        setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
-      }
+        setDropDownOpen(dropdownType);
+        openDropDown(event);
+      };
+
+      setDropDownOpen(dropdownType);
     }
 
   return (
