@@ -9,7 +9,7 @@ import {
   Badge
 } from "@material-ui/core";
 
-import { Notifications as NotificationIcon } from '@material-ui/icons';
+import { Notifications as NotificationIcon, AccountCircle, Mail as MailIcon } from '@material-ui/icons';
 
 import React, { useState } from "react";
 import AppInfo from "../../../constants/AppInfo.json";
@@ -18,8 +18,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 // components
 import Search from "./Search";
-import Message from "./Message";
-import User from "./user";
 import Navigation from "../Navigation";
 import { useStore } from "../../../store";
 import HeaderDropDowns from "./HeaderDropDowns";
@@ -43,14 +41,14 @@ const AppHeader = () => {
   
 
     const handleIconClick = (event, dropdownType) => {
-      setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
-
-      switch(dropdownType){
-        case 'NOTIFICATION':{
-          setDropDownData(notifications);
-          setDropDownOpen(dropdownType); //tells HeaderDropDowns which one to return
-        }
-      };
+      if(dropdownType === 'MESSAGE'){
+        setDropDownOpen('MESSAGE');
+        setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
+      }
+      if(dropdownType === 'NOTIFICATION'){
+        setDropDownOpen('NOTIFICATION');
+        setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
+      }
     }
 
   return (
@@ -76,8 +74,16 @@ const AppHeader = () => {
                 <NotificationIcon fontSize="small" />
             </Badge>
           </IconButton>
-          <Message />
-          <User />
+
+          <IconButton color="inherit" onClick={(event) => handleIconClick(event, 'MESSAGE') }>
+            <Badge badgeContent={4} color="secondary">
+              <MailIcon fontSize="small" />
+            </Badge>
+          </IconButton>
+          
+          <IconButton color="inherit" onClick={(event) => handleIconClick(event, 'USER')}>
+            <AccountCircle />
+          </IconButton>
 
         </Toolbar>
       </AppBar>
@@ -86,6 +92,7 @@ const AppHeader = () => {
       dropDownOpen={dropDownOpen}
       dropDownData={dropDownData}
       notificationAnchorEl={anchorEl}
+      messageAnchorEl={anchorEl}
       isOpen={Boolean(anchorEl)}
       />
       

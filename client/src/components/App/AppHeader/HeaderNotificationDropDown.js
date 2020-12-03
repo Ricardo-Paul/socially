@@ -6,11 +6,14 @@ import {
     MenuList, 
     MenuItem, 
     Grow} from '@material-ui/core';
+import { theme } from '../../../utils/theme';
 
 const NotificationStyles = makeStyles({
     root:{
      zIndex: 1000,
-     marginTop: 5
+    [theme.breakpoints.up("lg")]:{
+        marginTop: 15
+    }
     }
 });
 
