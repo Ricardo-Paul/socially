@@ -22,7 +22,7 @@ const useNotification = () => {
             });
         } catch(err){
             console.log(err)
-        };
+        }
     }
 
     /**

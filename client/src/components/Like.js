@@ -12,15 +12,12 @@ import { CREATE_LIKE, DELETE_LIKE } from './../graphql/like';
 // queries to refetch
 import { GET_AUTH_USER } from "./../graphql/user";
 import { GET_FOLLOWED_POSTS } from "./../graphql/post";
-import useNotification from '../hooks/useNotification';
 
 const Like = ({ likes, postId, author }) => {
     // decide what operation to execute
     // based on whether the current user has liked
     // the post
-    const [likeId, setLikeId] = React.useState('');
 
-    const notification = useNotification();
 
     const [{auth}] = useStore();
     const existedLike = likes.find(like => like.user.id === auth.user.id);
@@ -49,7 +46,7 @@ const Like = ({ likes, postId, author }) => {
 
     const handleButtonClick = async () => {
         try{
-            const { data } = await mutate({
+            await mutate({
                 variables: { input: { ...options[operation].variables } } // spread the variables object
             });
 

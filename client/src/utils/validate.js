@@ -17,12 +17,12 @@ const validate = fields => {
     // fields should not be empty
     if(!fullName || !email || !username || !password){
         return `Please provide a value for each field`;
-    };
+    }
 
     // email should be valid
     if(!emailRegex.test(String(email).toLocaleLowerCase())){
         return `Invalid email`
-    };
+    }
 
     if(!usernameRegex.test(String(username))){
         return `You may have entered some invalid characters for your username`
@@ -32,7 +32,7 @@ const validate = fields => {
 
     if(password.length < 7){
         return `Password should be at least 7 characters`
-    };
+    }
 
     return false;
 }

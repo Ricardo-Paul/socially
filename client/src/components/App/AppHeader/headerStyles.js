@@ -1,4 +1,4 @@
-import { theme, colors } from "../../../utils/theme";
+import { colors } from "../../../utils/theme";
 
 const { makeStyles } = require("@material-ui/core");
 

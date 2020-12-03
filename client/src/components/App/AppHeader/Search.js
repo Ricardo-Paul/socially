@@ -1,4 +1,4 @@
-import { InputBase, makeStyles } from "@material-ui/core";
+import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import headerStyles from "./headerStyles";

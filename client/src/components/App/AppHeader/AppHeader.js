@@ -2,8 +2,6 @@ import {
   AppBar,
   Drawer,
   IconButton,
-  Menu,
-  MenuItem,
   Toolbar,
   Typography,
   Badge
@@ -57,7 +55,7 @@ const AppHeader = () => {
       if(dropdownType === 'USER'){
         setDropDownOpen(dropdownType);
         openDropDown(event);
-      };
+      }
 
       setDropDownOpen(dropdownType);
     }

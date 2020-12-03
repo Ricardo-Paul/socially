@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import * as Routes from "../../routes";
 import Navigation from "./Navigation";
@@ -15,7 +15,6 @@ import Hidden from "@material-ui/core/Hidden";
 // pages
 import Home from "../../pages/Home";
 import AppHeader from "./AppHeader/AppHeader";
-import { theme } from "../../utils/theme";
 import { Grid, makeStyles, CssBaseline } from "@material-ui/core";
 
 const appLayoutStyles = makeStyles((theme) => ({

@@ -1,4 +1,4 @@
-import { Button, Typography, makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useStore } from "../store";
 import { AccountCircle } from "@material-ui/icons";
@@ -153,7 +153,7 @@ const CreatePost = () => {
           </div>
 
           {image && <ImagePreview imageSource={URL.createObjectURL(image)} />}
-
+          { uploadError  }
           {isFocused && (
             <div className={classes.buttons}>
               <Button
