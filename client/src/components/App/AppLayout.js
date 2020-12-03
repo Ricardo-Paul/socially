@@ -82,7 +82,7 @@ const AppLayout = ({ authUser }) => {
               md={4}
               xs={12}
               className={
-                classNames([classes.drawer], [classes.extreme])
+                classes.extreme
               }
             >
               <Navigation />
@@ -104,7 +104,7 @@ const AppLayout = ({ authUser }) => {
               md={3}
               xs={12}
               className={
-                classNames([classes.suggestions], [classes.extreme])
+                classNames([classes.extreme])
               }
             >
               User suggestions

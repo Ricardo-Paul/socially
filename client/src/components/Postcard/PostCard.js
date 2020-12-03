@@ -102,12 +102,10 @@ const PostCard = ({
 })
 
   const deletePost = async () => {
-    console.log(postAuthor.id, auth.user.id);
     try{
       const { data } = await remove({
         variables: { input: { id: postId, imagePublicId}}
       });
-      console.log("DELETED", data);
     }catch(err){
       console.log(err)
     }

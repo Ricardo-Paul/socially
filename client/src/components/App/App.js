@@ -36,9 +36,8 @@ const App = () => {
   const { loading, data, error, refetch } = useQuery(GET_AUTH_USER);
 
   useEffect(() => {
-    console.log("Authenticated User :", data);
+    console.log("AUTH USER :", data);
     console.log("ERROR", error);
-    console.log("LOADING: ", loading);
   });
 
   return (

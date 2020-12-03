@@ -109,7 +109,6 @@ const CreatePost = () => {
         `Image is size should not exceed ${MAX_POST_IMAGE_SIZE / 1000000} mb`
       );
     }
-    console.log(file);
     setImage(file);
   };
 
@@ -122,7 +121,6 @@ const CreatePost = () => {
       const res = await createPost({
         variables: { input: { title, authorId: auth.user.id, image } },
       });
-      console.log(res);
     } catch (error) {
       console.log(error);
     }

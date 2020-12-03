@@ -54,6 +54,7 @@ const Home = () => {
     if (!loading) {
       const posts = data.getFollowedPosts.posts;
       console.log('FollowedPosts',data.getFollowedPosts.posts);
+      
       posts.map(p => {
         console.log('AUTHOR: ',p.author)
         console.log('COMMENTS', p.comments)
