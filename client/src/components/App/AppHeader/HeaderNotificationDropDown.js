@@ -6,23 +6,16 @@ import {
     MenuList, 
     MenuItem, 
     Grow} from '@material-ui/core';
-import { theme } from '../../../utils/theme';
+import headerStyles from './headerStyles';
 
-const NotificationStyles = makeStyles({
-    root:{
-     zIndex: 1000,
-    [theme.breakpoints.up("lg")]:{
-        marginTop: 15
-    }
-    }
-});
+
 
 const HeaderNotificationDropDown = ({ dropDownData, notificationAnchorEl, isOpen }) => {
-    const classes = NotificationStyles();
+    const classes = headerStyles();
 
     console.log('notification HD', dropDownData);
     return(
-        <Popper anchorEl={notificationAnchorEl} open={isOpen} transition disablePortal className={classes.root} >
+        <Popper anchorEl={notificationAnchorEl} open={isOpen} transition disablePortal className={classes.popper} >
             {({ TransitionProps, placement }) => (
                 <Grow
                 {...TransitionProps}

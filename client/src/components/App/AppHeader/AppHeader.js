@@ -49,6 +49,10 @@ const AppHeader = () => {
         setDropDownOpen('NOTIFICATION');
         setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
       }
+      if(dropdownType === 'USER'){
+        setDropDownOpen('USER');
+        setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget );
+      }
     }
 
   return (
@@ -91,8 +95,11 @@ const AppHeader = () => {
       <HeaderDropDowns 
       dropDownOpen={dropDownOpen}
       dropDownData={dropDownData}
+
       notificationAnchorEl={anchorEl}
       messageAnchorEl={anchorEl}
+      userAnchorEl={anchorEl}
+
       isOpen={Boolean(anchorEl)}
       />
       
