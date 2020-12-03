@@ -50,6 +50,7 @@ const AppHeader = () => {
         openDropDown(event);
       }
       if(dropdownType === 'NOTIFICATION'){
+        setDropDownData(notifications)
         setDropDownOpen(dropdownType);
         openDropDown(event);
       }

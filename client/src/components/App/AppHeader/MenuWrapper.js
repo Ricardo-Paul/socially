@@ -8,18 +8,18 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu,children }) => {
   return (
     <Popper className={classes.popper} anchorEl={anchorEl} open={isOpen} transition disablePortal>
       {({ TransitionProps, placement }) => (
+      <ClickAwayListener onClickAway={closeMenu}>
         <Grow
         {...TransitionProps}
         style={{
           transformOrigin: placement === "top" ? "center bottom" : "center top"
         }}
         >
-          <ClickAwayListener onClickAway={closeMenu}>
-            <Paper elevation={5}>
-              {children}
-            </Paper>
-          </ClickAwayListener>
+          <Paper elevation={5}>
+            {children}
+          </Paper>
         </Grow>
+      </ClickAwayListener>
       )}
     </Popper>
   );
