@@ -8,10 +8,10 @@ import HeaderNotificationDropDown from './HeaderNotificationDropDown';
  * @param {string} dropDownOpen
  * @param {array}  dropDownData
  */
-const HeaderDropDowns = ({ dropDownOpen, dropDownData }) => {
+const HeaderDropDowns = ({ dropDownOpen, dropDownData, notificationAnchorEl, isOpen }) => {
 
     const DropDowns = {
-        NOTIFICATION: <HeaderNotificationDropDown dropDownData={dropDownData} />
+        NOTIFICATION: <HeaderNotificationDropDown dropDownData={dropDownData} notificationAnchorEl={notificationAnchorEl} isOpen={isOpen} />
     };
     return dropDownOpen ? DropDowns[dropDownOpen] : null
 }

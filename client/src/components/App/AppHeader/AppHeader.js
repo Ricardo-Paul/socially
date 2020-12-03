@@ -62,12 +62,14 @@ const AppHeader = () => {
     </Menu>
   );
 
-    const handleIconClick = (dropdownType) => {
+    const handleIconClick = (event, dropdownType) => {
+      setAnchorEl(event.currentTarget);
+
       switch(dropdownType){
         case 'NOTIFICATION':{
           setDropDownData(notifications);
-          console.log(notifications);
           setDropDownOpen(dropdownType);
+          setAnchorEl(event.currentTarget);
         }
       };
     }
@@ -90,7 +92,7 @@ const AppHeader = () => {
           <div className={classes.grow} />
 
           {/* Right Side */}
-          <IconButton color="inherit" onClick={() => handleIconClick('NOTIFICATION')}>
+          <IconButton color="inherit" onClick={(event) => handleIconClick(event, 'NOTIFICATION')}>
             <Badge badgeContent={notifications.length} color="secondary">
                 <NotificationIcon fontSize="small" />
             </Badge>
@@ -104,8 +106,11 @@ const AppHeader = () => {
       <HeaderDropDowns 
       dropDownOpen={dropDownOpen}
       dropDownData={dropDownData}
+      notificationAnchorEl={anchorEl}
+      isOpen={anchorEl}
       />
       
+      {/* {renderMenu} */}
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <Navigation />
       </Drawer>
