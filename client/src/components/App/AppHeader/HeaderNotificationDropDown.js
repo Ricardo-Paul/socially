@@ -1,8 +1,6 @@
 import React from 'react';
 import { 
-    List,
-    ListItem,
-    MenuItem, 
+    List
  } from '@material-ui/core';
 
 import MenuWrapper from './MenuWrapper';
