@@ -33,12 +33,19 @@ const Mutation = {
     return newComment;
   },
 
-  deleteComment: async (_, { input: { commentId } }, { User, Post, Comment }) => {
+  deleteComment: async (_, { input: { commentId } }, { User, Post, Comment, Notification }) => {
     const comment = await Comment.findOneAndDelete({ _id: commentId });
     if (!comment) throw new Error(`not found`);
 
     await Post.findOneAndUpdate({ _id: comment.post }, { $pull: { comments: comment._id } });
     await User.findOneAndUpdate({ _id: comment.author }, { $pull: { comments: comment._id } });
+
+    // delete associated notification
+    const post = await Post.findOne({ _id: comment.post});
+    if(comment.author != post.author){
+      const notification = await Notification.findOneAndDelete({comment: comment._id});
+      await User.findOneAndUpdate({ _id: notification.receiver }, { $pull: { notifications: notification._id } });
+    }
 
     return comment;
   },
