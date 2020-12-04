@@ -18,11 +18,9 @@ const Mutation = {
     const postAuthorId = await Post.findOne({ _id: postId}) // the post author
     console.log('POST AUTHOR', postAuthorId.author);
 
-    let isPostAuthor = commentAuthorId === postAuthorId.author;
-
-    if(!isPostAuthor){
+    if(commentAuthorId != postAuthorId.author){
       const newNotification = await new Notification({
-        sender: authorId,
+        sender: commentAuthorId,
         receiver: postAuthorId.author,
         comment: newComment._id,
         post: postId
