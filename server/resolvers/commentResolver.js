@@ -1,3 +1,5 @@
+import { withFilter } from "apollo-server";
+import { NOTIFICATION_CREATED_OR_DELETED } from "../constants/Subscriptions";
 import { pubSub } from "../utils/apolloServer";
 
 const Mutation = {
@@ -27,9 +29,10 @@ const Mutation = {
         comment: newComment._id,
         post: postId
       }).save();
-
       // set a notification for the post author
       await User.findOneAndUpdate({_id: post.author}, { $push: { notifications: newNotification._id } });
+
+      // publish the notification
     }
 
     return newComment;
@@ -55,9 +58,21 @@ const Mutation = {
 
 // Subscriptions are also a root level type
 // like Query and Mutation
+
+// use function to filter the subscriptions
 const Subscription = {
   notificationCreatedOrDeleted: {
-
+    subscribe: withFilter(
+      () => pubSub.asyncIterator(NOTIFICATION_CREATED_OR_DELETED),
+      // the filter function is executed with payload, var and context
+      // and must return a boolean to know if we should pass the payload
+      // to the subscriber
+      (payload, variables, { authenticatedUser }) => {
+        // make sure the user receiving the notification is (active) 
+        const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
+        return authenticatedUser && authenticatedUser.id === userId;
+      }
+    )
   }
 }
 export default {

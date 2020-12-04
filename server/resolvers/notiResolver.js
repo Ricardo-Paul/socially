@@ -31,6 +31,13 @@ const Mutation = {
       // thus has access to the id
     }).save();
 
+    newNotification = await newNotification
+      .populate('sender')
+      .populate('follow')
+      .populate({path: "comment", populate: {path: "post"}})
+      .populate({path: "like", populate: {path: "post"}})
+      .execPopulate();
+
     await User.findOneAndUpdate({_id: receiverId }, { $push: { notifications: newNotification._id } });
     return newNotification;
   },
