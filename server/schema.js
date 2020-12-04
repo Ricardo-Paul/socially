@@ -292,4 +292,23 @@ enum NotificationType{
         authorId: ID
     }
 
+#-------------------------------------------------------
+# SUBSCRIPTIONS
+#-------------------------------------------------------
+
+enum NotificationOperationType{
+    CREATE
+    DELETE
+}
+
+type NotificationCreatedOrDeletedPayload{
+    operation: NotificationOperationType!
+    notification: Notification
+}
+
+ type Subscription{
+    notificationCreatedOrDeleted: NotificationCreatedOrDeletedPayload
+ }
+
 `
+

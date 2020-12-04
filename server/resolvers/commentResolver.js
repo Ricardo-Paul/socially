@@ -1,3 +1,5 @@
+import { pubSub } from "../utils/apolloServer";
+
 const Mutation = {
   createComment: async (_, { input: { comment, authorId, postId } }, { Comment, User, Post, authenticatedUser, Notification }) => {
     if (!authenticatedUser) throw new Error(`Please login first`);
@@ -51,6 +53,14 @@ const Mutation = {
   },
 };
 
+// Subscriptions are also a root level type
+// like Query and Mutation
+const Subscription = {
+  notificationCreatedOrDeleted: {
+
+  }
+}
 export default {
   Mutation,
+  Subscription
 };

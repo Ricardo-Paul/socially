@@ -1,9 +1,14 @@
 import { ApolloServer } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
+import{ PubSub } from 'apollo-server';
+
+// create a new PubSub instance to publish events
+export const pubSub = new PubSub();
+
 /**
  * verify token
- * returns username and email if resolved
+ * authUser is an object of email and username
  * 
  * @param {*} token 
  */
@@ -44,6 +49,10 @@ export const createApolloServer = (schema, resolvers, models) => {
 
           return Object.assign({}, models);
         },
+
+        subscriptions:{
+
+        }
     })
 };
 
