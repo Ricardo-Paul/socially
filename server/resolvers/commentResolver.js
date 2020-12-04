@@ -86,7 +86,7 @@ const Subscription = {
       (payload, variables, { authenticatedUser }) => {
         // make sure the user receiving the notification is (active) 
         const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
-        return authenticatedUser && authenticatedUser.id === userId;
+        return authenticatedUser && authenticatedUser.id === receiverId;
       }
     )
   }
