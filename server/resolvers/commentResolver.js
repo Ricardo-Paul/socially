@@ -78,17 +78,17 @@ const Mutation = {
 // use function to filter the subscriptions
 const Subscription = {
   notificationCreatedOrDeleted: {
-    subscribe: () => pubSub.asyncIterator(NOTIFICATION_CREATED_OR_DELETED),
+    subscribe: withFilter(
+      () => pubSub.asyncIterator(NOTIFICATION_CREATED_OR_DELETED),
       // the filter function is executed with payload, var and context
       // and must return a boolean to know if we should pass the payload
       // to the subscriber
-
-      // (payload, variables, { authenticatedUser }) => {
-      //   // make sure the user receiving the notification is (active) 
-      //   const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
-      //   return authenticatedUser && authenticatedUser.id === userId;
-      // }
-
+      (payload, variables, { authenticatedUser }) => {
+        // make sure the user receiving the notification is (active) 
+        const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
+        return authenticatedUser && authenticatedUser.id === userId;
+      }
+    )
   }
 };
 export default {

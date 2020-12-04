@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
 import{ PubSub } from 'apollo-server';
+import { connection } from 'mongoose';
 
 // create a new PubSub instance to publish events
 export const pubSub = new PubSub();
@@ -50,6 +51,19 @@ export const createApolloServer = (schema, resolvers, models) => {
 
           return Object.assign({}, models);
         },
+
+        subscriptions:{
+          onConnect: async (connectionParams, WebSocket) => {
+            if(connectionParams.authorization){
+              let user = await checkAuth(connectionParams.authorization);
+              let authenticatedUser;
+              if(user) authenticatedUser = user;
+
+              // place the authenticated user in the connection context
+              return {authenticatedUser}
+            }
+          }
+        }
     })
 };
 
