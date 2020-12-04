@@ -15,19 +15,19 @@ const Mutation = {
 
     // create notification
     // find post author
-    const postAuthorId = await Post.findOne({ _id: postId}) // the post author
-    console.log('POST AUTHOR', postAuthorId.author);
+    const post = await Post.findOne({ _id: postId}) // the post author
+    console.log('POST AUTHOR', post.author);
 
-    if(commentAuthorId != postAuthorId.author){
+    if(commentAuthorId != post.author){
       const newNotification = await new Notification({
         sender: commentAuthorId,
-        receiver: postAuthorId.author,
+        receiver: post.author,
         comment: newComment._id,
         post: postId
       }).save();
 
       // set a notification for the post author
-      await User.findOneAndUpdate({_id: postAuthorId.author}, { $push: { notifications: newNotification._id } });
+      await User.findOneAndUpdate({_id: post.author}, { $push: { notifications: newNotification._id } });
     }
 
     return newComment;
