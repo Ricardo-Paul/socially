@@ -28,6 +28,7 @@ export const createApolloServer = (schema, resolvers, models) => {
         resolvers,
         context: async ({ req, connection }) => {
           if(connection){
+            console.log('CON CONTEXT :',connection.context);
             return connection.context;
           }
          // console.log('HEADERS API :',req.headers.authorization);
@@ -49,10 +50,6 @@ export const createApolloServer = (schema, resolvers, models) => {
 
           return Object.assign({}, models);
         },
-
-        subscriptions:{
-
-        }
     })
 };
 

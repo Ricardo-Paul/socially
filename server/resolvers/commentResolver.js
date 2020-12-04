@@ -23,7 +23,7 @@ const Mutation = {
     console.log('POST AUTHOR', post.author);
 
     if(commentAuthorId != post.author){
-      const newNotification = await new Notification({
+      let newNotification = await new Notification({
         sender: commentAuthorId,
         receiver: post.author,
         comment: newComment._id,
@@ -32,7 +32,23 @@ const Mutation = {
       // set a notification for the post author
       await User.findOneAndUpdate({_id: post.author}, { $push: { notifications: newNotification._id } });
 
+      newNotification = await newNotification
+        .populate("sender")
+        .populate("follow")
+        .populate({path: "comment", populate: { path: "post" }})
+        .populate({ path: "like", populate: { path: "post" } })
+        .execPopulate();
+
       // publish the notification
+      pubSub.publish(NOTIFICATION_CREATED_OR_DELETED, {
+        // our payload
+        notificationCreatedOrDeleted: {
+          operation: 'CREATE',
+          notification: newNotification
+        }
+      })
+
+
     }
 
     return newComment;
@@ -62,19 +78,19 @@ const Mutation = {
 // use function to filter the subscriptions
 const Subscription = {
   notificationCreatedOrDeleted: {
-    subscribe: withFilter(
-      () => pubSub.asyncIterator(NOTIFICATION_CREATED_OR_DELETED),
+    subscribe: () => pubSub.asyncIterator(NOTIFICATION_CREATED_OR_DELETED),
       // the filter function is executed with payload, var and context
       // and must return a boolean to know if we should pass the payload
       // to the subscriber
-      (payload, variables, { authenticatedUser }) => {
-        // make sure the user receiving the notification is (active) 
-        const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
-        return authenticatedUser && authenticatedUser.id === userId;
-      }
-    )
+
+      // (payload, variables, { authenticatedUser }) => {
+      //   // make sure the user receiving the notification is (active) 
+      //   const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
+      //   return authenticatedUser && authenticatedUser.id === userId;
+      // }
+
   }
-}
+};
 export default {
   Mutation,
   Subscription

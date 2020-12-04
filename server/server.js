@@ -7,6 +7,7 @@ import resolvers from './resolvers';
 import models from './models';
 import { schema } from './schema';
 
+import { createServer } from 'http';
 
 const app = express();
 app.use(cors());
@@ -26,15 +27,28 @@ const HOST =   process.env.HOST;
 //     }
 // }
 
+// create an http server
+const httpServer = createServer(app);
+
 const apolloServer = createApolloServer(schema, resolvers, models);
 apolloServer.applyMiddleware({ app })
-const PORT='4444'
-// API_PORT
+
+// add Subscription handler to our apolloServer
+apolloServer.installSubscriptionHandlers(httpServer);
+
 // express sever
-app.listen(API_PORT, ()=>{
+// app.listen(API_PORT, ()=>{
+//     console.log(`API is running on port: ${HOST}${API_PORT}
+//     graphQL Playground: ${HOST}${API_PORT}/${apolloServer.graphqlPath}
+//     `);
+// });
+
+httpServer.listen({ port: API_PORT}, () => {
     console.log(`API is running on port: ${HOST}${API_PORT}
     graphQL Playground: ${HOST}${API_PORT}/${apolloServer.graphqlPath}
-    `);
+
+    Subscriptions: ${'ws://'}${API_PORT}/${apolloServer.subscriptionsPath}
+    `)
 })
 
 mongoose.connect(`${MONGO_URL}/${DB_NAME}`, { useNewUrlParser: true, useUnifiedTopology: true })
