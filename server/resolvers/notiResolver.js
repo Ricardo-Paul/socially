@@ -31,8 +31,6 @@ const Mutation = {
       // thus has access to the id
     }).save();
 
-    console.log(newNotification._id)
-
     await User.findOneAndUpdate({_id: receiverId }, { $push: { notifications: newNotification._id } });
     return newNotification;
   },
