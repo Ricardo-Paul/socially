@@ -62,7 +62,9 @@ const headerStyles = makeStyles((theme) => ({
       zIndex: 1000,
      [theme.breakpoints.up("lg")]:{
          marginTop: 15
-     }
+     },
+     maxHeight: 350,
+     overflow: "auto"
   }
 }));
 
