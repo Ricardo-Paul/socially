@@ -42,7 +42,7 @@ const appLayoutStyles = makeStyles((theme) => ({
   },
   extreme: {
     paddingTop: 60,
-    backgroundColor: colors.black,
+    backgroundColor: colors.white,
     position: "relative"
   },
   drawer: {

@@ -7,11 +7,14 @@ import {
   Typography,
   makeStyles,
   CssBaseline,
+  Box,
+  Avatar,
 } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
 import Divider from "@material-ui/core/Divider";
+
 
 // icons
 import HomeIcon from "@material-ui/icons/Home";
@@ -20,7 +23,6 @@ import PeopleIcon from "@material-ui/icons/People";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import MessageIcon from "@material-ui/icons/Message";
 import InfoIcon from "@material-ui/icons/Info";
-import { AccountCircle } from "@material-ui/icons";
 
 import { colors, shadows } from "../../utils/theme";
 
@@ -58,9 +60,14 @@ const navStyles = makeStyles((theme) => ({
     }
   },
   name: {
-    color: colors.indigo0,
-    fontWeight: "bold",
-    fontSize: 10
+    fontWeight: 500,
+    fontSize: 16,
+    fontFamily: "roboto"
+  },
+  avatar:{
+    width: 64,
+    height: 64,
+    cursor: "pointer"
   }
 }));
 
@@ -82,6 +89,8 @@ const Navigation = () => {
   const classes = navStyles();
   const [location, setLocation] = useState(null); //hack to style the selected link
 
+  const avatar = "https://material-ui.com/static/images/avatar/2.jpg"
+
   const options = [
     { title: "Home", icon: <HomeIcon />, to: Routes.HOME },
     { title: "Browse Feed", icon: <WebIcon />, to: Routes.BROWSE },
@@ -101,11 +110,6 @@ const Navigation = () => {
         exact
         to={item.to}
         style={{ textDecoration: "none", color: colors.white }}
-        // isActive={(location) => { //grab the location url, helps us identify the current url
-        //   if(location){
-        //     setLocation(location.url)
-        //   }
-        // }}
       >
         <ListItem 
         key={index} 
@@ -121,23 +125,47 @@ const Navigation = () => {
   return (
     <>
       <CssBaseline />
-      <div className={classes.navContainer}>
-        <List className={classes.list}>
-          <div className={classes.fixList}>
-            <ListItem>
-              <ListItemIcon style={styles}>
-                {" "}
-                <AccountCircle />{" "}
-              </ListItemIcon>
-              <Typography variant="h4">
-                <ListItemText className={classes.name} primary={user.fullName} />
-              </Typography>
-            </ListItem>
-            <Divider />
-            {list}
-          </div>
-        </List>
-      </div>
+      <Box
+      bgcolor="palevioletred"
+      height="100%"
+      display="flex"
+      flexDirection="column"
+      >
+        <Box 
+        bgcolor="white"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        p={2}
+        >
+          <Avatar 
+          src={avatar}
+          component={Link}
+          className={classes.avatar}
+          />
+          <Typography
+          variant="primary"
+          color="textPrimary"
+          variant="h6"
+          className={classes.name}
+          >
+            Alex Xavier
+          </Typography>
+          <Typography
+          color="textSecondary"
+          >
+            Software Developer
+          </Typography>
+        </Box>
+        <Divider />
+        <Box
+        bgcolor="white"
+        >
+          <List>
+            <ListItem> Browse </ListItem>
+          </List>
+        </Box>
+      </Box>
     </>
   );
 };
