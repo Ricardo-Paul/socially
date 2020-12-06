@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
   List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Typography,
   makeStyles,
-  CssBaseline,
   Box,
   Avatar,
 } from "@material-ui/core";
-import { NavLink as RouterLink, Link } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
 import Divider from "@material-ui/core/Divider";
@@ -23,7 +19,7 @@ import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import MessageIcon from "@material-ui/icons/Message";
 import InfoIcon from "@material-ui/icons/Info";
 
-import { colors, shadows } from "../../utils/theme";
+import { colors } from "../../utils/theme";
 import NavItem from "./NavItem";
 
 const navStyles = makeStyles((theme) => ({
@@ -142,7 +138,6 @@ const Navigation = () => {
         p={2}
         >
           <List>
-            {list}
             {list}
           </List>
         </Box>

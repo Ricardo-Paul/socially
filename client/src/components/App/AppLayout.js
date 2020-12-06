@@ -45,10 +45,10 @@ const appLayoutStyles = makeStyles((theme) => ({
     backgroundColor: colors.white,
     position: "relative"
   },
-  drawer: {
-    //control mobile display
-    backgroundColor: colors.white,
-    paddingLeft: 20,
+  desktopDrawer: {
+    top: 64,
+    height: 'calc(100% - 64px)',
+    width: 256
   },
 }));
 
@@ -81,6 +81,7 @@ const AppLayout = ({ authUser }) => {
               <Drawer
               open
               variant="persistent"
+              classes={{ paper: classes.desktopDrawer }}
               >
                 <Navigation />
               </Drawer>
