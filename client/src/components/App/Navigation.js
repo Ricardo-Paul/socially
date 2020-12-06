@@ -10,11 +10,10 @@ import {
   Box,
   Avatar,
 } from "@material-ui/core";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink as RouterLink, Link } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
 import Divider from "@material-ui/core/Divider";
-
 
 // icons
 import HomeIcon from "@material-ui/icons/Home";
@@ -25,6 +24,7 @@ import MessageIcon from "@material-ui/icons/Message";
 import InfoIcon from "@material-ui/icons/Info";
 
 import { colors, shadows } from "../../utils/theme";
+import NavItem from "./NavItem";
 
 const navStyles = makeStyles((theme) => ({
   selected: {
@@ -71,11 +71,8 @@ const navStyles = makeStyles((theme) => ({
   }
 }));
 
-// partially set all routes to home
 const Navigation = () => {
   const [{ auth }] = useStore();
-  const styles = { color: colors.indigo0 };
-
 
   // set the user to local so we can access
   // its properties
@@ -87,40 +84,25 @@ const Navigation = () => {
   }, [auth.user]);
 
   const classes = navStyles();
-  const [location, setLocation] = useState(null); //hack to style the selected link
 
   const avatar = "https://material-ui.com/static/images/avatar/2.jpg"
 
   const options = [
-    { title: "Home", icon: <HomeIcon />, to: Routes.HOME },
-    { title: "Browse Feed", icon: <WebIcon />, to: Routes.BROWSE },
-    { title: "People", icon: <PeopleIcon />, to: Routes.PEOPLE },
+    { title: "Home", icon: HomeIcon, to: Routes.HOME },
+    { title: "Browse Feed", icon: WebIcon, to: Routes.BROWSE },
+    { title: "People", icon: PeopleIcon, to: Routes.PEOPLE },
     {
       title: "Notifications",
-      icon: <NotificationsActiveIcon />,
+      icon: NotificationsActiveIcon,
       to: Routes.NOTIFICATIONS,
     },
-    { title: "Messages", icon: <MessageIcon />, to: Routes.MESSAGE },
-    { title: "About", icon: <InfoIcon />, to: Routes.ABOUT },
+    { title: "Messages", icon: MessageIcon, to: Routes.MESSAGE },
+    { title: "About", icon: InfoIcon, to: Routes.ABOUT },
   ];
-  const list = options.map((item, index) => {
-    return (
-      <NavLink
-        key={index}
-        exact
-        to={item.to}
-        style={{ textDecoration: "none", color: colors.white }}
-      >
-        <ListItem 
-        key={index} 
-        className={item.to === location?classes.selected : classes.listItem}
-        >
-          <ListItemIcon style={styles}> {item.icon} </ListItemIcon>
-          <ListItemText primary={item.title} />
-        </ListItem>
-      </NavLink>
-    );
-  });
+
+  // const list = options.map((item, index) => (
+  //   <NavItem key={index} icon={item.icon} title={item.title} href={item.to} />
+  // ))
 
   return (
     <>
@@ -140,8 +122,9 @@ const Navigation = () => {
         >
           <Avatar 
           src={avatar}
-          component={Link}
+          component={RouterLink}
           className={classes.avatar}
+          to={Routes.HOME}
           />
           <Typography
           variant="primary"
@@ -162,7 +145,14 @@ const Navigation = () => {
         bgcolor="white"
         >
           <List>
-            <ListItem> Browse </ListItem>
+            {options.map(item => (
+              <NavItem
+                key={item.to}
+                title={item.title}
+                href={item.to}
+                icon={item.icon}
+              />
+            ))}
           </List>
         </Box>
       </Box>
