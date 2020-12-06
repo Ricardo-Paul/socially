@@ -100,21 +100,19 @@ const Navigation = () => {
     { title: "About", icon: InfoIcon, to: Routes.ABOUT },
   ];
 
-  // const list = options.map((item, index) => (
-  //   <NavItem key={index} icon={item.icon} title={item.title} href={item.to} />
-  // ))
+  const list = options.map((item, index) => (
+    <NavItem key={index} icon={item.icon} title={item.title} href={item.to} />
+  ))
 
   return (
     <>
       <CssBaseline />
       <Box
-      bgcolor="palevioletred"
       height="100%"
       display="flex"
       flexDirection="column"
       >
         <Box 
-        bgcolor="white"
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -145,14 +143,7 @@ const Navigation = () => {
         bgcolor="white"
         >
           <List>
-            {options.map(item => (
-              <NavItem
-                key={item.to}
-                title={item.title}
-                href={item.to}
-                icon={item.icon}
-              />
-            ))}
+            {list}
           </List>
         </Box>
       </Box>

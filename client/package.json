@@ -16,6 +16,7 @@
     "apollo-link-error": "^1.1.12",
     "apollo-upload-client": "^10.0.0",
     "classnames": "^2.2.6",
+    "clsx": "^1.1.1",
     "graphql": "^14.2.0",
     "graphql-tag": "^2.10.1",
     "prop-types": "^15.7.2",
