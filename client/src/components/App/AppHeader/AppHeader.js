@@ -109,6 +109,7 @@ const AppHeader = () => {
       closeMenu={closeDropDown}
       />
       
+      {/* mobile drawer */}
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <Navigation />
       </Drawer>

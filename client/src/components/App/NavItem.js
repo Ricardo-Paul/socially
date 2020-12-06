@@ -33,7 +33,21 @@ const navItemStyles = makeStyles((theme) => ({
     },
     button: {
         color: palette.text.secondary,
-        fontWeight: theme.typography.fontWeightMedium
+        fontWeight: theme.typography.fontWeightMedium,
+        width: "100%",
+        padding: "10px 8px",
+        justifyContent: "flex-start",
+        textTransform: "none",
+        letterSpacing: 0.1
+    },
+    icon: {
+        marginRight: theme.spacing(1)
+    },
+    title: {
+        marginRight: "auto"
+    },
+    active: {
+        color: palette.primary.main
     }
 }))
 
@@ -47,12 +61,13 @@ const NavItem = ({ icon: Icon, title, href, className, ...rest }) => {
          {...rest}
         >
             <Button
-            component={RouterLink}
+            component={RouterLink} // notice NavLink (RouterLink) is the component
             to={href}
             className={classes.button}
+            activeClassName={classes.active}
             >
-                {Icon && <Icon /> }
-                <span>
+                {Icon && <Icon className={classes.icon} /> }
+                <span className={classes.title}>
                     {title}
                 </span>
             </Button>

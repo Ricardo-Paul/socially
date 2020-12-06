@@ -15,7 +15,7 @@ import Hidden from "@material-ui/core/Hidden";
 // pages
 import Home from "../../pages/Home";
 import AppHeader from "./AppHeader/AppHeader";
-import { Grid, makeStyles, CssBaseline } from "@material-ui/core";
+import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
 
 const appLayoutStyles = makeStyles((theme) => ({
   "@global": {
@@ -77,15 +77,13 @@ const AppLayout = ({ authUser }) => {
         <Grid container className={classes.grid}>
           {/* hidden on mobile */}
           <Hidden smDown>
-            <Grid
-              item
-              md={4}
-              xs={12}
-              className={
-                classes.extreme
-              }
-            >
-              <Navigation />
+            <Grid item md={4} xs={12} className={classes.extreme}>
+              <Drawer
+              open
+              variant="persistent"
+              >
+                <Navigation />
+              </Drawer>
             </Grid>
           </Hidden>
 

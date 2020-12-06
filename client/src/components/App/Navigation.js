@@ -106,7 +106,6 @@ const Navigation = () => {
 
   return (
     <>
-      <CssBaseline />
       <Box
       height="100%"
       display="flex"
@@ -140,9 +139,10 @@ const Navigation = () => {
         </Box>
         <Divider />
         <Box
-        bgcolor="white"
+        p={2}
         >
           <List>
+            {list}
             {list}
           </List>
         </Box>
