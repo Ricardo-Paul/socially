@@ -50,7 +50,9 @@ const App = () => {
         if(operation === "CREATE"){
           const currentWindow = window.location.href.split("/")[3];
           if(currentWindow === "notifications") return prev;
-        };
+        }else{
+          // handle notification removal
+        }
 
         // combine new and previous notifications
         let newNotifications = [notification, ...prev.getAuthUser.notifications];
@@ -68,7 +70,7 @@ const App = () => {
     return () => {
       unsubscribe();
     }
-  })
+  }, [subscribeToMore])
 
   return (
     <Router>
