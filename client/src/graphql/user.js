@@ -77,3 +77,16 @@ query{
   }
 }
 `
+export const GET_USERS = gql`
+query($userId: ID!, $skip: Int, $limit: Int){
+  getUsers(userId: $userId, skip: $skip, limit: $limit){
+    count
+    users{
+      id
+      fullName
+      username
+      email
+    }
+  }
+}
+`

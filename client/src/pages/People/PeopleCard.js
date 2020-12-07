@@ -1,11 +1,23 @@
 import React from 'react';
-import { Box, Button, Paper, Typography } from '@material-ui/core';
-const avatar = "https://material-ui.com/static/images/avatar/2.jpg"
+import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
+
+
+const peopleCardStyles = makeStyles({
+    container: {
+        display: "flex",
+        height: 290,
+        width: 190,
+        flexDirection: "column",
+        alignItems: "center"
+    }
+})
 
 const PeopleCard = () => {
+    const avatar = "https://material-ui.com/static/images/avatar/2.jpg"
+    const classes = peopleCardStyles();
 
     return(
-        <Box style={{height: 282, width: 180}}>
+        <Box className={classes.container}>
             <Paper>
                 <Box>
                     <img src={avatar} />
