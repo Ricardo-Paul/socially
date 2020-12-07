@@ -2,7 +2,6 @@ import { ApolloServer } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
 import{ PubSub } from 'apollo-server';
-import { connection } from 'mongoose';
 
 // create a new PubSub instance to publish events
 export const pubSub = new PubSub();
@@ -35,7 +34,6 @@ export const createApolloServer = (schema, resolvers, models) => {
          // console.log('HEADERS API :',req.headers.authorization);
           let bool = Boolean(req.headers.authorization);
         //  console.log('BOOL ', bool);
-          
           if(bool){
            // console.log('headers present')
             const token = req.headers.authorization;

@@ -90,7 +90,6 @@ const Subscription = {
         const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
 
         const authUser = await User.findOne({email: authenticatedUser.email});
-        console.log('authUser ID: ', authUser, authUser.id);
         return authUser && authUser.id === receiverId;
       }
     )
