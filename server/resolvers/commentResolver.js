@@ -65,6 +65,12 @@ const Mutation = {
     const post = await Post.findOne({ _id: comment.post});
     if(comment.author != post.author){
       const notification = await Notification.findOneAndDelete({comment: comment._id});
+
+      notification.populate("sender")
+        .populate("follow")
+        .populate({path: "comment", populate: { path: "post" }})
+        .populate({ path: "like", populate: { path: "post" } })
+        .execPopulate();
       await User.findOneAndUpdate({ _id: notification.receiver }, { $pull: { notifications: notification._id } });
 
       // publish the notification deletion event
