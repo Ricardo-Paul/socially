@@ -7,7 +7,7 @@ import resolvers from './resolvers';
 import models from './models';
 import { schema } from './schema';
 
-import { createServer } from 'http';
+import { createServer } from 'http'; //our http server
 
 const app = express();
 app.use(cors());
@@ -43,6 +43,7 @@ apolloServer.installSubscriptionHandlers(httpServer);
 //     `);
 // });
 
+// now we're listening to the httpServer rather than app
 httpServer.listen({ port: API_PORT}, () => {
     console.log(`API is running on port: ${HOST}${API_PORT}
     graphQL Playground: ${HOST}${API_PORT}/${apolloServer.graphqlPath}

@@ -18,7 +18,7 @@ export const schema = gql`
         getFollowedPosts(userId: ID!, skip:Int, limit:Int): PostsPayload
         getUserPosts(userId: ID!, skip: Int, limit: Int): PostsPayload
 
-        getUsers(userId: ID!): UsersPayload
+        getUsers(userId: ID!, skip:Int, limit:Int): UsersPayload
         searchUsers(searchQuery: String): [UserPayload]
         suggestPeople(userId: ID!): UsersPayload
 

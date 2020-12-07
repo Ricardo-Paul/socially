@@ -109,7 +109,7 @@ const Query = {
       count
     }
   },
-
+// 
   /**
    * search for users by username or fullName
    */
