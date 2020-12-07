@@ -1,6 +1,8 @@
 import { withFilter } from "apollo-server";
 import { NOTIFICATION_CREATED_OR_DELETED } from "../constants/Subscriptions";
 import { pubSub } from "../utils/apolloServer";
+import Models from '../models';
+const User = Models.User;
 
 const Mutation = {
   createComment: async (_, { input: { comment, authorId, postId } }, { Comment, User, Post, authenticatedUser, Notification }) => {
@@ -83,10 +85,13 @@ const Subscription = {
       // the filter function is executed with payload, var and context
       // and must return a boolean to know if we should pass the payload
       // to the subscriber
-      (payload, variables, { authenticatedUser }) => {
+      async (payload, variables, { authenticatedUser }) => {
         // make sure the user receiving the notification is (active) 
         const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
-        return authenticatedUser && authenticatedUser.id === receiverId;
+
+        const authUser = await User.findOne({email: authenticatedUser.email});
+        console.log('authUser ID: ', authUser, authUser.id);
+        return authUser && authUser.id === receiverId;
       }
     )
   }
