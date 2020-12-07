@@ -14,6 +14,8 @@ import Hidden from "@material-ui/core/Hidden";
 
 // pages
 import Home from "../../pages/Home";
+import People from "../../pages/People/";
+
 import AppHeader from "./AppHeader/AppHeader";
 import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
 
@@ -92,6 +94,7 @@ const AppLayout = ({ authUser }) => {
           <Grid item md={6} xs={12} className={classes.middle}>
             <Switch>
               <Route exact path={Routes.HOME} render={() => <Home />} />
+              <Route exact path={Routes.PEOPLE} render={() => <People />} />
               <Redirect to={Routes.HOME} />
             </Switch>
           </Grid>

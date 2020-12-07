@@ -28,7 +28,7 @@ import { GET_AUTH_USER } from '../../graphql/user';
 import { GET_FOLLOWED_POSTS } from '../../graphql/post';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 
-import { colors, theme } from '../../utils/theme'
+import { theme } from '../../utils/theme'
 
 const postCardStyles = makeStyles({
   card: {
@@ -58,7 +58,7 @@ const postCardStyles = makeStyles({
     paddingRight: 10
   },
   media: {
-    height: 190,
+    height: 250,
     objectFit: "cover",
   },
   footer: {
