@@ -26,21 +26,20 @@ const Notification = ({ notification }) => {
     return(
         <ListItem button>
             <ListItemAvatar>
-                <Avatar alt="user avatar" src={avatar} />
+             <Avatar alt="user avatar" src={avatar} />
             </ListItemAvatar>
             { notification.like && 
             <>
-                <ListItemText  secondary={`${senderName} likes your post`} />
-                {showPostImage}
+             <ListItemText  secondary={`${senderName} likes your post`} />
+             {showPostImage}
             </>
             }
 
-            {
-                notification.comment && 
-                <>
-                <ListItemText secondary={`${senderName} commented your post`} />
-                {showPostImage}
-                </>
+            {notification.comment && 
+             <>
+              <ListItemText secondary={`${senderName} commented your post`} />
+              {showPostImage}
+             </>
             }
         </ListItem>
     )

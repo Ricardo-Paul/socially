@@ -15,14 +15,15 @@ import { StoreProvider } from './store/store';
 import { theme } from './utils/theme';
 import { MuiThemeProvider } from '@material-ui/core';
 
-const uri = "http://localhost:8080/graphql"
+const apiUrl = "http://localhost:8080/graphql"
+const webSocketApiUrl = "ws://localhost:8080/graphql"
 
-const testClient = new ApolloClient({
-  uri: 'http://localhost:8080/graphql',
-  cache: new InMemoryCache()
-});
+// const testClient = new ApolloClient({
+//   uri: 'http://localhost:8080/graphql',
+//   cache: new InMemoryCache()
+// });
 
-const client = createApolloClient(uri);
+const client = createApolloClient(apiUrl, webSocketApiUrl);
 
 render(
   // <ApolloHooksProvider client={client}>
