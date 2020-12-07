@@ -67,6 +67,7 @@ export const createApolloClient = (apiURL, webSocketApiUrl) => {
     const uploadLink = createUploadLink({ uri: apiURL });
 
 
+    // DIRECTIONAL COMPOSITION
     // we're handling only subscriptions over webSocket
     const terminatingLink = split(({ query }) => {
         const definition = getMainDefinition(query);
@@ -80,6 +81,7 @@ export const createApolloClient = (apiURL, webSocketApiUrl) => {
     )
 
     // using myAuthLink for now inst
+    // ADDITIVE COMPOSITION
     return new ApolloClient({
         link: ApolloLink.from([handleErrors(), myAuthLink, terminatingLink]),
         cache

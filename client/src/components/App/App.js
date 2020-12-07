@@ -6,6 +6,7 @@ import AuthLayout from "../../pages/Auth/AuthLayout";
 import { GET_AUTH_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
 import ScrollTop from "./ScrollTop";
+import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
 
 /**
  * as the app top level component
@@ -33,12 +34,41 @@ import ScrollTop from "./ScrollTop";
  */
 
 const App = () => {
-  const { loading, data, error, refetch } = useQuery(GET_AUTH_USER);
+  const { loading, data, error, subscribeToMore, refetch } = useQuery(GET_AUTH_USER);
 
+  // we use subscribeToMore to execute our subscriptions
+  // and push updates to the original query result (data.getAuthUser)
   useEffect(() => {
-    console.log("AUTH USER :", data);
-    console.log("ERROR", error);
-  });
+    // unsubscribe var handles subscriptions
+    const unsubscribe = subscribeToMore({
+      document: NOTIFICATION_CREATED_OR_DELETED,
+      updateQuery: (prev, { subscriptionData }) => { //first result is cached in prev
+        if(!subscriptionData.data) return prev;
+        let { operation, notification } = subscriptionData.data.notificationCreatedOrDeleted;
+
+        // dont notifify users if they are already on the notification page
+        if(operation === "CREATE"){
+          const currentWindow = window.location.href.split("/")[3];
+          if(currentWindow === "notifications") return prev;
+        };
+
+        // combine new and previous notifications
+        let newNotifications = [notification, ...prev.getAuthUser.notifications];
+
+        // attach new notifications to authUser
+        let authUser = prev.getAuthUser;
+        authUser.notifications = newNotifications;
+
+        // reassign the inial query
+        return { getAuthUser: authUser };
+      }
+    });
+
+    // clean up
+    return () => {
+      unsubscribe();
+    }
+  })
 
   return (
     <Router>
