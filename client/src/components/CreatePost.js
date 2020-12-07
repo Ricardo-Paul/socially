@@ -23,7 +23,6 @@ const postStyles = makeStyles((theme) => ({
     backgroundColor: colors.white,
     padding: 5,
     borderRadius: 5,
-    marginTop: 10,
     boxShadow: shadows.sm,
     [theme.breakpoints.down("sm")]: {
       padding: 0,
