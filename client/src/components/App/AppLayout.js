@@ -33,7 +33,7 @@ const appLayoutStyles = makeStyles((theme) => ({
     paddingTop: 60,
     height: "100vh",
     overflow: "auto",
-    backgroundColor: colors.lightGrey,
+    // backgroundColor: colors.lightGrey,
     paddingLeft: 25,
     paddingRight: 25,
     [theme.breakpoints.down("sm")]: {
@@ -77,7 +77,7 @@ const AppLayout = ({ authUser }) => {
         <Grid container className={classes.grid}>
           {/* hidden on mobile */}
           <Hidden smDown>
-            <Grid item md={4} xs={12} className={classes.extreme}>
+            <Grid item md={3} xs={12} className={classes.extreme}>
               <Drawer
               open
               variant="persistent"
@@ -89,7 +89,7 @@ const AppLayout = ({ authUser }) => {
           </Hidden>
 
           {/* Middle */}
-          <Grid item md={5} xs={12} className={classes.middle}>
+          <Grid item md={6} xs={12} className={classes.middle}>
             <Switch>
               <Route exact path={Routes.HOME} render={() => <Home />} />
               <Redirect to={Routes.HOME} />
