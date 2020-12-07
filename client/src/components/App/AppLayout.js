@@ -66,7 +66,7 @@ const AppLayout = ({ authUser }) => {
       type: SET_AUTH_USER,
       payload: authUser,
     });
-  }, [authUser, dispatch]); // dispatch and authUser used as dependencies
+  }, [authUser, dispatch]); // dispatch and authUser used as the effect dependencies
 
   return (
     <>
