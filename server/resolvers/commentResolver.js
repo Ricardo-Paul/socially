@@ -41,7 +41,7 @@ const Mutation = {
         .populate({ path: "like", populate: { path: "post" } })
         .execPopulate();
 
-      // publish the notification
+      // publish the notification creation event
       pubSub.publish(NOTIFICATION_CREATED_OR_DELETED, {
         // our payload
         notificationCreatedOrDeleted: {
@@ -49,8 +49,6 @@ const Mutation = {
           notification: newNotification
         }
       })
-
-
     }
 
     return newComment;
@@ -68,6 +66,15 @@ const Mutation = {
     if(comment.author != post.author){
       const notification = await Notification.findOneAndDelete({comment: comment._id});
       await User.findOneAndUpdate({ _id: notification.receiver }, { $pull: { notifications: notification._id } });
+
+      // publish the notification deletion event
+      pubSub.publish(NOTIFICATION_CREATED_OR_DELETED, {
+        // our payload
+        notificationCreatedOrDeleted: {
+          operation: "DELETE",
+          notification: notification
+        }
+      })
     }
 
     return comment;

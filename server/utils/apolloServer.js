@@ -1,6 +1,8 @@
 import { ApolloServer } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
+// We use PubSub implemented by apolloServer
+// the community has created other implementations of Publish Subscribe
 import{ PubSub } from 'apollo-server';
 
 // create a new PubSub instance to publish events
