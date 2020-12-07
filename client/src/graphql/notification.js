@@ -31,7 +31,9 @@ export const NOTIFICATION_CREATED_OR_DELETED = gql`
         notificationCreatedOrDeleted{
             operation
             notification{
+                id
                 sender{
+                    id
                     fullName
                     email
                     username

@@ -46,16 +46,30 @@ const App = () => {
         if(!subscriptionData.data) return prev;
         let { operation, notification } = subscriptionData.data.notificationCreatedOrDeleted;
 
+        // combine new and previous notifications
+        let newNotifications = [notification, ...prev.getAuthUser.notifications];
+
         // dont notifify users if they are already on the notification page
         if(operation === "CREATE"){
           const currentWindow = window.location.href.split("/")[3];
           if(currentWindow === "notifications") return prev;
-        }else{
-          // handle notification removal
         }
 
-        // combine new and previous notifications
-        let newNotifications = [notification, ...prev.getAuthUser.notifications];
+        if(operation === "DELETE"){
+          console.log('THE NOTIFICATION :', notification);
+          let oldNotifications = prev.getAuthUser.notifications;
+          // find the notification index and remove it
+          let index = oldNotifications.findIndex(n => n.id === notification.id);
+          if(index > -1){
+            oldNotifications.splice(index, 1);
+            console.log('INDEX: ',index, 'should spliced')
+          };
+          let notifications = oldNotifications;
+
+          // reassign notifications (with the deletion)
+          newNotifications = notifications;
+
+        }
 
         // attach new notifications to authUser
         let authUser = prev.getAuthUser;
