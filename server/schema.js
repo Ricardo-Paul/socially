@@ -2,7 +2,6 @@ import { gql } from 'apollo-server-express';
 // non-null fields !
 
 export const schema = gql`
-
 #-------------------------------------------------------
 # QUERY ROOT && QUERIES
 #-------------------------------------------------------
@@ -10,43 +9,34 @@ export const schema = gql`
         getAuthUser: UserPayload
         getUser(username: String!): UserPayload
         verifyResetPasswordToken(email: String!, token: String!): SuccessMessage
-
         postname: String
-
         getPosts(authUserId: ID!, skip:Int, limit:Int): PostsPayload
         getPost(id: ID!): PostPayload
         getFollowedPosts(userId: ID!, skip:Int, limit:Int): PostsPayload
         getUserPosts(userId: ID!, skip: Int, limit: Int): PostsPayload
-
         getUsers(userId: ID!, skip:Int, limit:Int): UsersPayload
         searchUsers(searchQuery: String): [UserPayload]
         suggestPeople(userId: ID!): UsersPayload
-
         getUserNotifications(userId:ID!, skip:Int, limit:Int): NotificationsPayload
     }
-
     type NotificationsPayload{
         notifications: [Notification]
         count: String
     }
-
     type UsersPayload{
         users: [UserPayload]
         count: String!
     }
-
     type Token{
         signupToken: String
         signinToken: String
         token: String
     }
-
   type File {
     filename: String!
     mimetype: String!
     encoding: String!
   }
-
     type User{
         id: ID!
         fullName: String!
@@ -59,12 +49,10 @@ export const schema = gql`
         coverImagePublicId: String
         passwordResetToken: String
         passwordResetTokenExpiryDate: String
-
         posts: [Post]
         comments: [Comment]
         notifications:[Notification]
     }
-
     type Post{
         id: ID!
         image: File  # set as string in the PayLoad
@@ -72,46 +60,37 @@ export const schema = gql`
         title: String!
         author: User!
     }
-
     type Comment{
         id: ID!
         authorId: ID!
         postId: ID!
         comment: String!
     }
-
     type Like{
 	    id: ID!
         post: PostPayload
         user: UserPayload
     }
-
-    type Follow {
+    type Follow{
         id: ID!
-        user: ID
-        follower: ID
-      }
-
+        following: ID!
+        follower: ID!
+    }
     type Notification{
         id: ID!
         sender: User!
         receiver: User!
         
         post: PostPayload
-
         like: Like
         comment: CommentPayload
         follow: Follow
-
         seen: Boolean
         createdAt: String
     }
-
-
 #-------------------------------------------------------
 # PAYLOADS
 #-------------------------------------------------------
-
 type UserPayload{
     id: ID!
     fullName: String!
@@ -124,50 +103,40 @@ type UserPayload{
     coverImagePublicId: String 
     passwordResetToken: String
     passwordResetTokenExpiryDate: String
-
     createdAt: String
     updatedAt: String
-
     posts: [PostPayload]
     comments: [CommentPayload]
     likes: [Like]
-
-    followers: [Follow]
     following: [Follow]
-
+    followers: [Follow]
     notifications: [Notification]
 }
-
 type PostPayload{
     id: ID!
     title: String!
     image: String
     imagePublicId: String
     createdAt: String
-
     author: UserPayload
     comments: [CommentPayload]
     likes: [Like]
 }
-
 type CommentPayload{
     id: ID!
     author: UserPayload
     post: PostPayload
     comment: String!
 }
-
 type PostsPayload{
     posts: [PostPayload]
     count: String!
 }
-
 enum NotificationType{
     COMMENT
     LIKE
     FOLLOW
 }
-
 #-------------------------------------------------------
 # MUTATION ROOT && MUTATIONS
 #-------------------------------------------------------
@@ -176,50 +145,38 @@ enum NotificationType{
         signin(input: SigninInput!): Token
         requestPassReset(input: PassResetInput!): SuccessMessage
         resetPassword(input: ResetPasswordInput!): Token
-
         createPost(input: CreatePostInput!): PostPayload
         deletePost(input: DeletePostInput!): PostPayload
-
         createComment(input: CreateCommentInput!): CommentPayload
         deleteComment(input: DeleteCommentInput): CommentPayload
-
         createLike(input: CreateLikeInput!): Like
         deleteLike(input: DeleteLikeInput!): Like
-
-        createFollow(input: CreateFollowInput!): Follow
-        deleteFollow(input: DeleteFollowInput!): Follow
-
+        createFollow(input: CreateFollowInput): Follow
+        deleteFollow(input: DeleteFollowInput): Follow
         deleteNotification(input: DeleteNotificationInput): Notification
         createNotification(input: CreateNotificationInput): Notification
         updateNotificationSeen(input: UpdateNotificationInput!): Boolean
-
         uploadUserPhoto(input: UploadUserPhotoInput!): UserPayload
     }
-
     type TestMessage{
         title: String!
     }
-
     type SuccessMessage{
         message: String
     }
-
     input DeletePostInput {
 	id: ID!
 	imagePublicId: ID
    }
-
     input UploadUserPhotoInput{
         userId: ID!
         image: Upload!
         imagePublicId: String
         isCover: Boolean
     }
-
     input DeleteNotificationInput{
         notificationId: ID!
     }
-
     input CreateNotificationInput{
         receiverId: ID!
         senderId: ID!
@@ -227,88 +184,70 @@ enum NotificationType{
         notificationType: NotificationType!
         notificationTypeId: ID
     }
-
     input SignupInput{
         fullName: String!
         email: String!
         username: String!
         password: String!
     }
-
     input ResetPasswordInput{
         email: String!
         passwordResetToken: String!
         password: String!
     }
-
     input SigninInput{
         emailOrUsername: String!
         password: String!
     }
-
     input PassResetInput{
         email: String!
     }
-
     input CreateCommentInput{
         authorId: ID!
         postId: ID!
         comment: String!
     }
-
     input CreateLikeInput{
         postId: ID!
         userId: ID!
         authorId: ID!
     }
-
     input DeleteLikeInput{
         likeId: ID!
     }
-
     input DeleteCommentInput{
         commentId: ID!
     }
-
-    input CreateFollowInput {
-        userId: ID!
-        followerId: ID!
-      }
-      input DeleteFollowInput {
-        id: ID!
-      }
-
+    input CreateFollowInput{
+        currentUserId: ID!
+        followedUserId: ID!
+    }
+    input DeleteFollowInput{
+        followId: ID!
+    }
     input UpdateNotificationInput{
         receiverId: ID!
     }
-
     #----------------------------------------
     # POST INPUTS
     #----------------------------------------
-
     input CreatePostInput {
         image: Upload
         title: String!
         authorId: ID
     }
-
 #-------------------------------------------------------
 # SUBSCRIPTIONS
 #-------------------------------------------------------
-
 enum NotificationOperationType{
     CREATE
     DELETE
 }
-
 type NotificationCreatedOrDeletedPayload{
     operation: NotificationOperationType!
     notification: Notification
 }
-
  type Subscription{
     notificationCreatedOrDeleted: NotificationCreatedOrDeletedPayload
  }
-
 `
-

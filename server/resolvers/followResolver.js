@@ -1,33 +1,50 @@
 const Mutation = {
   /**
-   * Creates a following/follower relationship between users
+   * create a relationship between user following/ user followed
    *
-   * @param {string} userId
-   * @param {string} followerId
+   * @params {string} currentUserId the current user
+   * @params {string} followedUserId the followed user id
    */
-  createFollow: async (root, { input: { userId, followerId } }, { Follow, User }) => {
-    const follow = await new Follow({ user: userId, follower: followerId }).save();
 
-    // Push follower/following to user collection
-    await User.findOneAndUpdate({ _id: userId }, { $push: { followers: follow.id } });
-    await User.findOneAndUpdate({ _id: followerId }, { $push: { following: follow.id } });
+  //  the user that send the request is following
+  // in other words the active user
+  createFollow: async (_, { input: { currentUserId, followedUserId } }, { Follow, User }) => {
+    const newFollow = await new Follow({
+      following: followedUserId,
+      follower: currentUserId,
+    }).save();
 
-    return follow;
+    // push the relationship to the followedUser
+    await User.findOneAndUpdate({ _id: followedUserId }, { $push: { followers: newFollow._id } });
+
+    // push the relationship to the current user
+    await User.findOneAndUpdate({ _id: currentUserId }, { $push: { following: newFollow._id } });
+
+    // TODO: cannot follow a user more than once
+
+    return newFollow;
   },
+
   /**
-   * Deletes a following/follower relationship between users
+   * delete a follow/following relationship
    *
-   * @param {string} id follow id
+   * @params {string} followId
    */
-  deleteFollow: async (root, { input: { id } }, { Follow, User }) => {
-    const follow = await Follow.findByIdAndRemove(id);
 
-    // Delete follow from users collection
-    await User.findOneAndUpdate({ _id: follow.user }, { $pull: { followers: follow.id } });
-    await User.findOneAndUpdate({ _id: follow.follower }, { $pull: { following: follow.id } });
+  deleteFollow: async (_, { input: { followId } }, { Follow, User }) => {
+    const followToRemove = await Follow.findOneAndRemove({ _id: followId });
+    if (!followToRemove) throw new Error(`cant perfor unfollowing, not found`);
 
-    return follow;
-  }
+    // remove it from the followed user
+    await User.findOneAndUpdate({ _id: followToRemove.follower }, { $pull: { followers: followToRemove._id } });
+
+    // remove it from current user
+    await User.findOneAndUpdate({ _id: followToRemove.following }, { $pull: { following: followToRemove._id } });
+
+    return followToRemove;
+  },
 };
 
-export default { Mutation };
+export default {
+  Mutation,
+};
