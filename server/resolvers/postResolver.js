@@ -1,4 +1,4 @@
-import Follow from '../models/Follow';
+// import Follow from '../models/Follow';
 import cloudinary from 'cloudinary'
 import { deleteFromCloudinary, uploadToCloudinary } from '../utils/fileUploads';
 const generateUniqueId = require('generate-unique-id');
@@ -45,17 +45,15 @@ const Query = {
    * @param {string} userId the current user
    */
 
-  getFollowedPosts: async(_, {userId, skip, limit}, {Post}) => {
+  getFollowedPosts: async(_, {userId, skip, limit}, {Post, Follow}) => {
     // find the users that the current user is following
 
     let followedUsers = [];
-    let follow = await Follow.find({ following: userId }, {_id: 0}).select("follower");
-    // we suppress the id so we're dealing with two fields now { follower, following }
-    // these are instances where the user is the following //refer to the followResolver
-    // we only select the follower field, people that the user is following
-// 
-    // push these celebrities in the array (this name helps identify)
-    follow.map((f) => followedUsers.push(f.follower));
+    // find in Follow collection, documents where the follower is the user
+    let follow = await Follow.find({ follower: userId });
+
+    // push all the following(people the user is following) in the array
+    follow.map((f) => followedUsers.push(f.following));
 
     // select in the post collecion all posts where the authors are in this array (followeUsers)
     // also where author is the current user
