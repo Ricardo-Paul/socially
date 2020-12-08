@@ -7,22 +7,28 @@ import { useStore } from '../../store';
 const People = () => {
     const [{auth}] = useStore();
 
-    const { data, loading } = useQuery(GET_USERS,{
+    const { data, loading, networkStatus } = useQuery(GET_USERS,{
         variables: {
             userId: auth.user.id,
             skip: 0,
             limit: 10 //TODO: create a limit constant
-        }
+        },
+        notifyOnNetworkStatusChange: true
     });
 
-    console.log('GET users', data)
+    const content = () => {
+       if(loading && networkStatus === 1){
+           return(
+               <h5> loading ... </h5>
+           )
+       }
+
+       const { users, count } = data.getUsers;
+    }
+
     return(
         <>
-        { !loading &&
-            data.getUsers.map(u => (
-                <PeopleCard />
-            ))
-        }
+        {content()}
         </>
     )
 }
