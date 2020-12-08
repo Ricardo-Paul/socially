@@ -45,7 +45,7 @@ const Query = {
    * @param {string} userId the current user
    */
 
-  getFollowedPosts: async(_, {userId, skip, limit}, {Post, User}) => {
+  getFollowedPosts: async(_, {userId, skip, limit}, {Post}) => {
     // find the users that the current user is following
 
     let followedUsers = [];
@@ -53,7 +53,7 @@ const Query = {
     // we suppress the id so we're dealing with two fields now { follower, following }
     // these are instances where the user is the following //refer to the followResolver
     // we only select the follower field, people that the user is following
-
+// 
     // push these celebrities in the array (this name helps identify)
     follow.map((f) => followedUsers.push(f.follower));
 

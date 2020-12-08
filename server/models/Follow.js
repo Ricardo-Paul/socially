@@ -1,23 +1,24 @@
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
+import mongoose from "mongoose";
+
+const Schema = mongoose.Schema;
 
 /**
- * current user is following the follower
+ * Follow schema that has references to User schema
  */
-const followSchema = new Schema(
+const followSchema = Schema(
   {
-    following: { // the actual user
+    user: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User"
     },
-    follower: { //
+    follower: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
+      ref: "User"
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
-export default mongoose.model('Follow', followSchema);
+export default mongoose.model("Follow", followSchema);

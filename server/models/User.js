@@ -50,13 +50,13 @@ const userSchema = new Schema(
     followers: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Follow',
       },
     ],
     following: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Follow',
       },
     ],
     notifications: [

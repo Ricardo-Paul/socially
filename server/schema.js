@@ -86,11 +86,11 @@ export const schema = gql`
         user: UserPayload
     }
 
-    type Follow{
+    type Follow {
         id: ID!
-        following: ID!
-        follower: ID!
-    }
+        user: ID
+        follower: ID
+      }
 
     type Notification{
         id: ID!
@@ -132,8 +132,9 @@ type UserPayload{
     comments: [CommentPayload]
     likes: [Like]
 
-    following: [Follow]
     followers: [Follow]
+    following: [Follow]
+
     notifications: [Notification]
 }
 
@@ -185,8 +186,8 @@ enum NotificationType{
         createLike(input: CreateLikeInput!): Like
         deleteLike(input: DeleteLikeInput!): Like
 
-        createFollow(input: CreateFollowInput): Follow
-        deleteFollow(input: DeleteFollowInput): Follow
+        createFollow(input: CreateFollowInput!): Follow
+        deleteFollow(input: DeleteFollowInput!): Follow
 
         deleteNotification(input: DeleteNotificationInput): Notification
         createNotification(input: CreateNotificationInput): Notification
@@ -269,14 +270,13 @@ enum NotificationType{
         commentId: ID!
     }
 
-    input CreateFollowInput{
-        currentUserId: ID!
-        followedUserId: ID!
-    }
-
-    input DeleteFollowInput{
-        followId: ID!
-    }
+    input CreateFollowInput {
+        userId: ID!
+        followerId: ID!
+      }
+      input DeleteFollowInput {
+        id: ID!
+      }
 
     input UpdateNotificationInput{
         receiverId: ID!

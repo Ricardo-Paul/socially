@@ -47,7 +47,10 @@ const Query = {
         options: { sort: { createdAt: 'desc' } },
       })
       .populate('comments')
-      .populate('likes');
+      .populate('likes')
+      .populate('following')
+      .populate('followers')
+      .populate('notifications')
 
     return user;
   },
@@ -92,19 +95,20 @@ const Query = {
      */
     // the second arg is a projection
     // we supress the _id from the result by setting it to 0
-    const follow = await Follow.find({ follower: userId }, {_id: 0}).select("following");
+    const follow = await Follow.find({ follower: userId }, {_id: 0}).select("follower");
 
     follow.map(f => followedUsers.push(f.follower));
     const query = { $and:[{ _id: { $nin: followedUsers } }, { _id: { $ne: userId } }] }
-    const count = User.find(query).countDocuments();
+    const count = await User.find(query).countDocuments();
 
     // TODO: populate posts
-    const users = User.find(query)
+    const users = await User.find(query)
     .populate("following")
     .populate("followers")
     .populate("posts")
     .skip(skip)
     .limit(limit)
+    .sort({ createdAt: "desc" });
 
     return{
       users, 
