@@ -100,6 +100,8 @@ const Query = {
 
     // TODO: populate posts
     const users = User.find(query)
+    .populate("following")
+    .populate("followers")
     .populate("posts")
     .skip(skip)
     .limit(limit)
