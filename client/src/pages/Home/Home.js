@@ -7,9 +7,8 @@ import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
 import Modal from "../../components/Modal";
 import PostPopUp from "../../components/PostPopUp";
-import * as Routes from '../../routes'
-import { generatePath } from 'react-router-dom';
-
+import * as Routes from "../../routes";
+import { generatePath } from "react-router-dom";
 
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
 
@@ -22,17 +21,17 @@ const homeStyles = makeStyles({
 
 const Home = () => {
   const [{ auth }] = useStore();
-  const [postId, setPostId] = React.useState(null); 
+  const [postId, setPostId] = React.useState(null);
 
   // pushState args (state, title, url)
   const openModal = (postId) => {
-    setPostId(postId)
-    window.history.pushState("", "", generatePath(Routes.POST,{ id: postId }));
-  }
+    setPostId(postId);
+    window.history.pushState("", "", generatePath(Routes.POST, { id: postId }));
+  };
 
-  const closeModal = () =>{
+  const closeModal = () => {
     setPostId(null);
-  }
+  };
 
   const classes = homeStyles();
 
@@ -53,30 +52,30 @@ const Home = () => {
 
     if (!loading) {
       const posts = data.getFollowedPosts.posts;
-      console.log('FollowedPosts',data.getFollowedPosts.posts);
-      
-      posts.map(p => {
-        console.log('AUTHOR: ',p.author)
-        console.log('COMMENTS', p.comments)
-      })
+      console.log("FollowedPosts", data.getFollowedPosts.posts);
+
+      posts.map((p) => {
+        console.log("AUTHOR: ", p.author);
+        console.log("COMMENTS", p.comments);
+      });
 
       if (!posts.length) {
         return <h5> Follow Users, Browse </h5>;
       }
-// we compare the id in the state var with the current postid
-// to decide whether to open the modal
+      // we compare the id in the state var with the current postid
+      // to decide whether to open the modal
       return posts.map((post) => (
         <Fragment key={post.id}>
           {/* modal */}
           <Modal open={postId === post.id} onClose={closeModal}>
-           <PostPopUp 
-           closeModal={closeModal} 
-           comments={post.comments} 
-           postImage={post.image} 
-           author={post.author.fullName}
-           postTitle={post.title}
-           createdAt={post.createdAt}
-           />
+            <PostPopUp
+              closeModal={closeModal}
+              comments={post.comments}
+              postImage={post.image}
+              author={post.author.fullName}
+              postTitle={post.title}
+              createdAt={post.createdAt}
+            />
           </Modal>
 
           {/* regualar post card */}
