@@ -24,6 +24,18 @@ const People = () => {
        }
 
        const { users, count } = data.getUsers;
+       if(!users.length > 0){
+           return(
+               <h4> No users yet... </h4>
+           )
+       }
+
+       return(
+           users.map((user, index) => {
+               return <PeopleCard key={index} />
+           })
+       )
+
     }
 
     return(
