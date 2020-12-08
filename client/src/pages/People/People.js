@@ -26,8 +26,10 @@ const People = () => {
       return <h4> No users yet... </h4>;
     }
 
+    console.log('USERS :', users)
+
     return users.map((user, index) => {
-      return <PeopleCard key={index} />;
+      return <PeopleCard key={index} user={user} />;
     });
   };
 

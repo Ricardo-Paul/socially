@@ -48,6 +48,15 @@ query{
     fullName
     email
     username
+    following{
+      id
+    }
+    followers{
+      id
+    }
+    likes{
+      id
+    }
     notifications{
       id
       sender{
@@ -86,6 +95,14 @@ query($userId: ID!, $skip: Int, $limit: Int){
       fullName
       username
       email
+      following{
+        id
+        follower
+      }
+      followers{
+        id
+        follower
+      }
     }
   }
 }

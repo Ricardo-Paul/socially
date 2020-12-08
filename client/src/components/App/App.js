@@ -35,6 +35,7 @@ import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
 
 const App = () => {
   const { loading, data, error, subscribeToMore, refetch } = useQuery(GET_AUTH_USER);
+  console.log("AUTH USER", data)
 
   // we use subscribeToMore to execute our subscriptions
   // and push updates to the original query result (data.getAuthUser)

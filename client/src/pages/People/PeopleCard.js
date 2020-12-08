@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
-
+import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
+import Proptypes from 'prop-types';
+import Follow from "../../components/Follow";
 const peopleCardStyles = makeStyles({
   container: {
     display: "flex",
@@ -8,10 +9,11 @@ const peopleCardStyles = makeStyles({
     width: 190,
     flexDirection: "column",
     alignItems: "center",
+    padding: 5
   },
 });
 
-const PeopleCard = () => {
+const PeopleCard = ({ user }) => {
   const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
   const classes = peopleCardStyles();
 
@@ -22,12 +24,17 @@ const PeopleCard = () => {
           <img src={avatar} />
         </Box>
         <Box>
-          <Typography> Alex Xavier </Typography>
-          <Button> FOllow </Button>
+          <Typography> {user.fullName} </Typography>
+          <Typography> @{user.username} </Typography>
+          <Follow user={user} />
         </Box>
       </Paper>
     </Box>
   );
 };
+
+PeopleCard.propTypes = {
+  user: Proptypes.object.isRequired
+}
 
 export default PeopleCard;
