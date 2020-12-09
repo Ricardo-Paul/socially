@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  List,
-  Typography,
-  makeStyles,
-  Box,
-  Avatar,
-} from "@material-ui/core";
+import { List, Typography, makeStyles, Box, Avatar } from "@material-ui/core";
 import { NavLink as RouterLink } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
@@ -50,21 +44,21 @@ const navStyles = makeStyles((theme) => ({
   listItem: {
     color: colors.white,
     width: "100%",
-    display:"flex",
-    "&:hover":{
-      backgroundColor: colors.indigo1
-    }
+    display: "flex",
+    "&:hover": {
+      backgroundColor: colors.indigo1,
+    },
   },
   name: {
     fontWeight: 500,
     fontSize: 16,
-    fontFamily: "roboto"
+    fontFamily: "roboto",
   },
-  avatar:{
+  avatar: {
     width: 64,
     height: 64,
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  },
 }));
 
 const Navigation = () => {
@@ -81,7 +75,7 @@ const Navigation = () => {
 
   const classes = navStyles();
 
-  const avatar = "https://material-ui.com/static/images/avatar/2.jpg"
+  const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
 
   const options = [
     { title: "Home", icon: HomeIcon, to: Routes.HOME },
@@ -98,48 +92,31 @@ const Navigation = () => {
 
   const list = options.map((item, index) => (
     <NavItem key={index} icon={item.icon} title={item.title} href={item.to} />
-  ))
+  ));
 
   return (
     <>
-      <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-      >
-        <Box 
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        p={2}
-        >
-          <Avatar 
-          src={avatar}
-          component={RouterLink}
-          className={classes.avatar}
-          to={Routes.HOME}
+      <Box height="100%" display="flex" flexDirection="column">
+        <Box display="flex" flexDirection="column" alignItems="center" p={2}>
+          <Avatar
+            src={avatar}
+            component={RouterLink}
+            className={classes.avatar}
+            to={Routes.HOME}
           />
           <Typography
-          variant="primary"
-          color="textPrimary"
-          variant="h6"
-          className={classes.name}
+            variant="primary"
+            color="textPrimary"
+            variant="h6"
+            className={classes.name}
           >
             Alex Xavier
           </Typography>
-          <Typography
-          color="textSecondary"
-          >
-            Software Developer
-          </Typography>
+          <Typography color="textSecondary">Software Developer</Typography>
         </Box>
         <Divider />
-        <Box
-        p={2}
-        >
-          <List>
-            {list}
-          </List>
+        <Box p={2}>
+          <List>{list}</List>
         </Box>
       </Box>
     </>

@@ -34,8 +34,10 @@ import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
  */
 
 const App = () => {
-  const { loading, data, error, subscribeToMore, refetch } = useQuery(GET_AUTH_USER);
-  console.log("AUTH USER", data)
+  const { loading, data, error, subscribeToMore, refetch } = useQuery(
+    GET_AUTH_USER
+  );
+  console.log("AUTH USER", data);
 
   // we use subscribeToMore to execute our subscriptions
   // and push updates to the original query result (data.getAuthUser)
@@ -43,33 +45,41 @@ const App = () => {
     // unsubscribe var handles subscriptions
     const unsubscribe = subscribeToMore({
       document: NOTIFICATION_CREATED_OR_DELETED,
-      updateQuery: (prev, { subscriptionData }) => { //first result is cached in prev
-        if(!subscriptionData.data) return prev;
-        let { operation, notification } = subscriptionData.data.notificationCreatedOrDeleted;
+      updateQuery: (prev, { subscriptionData }) => {
+        //first result is cached in prev
+        if (!subscriptionData.data) return prev;
+        let {
+          operation,
+          notification,
+        } = subscriptionData.data.notificationCreatedOrDeleted;
 
         // combine new and previous notifications
-        let newNotifications = [notification, ...prev.getAuthUser.notifications];
+        let newNotifications = [
+          notification,
+          ...prev.getAuthUser.notifications,
+        ];
 
         // dont notifify users if they are already on the notification page
-        if(operation === "CREATE"){
+        if (operation === "CREATE") {
           const currentWindow = window.location.href.split("/")[3];
-          if(currentWindow === "notifications") return prev;
+          if (currentWindow === "notifications") return prev;
         }
 
-        if(operation === "DELETE"){
-          console.log('THE NOTIFICATION :', notification);
+        if (operation === "DELETE") {
+          console.log("THE NOTIFICATION :", notification);
           let oldNotifications = prev.getAuthUser.notifications;
           // find the notification index and remove it
-          let index = oldNotifications.findIndex(n => n.id === notification.id);
-          if(index > -1){
+          let index = oldNotifications.findIndex(
+            (n) => n.id === notification.id
+          );
+          if (index > -1) {
             oldNotifications.splice(index, 1);
-            console.log('INDEX: ',index, 'should spliced')
-          };
+            console.log("INDEX: ", index, "should spliced");
+          }
           let notifications = oldNotifications;
 
           // reassign notifications (with the deletion)
           newNotifications = notifications;
-
         }
 
         // attach new notifications to authUser
@@ -78,21 +88,24 @@ const App = () => {
 
         // reassign the inial query
         return { getAuthUser: authUser };
-      }
+      },
     });
 
     // clean up
     return () => {
       unsubscribe();
-    }
-  }, [subscribeToMore])
+    };
+  }, [subscribeToMore]);
 
   return (
     <Router>
       <Switch>
         <ScrollTop>
           {!loading && data.getAuthUser ? ( //authUser prop is available on the layout
-           <Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />
+            <Route
+              exact
+              render={() => <AppLayout authUser={data.getAuthUser} />}
+            />
           ) : (
             <Route exact render={() => <AuthLayout refetch={refetch} />} />
           )}

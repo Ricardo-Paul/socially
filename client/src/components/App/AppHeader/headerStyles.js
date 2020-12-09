@@ -58,14 +58,14 @@ const headerStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  popper:{
-      zIndex: 1000,
-     [theme.breakpoints.up("lg")]:{
-         marginTop: 15
-     },
-     maxHeight: 350,
-     overflow: "auto"
-  }
+  popper: {
+    zIndex: 1000,
+    [theme.breakpoints.up("lg")]: {
+      marginTop: 15,
+    },
+    maxHeight: 350,
+    overflow: "auto",
+  },
 }));
 
 export default headerStyles;

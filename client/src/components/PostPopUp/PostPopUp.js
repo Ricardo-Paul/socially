@@ -1,7 +1,7 @@
 import React from "react";
-import {  makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { theme } from '../../utils/theme';
+import { theme } from "../../utils/theme";
 import {
   Card,
   CardHeader,
@@ -10,7 +10,7 @@ import {
   ClickAwayListener,
   Avatar,
   IconButton,
-  Paper
+  Paper,
 } from "@material-ui/core";
 import { MoreVert, Close } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
@@ -18,7 +18,7 @@ import PostPopUpComments from "./PostPopUpComments";
 const PostStyles = makeStyles({
   paper: {
     maxHeight: "80%",
-    overflow:"auto",
+    overflow: "auto",
 
     top: "50%",
     left: "50%",
@@ -28,55 +28,59 @@ const PostStyles = makeStyles({
     zIndex: 900,
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100%",
-      width: "100%"
+      width: "100%",
     },
   },
   card: {
     height: "100%",
   },
-  mediaContainer:{
+  mediaContainer: {
     height: 500,
     width: "95%",
-    backgroundColor:"blue",
-    margin: "0 auto"
+    backgroundColor: "blue",
+    margin: "0 auto",
   },
   media: {
-    width:"100%",
+    width: "100%",
     height: "100%",
     objectFit: "cover",
     [theme.breakpoints.down("sm")]: {
       height: "100%",
-      width:"100%"
+      width: "100%",
     },
   },
 });
 
-const PostPopUp = ({ closeModal, postImage, comments, author, postTitle, createdAt, closeComments }) => {
-
+const PostPopUp = ({
+  closeModal,
+  postImage,
+  comments,
+  author,
+  postTitle,
+  createdAt,
+  closeComments,
+}) => {
   const classes = PostStyles();
   return (
     <ClickAwayListener onClickAway={closeModal}>
       <Paper className={classes.paper}>
-      <Card className={classes.card}>
-        <CardHeader
-          avatar={<Avatar>A</Avatar>}
-          action={
-            <IconButton onClick={closeModal}>
-              <Close />
-            </IconButton>
-          }
-          title={author}
-          subheader={createdAt}
-        />
-        <CardContent> {postTitle} </CardContent>
-        <div className={classes.mediaContainer}>
-          <img 
-          src={postImage} 
-          alt="post image" 
-          className={classes.media} />
-        </div>
-        <PostPopUpComments comments={comments} closeComments={closeModal} />
-      </Card>
+        <Card className={classes.card}>
+          <CardHeader
+            avatar={<Avatar>A</Avatar>}
+            action={
+              <IconButton onClick={closeModal}>
+                <Close />
+              </IconButton>
+            }
+            title={author}
+            subheader={createdAt}
+          />
+          <CardContent> {postTitle} </CardContent>
+          <div className={classes.mediaContainer}>
+            <img src={postImage} alt="post image" className={classes.media} />
+          </div>
+          <PostPopUpComments comments={comments} closeComments={closeModal} />
+        </Card>
       </Paper>
     </ClickAwayListener>
   );
@@ -89,5 +93,5 @@ PostPopUp.propTypes = {
   comments: PropTypes.array.isRequired,
   author: PropTypes.string.isRequired,
   postTitle: PropTypes.string,
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string.isRequired,
 };

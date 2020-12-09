@@ -12,9 +12,9 @@ import UploadPostImage from "./UploadPostImage";
 import ImagePreview from "./ImagePreview";
 
 import { colors, shadows } from "../utils/theme";
-import { GET_AUTH_USER } from '../graphql/user';
-import { GET_FOLLOWED_POSTS } from '../graphql/post';
-import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
+import { GET_AUTH_USER } from "../graphql/user";
+import { GET_FOLLOWED_POSTS } from "../graphql/post";
+import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
 const postStyles = makeStyles((theme) => ({
   container: {
@@ -80,11 +80,14 @@ const CreatePost = () => {
   const [{ auth }] = useStore();
   const classes = postStyles();
 
-  const [createPost, { loading }] = useMutation(CREATE_POST,{
+  const [createPost, { loading }] = useMutation(CREATE_POST, {
     refetchQueries: [
-      {query: GET_AUTH_USER},
-      {query: GET_FOLLOWED_POSTS, variables:{ userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT }}
-  ]
+      { query: GET_AUTH_USER },
+      {
+        query: GET_FOLLOWED_POSTS,
+        variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
+      },
+    ],
   });
   const isUploadDisabled = loading || (!loading && !title && !image);
 
@@ -150,7 +153,7 @@ const CreatePost = () => {
           </div>
 
           {image && <ImagePreview imageSource={URL.createObjectURL(image)} />}
-          { uploadError  }
+          {uploadError}
           {isFocused && (
             <div className={classes.buttons}>
               <Button
@@ -180,4 +183,4 @@ const CreatePost = () => {
   );
 };
 export default CreatePost;
-// 
+//

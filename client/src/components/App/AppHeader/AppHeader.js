@@ -4,10 +4,14 @@ import {
   IconButton,
   Toolbar,
   Typography,
-  Badge
+  Badge,
 } from "@material-ui/core";
 
-import { Notifications as NotificationIcon, AccountCircle, Mail as MailIcon } from '@material-ui/icons';
+import {
+  Notifications as NotificationIcon,
+  AccountCircle,
+  Mail as MailIcon,
+} from "@material-ui/icons";
 
 import React, { useState } from "react";
 import AppInfo from "../../../constants/AppInfo.json";
@@ -20,45 +24,47 @@ import Navigation from "../Navigation";
 import { useStore } from "../../../store";
 import HeaderDropDowns from "./HeaderDropDowns";
 
-
 const AppHeader = () => {
   const classes = headerStyles();
-  const [{auth}] = useStore();
+  const [{ auth }] = useStore();
 
-  const [notifications, setNotifications] = React.useState([])
+  const [notifications, setNotifications] = React.useState([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [dropDownData, setDropDownData] = useState([]);
   const [dropDownOpen, setDropDownOpen] = useState(null);
 
-    React.useEffect(() => {
-      if(auth.user != null){
-        setNotifications(auth.user.notifications);
-      }
-    }, [auth]);
-
-    const openDropDown = (event) => setAnchorEl(anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget);
-    
-    const closeDropDown = () => {
-      setAnchorEl(null);
+  React.useEffect(() => {
+    if (auth.user != null) {
+      setNotifications(auth.user.notifications);
     }
-  
-    const handleIconClick = (event, dropdownType) => {
-      if(dropdownType === 'MESSAGE'){
-        openDropDown(event);
-      }
-      if(dropdownType === 'NOTIFICATION'){
-        setDropDownData(notifications)
-        setDropDownOpen(dropdownType);
-        openDropDown(event);
-      }
-      if(dropdownType === 'USER'){
-        setDropDownOpen(dropdownType);
-        openDropDown(event);
-      }
+  }, [auth]);
 
+  const openDropDown = (event) =>
+    setAnchorEl(
+      anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget
+    );
+
+  const closeDropDown = () => {
+    setAnchorEl(null);
+  };
+
+  const handleIconClick = (event, dropdownType) => {
+    if (dropdownType === "MESSAGE") {
+      openDropDown(event);
+    }
+    if (dropdownType === "NOTIFICATION") {
+      setDropDownData(notifications);
       setDropDownOpen(dropdownType);
+      openDropDown(event);
     }
+    if (dropdownType === "USER") {
+      setDropDownOpen(dropdownType);
+      openDropDown(event);
+    }
+
+    setDropDownOpen(dropdownType);
+  };
 
   return (
     <>
@@ -78,42 +84,47 @@ const AppHeader = () => {
           <div className={classes.grow} />
 
           {/* Right Side */}
-          <IconButton color="inherit" onClick={(event) => handleIconClick(event, 'NOTIFICATION')}>
+          <IconButton
+            color="inherit"
+            onClick={(event) => handleIconClick(event, "NOTIFICATION")}
+          >
             <Badge badgeContent={notifications.length} color="secondary">
-                <NotificationIcon fontSize="small" />
+              <NotificationIcon fontSize="small" />
             </Badge>
           </IconButton>
 
-          <IconButton color="inherit" onClick={(event) => handleIconClick(event, 'MESSAGE') }>
+          <IconButton
+            color="inherit"
+            onClick={(event) => handleIconClick(event, "MESSAGE")}
+          >
             <Badge badgeContent={4} color="secondary">
               <MailIcon fontSize="small" />
             </Badge>
           </IconButton>
-          
-          <IconButton color="inherit" onClick={(event) => handleIconClick(event, 'USER')}>
+
+          <IconButton
+            color="inherit"
+            onClick={(event) => handleIconClick(event, "USER")}
+          >
             <AccountCircle />
           </IconButton>
-
         </Toolbar>
       </AppBar>
 
-      <HeaderDropDowns 
-      dropDownOpen={dropDownOpen}
-      dropDownData={dropDownData}
-
-      notificationAnchorEl={anchorEl}
-      messageAnchorEl={anchorEl}
-      userAnchorEl={anchorEl}
-
-      isOpen={Boolean(anchorEl)}
-      closeMenu={closeDropDown}
+      <HeaderDropDowns
+        dropDownOpen={dropDownOpen}
+        dropDownData={dropDownData}
+        notificationAnchorEl={anchorEl}
+        messageAnchorEl={anchorEl}
+        userAnchorEl={anchorEl}
+        isOpen={Boolean(anchorEl)}
+        closeMenu={closeDropDown}
       />
-      
+
       {/* mobile drawer */}
       <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <Navigation />
       </Drawer>
-
     </>
   );
 };

@@ -45,12 +45,12 @@ const appLayoutStyles = makeStyles((theme) => ({
   extreme: {
     paddingTop: 60,
     backgroundColor: colors.white,
-    position: "relative"
+    position: "relative",
   },
   desktopDrawer: {
     top: 64,
-    height: 'calc(100% - 64px)',
-    width: 256
+    height: "calc(100% - 64px)",
+    width: 256,
   },
 }));
 
@@ -81,9 +81,9 @@ const AppLayout = ({ authUser }) => {
           <Hidden smDown>
             <Grid item md={3} xs={12} className={classes.extreme}>
               <Drawer
-              open
-              variant="persistent"
-              classes={{ paper: classes.desktopDrawer }}
+                open
+                variant="persistent"
+                classes={{ paper: classes.desktopDrawer }}
               >
                 <Navigation />
               </Drawer>
@@ -96,20 +96,13 @@ const AppLayout = ({ authUser }) => {
               <Route exact path={Routes.HOME} render={() => <Home />} />
               <Route exact path={Routes.PEOPLE} render={() => <People />} />
               {/* redirect to PEOPLE for development purpose */}
-              <Redirect to={Routes.PEOPLE} /> 
+              <Redirect to={Routes.PEOPLE} />
             </Switch>
           </Grid>
 
           {/* hidden on mobile */}
           <Hidden smDown>
-            <Grid
-              item
-              md={3}
-              xs={12}
-              className={
-                classNames([classes.extreme])
-              }
-            >
+            <Grid item md={3} xs={12} className={classNames([classes.extreme])}>
               User suggestions
             </Grid>
           </Hidden>

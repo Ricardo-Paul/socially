@@ -16,19 +16,19 @@ import CardHeader from "@material-ui/core/CardHeader";
 import { shadows } from "../../utils/theme";
 import PostCardOptions from "./PostCardOptions";
 import CreateComment from "../CreateComment";
-import Like from '../Like'
-import PostPopUpComments from '../PostPopUp/PostPopUpComments';
+import Like from "../Like";
+import PostPopUpComments from "../PostPopUp/PostPopUpComments";
 
-import { useStore } from '../../store';
+import { useStore } from "../../store";
 
 // delete post imports
-import { useMutation } from '@apollo/client';
-import { DELETE_POST } from '../../graphql/post';
-import { GET_AUTH_USER } from '../../graphql/user';
-import { GET_FOLLOWED_POSTS } from '../../graphql/post';
-import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
+import { useMutation } from "@apollo/client";
+import { DELETE_POST } from "../../graphql/post";
+import { GET_AUTH_USER } from "../../graphql/user";
+import { GET_FOLLOWED_POSTS } from "../../graphql/post";
+import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 
-import { theme } from '../../utils/theme'
+import { theme } from "../../utils/theme";
 
 const postCardStyles = makeStyles({
   card: {
@@ -41,21 +41,21 @@ const postCardStyles = makeStyles({
     // position: "absolute",
     // width: "30%"
     [theme.breakpoints.down("sm")]: {
-      maxWidth: "100%"
+      maxWidth: "100%",
     },
   },
   cardData: {
     display: "flex",
     justifyContent: "space-between",
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
   },
   icons: {
     paddingX: 0,
     display: "flex",
     justifyContent: "space-between",
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
   },
   media: {
     height: 250,
@@ -66,22 +66,22 @@ const postCardStyles = makeStyles({
   },
 });
 
-const PostCard = ({ 
-  title, 
-  username, 
-  image, 
-  avatar, 
-  openModal, 
-  likeNumber, 
+const PostCard = ({
+  title,
+  username,
+  image,
+  avatar,
+  openModal,
+  likeNumber,
   commentNumber,
   likes,
   postId,
   postAuthor,
   imagePublicId,
-  comments
+  comments,
 }) => {
   const classes = postCardStyles();
-  const [{auth}] = useStore();
+  const [{ auth }] = useStore();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -94,36 +94,39 @@ const PostCard = ({
 
   const [isCommentOpen, setIsCommentOpen] = React.useState(false);
 
-  const [remove] = useMutation(DELETE_POST,{
+  const [remove] = useMutation(DELETE_POST, {
     refetchQueries: [
-      {query: GET_AUTH_USER},
-      {query: GET_FOLLOWED_POSTS, variables:{ userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT }}
-  ]
-})
+      { query: GET_AUTH_USER },
+      {
+        query: GET_FOLLOWED_POSTS,
+        variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
+      },
+    ],
+  });
 
   const deletePost = async () => {
-    try{
+    try {
       const { data } = await remove({
-        variables: { input: { id: postId, imagePublicId}}
+        variables: { input: { id: postId, imagePublicId } },
       });
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
     setAnchorEl(null);
-  }
+  };
 
   return (
     <>
       <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
-        <PostCardOptions 
-        closeMenu={() => setAnchorEl(null)} 
-        postId={postId}  
-        postAuthor={postAuthor}
-        imagePublicId={imagePublicId}
-        deletePost={deletePost}
+        <PostCardOptions
+          closeMenu={() => setAnchorEl(null)}
+          postId={postId}
+          postAuthor={postAuthor}
+          imagePublicId={imagePublicId}
+          deletePost={deletePost}
         />
       </Popper>
-{/*  */}
+      {/*  */}
       <Card className={classes.card}>
         <CardHeader
           className={classes.header}
@@ -137,26 +140,40 @@ const PostCard = ({
           subheader={"5 hours ago"}
         />
         <CardContent>{title}</CardContent>
-        {image && <CardMedia
-          className={classes.media}
-          image={image}
-          onClick={openModal}
-        />}
+        {image && (
+          <CardMedia
+            className={classes.media}
+            image={image}
+            onClick={openModal}
+          />
+        )}
         <div className={classes.footer}>
           <div className={classes.cardData}>
-            <h5> {likeNumber} {likeNumber > 1? 'likes': 'like'} </h5>
-            <h5> {commentNumber} {commentNumber > 1? 'comments': 'comment'} </h5>
+            <h5>
+              {" "}
+              {likeNumber} {likeNumber > 1 ? "likes" : "like"}{" "}
+            </h5>
+            <h5>
+              {" "}
+              {commentNumber} {commentNumber > 1 ? "comments" : "comment"}{" "}
+            </h5>
           </div>
           <Divider />
           <div className={classes.icons}>
-
             <Like likes={likes} postId={postId} author={postAuthor} />
             <IconButton onClick={() => setIsCommentOpen(!isCommentOpen)}>
               <Comment />
             </IconButton>
           </div>
-          { isCommentOpen && <PostPopUpComments comments={comments} closeComments={() => setIsCommentOpen(false)} /> }
-          {isCommentOpen && <CreateComment postId={postId} focus={isCommentOpen} />}
+          {isCommentOpen && (
+            <PostPopUpComments
+              comments={comments}
+              closeComments={() => setIsCommentOpen(false)}
+            />
+          )}
+          {isCommentOpen && (
+            <CreateComment postId={postId} focus={isCommentOpen} />
+          )}
         </div>
       </Card>
     </>

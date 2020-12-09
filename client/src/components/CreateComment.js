@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, makeStyles, TextField, IconButton } from "@material-ui/core";
 import { theme } from "../utils/theme";
-import { CREATE_COMMENT } from '../graphql/comment';
-import { useMutation } from '@apollo/client';
-import {useStore} from '../store';
-import { Send } from '@material-ui/icons';
+import { CREATE_COMMENT } from "../graphql/comment";
+import { useMutation } from "@apollo/client";
+import { useStore } from "../store";
+import { Send } from "@material-ui/icons";
 
-import { GET_AUTH_USER } from '../graphql/user';
-import { GET_FOLLOWED_POSTS } from '../graphql/post';
-import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
+import { GET_AUTH_USER } from "../graphql/user";
+import { GET_FOLLOWED_POSTS } from "../graphql/post";
+import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
 const commenStyles = makeStyles({
   textField: {
@@ -43,24 +43,27 @@ const CreateComment = ({ focus, postId }) => {
   const buttonEl = React.useRef(null);
 
   const [comment, setComment] = React.useState("");
-  const [{auth}] = useStore();
-  const [ createComment, { loading } ] = useMutation(CREATE_COMMENT,{
+  const [{ auth }] = useStore();
+  const [createComment, { loading }] = useMutation(CREATE_COMMENT, {
     refetchQueries: [
-      {query: GET_AUTH_USER},
-      {query: GET_FOLLOWED_POSTS, variables:{ userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT }}
-  ]
+      { query: GET_AUTH_USER },
+      {
+        query: GET_FOLLOWED_POSTS,
+        variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
+      },
+    ],
   });
 
   const handleChange = (e) => setComment(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
+    try {
       await createComment({
-        variables:{input:{ comment, authorId:auth.user.id, postId }}
+        variables: { input: { comment, authorId: auth.user.id, postId } },
       });
-    } catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
     setComment("");
   };
@@ -82,7 +85,7 @@ const CreateComment = ({ focus, postId }) => {
   return (
     <>
       <form onSubmit={handleSubmit} className={classes.form}>
-        <TextField 
+        <TextField
           inputRef={textareaEl}
           multiline
           fullWidth
@@ -92,18 +95,18 @@ const CreateComment = ({ focus, postId }) => {
           value={comment}
           placeholder="comment..."
         />
-          <IconButton
-            size="small"
-            variant="contained"
-            className={classes.button}
-            color="primary"
-            type="submit"
-            ref={buttonEl}
-            type="submit"
-            disabled={!comment.trim()}
-          >
-             <Send />
-          </IconButton>
+        <IconButton
+          size="small"
+          variant="contained"
+          className={classes.button}
+          color="primary"
+          type="submit"
+          ref={buttonEl}
+          type="submit"
+          disabled={!comment.trim()}
+        >
+          <Send />
+        </IconButton>
       </form>
     </>
   );
@@ -113,5 +116,5 @@ export default CreateComment;
 
 CreateComment.propTypes = {
   focus: PropTypes.bool.isRequired,
-  postId: PropTypes.string.isRequired
+  postId: PropTypes.string.isRequired,
 };
