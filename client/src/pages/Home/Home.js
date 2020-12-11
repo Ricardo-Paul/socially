@@ -1,4 +1,4 @@
-import { Box, Grid, makeStyles, Paper } from "@material-ui/core";
+import { Box, Card, CardContent, CardHeader, Divider, Grid, makeStyles, Paper } from "@material-ui/core";
 import React, { Fragment } from "react";
 import CreatePost from "../../components/CreatePost";
 import PostCard from "../../components/Postcard";
@@ -22,6 +22,11 @@ const homeStyles = makeStyles({
       marginLeft: 0
     }
   },
+  headerTitle: {
+    fontSize: "16px",
+    fontFamily: "roboto",
+    fontWeight: 500
+  }
 });
 
 const Home = () => {
@@ -107,7 +112,7 @@ const Home = () => {
   return (
     <>
       <div className={classes.home}>
-        <Grid container>
+        <Grid container spacing={3}>
           <Grid item md="8" xs="12">
             <Box>
               <CreatePost />
@@ -115,7 +120,13 @@ const Home = () => {
             </Box>
           </Grid>
           <Grid item md="4" xs="12">
-            Suggestions
+            <Card>
+              <h4 style={{paddingLeft: 10}}> Suggestions </h4>
+              <Divider />
+              <CardContent>
+                  Users here
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       </div>
