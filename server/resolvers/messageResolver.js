@@ -1,5 +1,5 @@
 const Query = {
-    getMessages: async (root, {authUserId, userId}, {Message, User}) => {
+    getMessages: async (root, {authUserId, userId}, {Message}) => {
         const query = {
             $and:[
                 { $or:[{sender: authUserId } , {receiver: authUserId}] },
