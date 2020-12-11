@@ -6,7 +6,7 @@ const Mutation = {
     createMessage: async (root, { input: { message, sender, receiver } }, {Message, User}) => {
         console.log('FUNC HIT');
 
-        
+
         const newMessage = await new Message({
             sender: sender,
             receiver: receiver,
@@ -33,7 +33,7 @@ const Mutation = {
     deleteMessage: async (root, { input: { messageId } }, { Message, User }) => {
         const message = await Message.findOneAndRemove({ _id: messageId });
         // remove the message only from the sender messages array
-        await User.findOneAndUpdate({ _id: message.sender }, { $pull: { messages: message._id } });
+        await User.findOneAndUpdate({ _id: message.sender }, { $pull: { messages: message.receiver } });
 
         return message;
     }
