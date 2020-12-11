@@ -16,10 +16,8 @@ const Query = {
     getConversations: async (root, { authUserId }, {User, Message}) => {
         // a message is represented by the senderId
         // populating the messages field returns the entire sender
-        const authUser = await User.findById(authUserId).populate('messages')
+        const authUser = await User.findById(authUserId).populate('messages', 'id fullName image username isOnline')
 
-
-        console.log('AUTH USER',authUser);
 
         // messages the auth user has sent or received
        const lastMessages = await Message.aggregate([
@@ -33,18 +31,51 @@ const Query = {
        ]);
 
        let conversations = [];
-       authUser.messages.map((message) => {
-        console.log('SINGLE MESSAGE', message, 'FINISH')
-       })
-      
+        // attach message properties to users who had a chat with the auth user
+        // based on if they are sender or receiver
+       authUser.messages.map((u) => {
+        // each person who messaged the auth user
+        const user = {
+            id: u.id,
+            fullName: u.fullName,
+            image: u.image,
+            username: u.username,
+            isOnline: u.isOnline
+        };
 
-       return [authUser];
+        // check if the person is the sender in the auth user last Messages
+        const sender = lastMessages.find((m) => m.sender.toString() === u.id); //returns a message
+        if(sender){
+            user.seen = sender.seen;
+            user.lastMessage = sender.message;
+            user.lastMessageCreatedAt = sender.createdAt;
+            user.lastMessageSender = false;
+        };
+
+        // check if the user is the receiver in the auth user last messages
+        const receiver = lastMessages.find((m) => m.receiver.toString() === u.id); // returns a message
+        if(receiver){
+            user.seen = receiver.seen;
+            user.lastMessage = receiver.message;
+            user.lastMessageCreatedAt = receiver.createdAt;
+            user.lastMessageSender = true
+        };
+
+        conversations.push(user);
+       })
+
+       console.log('CONVERSATIONS', conversations);
+
+      const sortedConversations = conversations.sort((a, b) => {
+        b.lastMessageCreatedAt.toString().localeCompare(a.lastMessageCreatedAt)
+      });
+
+       return sortedConversations;
     }
 }
 
 const Mutation = {
     createMessage: async (root, { input: { message, sender, receiver } }, {Message, User}) => {
-        console.log('FUNC HIT');
 
 
         const newMessage = await new Message({

@@ -27,6 +27,9 @@ export const schema = gql`
         id: ID!
         username: String!
         fullName: String!
+        lastMessage: String!
+        image: String
+        isOnline: Boolean
     }
     type NotificationsPayload{
         notifications: [Notification]
@@ -61,6 +64,8 @@ export const schema = gql`
         posts: [Post]
         comments: [Comment]
         notifications:[Notification]
+        isOnline: Boolean
+        messages: [Message]
     }
     type Post{
         id: ID!
@@ -120,6 +125,9 @@ type UserPayload{
     following: [Follow]
     followers: [Follow]
     notifications: [Notification]
+
+    isOnline: Boolean
+    messages: [Message]
 }
 type PostPayload{
     id: ID!
