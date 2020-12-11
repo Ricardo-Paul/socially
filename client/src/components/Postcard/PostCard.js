@@ -58,7 +58,8 @@ const postCardStyles = makeStyles({
     paddingRight: 10,
   },
   media: {
-    height: 250,
+    height: 600,
+    maxHeight: 650,
     objectFit: "cover",
   },
   footer: {
