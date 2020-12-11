@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import React, { Fragment } from "react";
 import CreatePost from "../../components/CreatePost";
 import PostCard from "../../components/Postcard";
@@ -102,8 +102,15 @@ const Home = () => {
   return (
     <>
       <div className={classes.home}>
-        <CreatePost />
-        {renderContent()}
+        <Grid container>
+          <Grid item md="8" xs="12">
+            <CreatePost />
+            {renderContent()}
+          </Grid>
+          <Grid item md="4" xs="12">
+            Suggestions
+          </Grid>
+        </Grid>
       </div>
     </>
   );

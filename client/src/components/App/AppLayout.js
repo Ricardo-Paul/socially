@@ -3,7 +3,6 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import * as Routes from "../../routes";
 import Navigation from "./Navigation";
 import { colors } from "../../utils/theme";
-import classNames from "classnames";
 
 // actions
 import { SET_AUTH_USER } from "../../store/auth";
@@ -34,7 +33,7 @@ const appLayoutStyles = makeStyles((theme) => ({
   middle: {
     paddingTop: 80,
     height: "100vh",
-    overflow: "auto",
+    // overflow: "auto",
     // backgroundColor: colors.lightGrey,
     paddingLeft: 25,
     paddingRight: 25,
@@ -91,7 +90,7 @@ const AppLayout = ({ authUser }) => {
           </Hidden>
 
           {/* Middle */}
-          <Grid item md={6} xs={12} className={classes.middle}>
+          <Grid item md={8} xs={12} className={classes.middle}>
             <Switch>
               <Route exact path={Routes.HOME} render={() => <Home />} />
               <Route exact path={Routes.PEOPLE} render={() => <People />} />
@@ -101,11 +100,11 @@ const AppLayout = ({ authUser }) => {
           </Grid>
 
           {/* hidden on mobile */}
-          <Hidden smDown>
+          {/* <Hidden smDown>
             <Grid item md={3} xs={12} className={classNames([classes.extreme])}>
               User suggestions
             </Grid>
-          </Hidden>
+          </Hidden> */}
         </Grid>
       </div>
     </>
