@@ -20,6 +20,13 @@ export const schema = gql`
         getUserNotifications(userId:ID!, skip:Int, limit:Int): NotificationsPayload
 
         getMessages(authUserId:ID!, userId:ID!): [Message]
+        getConversations(authUserId: ID!): [ConversationsPayload]
+    }
+
+    type ConversationsPayload{
+        id: ID!
+        username: String!
+        fullName: String!
     }
     type NotificationsPayload{
         notifications: [Notification]

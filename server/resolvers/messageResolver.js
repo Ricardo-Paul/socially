@@ -10,6 +10,10 @@ const Query = {
         // SHOULD POPULATE??
 
         return messages;
+    },
+    getConversations: () => {
+        // aggregations can be tested in mongo shell
+        //db.messages.aggregate({$match: {sender: ObjectId("5fc2703d329e5d026d4f3020")}})
     }
 }
 
