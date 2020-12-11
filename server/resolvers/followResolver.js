@@ -36,10 +36,10 @@ const Mutation = {
     if (!followToRemove) throw new Error(`cant perfor unfollowing, not found`);
 
     // remove it from the followed user
-    await User.findOneAndUpdate({ _id: followToRemove.follower }, { $pull: { followers: followToRemove._id } });
+    await User.findOneAndUpdate({ _id: followToRemove.follower }, { $pull: { following: followToRemove._id } });
 
     // remove it from current user
-    await User.findOneAndUpdate({ _id: followToRemove.following }, { $pull: { following: followToRemove._id } });
+    await User.findOneAndUpdate({ _id: followToRemove.following }, { $pull: { followers: followToRemove._id } });
 
     return followToRemove;
   },
