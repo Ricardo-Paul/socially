@@ -18,7 +18,6 @@ const Query = {
         // populating the messages field returns the entire sender
         const authUser = await User.findById(authUserId).populate('messages', 'id fullName image username isOnline')
 
-
         // messages the auth user has sent or received
        const lastMessages = await Message.aggregate([
            {$match:{
@@ -63,8 +62,6 @@ const Query = {
 
         conversations.push(user);
        })
-
-       console.log('CONVERSATIONS', conversations);
 
       const sortedConversations = conversations.sort((a, b) => {
         b.lastMessageCreatedAt.toString().localeCompare(a.lastMessageCreatedAt)
