@@ -11,12 +11,16 @@ import * as Routes from "../../routes";
 import { generatePath } from "react-router-dom";
 
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
+import { theme } from "../../utils/theme";
 
 const homeStyles = makeStyles({
   home: {
     padding: 10,
     position: "relative",
-    marginLeft: 20
+    marginLeft: 20,
+    [theme.breakpoints.down("sm")]:{
+      marginLeft: 0
+    }
   },
 });
 

@@ -35,7 +35,13 @@ const PostStyles = makeStyles({
     height: "100%",
   },
   mediaContainer: {
-    height: 500,
+    height: 400,
+    [theme.breakpoints.up("xl")]:{
+      height: 600
+    },
+    [theme.breakpoints.down("sm")]:{
+      height: 300
+    },
     width: "95%",
     backgroundColor: "blue",
     margin: "0 auto",
