@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const Query = {
     getMessages: async (root, {authUserId, userId}, {Message}) => {
         const query = {
@@ -11,9 +13,32 @@ const Query = {
 
         return messages;
     },
-    getConversations: () => {
-        // aggregations can be tested in mongo shell
-        //db.messages.aggregate({$match: {sender: ObjectId("5fc2703d329e5d026d4f3020")}})
+    getConversations: async (root, { authUserId }, {User, Message}) => {
+        // a message is represented by the senderId
+        // populating the messages field returns the entire sender
+        const authUser = await User.findById(authUserId).populate('messages')
+
+
+        console.log('AUTH USER',authUser);
+
+        // messages the auth user has sent or received
+       const lastMessages = await Message.aggregate([
+           {$match:{
+            $or:[
+                {receiver: mongoose.Types.ObjectId(authUserId) },
+                {sender: mongoose.Types.ObjectId(authUserId)}
+            ]
+           }},
+           {$sort:{ createdAt: -1 }} //TODO: add other aggregation stages
+       ]);
+
+       let conversations = [];
+       authUser.messages.map((message) => {
+        console.log('SINGLE MESSAGE', message, 'FINISH')
+       })
+      
+
+       return [authUser];
     }
 }
 
