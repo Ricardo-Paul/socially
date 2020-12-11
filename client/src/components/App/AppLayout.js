@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import * as Routes from "../../routes";
 import Navigation from "./Navigation";
-import { colors } from "../../utils/theme";
+import { colors as appColors } from "../../utils/theme";
+
 
 // actions
 import { SET_AUTH_USER } from "../../store/auth";
@@ -16,7 +17,7 @@ import Home from "../../pages/Home";
 import People from "../../pages/People/";
 
 import AppHeader from "./AppHeader/AppHeader";
-import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
+import { Grid, makeStyles, CssBaseline, Drawer,colors } from "@material-ui/core";
 
 const appLayoutStyles = makeStyles((theme) => ({
   "@global": {
@@ -43,7 +44,7 @@ const appLayoutStyles = makeStyles((theme) => ({
   },
   extreme: {
     paddingTop: 60,
-    backgroundColor: colors.black,
+    backgroundColor: appColors.black,
     position: "relative",
   },
   desktopDrawer: {
@@ -51,6 +52,9 @@ const appLayoutStyles = makeStyles((theme) => ({
     height: "calc(100% - 64px)",
     width: 256,
   },
+  grid: {
+    height: "100%"
+  }
 }));
 
 /**
@@ -88,7 +92,7 @@ const AppLayout = ({ authUser }) => {
           </Hidden>
 
           {/* Middle */}
-          <Grid item md={10} xs={12} className={classes.middle}>
+          <Grid item xl={10} lg={12} xs={12} className={classes.middle}>
             <Switch>
               <Route exact path={Routes.HOME} render={() => <Home />} />
               <Route exact path={Routes.PEOPLE} render={() => <People />} />

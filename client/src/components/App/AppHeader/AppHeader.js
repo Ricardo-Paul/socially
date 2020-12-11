@@ -17,12 +17,11 @@ import React, { useState } from "react";
 import AppInfo from "../../../constants/AppInfo.json";
 import headerStyles from "./headerStyles";
 import MenuIcon from "@material-ui/icons/Menu";
-
 // components
-import Search from "./Search";
 import Navigation from "../Navigation";
 import { useStore } from "../../../store";
 import HeaderDropDowns from "./HeaderDropDowns";
+import Search from "../../Search";
 
 const AppHeader = () => {
   const classes = headerStyles();
