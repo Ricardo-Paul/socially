@@ -18,6 +18,8 @@ export const schema = gql`
         searchUsers(searchQuery: String): [UserPayload]
         suggestPeople(userId: ID!): UsersPayload
         getUserNotifications(userId:ID!, skip:Int, limit:Int): NotificationsPayload
+
+        getMessages(authUserId:ID!, userId:ID!): [Message]
     }
     type NotificationsPayload{
         notifications: [Notification]

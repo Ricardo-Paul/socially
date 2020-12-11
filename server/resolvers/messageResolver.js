@@ -1,5 +1,15 @@
 const Query = {
+    getMessages: async (root, {authUserId, userId}, {Message, User}) => {
+        const query = {
+            $and:[
+                { $or:[{sender: authUserId } , {receiver: authUserId}] },
+                { $or: [{sender: userId}, { receiver: userId }] }
+            ]
+        }
+        const messages = await Message.find(query);
 
+        return messages;
+    }
 }
 
 const Mutation = {
