@@ -9,7 +9,6 @@ const peopleCardStyles = makeStyles({
     width: 190,
     flexDirection: "column",
     alignItems: "center",
-    padding: 5
   },
 });
 

@@ -1,4 +1,4 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { Box, Grid, makeStyles, Paper } from "@material-ui/core";
 import React, { Fragment } from "react";
 import CreatePost from "../../components/CreatePost";
 import PostCard from "../../components/Postcard";
@@ -16,6 +16,7 @@ const homeStyles = makeStyles({
   home: {
     padding: 10,
     position: "relative",
+    marginLeft: 20
   },
 });
 
@@ -104,8 +105,10 @@ const Home = () => {
       <div className={classes.home}>
         <Grid container>
           <Grid item md="8" xs="12">
-            <CreatePost />
-            {renderContent()}
+            <Box>
+              <CreatePost />
+              {renderContent()}
+            </Box>
           </Grid>
           <Grid item md="4" xs="12">
             Suggestions
@@ -117,4 +120,3 @@ const Home = () => {
 };
 
 export default Home;
-//

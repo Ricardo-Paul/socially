@@ -17,38 +17,6 @@ import { colors } from "../../utils/theme";
 import NavItem from "./NavItem";
 
 const navStyles = makeStyles((theme) => ({
-  selected: {
-    backgroundColor: colors.lighRed,
-  },
-  navContainer: {
-    marginTop: 5,
-    paddingTop: 20,
-    backgroundColor: colors.black, //match that color with layout extreme color
-    [theme.breakpoints.up("sm")]: {
-      //not for sm screen
-      position: "absolute",
-      width: "70%", //related to the left grid
-      right: "1%",
-    },
-  },
-  list: {
-    // these styles are enabled for small screen
-    // all the way up.. not for xs
-    [theme.breakpoints.up("sm")]: {
-      width: "100%",
-      paddingLeft: 40,
-      // boxShadow: shadows.md,
-      padding: 15,
-    },
-  },
-  listItem: {
-    color: colors.white,
-    width: "100%",
-    display: "flex",
-    "&:hover": {
-      backgroundColor: colors.indigo1,
-    },
-  },
   name: {
     fontWeight: 500,
     fontSize: 16,
