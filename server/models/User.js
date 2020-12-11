@@ -64,7 +64,16 @@ const userSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Notification"
       }
-    ]
+    ],
+    messages:[
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User" // we will actually be storing sender or receiver ids
+      }
+    ],
+    isOnline: {
+      type: Boolean
+    }
   },
   {
     timestamps: true,

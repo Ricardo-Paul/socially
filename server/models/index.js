@@ -4,6 +4,7 @@ import Comment from './Comment';
 import Like from './Like';
 import Follow from './Follow';
 import Notification from './Notification';
+import Message from './Message'
 
 export default {
   User,
@@ -12,4 +13,5 @@ export default {
   Like,
   Follow,
   Notification,
+  Message
 };

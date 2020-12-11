@@ -143,21 +143,39 @@ enum NotificationType{
     type Mutation{
         signup(input: SignupInput!): Token
         signin(input: SigninInput!): Token
+        uploadUserPhoto(input: UploadUserPhotoInput!): UserPayload
+
         requestPassReset(input: PassResetInput!): SuccessMessage
         resetPassword(input: ResetPasswordInput!): Token
+
         createPost(input: CreatePostInput!): PostPayload
         deletePost(input: DeletePostInput!): PostPayload
+
         createComment(input: CreateCommentInput!): CommentPayload
         deleteComment(input: DeleteCommentInput): CommentPayload
+
         createLike(input: CreateLikeInput!): Like
         deleteLike(input: DeleteLikeInput!): Like
+
         createFollow(input: CreateFollowInput): Follow
         deleteFollow(input: DeleteFollowInput): Follow
+
         deleteNotification(input: DeleteNotificationInput): Notification
         createNotification(input: CreateNotificationInput): Notification
         updateNotificationSeen(input: UpdateNotificationInput!): Boolean
-        uploadUserPhoto(input: UploadUserPhotoInput!): UserPayload
+
+        createMessage(input: CreateMessageInput!): Message
+        deleteMessage(input: DeleteMessageInput!): Message
     }
+
+    type Message{
+        id: ID!
+        sender: ID!
+        receiver: ID!
+        seen: Boolean
+        message: String
+    }
+
     type TestMessage{
         title: String!
     }
@@ -168,6 +186,23 @@ enum NotificationType{
 	id: ID!
 	imagePublicId: ID
    }
+
+
+
+#-------------------------------------------------------
+# INPUTS
+#-------------------------------------------------------
+
+   input CreateMessageInput{
+     sender: ID!
+     receiver: ID!
+     message: String!
+   }
+
+   input DeleteMessageInput{
+     messageId: ID!
+   }
+
     input UploadUserPhotoInput{
         userId: ID!
         image: Upload!
