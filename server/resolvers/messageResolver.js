@@ -7,6 +7,7 @@ const Query = {
             ]
         }
         const messages = await Message.find(query);
+        // SHOULD POPULATE??
 
         return messages;
     }

@@ -176,6 +176,8 @@ enum NotificationType{
         receiver: ID!
         seen: Boolean
         message: String
+        createdAt: String
+        updatedAt: String
     }
 
     type TestMessage{
