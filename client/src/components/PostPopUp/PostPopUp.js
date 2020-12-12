@@ -5,14 +5,13 @@ import { theme } from "../../utils/theme";
 import {
   Card,
   CardHeader,
-  CardMedia,
   CardContent,
   ClickAwayListener,
   Avatar,
   IconButton,
   Paper,
 } from "@material-ui/core";
-import { MoreVert, Close } from "@material-ui/icons";
+import { Close } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
 
 const PostStyles = makeStyles({
@@ -66,7 +65,6 @@ const PostPopUp = ({
   author,
   postTitle,
   createdAt,
-  closeComments,
 }) => {
   const classes = PostStyles();
   return (
