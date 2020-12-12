@@ -9,7 +9,6 @@ import SearchResult from "./searchResult";
 
 const Search = () => {
   const client = useApolloClient();
-  const debounce = useDebounce();
 
   const classes = headerStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,7 +22,7 @@ const Search = () => {
   };
 
   // TODO: debounce the search query
-  const debounceSearchQuery = useDebounce(searchQuery, 1000);
+  const debounceSearchQuery = useDebounce(searchQuery, 500);
 
   // handle input change
   const handleChange = (event) => {

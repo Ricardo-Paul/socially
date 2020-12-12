@@ -5,7 +5,6 @@ import React from 'react';
  * @param {number} delay after the amount of time
  */
 
-
 const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = React.useState("");
     
