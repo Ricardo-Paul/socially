@@ -23,7 +23,7 @@ const Search = () => {
         <SearchIcon />
       </div>
       <InputBase classes={inputBaseClasses} placeholder="Search..." onChange={(event)=> handleChange(event)} />
-      <SearchResult searchAnchorEl={anchorEl} />
+      <SearchResult searchAnchorEl={anchorEl} isOpen={Boolean(anchorEl)} />
     </div>
   );
 };

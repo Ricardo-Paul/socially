@@ -5,7 +5,6 @@ import {
   ListItemText,
   Avatar,
 } from "@material-ui/core";
-import { render } from "react-dom";
 
 const Notification = ({ notification }) => {
   const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
