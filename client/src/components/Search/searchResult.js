@@ -2,12 +2,22 @@ import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from "@material-
 import React from "react";
 import MenuWrapper from "../App/AppHeader/MenuWrapper";
 
-const SearchResult = ({ searchAnchorEl, isOpen, users }) => {
+const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading }) => {
 
     const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
 
     return(
        <MenuWrapper isOpen={isOpen} anchorEl={searchAnchorEl} >
+
+            {loading && 
+            <ListItem> searching... </ListItem>
+            }
+
+           {!users.length > 0 && 
+           <ListItem>
+               No result found for {query}
+           </ListItem>
+           }
            <List style={{width: 240}}>
                 {users.map(u => (
                 <ListItem>

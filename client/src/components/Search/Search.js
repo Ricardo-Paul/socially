@@ -15,20 +15,24 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [foundUsers, setFoundUsers] = React.useState([]);
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const inputBaseClasses = {
     root: classes.inputRoot,
     input: classes.inputInput,
   };
 
-  // TODO: debounce the search query
   const debounceSearchQuery = useDebounce(searchQuery, 500);
 
   // handle input change
   const handleChange = (event) => {
-    const value = event.target.value;
+    // trim white space from the beginning
+    const value = event.target.value.replace(/^\s+/g, '');
     setAnchorEl(event.currentTarget);
     setSearchQuery(value);
+    if(value){
+      setLoading(true)
+    }
   }
 
   // the effect will run based on the existence of a 
@@ -40,6 +44,7 @@ const Search = () => {
         variables: { searchQuery: debounceSearchQuery }
       });
 
+      setLoading(false);
       setFoundUsers(data.searchUsers);
       setIsSearchOpen(debounceSearchQuery != '');
     }
@@ -62,7 +67,10 @@ const Search = () => {
       <SearchResult 
         searchAnchorEl={anchorEl} 
         isOpen={isSearchOpen}
-        users={foundUsers} />
+        users={foundUsers} 
+        query={debounceSearchQuery}
+        loading={loading}
+        />
     </div>
   );
 };
