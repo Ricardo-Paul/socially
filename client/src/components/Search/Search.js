@@ -3,13 +3,14 @@ import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import { SEARCH_USERS } from "../../graphql/search";
+import useDebounce from "../../hooks/useDebounce";
 import headerStyles from "../App/AppHeader/headerStyles";
 import SearchResult from "./searchResult";
 
-const sampleUsers = [{fullName:'Eric Xavier', username:'@xavier'}]
-
 const Search = () => {
   const client = useApolloClient();
+  const debounce = useDebounce();
+
   const classes = headerStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -22,7 +23,7 @@ const Search = () => {
   };
 
   // TODO: debounce the search query
-  const debounceSearchQuery = searchQuery;
+  const debounceSearchQuery = useDebounce(searchQuery, 1000);
 
   // handle input change
   const handleChange = (event) => {
@@ -40,16 +41,12 @@ const Search = () => {
         variables: { searchQuery: debounceSearchQuery }
       });
 
-      console.log('SEARCH DATA', data)
-
       setFoundUsers(data.searchUsers);
       setIsSearchOpen(debounceSearchQuery != '');
     }
 
     search();
   }, [client, debounceSearchQuery]);
-
-
 
 
   return (
