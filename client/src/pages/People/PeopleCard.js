@@ -5,11 +5,16 @@ import Follow from "../../components/Follow";
 const peopleCardStyles = makeStyles({
   container: {
     display: "flex",
-    height: 290,
-    width: 190,
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor: "#f1f1f1",
+    padding: 20
   },
+  avatar: {
+    width: 128,
+    height: 128,
+    borderRadius: "50%"
+  }
 });
 
 const PeopleCard = ({ user }) => {
@@ -17,10 +22,9 @@ const PeopleCard = ({ user }) => {
   const classes = peopleCardStyles();
 
   return (
-    <Box className={classes.container}>
-      <Paper>
+      <Paper className={classes.container}>
         <Box>
-          <img src={avatar} />
+          <img src={avatar} className={classes.avatar} />
         </Box>
         <Box>
           <Typography> {user.fullName} </Typography>
@@ -28,7 +32,6 @@ const PeopleCard = ({ user }) => {
           <Follow user={user} />
         </Box>
       </Paper>
-    </Box>
   );
 };
 

@@ -3,9 +3,28 @@ import { GET_USERS } from "../../graphql/user";
 import PeopleCard from "./PeopleCard";
 import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
+import { GridList, GridListTile, ListSubheader, makeStyles } from "@material-ui/core";
+
+const peopleStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    width: "100%"
+  },
+  gridList: {
+    width: "100%",
+    height: "100%"
+  },
+  gridListTile: {
+    width: "180px",
+    padding: 20
+  }
+}))
 
 const People = () => {
   const [{ auth }] = useStore();
+  const classes = peopleStyles();
 
   const { data, loading, networkStatus } = useQuery(GET_USERS, {
     variables: {
@@ -28,9 +47,20 @@ const People = () => {
 
     console.log('USERS :', users)
 
-    return users.map((user, index) => {
-      return <PeopleCard key={index} user={user} />;
-    });
+
+    return <div className={classes.root}>
+      <GridList cellHeight={300} className={classes.gridList}>
+        <GridListTile cols={2} style={{height: "auto"}}>
+          <ListSubheader> PEOPLE </ListSubheader>
+        </GridListTile>
+
+        {users.map((user, index) => (
+          <GridListTile key={index} className={classes.gridListTile} style={{width: "190px", height: "270px", padding: 10}}>
+            <PeopleCard key={index} user={user} />
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
   };
 
   return <>{content()}</>;
