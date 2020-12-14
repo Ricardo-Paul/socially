@@ -9,10 +9,11 @@ import { createApolloClient } from './utils/createApolloClient';
 import App from './components/App/App';
 
 import { StoreProvider } from './store/store';
-import { theme, palette } from './utils/theme';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core';
+import { getMuiTheme } from './utils/getMuiTheme';
 
-const appTheme = createMuiTheme(palette)
+const SELECTED_COLOR_SCHEME = 'LIGHT';
+const theme = getMuiTheme(SELECTED_COLOR_SCHEME);
 
 // http and websockekt links
 const apiUrl = "http://localhost:8080/graphql"

@@ -7,4 +7,4 @@ import { palette } from './theme';
  */
 export const getMuiTheme = SELECTED_COLOR_SCHEME => createMuiTheme({
     palette: palette[SELECTED_COLOR_SCHEME]
-})
+});

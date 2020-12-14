@@ -48,7 +48,7 @@ const postStyles = makeStyles((theme) => ({
     paddingTop: 10,
     paddingLeft: 15,
     borderRadius: 5,
-    backgroundColor: colors.indigo1,
+    backgroundColor: "#efefef",
     [theme.breakpoints.down("sm")]: {
       margin: 0,
       width: "100%",

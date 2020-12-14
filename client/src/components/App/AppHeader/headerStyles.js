@@ -21,11 +21,11 @@ const headerStyles = makeStyles((theme) => ({
     },
   },
   search: {
-    backgroundColor: "white",
+    backgroundColor: "#efefef",
     display: "flex",
     borderRadius: 15,
     marginLeft: 20,
-    [theme.breakpoints.down(`${theme.screen.sm}`)]: {
+    [theme.breakpoints.down("sm")]: {
       marginLeft: 5,
     },
   },
@@ -48,13 +48,13 @@ const headerStyles = makeStyles((theme) => ({
   },
   // hide the menu icon from md all the way up
   menuIcon: {
-    [theme.breakpoints.up(`${theme.screen.sm}`)]: {
+    [theme.breakpoints.up("sm")]: {
       display: "none",
     },
   },
   appName: {
     color: colors.lighRed,
-    [theme.breakpoints.down(`${theme.screen.sm}`)]: {
+    [theme.breakpoints.down("sm")]: {
       display: "none",
     },
   },
