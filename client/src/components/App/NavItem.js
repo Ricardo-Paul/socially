@@ -47,7 +47,8 @@ const navItemStyles = makeStyles((theme) => ({
     marginRight: "auto",
   },
   active: {
-    color: palette.primary.main,
+    color: "#fdfdfd",
+    backgroundColor: "#505050"
   },
 }));
 

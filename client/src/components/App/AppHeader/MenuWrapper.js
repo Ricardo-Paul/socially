@@ -2,7 +2,7 @@ import React from "react";
 import { Popper, Grow, Paper, ClickAwayListener } from "@material-ui/core";
 import headerStyles from "./headerStyles";
 
-const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children }) => {
+const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
   const classes = headerStyles();
 
   return (
@@ -12,6 +12,7 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children }) => {
       open={isOpen}
       transition
       disablePortal
+      {...rest}
     >
       {({ TransitionProps, placement }) => (
         <ClickAwayListener onClickAway={closeMenu}>
@@ -22,7 +23,7 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children }) => {
                 placement === "top" ? "center bottom" : "center top",
             }}
           >
-            <Paper elevation={5}>{children}</Paper>
+            <Paper square="true" elevation={21} variant="outlined">{children}</Paper>
           </Grow>
         </ClickAwayListener>
       )}

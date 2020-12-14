@@ -46,7 +46,6 @@ const Notification = ({ notification }) => {
         </>
       )}
     </ListItem>
-    <Divider />
     </React.Fragment>
   );
 };

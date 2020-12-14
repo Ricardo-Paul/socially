@@ -7,7 +7,7 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading }) => {
     const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
 
     return(
-       <MenuWrapper isOpen={isOpen} anchorEl={searchAnchorEl} >
+       <MenuWrapper isOpen={isOpen} anchorEl={searchAnchorEl} style={{marginLeft: -50}} >
 
             {loading && 
             <ListItem> searching... </ListItem>
@@ -18,7 +18,7 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading }) => {
                No result found for {query}
            </ListItem>
            }
-           <List style={{width: 240}}>
+           <List style={{width: 250, paddingLeft: 10}}>
                 {users.map(u => (
                 <React.Fragment>
                 <ListItem>
@@ -27,7 +27,6 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading }) => {
                     </ListItemAvatar>
                     <ListItemText primary={u.fullName} secondary={u.username} />
                 </ListItem>
-                <Divider />
                 </React.Fragment>
                 ))}
            </List>
