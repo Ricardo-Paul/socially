@@ -12,8 +12,8 @@ const inputStyles = makeStyles({
     display: "none",
   },
   avatar: {
-    color: colors.lighRed,
-    backgroundColor: colors.indigo1,
+    color: "#ffffff",
+    backgroundColor: "#7c7d82",
     width: 50,
     height: 50,
     borderRadius: 5,

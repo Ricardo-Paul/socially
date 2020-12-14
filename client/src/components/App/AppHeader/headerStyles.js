@@ -21,6 +21,7 @@ const headerStyles = makeStyles((theme) => ({
     },
   },
   search: {
+    border: "1.2px solid #a9a8a8",
     backgroundColor: "#efefef",
     display: "flex",
     borderRadius: 15,
