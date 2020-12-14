@@ -40,3 +40,18 @@ export const colors = {
     black: "black",
     lightGrey: "#e0e0e0"
 }
+
+const nTheme = {
+    LIGHT: {
+        primary: {
+            main: "#ffffff",
+            dark:"",
+            light: ""
+        },
+        secondary: {
+            main: "#bdbdbd4f",
+            dark: "#888584", //icons fill color
+            light: "#d8d8d847"
+        }
+    }
+}

@@ -48,7 +48,7 @@ const appLayoutStyles = makeStyles((theme) => ({
     position: "relative",
   },
   desktopDrawer: {
-    top: 64,
+    top: 70,
     height: "calc(100% - 64px)",
     width: 256,
   },

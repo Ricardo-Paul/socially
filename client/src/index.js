@@ -1,11 +1,7 @@
 // That's the very root of the app
 import React from 'react';
 import { render } from 'react-dom';
-
-import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
-
-import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 
 // root component
 import App from './components/App/App';
@@ -15,18 +11,12 @@ import { StoreProvider } from './store/store';
 import { theme } from './utils/theme';
 import { MuiThemeProvider } from '@material-ui/core';
 
+// http and websockekt links
 const apiUrl = "http://localhost:8080/graphql"
 const webSocketApiUrl = "ws://localhost:8080/graphql"
-
-// const testClient = new ApolloClient({
-//   uri: 'http://localhost:8080/graphql',
-//   cache: new InMemoryCache()
-// });
-
 const client = createApolloClient(apiUrl, webSocketApiUrl);
 
 render(
-  // <ApolloHooksProvider client={client}>
   <ApolloProvider client={client}>
     <MuiThemeProvider theme={theme}>
       <StoreProvider>
@@ -34,7 +24,6 @@ render(
         </StoreProvider>
     </MuiThemeProvider>
   </ApolloProvider>,
-  // </ApolloHooksProvider>,
     document.getElementById("root")
   );
 
