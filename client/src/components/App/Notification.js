@@ -4,6 +4,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
+  Divider
 } from "@material-ui/core";
 
 const Notification = ({ notification }) => {
@@ -26,6 +27,7 @@ const Notification = ({ notification }) => {
   };
 
   return (
+    <React.Fragment>
     <ListItem button>
       <ListItemAvatar>
         <Avatar alt="user avatar" src={avatar} />
@@ -44,6 +46,8 @@ const Notification = ({ notification }) => {
         </>
       )}
     </ListItem>
+    <Divider />
+    </React.Fragment>
   );
 };
 
