@@ -7,6 +7,7 @@ import { GridList, GridListTile, ListSubheader, makeStyles } from "@material-ui/
 
 const peopleStyles = makeStyles(theme => ({
   root: {
+    marginLeft: 20,
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
@@ -55,7 +56,7 @@ const People = () => {
         </GridListTile>
 
         {users.map((user, index) => (
-          <GridListTile key={index} className={classes.gridListTile} style={{width: "190px", height: "270px", padding: 10}}>
+          <GridListTile key={index} className={classes.gridListTile} style={{width: "160px", height: "270px"}}>
             <PeopleCard key={index} user={user} />
           </GridListTile>
         ))}

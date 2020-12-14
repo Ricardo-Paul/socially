@@ -7,8 +7,9 @@ const peopleCardStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#f1f1f1",
-    padding: 20
+    backgroundColor: "#fff",
+    padding: 20,
+    marginRight: 10
   },
   avatar: {
     width: 128,
@@ -22,7 +23,7 @@ const PeopleCard = ({ user }) => {
   const classes = peopleCardStyles();
 
   return (
-      <Paper className={classes.container}>
+      <Paper className={classes.container} elevation={2}>
         <Box>
           <img src={avatar} className={classes.avatar} />
         </Box>
