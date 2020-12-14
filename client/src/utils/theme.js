@@ -41,7 +41,7 @@ export const colors = {
     lightGrey: "#e0e0e0"
 }
 
-const nTheme = {
+export const palette = {
     LIGHT: {
         primary: {
             main: "#ffffff",

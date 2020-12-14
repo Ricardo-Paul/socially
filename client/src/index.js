@@ -2,14 +2,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { ApolloProvider } from '@apollo/client';
+import { createApolloClient } from './utils/createApolloClient';
+
 
 // root component
 import App from './components/App/App';
-import { createApolloClient } from './utils/createApolloClient';
 
 import { StoreProvider } from './store/store';
-import { theme } from './utils/theme';
-import { MuiThemeProvider } from '@material-ui/core';
+import { theme, palette } from './utils/theme';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+
+const appTheme = createMuiTheme(palette)
 
 // http and websockekt links
 const apiUrl = "http://localhost:8080/graphql"
