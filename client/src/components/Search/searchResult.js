@@ -1,4 +1,4 @@
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from "@material-ui/core";
+import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from "@material-ui/core";
 import React from "react";
 import MenuWrapper from "../App/AppHeader/MenuWrapper";
 
@@ -20,12 +20,15 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading }) => {
            }
            <List style={{width: 240}}>
                 {users.map(u => (
+                <React.Fragment>
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar alt="user avatar" src={avatar} />
                     </ListItemAvatar>
                     <ListItemText primary={u.fullName} secondary={u.username} />
                 </ListItem>
+                <Divider />
+                </React.Fragment>
                 ))}
            </List>
        </MenuWrapper>
