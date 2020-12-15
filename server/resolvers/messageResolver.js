@@ -74,7 +74,6 @@ const Query = {
 const Mutation = {
     createMessage: async (root, { input: { message, sender, receiver } }, {Message, User}) => {
 
-
         const newMessage = await new Message({
             sender: sender,
             receiver: receiver,

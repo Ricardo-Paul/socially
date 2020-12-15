@@ -147,7 +147,7 @@ const Query = {
     followedUsers.push(userId); // we'll also exclude the user from the suggestions
     
     const query = { _id: { $nin: followedUsers } }
-    const usersCount = await User.find(query).countDocuments();
+    // await User.find(query).countDocuments();
 
     // skip a random amount of users from the total
     // and make sure we return only six
