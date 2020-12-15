@@ -41,7 +41,7 @@ const Notification = ({ notification }) => {
 
       {notification.comment && (
         <>
-          <ListItemText secondary={`${senderName} commented your post`} />
+          <ListItemText secondary={`${senderName} commented on your post`} />
           {showPostImage}
         </>
       )}

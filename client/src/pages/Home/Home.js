@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardHeader, Divider, Grid, makeStyles, Paper } from "@material-ui/core";
+import { Box, Grid, makeStyles } from "@material-ui/core";
 import React, { Fragment } from "react";
 import CreatePost from "../../components/CreatePost";
 import PostCard from "../../components/Postcard";
@@ -12,6 +12,7 @@ import { generatePath } from "react-router-dom";
 
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
 import { theme } from "../../utils/theme";
+import PeopleSuggestions from "../../components/peopleSuggestions";
 
 const homeStyles = makeStyles({
   home: {
@@ -120,13 +121,7 @@ const Home = () => {
             </Box>
           </Grid>
           <Grid item md="4" xs="12">
-            <Card>
-              <h4 style={{paddingLeft: 10}}> Suggestions </h4>
-              <Divider />
-              <CardContent>
-                  Users here
-              </CardContent>
-            </Card>
+            <PeopleSuggestions />
           </Grid>
         </Grid>
       </div>

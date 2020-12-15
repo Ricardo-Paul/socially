@@ -96,8 +96,7 @@ const AppLayout = ({ authUser }) => {
             <Switch>
               <Route exact path={Routes.HOME} render={() => <Home />} />
               <Route exact path={Routes.PEOPLE} render={() => <People />} />
-              {/* redirect to PEOPLE for development purpose */}
-              <Redirect to={Routes.PEOPLE} />
+              <Redirect to={Routes.HOME} />
             </Switch>
           </Grid>
 
