@@ -1,4 +1,4 @@
-import { Button, makeStyles } from "@material-ui/core";
+import { Box, Button, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useStore } from "../store";
 import { AccountCircle } from "@material-ui/icons";
@@ -18,13 +18,11 @@ import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
 const postStyles = makeStyles((theme) => ({
   container: {
-    border: "0.5px #e6e6e6",
+    borderColor: "#afafaf",
     display: "flex",
     flexDirection: "column",
     backgroundColor: colors.white,
     padding: 5,
-    borderRadius: 5,
-    boxShadow: shadows.sm,
     [theme.breakpoints.down("sm")]: {
       padding: 0,
     },
@@ -48,7 +46,6 @@ const postStyles = makeStyles((theme) => ({
     border: 0,
     paddingTop: 10,
     paddingLeft: 15,
-    borderRadius: 5,
     backgroundColor: "#efefef",
     [theme.breakpoints.down("sm")]: {
       margin: 0,
@@ -133,7 +130,7 @@ const CreatePost = () => {
   return (
     <>
       <form onSubmit={(e) => handleSubmit(e, createPost)}>
-        <div className={classes.container}>
+        <Box border={1} className={classes.container}>
           <div className={classes.row1}>
             <div className={classes.avatar}>
               <AccountCircle fontSize="large" />
@@ -178,10 +175,9 @@ const CreatePost = () => {
               </Button>
             </div>
           )}
-        </div>
+        </Box>
       </form>
     </>
   );
 };
 export default CreatePost;
-//

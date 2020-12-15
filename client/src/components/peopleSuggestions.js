@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Card,
   Divider,
   Box,
   List,
@@ -18,8 +17,13 @@ const peopleStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "flex-start",
     padding: 5,
-    border: "1px solid #e6e6e6",
+    border: "0.1px #afafaf",
     cursor: "pointer",
+
+    '&:hover':{
+        backgroundColor: "#afafaf",
+        color: "#fdfdfd"
+    }
   },
   name: {
     fontSize: "16px",
@@ -59,7 +63,7 @@ const PeopleSuggestions = () => {
   }
 
   return (
-    <Card style={{ width: "80%" }}>
+    <Box border={1} style={{ width: "80%", borderColor: "#afafaf" }}>
       <h4 style={{ paddingLeft: 10 }}> USER SUGGESTIONS </h4>
       <Divider />
       <List style={{ padding: 0 }}>
@@ -76,7 +80,7 @@ const PeopleSuggestions = () => {
           </ListItem>
         ))}
       </List>
-    </Card>
+    </Box>
   );
 };
 
