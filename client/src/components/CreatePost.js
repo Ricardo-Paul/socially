@@ -18,6 +18,7 @@ import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
 const postStyles = makeStyles((theme) => ({
   container: {
+    border: "0.5px #e6e6e6",
     display: "flex",
     flexDirection: "column",
     backgroundColor: colors.white,
