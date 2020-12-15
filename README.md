@@ -1,2 +1,2 @@
 ### Socially
-Socially API
+Socially APP
