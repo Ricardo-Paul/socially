@@ -17,7 +17,6 @@ import PeopleSuggestions from "../../components/peopleSuggestions";
 const homeStyles = makeStyles({
   home: {
     position: "relative",
-    marginLeft: 20,
     [theme.breakpoints.down("sm")]:{
       marginLeft: 0
     }

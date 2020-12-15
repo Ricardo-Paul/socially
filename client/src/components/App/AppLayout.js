@@ -23,6 +23,7 @@ import {
   CssBaseline,
   Drawer,
 } from "@material-ui/core";
+import { PageContainer } from "../pageContainer";
 
 const appLayoutStyles = makeStyles((theme) => ({
   "@global": {
@@ -101,22 +102,17 @@ const AppLayout = ({ authUser }) => {
 
           {/* Middle */}
           <Grid item xl={10} lg={12} xs={12} className={classes.middle}>
-            <Switch>
-              <Route exact path={Routes.HOME} render={() => <Home />} />
-              <Route exact path={Routes.PEOPLE} render={() => <People />} />
-              <Route exact path={Routes.PROFILE} render={() => <Profile />} />
+            <PageContainer>
+              <Switch>
+                <Route exact path={Routes.HOME} render={() => <Home />} />
+                <Route exact path={Routes.PEOPLE} render={() => <People />} />
+                <Route exact path={Routes.PROFILE} render={() => <Profile />} />
 
-              {/* redirect to a particular profile for development purpose */}
-              <Redirect to={mrjoeProfile} />
-            </Switch>
+                {/* redirect to a particular profile for development purpose */}
+                <Redirect to={mrjoeProfile} />
+              </Switch>
+            </PageContainer>
           </Grid>
-
-          {/* hidden on mobile */}
-          {/* <Hidden smDown>
-            <Grid item md={3} xs={12} className={classNames([classes.extreme])}>
-              User suggestions
-            </Grid>
-          </Hidden> */}
         </Grid>
       </div>
     </>

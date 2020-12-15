@@ -7,7 +7,6 @@ import { GridList, GridListTile, ListSubheader, makeStyles } from "@material-ui/
 
 const peopleStyles = makeStyles(theme => ({
   root: {
-    marginLeft: 20,
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
