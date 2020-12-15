@@ -107,3 +107,16 @@ query($userId: ID!, $skip: Int, $limit: Int){
   }
 }
 `
+
+export const SUGGEST_PEOPLE = gql`
+  query($userId: ID!){
+    suggestPeople(userId: $userId){
+      count
+      users{
+        fullName
+        username
+        image
+      }
+    }
+  }
+`
