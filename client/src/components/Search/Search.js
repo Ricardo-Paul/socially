@@ -12,7 +12,7 @@ const Search = () => {
 
   const classes = headerStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [searchQuery, setSearchQuery] = React.useState("");
   const [foundUsers, setFoundUsers] = React.useState([]);
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -27,50 +27,49 @@ const Search = () => {
   // handle input change
   const handleChange = (event) => {
     // trim white space from the beginning
-    const value = event.target.value.replace(/^\s+/g, '');
+    const value = event.target.value.replace(/^\s+/g, "");
     setAnchorEl(event.currentTarget);
     setSearchQuery(value);
-    if(value){
-      setLoading(true)
+    if (value) {
+      setLoading(true);
     }
-  }
+  };
 
-  // the effect will run based on the existence of a 
+  // the effect will run based on the existence of a
   // debounced search query
   React.useEffect(() => {
     const search = async () => {
       const { data } = await client.query({
         query: SEARCH_USERS,
-        variables: { searchQuery: debounceSearchQuery }
+        variables: { searchQuery: debounceSearchQuery },
       });
 
       setLoading(false);
       setFoundUsers(data.searchUsers);
-      setIsSearchOpen(debounceSearchQuery != '');
-    }
+      setIsSearchOpen(debounceSearchQuery != "");
+    };
 
     search();
   }, [client, debounceSearchQuery]);
-
 
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
-      <InputBase 
-        classes={inputBaseClasses} 
-        placeholder="Search..." 
-        onChange={(event)=> handleChange(event)} 
-        />
+      <InputBase
+        classes={inputBaseClasses}
+        placeholder="Search..."
+        onChange={(event) => handleChange(event)}
+      />
 
-      <SearchResult 
-        searchAnchorEl={anchorEl} 
+      <SearchResult
+        searchAnchorEl={anchorEl}
         isOpen={isSearchOpen}
-        users={foundUsers} 
+        users={foundUsers}
         query={debounceSearchQuery}
         loading={loading}
-        />
+      />
     </div>
   );
 };

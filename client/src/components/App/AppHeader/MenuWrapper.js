@@ -23,7 +23,9 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
                 placement === "top" ? "center bottom" : "center top",
             }}
           >
-            <Paper square="true" elevation={21} variant="outlined">{children}</Paper>
+            <Paper square="true" elevation={21} variant="outlined">
+              {children}
+            </Paper>
           </Grow>
         </ClickAwayListener>
       )}

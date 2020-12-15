@@ -4,7 +4,6 @@ import * as Routes from "../../routes";
 import Navigation from "./Navigation";
 import { colors as appColors } from "../../utils/theme";
 
-
 // actions
 import { SET_AUTH_USER } from "../../store/auth";
 
@@ -17,7 +16,13 @@ import Home from "../../pages/Home";
 import People from "../../pages/People/";
 
 import AppHeader from "./AppHeader/AppHeader";
-import { Grid, makeStyles, CssBaseline, Drawer,colors } from "@material-ui/core";
+import {
+  Grid,
+  makeStyles,
+  CssBaseline,
+  Drawer,
+  colors,
+} from "@material-ui/core";
 
 const appLayoutStyles = makeStyles((theme) => ({
   "@global": {
@@ -53,8 +58,8 @@ const appLayoutStyles = makeStyles((theme) => ({
     width: 256,
   },
   grid: {
-    height: "100%"
-  }
+    height: "100%",
+  },
 }));
 
 /**
@@ -82,13 +87,13 @@ const AppLayout = ({ authUser }) => {
         <Grid container className={classes.grid}>
           {/* hidden on mobile */}
           <Hidden smDown>
-              <Drawer
-                open
-                variant="persistent"
-                classes={{ paper: classes.desktopDrawer }}
-              >
-                <Navigation />
-              </Drawer>
+            <Drawer
+              open
+              variant="persistent"
+              classes={{ paper: classes.desktopDrawer }}
+            >
+              <Navigation />
+            </Drawer>
           </Hidden>
 
           {/* Middle */}

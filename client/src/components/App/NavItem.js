@@ -48,7 +48,7 @@ const navItemStyles = makeStyles((theme) => ({
   },
   active: {
     color: "#fdfdfd",
-    backgroundColor: "#505050"
+    backgroundColor: "#505050",
   },
 }));
 

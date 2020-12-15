@@ -4,7 +4,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Divider
+  Divider,
 } from "@material-ui/core";
 
 const Notification = ({ notification }) => {
@@ -28,24 +28,24 @@ const Notification = ({ notification }) => {
 
   return (
     <React.Fragment>
-    <ListItem button>
-      <ListItemAvatar>
-        <Avatar alt="user avatar" src={avatar} />
-      </ListItemAvatar>
-      {notification.like && (
-        <>
-          <ListItemText secondary={`${senderName} likes your post`} />
-          {showPostImage}
-        </>
-      )}
+      <ListItem button>
+        <ListItemAvatar>
+          <Avatar alt="user avatar" src={avatar} />
+        </ListItemAvatar>
+        {notification.like && (
+          <>
+            <ListItemText secondary={`${senderName} likes your post`} />
+            {showPostImage}
+          </>
+        )}
 
-      {notification.comment && (
-        <>
-          <ListItemText secondary={`${senderName} commented on your post`} />
-          {showPostImage}
-        </>
-      )}
-    </ListItem>
+        {notification.comment && (
+          <>
+            <ListItemText secondary={`${senderName} commented on your post`} />
+            {showPostImage}
+          </>
+        )}
+      </ListItem>
     </React.Fragment>
   );
 };

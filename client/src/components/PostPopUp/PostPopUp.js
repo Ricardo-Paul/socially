@@ -18,8 +18,8 @@ const PostStyles = makeStyles({
   paper: {
     maxHeight: "80%",
     overflow: "auto",
-    [theme.breakpoints.up("lg")]:{
-      top: "55%"
+    [theme.breakpoints.up("lg")]: {
+      top: "55%",
     },
     top: "50%",
     left: "50%",
@@ -37,11 +37,11 @@ const PostStyles = makeStyles({
   },
   mediaContainer: {
     height: 400,
-    [theme.breakpoints.up("xl")]:{
-      height: 600
+    [theme.breakpoints.up("xl")]: {
+      height: 600,
     },
-    [theme.breakpoints.down("sm")]:{
-      height: 300
+    [theme.breakpoints.down("sm")]: {
+      height: 300,
     },
     width: "95%",
     backgroundColor: "blue",

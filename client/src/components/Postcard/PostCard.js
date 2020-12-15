@@ -58,11 +58,11 @@ const postCardStyles = makeStyles({
     paddingRight: 10,
   },
   media: {
-    [theme.breakpoints.up("xl")]:{
-      height: 600
+    [theme.breakpoints.up("xl")]: {
+      height: 600,
     },
-    [theme.breakpoints.down("sm")]:{
-      height: 300
+    [theme.breakpoints.down("sm")]: {
+      height: 300,
     },
     height: 400,
     objectFit: "cover",

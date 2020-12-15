@@ -63,7 +63,7 @@ const Follow = ({ user }) => {
   return (
     <Button
       variant="contained"
-      color={isFollowing ? 'primary': 'secondary'}
+      color={isFollowing ? "primary" : "secondary"}
       size="small"
       onClick={handleButtonClick}
       fullWidth

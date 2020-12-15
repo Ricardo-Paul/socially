@@ -57,7 +57,7 @@ const Like = ({ likes, postId, author }) => {
 
   return (
     <IconButton onClick={() => handleButtonClick(mutate)}>
-      <ThumbUpAlt style={{color: existedLike?"#0b80ef":"#d4d4d4"}} />
+      <ThumbUpAlt style={{ color: existedLike ? "#0b80ef" : "#d4d4d4" }} />
     </IconButton>
   );
 };
