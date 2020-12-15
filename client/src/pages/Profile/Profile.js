@@ -1,10 +1,12 @@
 import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
 import CoverPhotoUpload from "./CoverPhotoUpload";
+import ProfileInfo from "./ProfileInfo";
 
 const ProfileStyles = makeStyles(theme => ({
     container: {
-        backgroundColor: "grey"
+        backgroundColor: "#efefef",
+        border: "7px solid #ffffff"
     }
 }))
 
@@ -14,6 +16,7 @@ const Profile = () => {
     return(
         <Box className={classes.container}>
             <CoverPhotoUpload />
+            <ProfileInfo />
         </Box>
     )
 }
