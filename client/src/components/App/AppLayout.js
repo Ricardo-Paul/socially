@@ -14,6 +14,7 @@ import Hidden from "@material-ui/core/Hidden";
 // pages
 import Home from "../../pages/Home";
 import People from "../../pages/People/";
+import Profile from "../../pages/Profile";
 
 import AppHeader from "./AppHeader/AppHeader";
 import {
@@ -21,7 +22,6 @@ import {
   makeStyles,
   CssBaseline,
   Drawer,
-  colors,
 } from "@material-ui/core";
 
 const appLayoutStyles = makeStyles((theme) => ({
@@ -71,6 +71,9 @@ const AppLayout = ({ authUser }) => {
 
   const classes = appLayoutStyles();
 
+  // for develoment purpose
+  const mrjoeProfile = '/profile/mrjoe'
+
   useEffect(() => {
     dispatch({
       type: SET_AUTH_USER,
@@ -101,7 +104,10 @@ const AppLayout = ({ authUser }) => {
             <Switch>
               <Route exact path={Routes.HOME} render={() => <Home />} />
               <Route exact path={Routes.PEOPLE} render={() => <People />} />
-              <Redirect to={Routes.HOME} />
+              <Route exact path={Routes.PROFILE} render={() => <Profile />} />
+
+              {/* redirect to a particular profile for development purpose */}
+              <Redirect to={mrjoeProfile} />
             </Switch>
           </Grid>
 

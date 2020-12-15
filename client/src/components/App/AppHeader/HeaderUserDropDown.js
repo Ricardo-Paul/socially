@@ -1,13 +1,23 @@
 import React from "react";
 import { MenuList, MenuItem } from "@material-ui/core";
-import headerStyles from "./headerStyles";
 import MenuWrapper from "./MenuWrapper";
+import { generatePath, Link } from "react-router-dom";
+import { PROFILE } from "../../../routes";
+import { useStore } from "../../../store";
 
 const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
+  const [{ auth }] = useStore();
+
   return (
     <MenuWrapper isOpen={isOpen} anchorEl={userAnchorEl} closeMenu={closeMenu}>
       <MenuList>
-        <MenuItem> Profile </MenuItem>
+        <Link to={generatePath(PROFILE, {
+          username: auth.user.username
+        })}
+        style={{textDecoration: "none"}}
+        >
+          <MenuItem> Profile </MenuItem>
+        </Link>
         <MenuItem> Logout </MenuItem>
       </MenuList>
     </MenuWrapper>

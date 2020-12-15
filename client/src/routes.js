@@ -17,3 +17,5 @@ export const PEOPLE = "/people"
 export const NOTIFICATIONS = "/notifications"
 export const MESSAGE = "/message"
 export const ABOUT = "/about"
+export const PROFILE = "/profile/:username"
+// 

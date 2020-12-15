@@ -21,8 +21,7 @@ const peopleStyles = makeStyles((theme) => ({
     cursor: "pointer",
 
     '&:hover':{
-        backgroundColor: "#afafaf",
-        color: "#fdfdfd"
+        backgroundColor: "#efefef",
     }
   },
   name: {
