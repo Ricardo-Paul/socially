@@ -55,7 +55,7 @@ const People = () => {
         </GridListTile>
 
         {users.map((user, index) => (
-          <GridListTile key={index} className={classes.gridListTile} style={{width: "160px", height: "270px"}}>
+          <GridListTile key={index} className={classes.gridListTile} style={{width: "230px", height: "330px"}}>
             <PeopleCard key={index} user={user} />
           </GridListTile>
         ))}
