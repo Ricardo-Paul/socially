@@ -4,9 +4,11 @@ export const theme = createMuiTheme({
     palette: {
         primary:{
          main: "#1a237e", //indigo9
+        // main: "#1a237e"
         }, 
         secondary:{
          main: "#c5cae9" //indigo1
+        // main: "#ffffff"
         }
     },
     screen: {
@@ -44,12 +46,12 @@ export const colors = {
 export const palette = {
     LIGHT: {
         primary: {
-            main: "#ffffff",
+            main: "#000000",
             dark:"",
             light: ""
         },
         secondary: {
-            main: "#bdbdbd4f",
+            main: "#a7a6a6",
             dark: "#888584", //icons fill color
             light: "#d8d8d847"
         }

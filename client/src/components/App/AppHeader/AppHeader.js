@@ -88,7 +88,7 @@ const AppHeader = () => {
             onClick={(event) => handleIconClick(event, "NOTIFICATION")}
           >
             <Badge badgeContent={notifications.length} color="secondary">
-              <NotificationIcon fontSize="small" />
+              <NotificationIcon color="primary" fontSize="small" />
             </Badge>
           </IconButton>
 
@@ -97,7 +97,7 @@ const AppHeader = () => {
             onClick={(event) => handleIconClick(event, "MESSAGE")}
           >
             <Badge badgeContent={4} color="secondary">
-              <MailIcon fontSize="small" />
+              <MailIcon color="primary" fontSize="small" />
             </Badge>
           </IconButton>
 
@@ -105,7 +105,7 @@ const AppHeader = () => {
             color="inherit"
             onClick={(event) => handleIconClick(event, "USER")}
           >
-            <AccountCircle />
+            <AccountCircle color="primary" />
           </IconButton>
         </Toolbar>
       </AppBar>

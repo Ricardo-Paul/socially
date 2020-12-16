@@ -59,7 +59,7 @@ const Search = () => {
       </div>
       <InputBase
         classes={inputBaseClasses}
-        placeholder="Search..."
+        placeholder="Search users..."
         onChange={(event) => handleChange(event)}
       />
 
