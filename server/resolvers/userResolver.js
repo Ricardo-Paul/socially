@@ -318,7 +318,7 @@ const Mutation = {
    uploadUserPhoto: async(_, {input: {userId, image, imagePublicId, isCover}}, {User}) => {
     const { createReadStream } = await image;
     const stream = createReadStream();
-    const uploadImage = uploadToCloudinary(stream, "user", imagePublicId);
+    const uploadImage = await uploadToCloudinary(stream, "user", imagePublicId);
 
     // set the photo as either image or cover image
     // based on client choice
@@ -333,12 +333,20 @@ const Mutation = {
       }
     }
 
-    const updatedUser = await User.findOneAndUpdate({_id: userId}, {...fieldsToUpdate},{
-      new: true
-    }).populate("posts")
-      .populate("likes");
+    
 
-    return updatedUser;
+    console.log("UPDATED FIELDS", fieldsToUpdate)
+
+    try{
+      const updatedUser = await User.findOneAndUpdate({_id: userId}, {...fieldsToUpdate},{
+        new: true
+      }).populate("posts")
+        .populate("likes");
+
+        return updatedUser;
+    } catch(err){
+      console.log(err)
+    }
   }
 };
 
