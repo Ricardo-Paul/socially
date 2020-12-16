@@ -48,6 +48,7 @@ query{
     fullName
     email
     username
+    image
     following{
       id
     }
@@ -117,6 +118,17 @@ export const SUGGEST_PEOPLE = gql`
         username
         image
       }
+    }
+  }
+`
+
+export const UPLOAD_USER_PHOTO = gql`
+  mutation($input:UploadUserPhotoInput!){
+    uploadUserPhoto(input: $input){
+      fullName
+      username
+      email
+      image
     }
   }
 `
