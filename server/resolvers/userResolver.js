@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 import ms from 'ms';
 import { sendEmail } from '../utils/sendEmail';
 import Follow from '../models/Follow';
+import { uploadToCloudinary } from '../utils/fileUploads';
+
 
 const AUTH_TOKEN_EXPIRY = ms('1 day'); // token duration for signin/signup
 const PASS_RESET_TOKEN_DURATION = '3600000'; // 1 hour token duration while password-resetting
@@ -320,8 +322,8 @@ const Mutation = {
 
     // set the photo as either image or cover image
     // based on client choice
+    let fieldsToUpdate = {};
     if(uploadImage.secure_url){
-      let fieldsToUpdate = {};
       if(isCover){
         fieldsToUpdate.coverImage = uploadImage.secure_url;
         fieldsToUpdate.coverImagePublicId = uploadImage.public_id;
