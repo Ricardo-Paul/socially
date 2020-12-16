@@ -40,6 +40,11 @@ const ProfileStyles = makeStyles(theme => ({
 const ProfileInfo = () => {
     const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
     const classes = ProfileStyles();
+    const inputRef = React.useRef(null);
+
+    const handleIconClick = () => {
+        inputRef.current.click();
+    }
 
     return(
         <Box className={classes.root}>
@@ -48,9 +53,14 @@ const ProfileInfo = () => {
                 src={avatar} 
                 className={classes.image}
                 />
+                <input 
+                accept="image/x-png,image/jpeg"
+                ref={inputRef} 
+                type="file" 
+                style={{display:"none"}} />
                 <IconButton 
                 className={classes.uploadIcon}
-                
+                onClick={handleIconClick}
                 >
                     <PhotoCamera />
                 </IconButton>

@@ -10,6 +10,13 @@ const CoverStyles = makeStyles(theme => ({
         backgroundImage: `url(${defaultCover})`,
         backgroundSize: "cover",
         backgroundPosition: "center"
+    },
+    uploadIcon: {
+        borderRadius: 1,
+        marginTop: 5,
+        marginLeft: 5,
+        backgroundColor: "#2896e4",
+        color: "#fbfbfb",
     }
 }))
 
@@ -32,7 +39,7 @@ const CoverPhotoUpload = () => {
             />
 
             <label>
-                <IconButton onClick={handleIconClick}>
+                <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
                     <PhotoCamera />
                 </IconButton>
             </label>
