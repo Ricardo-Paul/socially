@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, IconButton, makeStyles, Typography } from "@material-ui/core";
+import { PhotoCamera } from "@material-ui/icons";
 
 const ProfileStyles = makeStyles(theme => ({
     root: {
@@ -20,6 +21,19 @@ const ProfileStyles = makeStyles(theme => ({
         display: "flex",
         width: 600,
         justifyContent: "space-between"
+    },
+    imgContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        position: "relative"
+    },
+    uploadIcon: {
+        backgroundColor: "#2896e4",
+        position: "absolute",
+        color: "#fbfbfb",
+        right: 0,
+        bottom: 0
     }
 }))
 
@@ -29,10 +43,18 @@ const ProfileInfo = () => {
 
     return(
         <Box className={classes.root}>
-            <img 
-            src={avatar} 
-            className={classes.image}
-            />
+            <Box className={classes.imgContainer}>
+                <img 
+                src={avatar} 
+                className={classes.image}
+                />
+                <IconButton 
+                className={classes.uploadIcon}
+                
+                >
+                    <PhotoCamera />
+                </IconButton>
+            </Box>
             <Box>
                 <h1 style={{textAlign: "center"}} > Alex Xavier </h1>
                 <Box className={classes.info}>
