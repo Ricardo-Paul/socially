@@ -45,9 +45,6 @@ const People = () => {
       return <h4> No users yet... </h4>;
     }
 
-    console.log('USERS :', users)
-
-
     return <div className={classes.root}>
       <GridList cellHeight={300} className={classes.gridList}>
         <GridListTile cols={2} style={{height: "auto"}}>
