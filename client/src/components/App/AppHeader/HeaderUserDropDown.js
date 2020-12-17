@@ -15,6 +15,7 @@ const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
           username: auth.user.username
         })}
         style={{textDecoration: "none"}}
+        onClick={closeMenu}
         >
           <MenuItem> Profile </MenuItem>
         </Link>

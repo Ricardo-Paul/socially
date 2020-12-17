@@ -15,7 +15,7 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
   const [{ auth }] = useStore();
 
   const font = { fontSize: 12 };
-  // REPLACE REACT_APP_CLIENT_URL when deployed,
+  //TODO: REPLACE REACT_APP_CLIENT_URL when deployed,
   const copyUrl = () => {
     let absUrl = `${process.env.REACT_APP_CLIENT_URL}${generatePath(
       Routes.POST,

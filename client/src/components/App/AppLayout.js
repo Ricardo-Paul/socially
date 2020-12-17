@@ -57,6 +57,7 @@ const appLayoutStyles = makeStyles((theme) => ({
     top: 70,
     height: "calc(100% - 64px)",
     width: 256,
+    zIndex: 100
   },
   grid: {
     height: "100%",
