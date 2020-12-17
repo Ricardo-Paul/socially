@@ -48,7 +48,7 @@ const Mutation = {
     // we only perform the notification removal if the user unliking (lke.user)
     // is not the post author (post.author)
     const post = await Post.findOne({_id: like.post});
-    if(post.author != like.user){
+    if(post.author.toString() !== like.user.toString()){
       const notification = await Notification.findOneAndDelete({like: likeId});
       await User.findOneAndUpdate({_id: notification.receiver}, {$pull: { notifications: notification._id}});
     }
