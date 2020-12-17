@@ -62,7 +62,7 @@ const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
         {comments.reverse().map((c) => (
           <ListItem key={c.id}>
             <ListItemAvatar>
-              <Avatar alt="user avatar" src={userAvatar} />
+              <Avatar alt="user avatar" src={c.author.image} />
             </ListItemAvatar>
             <ListItemText
               primary={c.author.fullName}

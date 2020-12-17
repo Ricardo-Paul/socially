@@ -67,7 +67,7 @@ const Navigation = () => {
       <Box height="100%" display="flex" flexDirection="column">
         <Box display="flex" flexDirection="column" alignItems="center" p={2}>
           <Avatar
-            src={avatar}
+            src={auth.user.image}
             component={RouterLink}
             className={classes.avatar}
             to={Routes.HOME}
@@ -78,7 +78,7 @@ const Navigation = () => {
             variant="h6"
             className={classes.name}
           >
-            Alex Xavier
+            {auth.user.fullName}
           </Typography>
           <Typography color="textSecondary">Software Developer</Typography>
         </Box>

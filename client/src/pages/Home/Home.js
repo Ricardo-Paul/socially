@@ -91,7 +91,7 @@ const Home = () => {
           <PostCard
             title={post.title}
             image={post.image}
-            username={post.author.username}
+            fullName={post.author.fullName}
             avatar={post.author.image}
             openModal={() => openModal(post.id)} //save the post.id in a state var
             likeNumber={post.likes.length}

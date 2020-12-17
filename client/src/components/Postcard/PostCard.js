@@ -74,7 +74,7 @@ const postCardStyles = makeStyles({
 
 const PostCard = ({
   title,
-  username,
+  fullName,
   image,
   avatar,
   openModal,
@@ -137,7 +137,7 @@ const PostCard = ({
         <CardHeader
           className={classes.header}
           avatar={<Avatar alt="user photo" src={avatar} />}
-          title={username}
+          title={fullName}
           action={
             <IconButton onClick={handleClick}>
               <MoreVert />
@@ -190,7 +190,7 @@ export default PostCard;
 
 PostCard.propTypes = {
   title: PropTypes.string,
-  username: PropTypes.string.isRequired,
+  fullName: PropTypes.string.isRequired,
   image: PropTypes.string, //post image
   avatar: PropTypes.string, //author avatar
   openModal: PropTypes.func.isRequired, //called when image is clicked

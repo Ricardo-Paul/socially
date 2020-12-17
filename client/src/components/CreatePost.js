@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles } from "@material-ui/core";
+import { Avatar, Box, Button, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useStore } from "../store";
 import { AccountCircle } from "@material-ui/icons";
@@ -134,7 +134,8 @@ const CreatePost = () => {
           <div className={classes.row1}>
             <div className={classes.avatar}>
               <AccountCircle fontSize="large" />
-            </div>
+              {/* <Avatar src={auth.user.avatar} /> */}
+            </div> 
 
             <textarea
               className={classes.textarea}
