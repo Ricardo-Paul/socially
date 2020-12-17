@@ -1,5 +1,5 @@
 import React from "react";
-import { List } from "@material-ui/core";
+import { List, MenuItem, Typography } from "@material-ui/core";
 
 import MenuWrapper from "./MenuWrapper";
 import Notification from "../Notification";
@@ -12,6 +12,19 @@ const HeaderNotificationDropDown = ({
 }) => {
   console.log("notification HD", dropDownData);
   let notifications = dropDownData;
+
+  if(!notifications.length > 0){
+    return(
+      <MenuWrapper
+      isOpen={isOpen}
+      anchorEl={notificationAnchorEl}
+      closeMenu={closeMenu}
+    >
+      <Typography color="textSecondary" style={{padding: 10}}> No notification </Typography>
+    </MenuWrapper>
+    )
+  }
+
   return (
     <MenuWrapper
       isOpen={isOpen}
