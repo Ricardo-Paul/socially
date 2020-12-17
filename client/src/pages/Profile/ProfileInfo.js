@@ -4,6 +4,7 @@ import { PhotoCamera } from "@material-ui/icons";
 import { GET_AUTH_USER, UPLOAD_USER_PHOTO } from "../../graphql/user";
 import { useApolloClient } from "@apollo/client";
 import { useStore } from "../../store";
+import defaultAvatar from "../../ressources/defaultAvatar.jpg"
 
 const ProfileStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +45,6 @@ const ProfileStyles = makeStyles((theme) => ({
 const ProfileInfo = () => {
   const classes = ProfileStyles();
   const inputRef = React.useRef(null);
-  const [image, setImage] = React.useState("");
   const client = useApolloClient();
   const [{ auth }] = useStore();
 
@@ -77,7 +77,7 @@ const ProfileInfo = () => {
   return (
     <Box className={classes.root}>
       <Box className={classes.imgContainer}>
-        <img src={auth.user.image} className={classes.image} />
+        <img src={auth.user.image || defaultAvatar} className={classes.image} />
         <input
           accept="image/x-png,image/jpeg"
           ref={inputRef}
