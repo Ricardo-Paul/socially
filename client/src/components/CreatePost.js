@@ -71,7 +71,7 @@ const postStyles = makeStyles((theme) => ({
 }));
 
 const CreatePost = () => {
-  const [isFocused, setIsFocused] = useState("false");
+  const [isFocused, setIsFocused] = useState(null);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [uploadError, setUploadError] = useState("");
@@ -142,8 +142,8 @@ const CreatePost = () => {
               placeholder="What's on your mind..."
               value={title}
               onChange={handleChange}
-              focus={isFocused}
-              onFocus={() => setIsFocused("true")}
+              focused={isFocused}
+              onFocus={() => setIsFocused(true)}
             />
 
             <div className={classes.uploadIcon}>

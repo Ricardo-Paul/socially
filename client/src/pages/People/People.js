@@ -3,24 +3,29 @@ import { GET_USERS } from "../../graphql/user";
 import PeopleCard from "./PeopleCard";
 import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
-import { GridList, GridListTile, ListSubheader, makeStyles } from "@material-ui/core";
+import {
+  GridList,
+  GridListTile,
+  ListSubheader,
+  makeStyles,
+} from "@material-ui/core";
 
-const peopleStyles = makeStyles(theme => ({
+const peopleStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    width: "100%"
+    width: "100%",
   },
   gridList: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   gridListTile: {
     width: "180px",
-    padding: 20
-  }
-}))
+    padding: 20,
+  },
+}));
 
 const People = () => {
   const [{ auth }] = useStore();
@@ -45,19 +50,25 @@ const People = () => {
       return <h4> No users yet... </h4>;
     }
 
-    return <div className={classes.root}>
-      <GridList cellHeight={300} className={classes.gridList}>
-        <GridListTile cols={2} style={{height: "auto"}}>
-          <ListSubheader> PEOPLE </ListSubheader>
-        </GridListTile>
-
-        {users.map((user, index) => (
-          <GridListTile key={index} className={classes.gridListTile} style={{width: "230px", height: "330px"}}>
-            <PeopleCard key={index} user={user} />
+    return (
+      <div className={classes.root}>
+        <GridList cellHeight={300} className={classes.gridList}>
+          <GridListTile cols={2} style={{ height: "auto" }}>
+            <ListSubheader> PEOPLE </ListSubheader>
           </GridListTile>
-        ))}
-      </GridList>
-    </div>
+
+          {users.map((user, index) => (
+            <GridListTile
+              key={index}
+              className={classes.gridListTile}
+              style={{ width: "230px", height: "330px" }}
+            >
+              <PeopleCard key={index} user={user} />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+    );
   };
 
   return <>{content()}</>;

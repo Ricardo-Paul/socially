@@ -24,7 +24,7 @@ const headerStyles = makeStyles((theme) => ({
     border: "1.2px solid #a9a8a8",
     backgroundColor: "#efefef",
     display: "flex",
-    borderRadius: 15,
+    borderRadius: 5,
     marginLeft: 20,
     [theme.breakpoints.down("sm")]: {
       marginLeft: 5,
@@ -40,9 +40,6 @@ const headerStyles = makeStyles((theme) => ({
   inputInput: {
     padding: 5,
     height: "90%",
-  },
-  badge: {
-    // color: "red",
   },
   grow: {
     flexGrow: 1,

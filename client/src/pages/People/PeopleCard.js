@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
-import Proptypes from 'prop-types';
+import Proptypes from "prop-types";
 import Follow from "../../components/Follow";
 const peopleCardStyles = makeStyles({
   container: {
@@ -9,13 +9,13 @@ const peopleCardStyles = makeStyles({
     alignItems: "center",
     backgroundColor: "#fff",
     padding: 20,
-    marginRight: 10
+    marginRight: 10,
   },
   avatar: {
     width: 128,
     height: 128,
-    borderRadius: "50%"
-  }
+    borderRadius: "50%",
+  },
 });
 
 const PeopleCard = ({ user }) => {
@@ -23,21 +23,21 @@ const PeopleCard = ({ user }) => {
   const classes = peopleCardStyles();
 
   return (
-      <Paper className={classes.container} elevation={2}>
-        <Box>
-          <img src={avatar} className={classes.avatar} />
-        </Box>
-        <Box>
-          <Typography> {user.fullName} </Typography>
-          <Typography> @{user.username} </Typography>
-          <Follow user={user} />
-        </Box>
-      </Paper>
+    <Paper className={classes.container} elevation={2}>
+      <Box>
+        <img src={avatar} className={classes.avatar} />
+      </Box>
+      <Box>
+        <Typography> {user.fullName} </Typography>
+        <Typography> @{user.username} </Typography>
+        <Follow user={user} />
+      </Box>
+    </Paper>
   );
 };
 
 PeopleCard.propTypes = {
-  user: Proptypes.object.isRequired
-}
+  user: Proptypes.object.isRequired,
+};
 
 export default PeopleCard;

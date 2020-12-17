@@ -17,15 +17,15 @@ import PeopleSuggestions from "../../components/peopleSuggestions";
 const homeStyles = makeStyles({
   home: {
     position: "relative",
-    [theme.breakpoints.down("sm")]:{
-      marginLeft: 0
-    }
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 0,
+    },
   },
   headerTitle: {
     fontSize: "16px",
     fontFamily: "roboto",
-    fontWeight: 500
-  }
+    fontWeight: 500,
+  },
 });
 
 const Home = () => {
