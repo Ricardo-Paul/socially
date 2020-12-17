@@ -4,6 +4,7 @@ import MenuWrapper from "./MenuWrapper";
 import { generatePath, Link } from "react-router-dom";
 import { PROFILE } from "../../../routes";
 import { useStore } from "../../../store";
+import Logout from "../../Logout";
 
 const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
   const [{ auth }] = useStore();
@@ -20,6 +21,7 @@ const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
           <MenuItem> Profile </MenuItem>
         </Link>
         <MenuItem> Logout </MenuItem>
+        <Logout />
       </MenuList>
     </MenuWrapper>
   );

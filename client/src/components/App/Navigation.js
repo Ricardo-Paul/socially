@@ -12,9 +12,8 @@ import PeopleIcon from "@material-ui/icons/People";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import MessageIcon from "@material-ui/icons/Message";
 import InfoIcon from "@material-ui/icons/Info";
-
-import { colors } from "../../utils/theme";
 import NavItem from "./NavItem";
+import { SignalCellularNullSharp } from "@material-ui/icons";
 
 const navStyles = makeStyles((theme) => ({
   name: {
@@ -55,7 +54,7 @@ const Navigation = () => {
       <Box height="100%" display="flex" flexDirection="column">
         <Box display="flex" flexDirection="column" alignItems="center" p={2}>
           <Avatar
-            src={auth.user.image}
+            src={auth.user? auth.user.image:null}
             component={RouterLink}
             className={classes.avatar}
             to={Routes.HOME}

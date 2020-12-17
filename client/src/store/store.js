@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
+// useReducer reuturn [state, dispatch]
 
 /**
  * intitial state and reducers imports
@@ -47,6 +48,10 @@ export const StoreProvider = ({children}) => {
  */
 
  export const useStore = () => useContext(StoreContext);
+//  useReducer returns [ state, dispatch ]
+// which can be destructured from the context like
+// const [reducers, dispatch] = useStore();
+// const [{auth, message}, dispatch] = useStore();
 
 
 
