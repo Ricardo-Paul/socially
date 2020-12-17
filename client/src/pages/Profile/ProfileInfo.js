@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, IconButton, makeStyles, Typography } from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
-import { UPLOAD_USER_PHOTO } from "../../graphql/user";
+import { GET_AUTH_USER, UPLOAD_USER_PHOTO } from "../../graphql/user";
 import { useApolloClient } from "@apollo/client";
 import { useStore } from "../../store";
 
@@ -42,7 +42,6 @@ const ProfileStyles = makeStyles((theme) => ({
 }));
 
 const ProfileInfo = () => {
-  const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
   const classes = ProfileStyles();
   const inputRef = React.useRef(null);
   const [image, setImage] = React.useState("");
@@ -65,6 +64,9 @@ const ProfileInfo = () => {
             imagePublicId: "userphoto",
           },
         },
+        refetchQueries:[
+            {query: GET_AUTH_USER}
+        ]
       });
       console.log(data);
     } catch (err) {
@@ -88,7 +90,7 @@ const ProfileInfo = () => {
         </IconButton>
       </Box>
       <Box>
-        <h1 style={{ textAlign: "center" }}> Alex Xavier </h1>
+        <h1 style={{ textAlign: "center" }}> {auth.user.fullName} </h1>
         <Box className={classes.info}>
           <Typography> Posts </Typography>
           <Typography> Following </Typography>

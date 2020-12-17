@@ -5,25 +5,33 @@ import CoverPhotoUpload from "./CoverPhotoUpload";
 import ProfileInfo from "./ProfileInfo";
 
 const ProfileStyles = makeStyles((theme) => ({
-  container: {},
   info: {
     backgroundColor: "#efefef",
     border: "7px solid #ffffff",
   },
-  createPost: {
-    marginTop: 20,
-    width: "60%",
+  content: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
   },
+  postContainer: {
+    marginTop: 20,
+    width: "80%",
+  }
 }));
 
 const Profile = () => {
   const classes = ProfileStyles();
 
   return (
-    <Box className={classes.container}>
+    <Box>
       <CoverPhotoUpload />
       <ProfileInfo className={classes.info} />
-      <CreatePost className={classes.createPost} />
+      <Box className={classes.content}>
+        <Box className={classes.postContainer}>
+          <CreatePost />
+        </Box>
+      </Box>
     </Box>
   );
 };
