@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { generatePath } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
+import { Delete, FileCopy } from "@material-ui/icons";
 
 const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
   const [{ auth }] = useStore();
@@ -36,12 +37,14 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
           <MenuList>
             <MenuItem style={font} onClick={copyUrl}>
               {" "}
-              Copy URL{" "}
+              <FileCopy style={{marginRight: 10}} />
+              Copy URL
             </MenuItem>
             {isUserPost && (
               <MenuItem style={font} onClick={deletePost}>
                 {" "}
-                Delete{" "}
+                <Delete style={{marginRight: 10}} />
+                Delete
               </MenuItem>
             )}
             {!isUserPost && <MenuItem style={font}> Follow </MenuItem>}
