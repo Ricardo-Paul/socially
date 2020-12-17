@@ -9,7 +9,7 @@ import {
 import React from "react";
 import MenuWrapper from "../App/AppHeader/MenuWrapper";
 
-const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading }) => {
+const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu }) => {
   const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
 
   return (
@@ -17,6 +17,7 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading }) => {
       isOpen={isOpen}
       anchorEl={searchAnchorEl}
       style={{ marginLeft: -50 }}
+      closeMenu={closeMenu}
     >
       {loading && <ListItem> searching... </ListItem>}
 

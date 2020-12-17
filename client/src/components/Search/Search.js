@@ -23,7 +23,7 @@ const Search = () => {
   };
 
   const debounceSearchQuery = useDebounce(searchQuery, 500);
-
+  const closeMenu = () => setSearchQuery("");
   // handle input change
   const handleChange = (event) => {
     // trim white space from the beginning
@@ -69,6 +69,7 @@ const Search = () => {
         users={foundUsers}
         query={debounceSearchQuery}
         loading={loading}
+        closeMenu={closeMenu}
       />
     </div>
   );
