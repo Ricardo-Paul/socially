@@ -99,6 +99,7 @@ query($userId: ID!, $skip: Int, $limit: Int){
       fullName
       username
       email
+      image
       following{
         id
         follower

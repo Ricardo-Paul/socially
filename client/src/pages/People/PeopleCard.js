@@ -17,6 +17,7 @@ const peopleCardStyles = makeStyles({
     width: 128,
     height: 128,
     borderRadius: "50%",
+    objectFit: "cover"
   },
 });
 
@@ -27,7 +28,7 @@ const PeopleCard = ({ user }) => {
   return (
     <Paper className={classes.container} elevation={2}>
       <Box>
-        <img src={avatar} className={classes.avatar} />
+        <img src={user.image || avatar} className={classes.avatar} />
       </Box>
       <Box>
         <Typography> {user.fullName} </Typography>
