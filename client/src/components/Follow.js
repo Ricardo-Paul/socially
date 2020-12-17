@@ -6,7 +6,7 @@ import { useStore } from "../store";
 
 // Queries
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
-import { GET_AUTH_USER, GET_USERS } from "../graphql/user";
+import { GET_AUTH_USER, GET_USERS, SUGGEST_PEOPLE } from "../graphql/user";
 import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
 const Follow = ({ user }) => {
@@ -44,6 +44,7 @@ const Follow = ({ user }) => {
       },
       { query: GET_AUTH_USER },
       { query: GET_USERS, variables: { userId: auth.user.id } },
+      { query: SUGGEST_PEOPLE, variables: { userId: auth.user.id } }
     ],
   });
 
