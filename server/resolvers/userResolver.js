@@ -19,6 +19,7 @@ const Query = {
     if (!authenticatedUser) return null;
     const { email, username } = authenticatedUser;
     const user = User.findOne({ email, username })
+    .populate('posts')
     .populate('likes')
     .populate('followers')
     .populate('following')
