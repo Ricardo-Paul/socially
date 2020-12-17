@@ -21,6 +21,11 @@ const peopleCardStyles = makeStyles({
     borderRadius: "50%",
     objectFit: "cover"
   },
+  cardInfo: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  }
 });
 
 const PeopleCard = ({ user }) => {
@@ -31,9 +36,9 @@ const PeopleCard = ({ user }) => {
       <Box>
         <img src={user.image || defaultAvatar} className={classes.avatar} />
       </Box>
-      <Box>
+      <Box className={classes.cardInfo}>
         <Typography> {user.fullName} </Typography>
-        <Typography> @{user.username} </Typography>
+        <Typography style={{marginBottom: 10}} color="textSecondary"> @{user.username} </Typography>
         <Follow user={user} />
       </Box>
     </Paper>
