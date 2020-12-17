@@ -133,8 +133,8 @@ const CreatePost = () => {
         <Box border={1} className={classes.container}>
           <div className={classes.row1}>
             <div className={classes.avatar}>
-              <AccountCircle fontSize="large" />
-              {/* <Avatar src={auth.user.avatar} /> */}
+              {/* <AccountCircle fontSize="large" /> */}
+              <Avatar src={auth.user.image} />
             </div> 
 
             <textarea

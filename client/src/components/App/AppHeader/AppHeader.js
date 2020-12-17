@@ -5,6 +5,7 @@ import {
   Toolbar,
   Typography,
   Badge,
+  Avatar,
 } from "@material-ui/core";
 
 import {
