@@ -30,20 +30,8 @@ const navStyles = makeStyles((theme) => ({
 }));
 
 const Navigation = () => {
-  const [{ auth }] = useStore();
-
-  // set the user to local so we can access
-  // its properties
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    if (auth.user) {
-      setUser(auth.user);
-    }
-  }, [auth.user]);
-
   const classes = navStyles();
-
-  const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
+  const [{ auth }] = useStore();
 
   const options = [
     { title: "Home", icon: HomeIcon, to: Routes.HOME },
