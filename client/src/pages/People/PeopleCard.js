@@ -2,6 +2,8 @@ import React from "react";
 import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import Proptypes from "prop-types";
 import Follow from "../../components/Follow";
+import defaultAvatar from "../../ressources/defaultAvatar.jpg";
+
 const peopleCardStyles = makeStyles({
   container: {
     display: "flex",
@@ -22,13 +24,12 @@ const peopleCardStyles = makeStyles({
 });
 
 const PeopleCard = ({ user }) => {
-  const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
   const classes = peopleCardStyles();
 
   return (
     <Paper className={classes.container} elevation={2}>
       <Box>
-        <img src={user.image || avatar} className={classes.avatar} />
+        <img src={user.image || defaultAvatar} className={classes.avatar} />
       </Box>
       <Box>
         <Typography> {user.fullName} </Typography>
