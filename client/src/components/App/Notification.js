@@ -8,7 +8,6 @@ import {
 } from "@material-ui/core";
 
 const Notification = ({ notification }) => {
-  const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
   if (!notification.like && !notification.comment && !notification.follow) {
     return;
   }
@@ -30,7 +29,7 @@ const Notification = ({ notification }) => {
     <React.Fragment>
       <ListItem button>
         <ListItemAvatar>
-          <Avatar alt="user avatar" src={avatar} />
+          <Avatar alt="user avatar" src={notification.sender.image} />
         </ListItemAvatar>
         {notification.like && (
           <>
