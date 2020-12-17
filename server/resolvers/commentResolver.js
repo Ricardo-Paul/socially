@@ -63,7 +63,7 @@ const Mutation = {
 
     // delete associated notification
     const post = await Post.findOne({ _id: comment.post});
-    if(comment.author != post.author){
+    if(comment.author.toString() !== post.author.toString()){
       const notification = await Notification.findOneAndDelete({comment: comment._id});
 
       notification.populate("sender")
