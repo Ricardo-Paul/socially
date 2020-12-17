@@ -7,7 +7,6 @@ import { Button, CssBaseline, Toolbar, Typography } from "@material-ui/core";
 // styles
 import { MainContainer } from "../../components/Layout";
 import TextField from "../../components/TextField";
-import AppBar from "../Auth/AuthHeader";
 import { formStyles } from "../../styles/formStyles";
 
 // utils

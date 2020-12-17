@@ -61,7 +61,7 @@ const People = () => {
             <GridListTile
               key={index}
               className={classes.gridListTile}
-              style={{ width: "230px", height: "330px" }}
+              style={{ width: "230px", height: "100%" }}
             >
               <PeopleCard key={index} user={user} />
             </GridListTile>

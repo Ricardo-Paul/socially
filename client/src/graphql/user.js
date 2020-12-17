@@ -49,6 +49,9 @@ query{
     email
     username
     image
+    posts{
+      id
+    }
     following{
       id
     }

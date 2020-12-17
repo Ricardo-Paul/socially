@@ -92,9 +92,9 @@ const ProfileInfo = () => {
       <Box>
         <h1 style={{ textAlign: "center" }}> {auth.user.fullName} </h1>
         <Box className={classes.info}>
-          <Typography> Posts </Typography>
-          <Typography> Following </Typography>
-          <Typography> Followers </Typography>
+          <Typography variant="caption"> {auth.user.posts.length} Posts </Typography>
+          <Typography variant="subtitle1"> {auth.user.following.length} Following </Typography>
+          <Typography variant="subtitle2" color="textSecondary"> {auth.user.followers.length} Followers </Typography>
         </Box>
       </Box>
     </Box>

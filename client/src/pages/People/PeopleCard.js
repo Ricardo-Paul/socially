@@ -10,6 +10,8 @@ const peopleCardStyles = makeStyles({
     backgroundColor: "#fff",
     padding: 20,
     marginRight: 10,
+    border: "1px solid #c5c4c4",
+    borderRadius: 0
   },
   avatar: {
     width: 128,
