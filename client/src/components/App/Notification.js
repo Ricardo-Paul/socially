@@ -5,6 +5,7 @@ import {
   ListItemText,
   Avatar,
   Divider,
+  MenuItem,
 } from "@material-ui/core";
 
 const Notification = ({ notification }) => {

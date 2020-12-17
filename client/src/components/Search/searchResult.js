@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Divider,
   List,
   ListItem,
   ListItemAvatar,
@@ -8,9 +7,9 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import MenuWrapper from "../App/AppHeader/MenuWrapper";
+import defaultAvatar from "../../ressources/defaultAvatar.jpg";
 
 const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu }) => {
-  const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
 
   return (
     <MenuWrapper
@@ -27,7 +26,7 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu
           <React.Fragment>
             <ListItem>
               <ListItemAvatar>
-                <Avatar alt="user avatar" src={avatar} />
+                <Avatar alt="user avatar" src={u.image || defaultAvatar} />
               </ListItemAvatar>
               <ListItemText primary={u.fullName} secondary={u.username} />
             </ListItem>
