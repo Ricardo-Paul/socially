@@ -3,9 +3,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Avatar,
-  Divider,
-  MenuItem,
+  Avatar
 } from "@material-ui/core";
 
 const Notification = ({ notification }) => {

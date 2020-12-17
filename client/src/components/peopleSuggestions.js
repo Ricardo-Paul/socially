@@ -10,6 +10,7 @@ import {
 import { SUGGEST_PEOPLE } from "../graphql/user";
 import { useApolloClient } from "@apollo/client";
 import { useStore } from "../store";
+import defaultAvatar from "../ressources/defaultAvatar.jpg";
 
 const peopleStyles = makeStyles((theme) => ({
   item: {
@@ -37,7 +38,6 @@ const PeopleSuggestions = () => {
   const [people, setPeople] = React.useState([]);
 
   const classes = peopleStyles();
-  const avatar = "https://material-ui.com/static/images/avatar/2.jpg";
 
   React.useEffect(() => {
     const getSuggestedPeople = async () => {
@@ -69,8 +69,8 @@ const PeopleSuggestions = () => {
         {people.map((p) => (
           <ListItem disableGutters className={classes.item}>
             <img
-              src={avatar}
-              style={{ width: 80, height: 80, marginRight: 10 }}
+              src={p.image || defaultAvatar}
+              style={{ width: 80, height: 80, marginRight: 10, objectFit: "cover" }}
             />
             <Box display="flex" flexDirection="column">
               <Typography className={classes.name}> {p.fullName} </Typography>
