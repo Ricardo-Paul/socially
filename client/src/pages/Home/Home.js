@@ -49,7 +49,7 @@ const Home = () => {
     limit: HOME_PAGE_POSTS_LIMIT,
   };
 
-  const { data, loading, networkStatus } = useQuery(GET_FOLLOWED_POSTS, {
+  const { data, loading, networkStatus, error } = useQuery(GET_FOLLOWED_POSTS, {
     variables,
     notifyOnNetworkStatusChange: true,
   });
@@ -59,7 +59,17 @@ const Home = () => {
       return <h4> loading ... </h4>;
     }
 
-    if (!loading) {
+    if(loading && networkStatus === 3){
+      return <h4> Loading more... </h4>
+    }
+
+    console.log(data)
+    if(error){
+      console.log(error)
+    }
+
+    if (!loading && networkStatus != 1) {
+
       const posts = data.getFollowedPosts.posts;
       console.log("FollowedPosts", data.getFollowedPosts.posts);
 
