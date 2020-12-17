@@ -34,7 +34,7 @@ const AuthLayout = ({ refetch }) => {
           render={() => <ForgotPassword />}
         />
         <Route exact path={Routes.RESET_PASSWORD} component={ResetPassword} />
-        <Redirect to={Routes.SIGNUP} />
+        <Redirect to={Routes.SIGNIN} />
       </Switch>
     </>
   );

@@ -93,7 +93,7 @@ const SignIn = ({ location, history, refetch }) => {
             </Button>{" "}
             <br />
             <Typography>
-              Don't have an acount? <Link to={Routes.HOME}> Sign up </Link>
+              Don't have an acount? <Link to={Routes.SIGNUP}> Sign up </Link>
             </Typography>
             <Typography>
               Forgot Password ?{" "}

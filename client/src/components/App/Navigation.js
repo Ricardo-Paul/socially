@@ -13,7 +13,6 @@ import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import MessageIcon from "@material-ui/icons/Message";
 import InfoIcon from "@material-ui/icons/Info";
 import NavItem from "./NavItem";
-import { SignalCellularNullSharp } from "@material-ui/icons";
 
 const navStyles = makeStyles((theme) => ({
   name: {
@@ -65,7 +64,7 @@ const Navigation = () => {
             variant="h6"
             className={classes.name}
           >
-            {auth.user.fullName}
+            {auth.user? auth.user.fullName: null}
           </Typography>
           <Typography color="textSecondary">Software Developer</Typography>
         </Box>

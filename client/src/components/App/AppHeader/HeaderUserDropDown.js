@@ -20,7 +20,6 @@ const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
         >
           <MenuItem> Profile </MenuItem>
         </Link>
-        <MenuItem> Logout </MenuItem>
         <Logout />
       </MenuList>
     </MenuWrapper>
