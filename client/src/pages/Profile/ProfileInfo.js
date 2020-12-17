@@ -18,7 +18,8 @@ const ProfileStyles = makeStyles(theme => ({
         height: 200,
         marginTop: -100,
         borderRadius: "50%",
-        border: "7px solid #ffffff"
+        border: "7px solid #ffffff",
+        objectFit: "cover"
     },
     info: {
         display: "flex",

@@ -43,7 +43,7 @@ const postStyles = makeStyles((theme) => ({
     width: "100%",
     height: 50,
     outline: "none",
-    border: 0,
+    border: "1px solid #d0d0d0",
     paddingTop: 10,
     paddingLeft: 15,
     backgroundColor: "#efefef",
