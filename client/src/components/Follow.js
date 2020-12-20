@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { Button } from "@material-ui/core";
+import { Button, Icon } from "@material-ui/core";
 import React from "react";
 import { CREATE_FOLLOW, DELETE_FOLLOW } from "../graphql/follow";
 import { useStore } from "../store";
@@ -10,7 +10,7 @@ import { GET_FOLLOWED_POSTS } from "../graphql/post";
 import { GET_AUTH_USER, GET_USERS, SUGGEST_PEOPLE } from "../graphql/user";
 import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
-const Follow = ({ user }) => {
+const Follow = ({ user, icon: Icon }) => {
   const [{ auth }] = useStore();
 
   const isFollowing = user.followers.find((f) => f.follower === auth.user.id);
@@ -64,6 +64,7 @@ const Follow = ({ user }) => {
   };
 
   return (
+  <React.Fragment>
     <Button
       variant="contained"
       color={isFollowing ? "primary" : "secondary"}
@@ -71,13 +72,16 @@ const Follow = ({ user }) => {
       onClick={handleButtonClick}
       fullWidth
     >
+      {Icon && <Icon style={{marginRight: 10}} /> }
       {!isFollowing ? "Follow" : "Unfollow"}
     </Button>
+  </React.Fragment>
   );
 };
 
 Follow.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  icon: PropTypes.elementType
 }
 
 export default Follow;
