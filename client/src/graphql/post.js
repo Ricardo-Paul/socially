@@ -26,6 +26,7 @@ const postAuthorPayload = `
         image
         fullName
         followers{
+            id
             follower
             following
         }

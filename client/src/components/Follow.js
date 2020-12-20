@@ -50,13 +50,14 @@ const Follow = ({ user }) => {
   });
 
   const handleButtonClick = async () => {
+    console.log('USER', user);
+    console.log('ISFOLLOWING', isFollowing)
     try {
       const result = await mutate({
         variables: {
           input: { ...options[operation].variables },
         },
       });
-      console.log(result);
     } catch (err) {
       console.log(err);
     }
@@ -75,7 +76,7 @@ const Follow = ({ user }) => {
   );
 };
 
-Follow.PropTypes = {
+Follow.propTypes = {
   user: PropTypes.object.isRequired
 }
 

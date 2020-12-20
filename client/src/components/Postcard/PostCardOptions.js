@@ -4,6 +4,7 @@ import {
   MenuItem,
   Paper,
   ClickAwayListener,
+  Button,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { generatePath } from "react-router-dom";
@@ -11,7 +12,6 @@ import * as Routes from "../../routes";
 import { useStore } from "../../store";
 import { Delete, FileCopy, PersonAdd } from "@material-ui/icons";
 import Follow from "../Follow";
-
 
 const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
   const [{ auth }] = useStore();
@@ -36,25 +36,26 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
     <>
       <ClickAwayListener onClickAway={closeMenu}>
         <Paper elevation={3}>
-          <MenuList>
-            <MenuItem style={font} onClick={copyUrl}>
+          {/* <MenuList> */}
+            <Button style={font} onClick={copyUrl}>
               {" "}
               <FileCopy style={{marginRight: 10}} />
               Copy URL
-            </MenuItem>
+            </Button>
             {isUserPost && (
-              <MenuItem style={font} onClick={deletePost}>
+              <Button style={font} onClick={deletePost}>
                 {" "}
                 <Delete style={{marginRight: 10}} />
                 Delete
-              </MenuItem>
+              </Button>
             )}
             {!isUserPost && 
-            <MenuItem style={font}> 
-              <PersonAdd style={{marginRight: 10}} />
-               <Follow />
-            </MenuItem>}
-          </MenuList>
+            // <Button style={font}> 
+            //  {/* <PersonAdd style={{marginRight: 10}} /> */}
+               <Follow user={postAuthor} />
+            // </Button>
+            }
+          {/* </MenuList> */}
         </Paper>
       </ClickAwayListener>
     </>
