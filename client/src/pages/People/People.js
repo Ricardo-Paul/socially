@@ -45,7 +45,7 @@ const People = () => {
       return <h5> loading ... </h5>;
     }
 
-    const { users, count } = data.getUsers;
+    const { users } = data.getUsers;
     if (!users.length > 0) {
       return <h4> No users yet... </h4>;
     }
