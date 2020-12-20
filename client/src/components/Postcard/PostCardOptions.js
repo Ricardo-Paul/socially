@@ -9,7 +9,8 @@ import PropTypes from "prop-types";
 import { generatePath } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
-import { Delete, FileCopy } from "@material-ui/icons";
+import { Delete, FileCopy, PersonAdd } from "@material-ui/icons";
+
 
 const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
   const [{ auth }] = useStore();
@@ -47,7 +48,11 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
                 Delete
               </MenuItem>
             )}
-            {!isUserPost && <MenuItem style={font}> Follow </MenuItem>}
+            {!isUserPost && 
+            <MenuItem style={font}> 
+              <PersonAdd style={{marginRight: 10}} />
+               Follow 
+            </MenuItem>}
           </MenuList>
         </Paper>
       </ClickAwayListener>
