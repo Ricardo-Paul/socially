@@ -10,6 +10,7 @@ import { generatePath } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
 import { Delete, FileCopy, PersonAdd } from "@material-ui/icons";
+import Follow from "../Follow";
 
 
 const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
@@ -51,7 +52,7 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
             {!isUserPost && 
             <MenuItem style={font}> 
               <PersonAdd style={{marginRight: 10}} />
-               Follow 
+               <Follow />
             </MenuItem>}
           </MenuList>
         </Paper>

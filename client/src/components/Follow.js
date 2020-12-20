@@ -3,6 +3,7 @@ import { Button } from "@material-ui/core";
 import React from "react";
 import { CREATE_FOLLOW, DELETE_FOLLOW } from "../graphql/follow";
 import { useStore } from "../store";
+import PropTypes from "prop-types"
 
 // Queries
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
@@ -73,5 +74,9 @@ const Follow = ({ user }) => {
     </Button>
   );
 };
+
+Follow.PropTypes = {
+  user: PropTypes.object.isRequired
+}
 
 export default Follow;
