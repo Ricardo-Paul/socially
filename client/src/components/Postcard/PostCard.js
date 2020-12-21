@@ -112,7 +112,7 @@ const PostCard = ({
 
   const deletePost = async () => {
     try {
-      const { data } = await remove({
+      await remove({
         variables: { input: { id: postId, imagePublicId } },
       });
     } catch (err) {

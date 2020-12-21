@@ -10,7 +10,6 @@ import { HOME_PAGE_POSTS_LIMIT } from "./../constants/DataLimit";
 import { CREATE_LIKE, DELETE_LIKE } from "./../graphql/like";
 
 // queries to refetch
-import { GET_AUTH_USER } from "./../graphql/user";
 import { GET_FOLLOWED_POSTS } from "./../graphql/post";
 
 const Like = ({ likes, postId, author }) => {

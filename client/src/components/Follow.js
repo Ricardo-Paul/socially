@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { Button, Icon } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import React from "react";
 import { CREATE_FOLLOW, DELETE_FOLLOW } from "../graphql/follow";
 import { useStore } from "../store";
