@@ -53,7 +53,7 @@ const Follow = ({ user, icon: Icon }) => {
     console.log('USER', user);
     console.log('ISFOLLOWING', isFollowing)
     try {
-      const result = await mutate({
+      await mutate({
         variables: {
           input: { ...options[operation].variables },
         },

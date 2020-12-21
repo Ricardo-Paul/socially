@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { List, Typography, makeStyles, Box, Avatar } from "@material-ui/core";
 import { NavLink as RouterLink } from "react-router-dom";
 import * as Routes from "../../routes";

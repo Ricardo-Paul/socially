@@ -25,12 +25,6 @@ import { GET_AUTH_USER } from "../../graphql/user";
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 
-const commentsStyles = makeStyles({
-  paper: {
-    maxHeight: 300,
-  },
-});
-
 const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
   const [{ auth }] = useStore();
 

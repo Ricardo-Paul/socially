@@ -17,6 +17,7 @@ const Notification = ({ notification }) => {
     return (
       <div style={{ width: 45, height: 45, marginLeft: 5 }}>
         <img
+          alt="post-pic"
           src={notification.like.post.image}
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
