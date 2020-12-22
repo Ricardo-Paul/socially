@@ -7,4 +7,16 @@
 
 <img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20message%20development.png" />
 
-Navigate to development screenshots for more
+Navigate to [development screenshots](https://github.com/Ricardo-Paul/socially/tree/client/development%20screenshots) for more
+
+### Tech Stacks
+
+- MongoDB with Mongoose
+- GraphQL
+- Express
+- Apollo Server
+- Apollo Client
+- ReactJs 
+- Material UI
+
+Global State is implemented using React Context API and React Hooks
