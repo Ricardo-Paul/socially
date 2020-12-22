@@ -4,7 +4,7 @@ import CreateIcon from '@material-ui/icons/Create';
 
 const useStyles = makeStyles(theme => ({
     container: {
-        backgroundColor: "#cdcde0",
+        // backgroundColor: "#cdcde0",
         width: 330,
         height: "90vh",
     },
@@ -22,7 +22,7 @@ const MessageUsers = () => {
     return(
         <Box border={1} className={classes.container}>
             <Box className={classes.header}>
-                <Typography> MESSAGE USERS </Typography>
+                <Typography> CHATS </Typography>
                 <IconButton>
                     <CreateIcon />
                 </IconButton>

@@ -3,7 +3,7 @@ import { Box, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     container: {
-        backgroundColor: "#aadc95",
+        backgroundColor: "#d6d6d6",
         width: "100%",
         height:"90vh"
     }
