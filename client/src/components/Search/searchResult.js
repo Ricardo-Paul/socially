@@ -22,7 +22,7 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu
     >
       {loading && <ListItem> searching... </ListItem>}
 
-      {!users.length > 0 && <ListItem>No result found for {query}</ListItem>}
+      {!users.length > 0 && <ListItem> No result found for {query}</ListItem>}
       <List style={{ width: 250, paddingLeft: 10 }}>
         {users.map((u) => (
           <React.Fragment>
@@ -32,7 +32,9 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu
               generatePath(Routes.PROFILE, {
                 username: u.username
               })
-            } >
+            }
+            onClick={closeMenu}
+            >
               <ListItemAvatar>
                 <Avatar alt="user avatar" src={u.image || defaultAvatar} />
               </ListItemAvatar>
