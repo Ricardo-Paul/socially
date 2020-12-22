@@ -73,6 +73,7 @@ const AppLayout = ({ authUser }) => {
   const [, dispatch] = useStore();
 
   const classes = appLayoutStyles();
+  const m = `${Routes.MESSAGE}/1`
 
 
   useEffect(() => {
@@ -110,7 +111,7 @@ const AppLayout = ({ authUser }) => {
                 <Route exact path={Routes.MESSAGE} render={() => <Message /> } />
 
                 {/* redirect to  message for development purpose */}
-                <Redirect to={Routes.MESSAGE} />
+                {/* <Redirect to={Routes.MESSAGE} /> */}
               </Switch>
             </PageContainer>
           </Grid>
