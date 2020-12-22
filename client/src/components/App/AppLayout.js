@@ -70,12 +70,10 @@ const appLayoutStyles = makeStyles((theme) => ({
  *
  */
 const AppLayout = ({ authUser }) => {
-  const [{ auth }, dispatch] = useStore();
+  const [, dispatch] = useStore();
 
   const classes = appLayoutStyles();
 
-  // for develoment purpose
-  const mrjoeProfile = '/profile/mrjoe'
 
   useEffect(() => {
     dispatch({
