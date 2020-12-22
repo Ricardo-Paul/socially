@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, makeStyles } from "@material-ui/core";
-
 import MessageChat from "./MessageChat";
 import MessageUsers from "./MessageUsers";
 

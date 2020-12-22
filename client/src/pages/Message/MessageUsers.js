@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, IconButton, makeStyles, Typography } from "@material-ui/core";
 import CreateIcon from '@material-ui/icons/Create';
+import Search from "../../components/Search/Search";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -27,6 +28,7 @@ const MessageUsers = () => {
                     <CreateIcon />
                 </IconButton>
             </Box>
+            <Search />
         </Box>
     )
 }

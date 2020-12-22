@@ -25,7 +25,7 @@ const headerStyles = makeStyles((theme) => ({
     backgroundColor: "#efefef",
     display: "flex",
     borderRadius: 5,
-    marginLeft: 20,
+    // marginLeft: 20,
     [theme.breakpoints.down("sm")]: {
       marginLeft: 5,
     },
