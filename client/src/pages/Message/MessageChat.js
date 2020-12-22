@@ -3,9 +3,10 @@ import { Box, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     container: {
-        backgroundColor: "#d6d6d6",
+        backgroundColor: "#dedede",
         width: "100%",
-        height:"90vh"
+        height:"90vh",
+        padding: 5
     }
 }))
 
