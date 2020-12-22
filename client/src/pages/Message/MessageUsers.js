@@ -21,6 +21,30 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+const dummyUsers = [
+    {
+        id: 1,
+        image: '',
+        fullName: "Roger Alexander",
+        lastMessageSender: true,
+        lastMessage: "Hey fine"
+    },
+    {
+        id: 2,
+        image: '',
+        fullName: "Alex Xavier",
+        lastMessageSender: false,
+        lastMessage: "For the love of Open Source"
+    },
+    {
+        id: 3,
+        image: '',
+        fullName: "Sam Saul",
+        lastMessageSender: true,
+        lastMessage: "Print Eval Loop"
+    }
+]
+
 const MessageUsers = () => {
     const classes = useStyles();
 
@@ -33,6 +57,9 @@ const MessageUsers = () => {
                 </IconButton>
             </Box>
             <Search style={{width: "90%"}} messageSearch placeholder="Chat users..."  />
+            <Box>
+                
+            </Box>
         </Box>
     )
 }
