@@ -19,5 +19,8 @@ Navigate to [development screenshots](https://github.com/Ricardo-Paul/socially/t
 - ReactJs 
 - Material UI
 
+### Global State
 Global State is implemented using React Context API and React Hooks
+
+### Image Hosting
 Cloudinary is used for image hosting
