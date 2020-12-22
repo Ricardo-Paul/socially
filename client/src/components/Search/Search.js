@@ -6,8 +6,9 @@ import { SEARCH_USERS } from "../../graphql/search";
 import useDebounce from "../../hooks/useDebounce";
 import headerStyles from "../App/AppHeader/headerStyles";
 import SearchResult from "./searchResult";
+import PropTypes from "prop-types";
 
-const Search = () => {
+const Search = ({ placeholder }) => {
   const client = useApolloClient();
   const classes = headerStyles();
   
@@ -59,7 +60,7 @@ const Search = () => {
       </div>
       <InputBase
         classes={inputBaseClasses}
-        placeholder="Search users..."
+        placeholder={placeholder}
         onChange={(event) => handleChange(event)}
       />
 
@@ -74,5 +75,9 @@ const Search = () => {
     </div>
   );
 };
+
+Search.propTypes = {
+  placeholder: PropTypes.string
+}
 
 export default Search;
