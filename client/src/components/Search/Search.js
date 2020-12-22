@@ -8,7 +8,7 @@ import headerStyles from "../App/AppHeader/headerStyles";
 import SearchResult from "./searchResult";
 import PropTypes from "prop-types";
 
-const Search = ({ placeholder, ...rest }) => {
+const Search = ({ placeholder, messageSearch, ...rest }) => {
   const client = useApolloClient();
   const classes = headerStyles();
   
@@ -71,13 +71,15 @@ const Search = ({ placeholder, ...rest }) => {
         query={debounceSearchQuery}
         loading={loading}
         closeMenu={closeMenu}
+        messageSearch={messageSearch}
       />
     </div>
   );
 };
 
 Search.propTypes = {
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  messageSearch: PropTypes.bool
 }
 
 export default Search;

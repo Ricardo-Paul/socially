@@ -8,12 +8,16 @@ const useStyles = makeStyles(theme => ({
         // backgroundColor: "#cdcde0",
         width: 330,
         height: "90vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
     },
     header: {
         display: "flex",
         justifyContent: "space-between",
         padding: 5,
-        alignItems: "center"
+        alignItems: "center",
+        width: "90%"
     }
 }))
 
@@ -28,7 +32,7 @@ const MessageUsers = () => {
                     <CreateIcon />
                 </IconButton>
             </Box>
-            <Search />
+            <Search style={{width: "90%"}} messageSearch placeholder="Chat users..."  />
         </Box>
     )
 }
