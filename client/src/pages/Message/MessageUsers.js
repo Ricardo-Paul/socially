@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, IconButton, makeStyles, Typography } from "@material-ui/core";
+import { Avatar, Box, IconButton, List, makeStyles, Typography } from "@material-ui/core";
 import CreateIcon from '@material-ui/icons/Create';
 import Search from "../../components/Search/Search";
 import { generatePath, NavLink } from "react-router-dom";
@@ -13,7 +13,9 @@ const useStyles = makeStyles(theme => ({
         height: "90vh",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        borderColor: "#d0d0d0",
+        backgroundColor: "#ffffff"
     },
     header: {
         display: "flex",
@@ -23,11 +25,16 @@ const useStyles = makeStyles(theme => ({
         width: "90%"
     },
     selected: {
-        backgroundColor: "blue"
+        backgroundColor: "#ceced0"
     },
     user: {
         display: "flex",
         width: "100%",
+        justifyContent: "flex-start",
+        textDecoration: "none",
+        alignItems: "center",
+        padding: 5,
+        color: "#424242"
     }
 }))
 const avatar = "https://material-ui.com/static/images/avatar/3.jpg"
@@ -67,17 +74,19 @@ const MessageUsers = () => {
                 </IconButton>
             </Box>
             <Search style={{width: "90%"}} messageSearch placeholder="Chat users..."  />
-            <Box>
+            <Box width="100%">
+                <List>
                 {dummyUsers.map(user => (
                     <NavLink className={classes.user} activeClassName={classes.selected} to={
                         generatePath(Routes.MESSAGE,{
                             id: user.id
                         })
                     }>
-                        <Avatar src={user.image} />
+                        <Avatar style={{marginRight: 10}} src={user.image} />
                         <Typography> {user.fullName }</Typography>
                     </NavLink>
                 ))}
+                </List>
             </Box>
         </Box>
     )
