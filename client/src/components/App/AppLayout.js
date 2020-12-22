@@ -15,6 +15,7 @@ import Hidden from "@material-ui/core/Hidden";
 import Home from "../../pages/Home";
 import People from "../../pages/People/";
 import Profile from "../../pages/Profile";
+import Message from "../../pages/Message";
 
 import AppHeader from "./AppHeader/AppHeader";
 import {
@@ -108,6 +109,7 @@ const AppLayout = ({ authUser }) => {
                 <Route exact path={Routes.HOME} render={() => <Home />} />
                 <Route exact path={Routes.PEOPLE} render={() => <People />} />
                 <Route exact path={Routes.PROFILE} render={() => <Profile />} />
+                <Route exact path={Routes.MESSAGE} render={() => <Message /> } />
 
                 {/* redirect to a particular profile for development purpose */}
                 <Redirect to={Routes.HOME} />

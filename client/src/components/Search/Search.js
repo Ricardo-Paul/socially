@@ -9,8 +9,8 @@ import SearchResult from "./searchResult";
 
 const Search = () => {
   const client = useApolloClient();
-
   const classes = headerStyles();
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [foundUsers, setFoundUsers] = React.useState([]);
