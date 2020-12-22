@@ -109,8 +109,8 @@ const AppLayout = ({ authUser }) => {
                 <Route exact path={Routes.PROFILE} render={() => <Profile />} />
                 <Route exact path={Routes.MESSAGE} render={() => <Message /> } />
 
-                {/* redirect to a particular profile for development purpose */}
-                <Redirect to={Routes.HOME} />
+                {/* redirect to  message for development purpose */}
+                <Redirect to={Routes.MESSAGE} />
               </Switch>
             </PageContainer>
           </Grid>
