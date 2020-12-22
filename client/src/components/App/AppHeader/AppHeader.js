@@ -80,7 +80,7 @@ const AppHeader = () => {
           <Typography variant="h6" className={classes.appName}>
             {AppInfo.name}
           </Typography>
-          <Search placeholder="Search Users" />
+          <Search placeholder="Search users..." />
           <div className={classes.grow} />
 
           {/* Right Side */}

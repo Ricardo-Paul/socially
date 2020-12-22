@@ -8,8 +8,10 @@ import {
 import React from "react";
 import MenuWrapper from "../App/AppHeader/MenuWrapper";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
+import * as Routes from "../../routes";
+import { generatePath, Link } from "react-router-dom"
 
-const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu }) => {
+const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu, messageSearch }) => {
 
   return (
     <MenuWrapper
@@ -24,7 +26,13 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu
       <List style={{ width: 250, paddingLeft: 10 }}>
         {users.map((u) => (
           <React.Fragment>
-            <ListItem>
+            {/* TODO: replace id */}
+            <ListItem component={Link} to={
+              messageSearch ? generatePath(Routes.MESSAGE, { userId: "replaceId"}) : 
+              generatePath(Routes.PROFILE, {
+                username: u.username
+              })
+            } >
               <ListItemAvatar>
                 <Avatar alt="user avatar" src={u.image || defaultAvatar} />
               </ListItemAvatar>
