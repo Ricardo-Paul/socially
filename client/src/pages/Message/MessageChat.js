@@ -17,7 +17,8 @@ const user = {
     image: avatar,
     fullName: "Roger Alexander",
     lastMessageSender: true,
-    lastMessage: "Hey fine"
+    lastMessage: "Hey fine",
+    isOnline: true
 }
 
 const MessageChat = () => {
@@ -25,7 +26,7 @@ const MessageChat = () => {
 
     return(
         <Box className={classes.container}>
-            <ChatHeading />
+            <ChatHeading chatUser={user} />
         </Box>
     )
 }

@@ -12,7 +12,19 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
         padding: 5,
         color: "#ffffff",
-        backgroundColor: "#ababab"
+        backgroundColor: "#505050"
+    },
+    online: {
+        backgroundColor: "#1bde03",
+        width: 8,
+        height: 8,
+        borderRadius: "50%",
+        marginLeft: 15
+    },
+    avatar: {
+        marginRight: 15,
+        border: "3px solid #a9a4a4",
+        borderRadius: "50%"
     }
 }))
 
@@ -22,8 +34,9 @@ const ChatHeading = ({ chatUser }) => {
     if(chatUser){
         return(
             <Box className={classes.user}>
-                <Avatar style={{marginRight: 15}} src={chatUser.image} />
+                <Avatar className={classes.avatar} src={chatUser.image} />
                 <Typography> { chatUser.fullName } </Typography>
+                {chatUser.isOnline && <div className={classes.online} /> }
             </Box>
         )
     };
@@ -31,7 +44,7 @@ const ChatHeading = ({ chatUser }) => {
     if(!chatUser){
         return(
             <Box>
-                <Search fullWidth style={{borderRadius: 0, width: "100%"}} />
+                <Search placeholder="Search user to message..." fullWidth style={{borderRadius: 0, width: "100%"}} />
             </Box>
         )
     }
