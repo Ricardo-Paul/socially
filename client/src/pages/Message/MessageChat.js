@@ -25,7 +25,7 @@ const MessageChat = () => {
 
     return(
         <Box className={classes.container}>
-            <ChatHeading chatUser={user} />
+            <ChatHeading />
         </Box>
     )
 }

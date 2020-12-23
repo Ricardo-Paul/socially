@@ -8,7 +8,7 @@ import headerStyles from "../App/AppHeader/headerStyles";
 import SearchResult from "./searchResult";
 import PropTypes from "prop-types";
 
-const Search = ({ placeholder, messageSearch, ...rest }) => {
+const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   const client = useApolloClient();
   const classes = headerStyles();
   
@@ -59,6 +59,7 @@ const Search = ({ placeholder, messageSearch, ...rest }) => {
         <SearchIcon />
       </div>
       <InputBase
+        fullWidth={fullWidth? true: false}
         classes={inputBaseClasses}
         placeholder={placeholder}
         onChange={(event) => handleChange(event)}
@@ -79,7 +80,8 @@ const Search = ({ placeholder, messageSearch, ...rest }) => {
 
 Search.propTypes = {
   placeholder: PropTypes.string,
-  messageSearch: PropTypes.bool
+  messageSearch: PropTypes.bool,
+  fullWidth: PropTypes.bool
 }
 
 export default Search;

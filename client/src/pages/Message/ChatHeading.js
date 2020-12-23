@@ -26,11 +26,13 @@ const ChatHeading = ({ chatUser }) => {
                 <Typography> { chatUser.fullName } </Typography>
             </Box>
         )
-    }
+    };
 
     if(!chatUser){
         return(
-            <Search />
+            <Box>
+                <Search fullWidth style={{borderRadius: 0, width: "100%"}} />
+            </Box>
         )
     }
 }
