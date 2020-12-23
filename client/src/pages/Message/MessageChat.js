@@ -1,12 +1,13 @@
 import React from "react";
 import { Box, makeStyles } from "@material-ui/core";
 import ChatHeading from "./ChatHeading";
+import ChatConversations from "./ChatConversations";
 
 const useStyles = makeStyles(theme => ({
     container: {
         backgroundColor: "#dedede",
         width: "100%",
-        height:"90vh",
+        // height:"90vh",
     }
 }));
 
@@ -27,6 +28,7 @@ const MessageChat = () => {
     return(
         <Box className={classes.container}>
             <ChatHeading chatUser={user} />
+            <ChatConversations />
         </Box>
     )
 }
