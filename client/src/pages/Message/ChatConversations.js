@@ -15,7 +15,9 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         padding: 5,
         backgroundColor: "#f7f7f7",
-        border: "1px solid #bfbebe"
+        borderTop: "1px solid #bfbebe",
+        borderBottom: "1px solid #bfbebe",
+        borderRight: "1px solid #bfbebe"
     }
 }));
 
@@ -34,7 +36,7 @@ const ChatConversations = () => {
                     style={{width: 'calc(100% - 50px)'}}
                     placeholder="Start typing your message..."
                     />
-                    <Button type="submit" variant="contained" size="small">
+                    <Button type="submit" variant="contained" size="small" color="primary">
                         Send 
                     </Button>
             </Box>
