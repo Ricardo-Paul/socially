@@ -28,7 +28,7 @@ const ChatConversations = () => {
     return(
         <Box className={classes.container}>
             <Box className={classes.conversation}>
-                conversation
+                Conversations go here
             </Box>
             <Box className={classes.submit}>
                     <InputBase 
