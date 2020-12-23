@@ -7,6 +7,12 @@
 
 <img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20message%20development.png" />
 
+<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20Upload%20Preview.png" />
+
+<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20search.png" />
+
+<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20profile%20page.png" />
+
 Navigate to [development screenshots](https://github.com/Ricardo-Paul/socially/tree/client/development%20screenshots) for more
 
 ### Tech Stacks
