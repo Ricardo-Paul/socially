@@ -73,7 +73,7 @@ const MessageUsers = () => {
                     <CreateIcon />
                 </IconButton>
             </Box>
-            <Search style={{width: "90%"}} messageSearch placeholder="Chat users..."  />
+            <Search style={{width: "95%", borderRadius: 0}} messageSearch placeholder="Chat users..."  />
             <Box width="100%">
                 <List>
                 {dummyUsers.map(user => (
