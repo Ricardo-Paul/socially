@@ -19,21 +19,32 @@ const useStyles = makeStyles(theme => ({
         borderTop: "1px solid #bfbebe",
         borderBottom: "1px solid #bfbebe",
         borderRight: "1px solid #bfbebe"
+    },
+    conversation: {
+        backgroundColor: "white",
+        flexGrow: 1
+    },
+    messageWrapper: {
+        backgroundColor: "blue",
+        padding: 10,
+        margin: "5px 5px 0 5px",
+        display: "flex",
     }
 }));
 
 
-const ChatConversations = ({ chatUser, messages }) => {
+const ChatConversations = ({ chatUser, messages, authUser }) => {
     const classes = useStyles();
 
     return(
         <Box className={classes.container}>
             <Box className={classes.conversation}>
                 {messages.map(message => {
+                    const isAuthUserSender = authUser.id === message.sender.id;
 
                     return(
-                        <Box className={classes.messageWrapper}>
-                            { message.message }
+                        <Box style={isAuthUserSender?{justifyContent: "flex-end"}:null} className={`${classes.messageWrapper}`}>
+                            <Box> {message.message} </Box>
                         </Box>
                     )
                 })}
@@ -57,7 +68,8 @@ const ChatConversations = ({ chatUser, messages }) => {
 
 ChatConversations.propTypes = {
     chatUser: PropTypes.object,
-    messages: PropTypes.array.isRequired
+    messages: PropTypes.array.isRequired,
+    authUser: PropTypes.object.isRequired
 }
  
 export default ChatConversations;

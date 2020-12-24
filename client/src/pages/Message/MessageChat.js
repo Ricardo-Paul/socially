@@ -2,6 +2,7 @@ import React from "react";
 import { Box, makeStyles } from "@material-ui/core";
 import ChatHeading from "./ChatHeading";
 import ChatConversations from "./ChatConversations";
+import { useStore } from "../../store";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -22,13 +23,35 @@ const user = {
     isOnline: true
 }
 
+const dummyMessages = [
+    {
+        id: 1,
+        sender:{
+            id: "5fc26ff2329e5d026d4f301f",
+            image: avatar
+        },
+        message: "Hey boy",
+        cratedAt: "23 - 09 - 2020"
+    },
+    {
+        id: 1,
+        sender:{
+            id: "5fc2703d329e5d026d4f3020",
+            image: avatar
+        },
+        message: "Hey There",
+        cratedAt: "23 - 09 - 2020"
+    }
+]
+
 const MessageChat = () => {
     const classes = useStyles();
+    const [{ auth }] = useStore();
 
     return(
         <Box className={classes.container}>
             <ChatHeading chatUser={user} />
-            <ChatConversations />
+            <ChatConversations messages={dummyMessages} authUser={auth.user} chatUser={user} />
         </Box>
     )
 }
