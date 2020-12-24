@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, makeStyles, Button, InputBase } from "@material-ui/core";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -22,15 +23,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const ChatConversations = () => {
+const ChatConversations = ({ chatUser, messages }) => {
     const classes = useStyles();
 
     return(
         <Box className={classes.container}>
             <Box className={classes.conversation}>
-                Conversations go here
+                {messages.map(message => {
+
+                    return(
+                        <Box className={classes.messageWrapper}>
+                            { message.message }
+                        </Box>
+                    )
+                })}
             </Box>
-            <Box className={classes.submit}>
+
+            {chatUser && 
+                <Box className={classes.submit}>
                     <InputBase 
                     type="text" 
                     style={{width: 'calc(100% - 50px)'}}
@@ -39,9 +49,15 @@ const ChatConversations = () => {
                     <Button type="submit" variant="contained" size="small" color="primary">
                         Send 
                     </Button>
-            </Box>
+                </Box>
+            }
         </Box>
     )
+};
+
+ChatConversations.propTypes = {
+    chatUser: PropTypes.object,
+    messages: PropTypes.array.isRequired
 }
  
 export default ChatConversations;
