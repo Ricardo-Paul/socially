@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     },
     message: {
         maxWidth: 300,
-        backgroundColor: "#97bd8a",
+        backgroundColor: "#ffffff",
         padding: 10,
         borderRadius: 5
     }
@@ -49,7 +49,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
                     return(
                         <Box style={isAuthUserSender?{justifyContent: "flex-end"}:null} className={`${classes.messageWrapper}`}>
                             { !isAuthUserSender && <Avatar style={{marginRight: 5}} src={chatUser.image} /> }
-                            <Box style={isAuthUserSender?{backgroundColor:"#6dc9e4"}:null} className={classes.message}> {message.message} </Box>
+                            <Box style={isAuthUserSender?{backgroundColor:"#bfbfbf"}:null} className={classes.message}> {message.message} </Box>
                         </Box>
                     )
                 })}
