@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, makeStyles, Button, InputBase } from "@material-ui/core";
+import { Box, makeStyles, Button, InputBase, Avatar } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
@@ -21,14 +21,18 @@ const useStyles = makeStyles(theme => ({
         borderRight: "1px solid #bfbebe"
     },
     conversation: {
-        backgroundColor: "white",
         flexGrow: 1
     },
     messageWrapper: {
-        backgroundColor: "blue",
         padding: 10,
         margin: "5px 5px 0 5px",
         display: "flex",
+    },
+    message: {
+        maxWidth: 300,
+        backgroundColor: "#97bd8a",
+        padding: 10,
+        borderRadius: 5
     }
 }));
 
@@ -44,7 +48,8 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
 
                     return(
                         <Box style={isAuthUserSender?{justifyContent: "flex-end"}:null} className={`${classes.messageWrapper}`}>
-                            <Box> {message.message} </Box>
+                            { !isAuthUserSender && <Avatar style={{marginRight: 5}} src={chatUser.image} /> }
+                            <Box style={isAuthUserSender?{backgroundColor:"#6dc9e4"}:null} className={classes.message}> {message.message} </Box>
                         </Box>
                     )
                 })}
