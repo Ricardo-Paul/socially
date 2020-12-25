@@ -30,6 +30,8 @@ export const schema = gql`
         lastMessage: String!
         image: String
         isOnline: Boolean
+        seen: Boolean
+        lastMessageSender: Boolean
     }
     type NotificationsPayload{
         notifications: [Notification]

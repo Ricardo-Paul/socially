@@ -45,7 +45,7 @@ const Query = {
         // check if the person is the sender in the auth user last Messages
         const sender = lastMessages.find((m) => m.sender.toString() === u.id); //returns a message
         if(sender){
-            user.seen = sender.seen;
+            user.seen = sender.seen; //(message.seen --> default value is false)
             user.lastMessage = sender.message;
             user.lastMessageCreatedAt = sender.createdAt;
             user.lastMessageSender = false;

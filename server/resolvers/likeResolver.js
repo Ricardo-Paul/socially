@@ -44,7 +44,7 @@ const Mutation = {
     await User.findOneAndUpdate({ _id: like.user }, { $pull: { likes: like._id } });
     await Post.findOneAndUpdate({ _id: like.post }, { $pull: { likes: like.id } });
 
-        // remove from user collection
+    // remove from user collection
     // we only perform the notification removal if the user unliking (lke.user)
     // is not the post author (post.author)
     const post = await Post.findOne({_id: like.post});
