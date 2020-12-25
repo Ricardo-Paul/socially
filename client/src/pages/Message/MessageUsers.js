@@ -39,30 +39,6 @@ const useStyles = makeStyles(theme => ({
         color: "#424242"
     }
 }))
-const avatar = "https://material-ui.com/static/images/avatar/3.jpg"
-const dummyUsers = [
-    {
-        id: 1,
-        image: avatar,
-        fullName: "Roger Alexander",
-        lastMessageSender: true,
-        lastMessage: "Hey fine"
-    },
-    {
-        id: 2,
-        image: avatar,
-        fullName: "Alex Xavier",
-        lastMessageSender: false,
-        lastMessage: "For the love of Open Source"
-    },
-    {
-        id: 3,
-        image: avatar,
-        fullName: "Sam Saul",
-        lastMessageSender: true,
-        lastMessage: "Print Eval Loop"
-    }
-]
 
 const MessageUsers = () => {
     const classes = useStyles();
@@ -73,7 +49,6 @@ const MessageUsers = () => {
             authUserId: auth.user.id
         }
     });
-
 
     return(
         <Box border={1} className={classes.container}>
