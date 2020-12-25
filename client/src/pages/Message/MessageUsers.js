@@ -4,7 +4,9 @@ import CreateIcon from '@material-ui/icons/Create';
 import Search from "../../components/Search/Search";
 import { generatePath, NavLink } from "react-router-dom";
 import * as Routes from "../../routes";
-
+import { GET_CONVERSATIONS } from "../../graphql/message";
+import { useQuery } from "@apollo/client";
+import { useStore } from "../../store";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -64,6 +66,14 @@ const dummyUsers = [
 
 const MessageUsers = () => {
     const classes = useStyles();
+    const [{ auth }] = useStore();
+
+    const { data, loading } = useQuery(GET_CONVERSATIONS, {
+        variables:{
+            authUserId: auth.user.id
+        }
+    });
+
 
     return(
         <Box border={1} className={classes.container}>
@@ -76,7 +86,7 @@ const MessageUsers = () => {
             <Search style={{width: "95%", borderRadius: 0}} messageSearch placeholder="Chat users..."  />
             <Box width="100%">
                 <List>
-                {dummyUsers.map(user => (
+                {!loading && data.getConversations.map(user => (
                     <NavLink className={classes.user} activeClassName={classes.selected} to={
                         generatePath(Routes.MESSAGE,{
                             id: user.id
