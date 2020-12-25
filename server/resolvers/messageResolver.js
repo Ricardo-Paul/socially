@@ -46,18 +46,18 @@ const Query = {
         const sender = lastMessages.find((m) => m.sender.toString() === u.id); //returns a message
         if(sender){
             user.seen = sender.seen; //(message.seen --> default value is false)
-            user.lastMessage = sender.message;
+            user.lastMessage = sender.message; // the actual message sent by the user
             user.lastMessageCreatedAt = sender.createdAt;
-            user.lastMessageSender = false;
+            user.lastMessageSender = false; // if the use sent the message, he's not the last message sender (not the one having to send the next message)
         };
 
         // check if the user is the receiver in the auth user last messages
         const receiver = lastMessages.find((m) => m.receiver.toString() === u.id); // returns a message
         if(receiver){
             user.seen = receiver.seen;
-            user.lastMessage = receiver.message;
+            user.lastMessage = receiver.message; //the actual message received by the user
             user.lastMessageCreatedAt = receiver.createdAt;
-            user.lastMessageSender = true
+            user.lastMessageSender = true // if the user received a message, he's the last message sender
         };
 
         conversations.push(user);
