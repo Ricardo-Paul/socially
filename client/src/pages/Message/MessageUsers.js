@@ -37,7 +37,14 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
         padding: 5,
         color: "#424242"
-    }
+    },
+    notSeen: {
+        backgroundColor: "#14e8de",
+        width: 8,
+        height: 8,
+        borderRadius: "50%",
+        marginLeft: 15
+    },
 }))
 
 const MessageUsers = () => {
@@ -50,6 +57,8 @@ const MessageUsers = () => {
         }
     });
 
+
+
     return(
         <Box border={1} className={classes.container}>
             <Box className={classes.header}>
@@ -61,16 +70,26 @@ const MessageUsers = () => {
             <Search style={{width: "95%", borderRadius: 0}} messageSearch placeholder="Chat users..."  />
             <Box width="100%">
                 <List>
-                {!loading && data.getConversations.map(user => (
-                    <NavLink className={classes.user} activeClassName={classes.selected} to={
-                        generatePath(Routes.MESSAGE,{
-                            id: user.id
-                        })
-                    }>
-                        <Avatar style={{marginRight: 10}} src={user.image} />
-                        <Typography> {user.fullName }</Typography>
-                    </NavLink>
-                ))}
+                {!loading && data.getConversations.map(user => {
+                    const notSeen = user.seen === false && user.lastMessageSender === false;
+                    console.log('NOT SEEN', notSeen)
+
+                    console.log('CONVERSATIONS', data.getConversations)
+                    return(
+                        <NavLink className={classes.user} activeClassName={classes.selected} to={
+                            generatePath(Routes.MESSAGE,{
+                                id: user.id
+                            })
+                        }>
+                            <Avatar style={{marginRight: 10}} src={user.image} />
+                            <Box>
+                                <Typography> {user.fullName }</Typography>
+                                <Typography> { user.lastMessage } </Typography>
+                                {notSeen && <div className={classes.notSeen}></div>}
+                            </Box>
+                        </NavLink>
+                    )
+    })}
                 </List>
             </Box>
         </Box>

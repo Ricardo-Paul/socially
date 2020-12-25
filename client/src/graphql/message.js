@@ -8,6 +8,9 @@ export const GET_CONVERSATIONS = gql`
             username
             fullName
             isOnline
+            seen
+            lastMessage
+            lastMessageSender
         }
     }
 `
