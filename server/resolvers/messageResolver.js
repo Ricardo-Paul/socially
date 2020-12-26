@@ -132,18 +132,12 @@ const Subscription = {
         (payload, variables) => {
             const { sender, receiver } = payload.messageCreated;
 
-            // const { authUserId, userId } = variables;
             const authUserId = variables.authUserId.toString();
             const userId = variables.userId.toString();
-
-            console.log('PAYLOAD', payload.messageCreated)
-            console.log('VARS', variables)
-            
 
             const isAuthUserSenderOrReceiver = authUserId === sender.toString() || authUserId == receiver.toString();
             const isUserSenderOrReceiver = userId === sender.toString()  || userId === receiver.toString();
 
-            console.log("BOOL", isAuthUserSenderOrReceiver && isUserSenderOrReceiver)
             return isAuthUserSenderOrReceiver && isUserSenderOrReceiver
         }
         )
@@ -158,9 +152,6 @@ const Subscription = {
             let authUserId;
             if(authUser) {authUserId = authUser.id;}
 
-            console.log('IDS', authUser, authUserId, receiverId)
-
-            console.log('BOOL ::', authUserId === receiverId)
             return authUserId === receiverId
         }
         )
