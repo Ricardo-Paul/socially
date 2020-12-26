@@ -322,6 +322,7 @@ type NewConversationPayload{
     isOnline: Boolean
     lastMessage: String
     lastMessageCreatedAt: String
+    lastMessageSender: Boolean
     seen: Boolean
 }
 

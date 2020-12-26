@@ -106,7 +106,7 @@ const Mutation = {
             pubSub.publish(NEW_CONVERSATION, {
                 newConversation: {
                     receiverId: receiver,
-                    id: senderUser.id,
+                    id: senderUser.id, // notice the id is a user id
                     fullName: senderUser.fullName,
                     image: senderUser.image,
                     lastMessage: newMessage.message,
