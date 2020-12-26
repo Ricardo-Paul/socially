@@ -4,7 +4,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import Search from "../../components/Search/Search";
 import { generatePath, NavLink } from "react-router-dom";
 import * as Routes from "../../routes";
-import { GET_CONVERSATIONS } from "../../graphql/message";
+import { GET_CONVERSATIONS, GET_NEW_CONVERSATIONS } from "../../graphql/message";
 import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
 
@@ -51,12 +51,39 @@ const MessageUsers = () => {
     const classes = useStyles();
     const [{ auth }] = useStore();
 
-    const { data, loading } = useQuery(GET_CONVERSATIONS, {
+    const { data, loading, subscribeToMore } = useQuery(GET_CONVERSATIONS, {
         variables:{
             authUserId: auth.user.id
         }
     });
 
+    React.useEffect(() => {
+        const unsubscribe = subscribeToMore({
+            document: GET_NEW_CONVERSATIONS,
+            updateQuery: (prev, { subscriptionData }) => {
+                if(!subscriptionData.data) return prev;
+                const { newConversation } = subscriptionData.data;
+                const oldConversations = prev.getConversations;
+                
+                const existedUserInChat = oldConversations.some( u => u.id === newConversation.id);
+                if(existedUserInChat) return prev;
+                // newConversation.id is the senderUser id
+
+                let mergedConversations = [...oldConversations, newConversation];
+
+                console.log("SUBS :", newConversation, oldConversations, mergedConversations)
+
+                return {
+                    getConversations: mergedConversations
+                }
+            }
+        })
+
+        return () => {
+            unsubscribe();
+        }
+
+    }, [subscribeToMore])
 
 
     return(
@@ -95,5 +122,5 @@ const MessageUsers = () => {
         </Box>
     )
 }
- 
+
 export default MessageUsers;

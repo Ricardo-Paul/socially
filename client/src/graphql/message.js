@@ -14,3 +14,19 @@ export const GET_CONVERSATIONS = gql`
         }
     }
 `
+
+export const GET_NEW_CONVERSATIONS = gql`
+    subscription{
+        newConversation{
+            id
+            username
+            fullName
+            image
+            isOnline
+            lastMessage
+            lastMessageCreatedAt
+            lastMessageSender
+            seen
+        }
+    }
+`
