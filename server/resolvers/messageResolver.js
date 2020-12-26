@@ -131,11 +131,19 @@ const Subscription = {
         subscribe: withFilter( () => pubSub.asyncIterator(MESSAGE_CREATED),
         (payload, variables) => {
             const { sender, receiver } = payload.messageCreated;
-            const { authUserId, userId } = variables;
 
-            const isAuthUserSenderOrReceiver = authUserId === sender.id || authUserId == receiver.id
-            const isUserSenderOrReceiver = userId === sender.id || userId === receiver.id
+            // const { authUserId, userId } = variables;
+            const authUserId = variables.authUserId.toString();
+            const userId = variables.userId.toString();
 
+            console.log('PAYLOAD', payload.messageCreated)
+            console.log('VARS', variables)
+            
+
+            const isAuthUserSenderOrReceiver = authUserId === sender.toString() || authUserId == receiver.toString();
+            const isUserSenderOrReceiver = userId === sender.toString()  || userId === receiver.toString();
+
+            console.log("BOOL", isAuthUserSenderOrReceiver && isUserSenderOrReceiver)
             return isAuthUserSenderOrReceiver && isUserSenderOrReceiver
         }
         )
