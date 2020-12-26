@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { pubSub } from "../utils/apolloServer";
+import { withFilter } from "apollo-server";
 
 const Query = {
     getMessages: async (root, {authUserId, userId}, {Message}) => {
@@ -106,7 +108,17 @@ const Mutation = {
     }
 }
 
+const Subscription = {
+    messageCreated: {
+
+    },
+    newConversation: {
+
+    }
+}
+
 export default {
     Query,
-    Mutation
+    Mutation,
+    Subscription
 }

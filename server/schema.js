@@ -303,7 +303,18 @@ type NotificationCreatedOrDeletedPayload{
     operation: NotificationOperationType!
     notification: Notification
 }
+
+type MessageCreatedPayload{
+        id: ID
+    }
+
+type NewConversationPayload{
+    id: ID
+}
+
  type Subscription{
     notificationCreatedOrDeleted: NotificationCreatedOrDeletedPayload
+    messageCreated: MessageCreatedPayload
+    newConversation: NewConversationPayload
  }
 `
