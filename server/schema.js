@@ -319,6 +319,10 @@ type NewConversationPayload{
     username: String
     fullName: String
     image: String
+    isOnline: Boolean
+    lastMessage: String
+    lastMessageCreatedAt: String
+    seen: Boolean
 }
 
  type Subscription{

@@ -110,12 +110,13 @@ const Mutation = {
                     fullName: senderUser.fullName,
                     image: senderUser.image,
                     lastMessage: newMessage.message,
-                    createdAt: newMessage.createdAt
+                    lastMessageCreatedAt: newMessage.createdAt,
+                    seen: newMessage.seen,
+                    lastMessageSender: true
                 }
             })
     
             return newMessage;
-
     },
     deleteMessage: async (root, { input: { messageId } }, { Message, User }) => {
         const message = await Message.findOneAndRemove({ _id: messageId });
@@ -139,8 +140,7 @@ const Subscription = {
             const isUserSenderOrReceiver = userId === sender.toString()  || userId === receiver.toString();
 
             return isAuthUserSenderOrReceiver && isUserSenderOrReceiver
-        }
-        )
+        })
     },
     newConversation: {
         subscribe: withFilter(() => pubSub.asyncIterator(NEW_CONVERSATION), 
