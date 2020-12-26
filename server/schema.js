@@ -316,6 +316,9 @@ type MessageCreatedPayload{
 
 type NewConversationPayload{
     id: ID
+    username: String
+    fullName: String
+    image: String
 }
 
  type Subscription{

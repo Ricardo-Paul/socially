@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 import { pubSub } from "../utils/apolloServer";
 import { withFilter } from "apollo-server";
 import { MESSAGE_CREATED, NEW_CONVERSATION } from "../constants/Subscriptions";
+import models from '../models';
 
+const User = models.User;
 
 const Query = {
     getMessages: async (root, {authUserId, userId}, {Message}) => {
@@ -77,44 +79,43 @@ const Query = {
 
 const Mutation = {
     createMessage: async (root, { input: { message, sender, receiver } }, {Message, User}) => {
+            let newMessage = await new Message({
+                sender: sender,
+                receiver: receiver,
+                message: message
+            }).save();
+    
+            // publish messsage created
+            pubSub.publish(MESSAGE_CREATED, {
+                messageCreated: newMessage
+            })
+    
+            // push sender to receiver messages collection
+            // push receiver to sender messages collection
+            // if it is the first conversation
+    
+            const senderUser = await User.findById(sender);
+    
+            if(!senderUser.messages.includes(receiver)){
+                await User.findOneAndUpdate({ _id: receiver }, { $push: { messages: sender } });
+                await User.findOneAndUpdate({ _id: sender }, { $push: { messages: receiver } })
+                newMessage.isFirstMessage = true;
+            };
+    
+            // publish new conversation
+            pubSub.publish(NEW_CONVERSATION, {
+                newConversation: {
+                    receiverId: receiver,
+                    id: senderUser.id,
+                    fullName: senderUser.fullName,
+                    image: senderUser.image,
+                    lastMessage: newMessage.message,
+                    createdAt: newMessage.createdAt
+                }
+            })
+    
+            return newMessage;
 
-        const newMessage = await new Message({
-            sender: sender,
-            receiver: receiver,
-            message: message
-        }).save();
-
-        // populate because we'll need sender and receiver id
-        newMessage = await newMessage.populate('sender').populate('receiver').execPopulate();
-        // publish messsage created
-        pubSub.publish(MESSAGE_CREATED, {
-            messageCreated: newMessage
-        })
-
-        // push sender to receiver messages collection
-        // push receiver to sender messages collection
-        // if it is the first conversation
-
-        const senderUser = await User.findById(sender);
-
-        if(!senderUser.messages.includes(receiver)){
-            await User.findOneAndUpdate({ _id: receiver }, { $push: { messages: sender } });
-            await User.findOneAndUpdate({ _id: sender }, { $push: { messages: receiver } })
-            newMessage.isFirstMessage = true;
-        };
-
-        // publish new conversation
-        pubSub.publish(NEW_CONVERSATION, {
-            newConversation: {
-                id: senderUser.id,
-                fullName: senderUser.fullName,
-                image: senderUser.image,
-                lastMessage: newMessage.message,
-                createdAt: newMessage.createdAt
-            }
-        })
-
-        return newMessage;
     },
     deleteMessage: async (root, { input: { messageId } }, { Message, User }) => {
         const message = await Message.findOneAndRemove({ _id: messageId });
@@ -140,7 +141,21 @@ const Subscription = {
         )
     },
     newConversation: {
-        subscribe: pubSub.asyncIterator(NEW_CONVERSATION)
+        subscribe: withFilter(() => pubSub.asyncIterator(NEW_CONVERSATION), 
+       async (payload, variables, { authenticatedUser }) => {
+            // Make sure the receiver is authenticated AKA active
+            const { receiverId } = payload.newConversation;
+            const authUser = await User.findOne({username: authenticatedUser.username});
+
+            let authUserId;
+            if(authUser) {authUserId = authUser.id;}
+
+            console.log('IDS', authUser, authUserId, receiverId)
+
+            console.log('BOOL ::', authUserId === receiverId)
+            return authUserId === receiverId
+        }
+        )
     }
 }
 
