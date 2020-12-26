@@ -86,6 +86,7 @@ const Mutation = {
 
         // populate because we'll need sender and receiver id
         newMessage = await newMessage.populate('sender').populate('receiver').execPopulate();
+        // publish messsage created
         pubSub.publish(MESSAGE_CREATED, {
             messageCreated: newMessage
         })
@@ -99,9 +100,19 @@ const Mutation = {
         if(!senderUser.messages.includes(receiver)){
             await User.findOneAndUpdate({ _id: receiver }, { $push: { messages: sender } });
             await User.findOneAndUpdate({ _id: sender }, { $push: { messages: receiver } })
-
             newMessage.isFirstMessage = true;
-        }
+        };
+
+        // publish new conversation
+        pubSub.publish(NEW_CONVERSATION, {
+            newConversation: {
+                id: senderUser.id,
+                fullName: senderUser.fullName,
+                image: senderUser.image,
+                lastMessage: newMessage.message,
+                createdAt: newMessage.createdAt
+            }
+        })
 
         return newMessage;
     },
