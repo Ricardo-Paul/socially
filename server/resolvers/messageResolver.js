@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { pubSub } from "../utils/apolloServer";
 import { withFilter } from "apollo-server";
+import { MESSAGE_CREATED, NEW_CONVERSATION } from "../constants/Subscriptions";
+
 
 const Query = {
     getMessages: async (root, {authUserId, userId}, {Message}) => {
@@ -82,7 +84,11 @@ const Mutation = {
             message: message
         }).save();
 
-        // TODO: populate message before publish through subscription
+        // populate because we'll need sender and receiver id
+        newMessage = await newMessage.populate('sender').populate('receiver').execPopulate();
+        pubSub.publish(MESSAGE_CREATED, {
+            messageCreated: newMessage
+        })
 
         // push sender to receiver messages collection
         // push receiver to sender messages collection
@@ -110,10 +116,20 @@ const Mutation = {
 
 const Subscription = {
     messageCreated: {
+        subscribe: withFilter( () => pubSub.asyncIterator(MESSAGE_CREATED),
+        (payload, variables) => {
+            const { sender, receiver } = payload.messageCreated;
+            const { authUserId, userId } = variables;
 
+            const isAuthUserSenderOrReceiver = authUserId === sender.id || authUserId == receiver.id
+            const isUserSenderOrReceiver = userId === sender.id || userId === receiver.id
+
+            return isAuthUserSenderOrReceiver && isUserSenderOrReceiver
+        }
+        )
     },
     newConversation: {
-
+        subscribe: pubSub.asyncIterator(NEW_CONVERSATION)
     }
 }
 

@@ -306,6 +306,12 @@ type NotificationCreatedOrDeletedPayload{
 
 type MessageCreatedPayload{
         id: ID
+        sender: UserPayload
+        receiver: UserPayload
+        message: String
+        seen: Boolean
+        isFirstMessage: Boolean
+        createdAt: String
     }
 
 type NewConversationPayload{
@@ -314,7 +320,7 @@ type NewConversationPayload{
 
  type Subscription{
     notificationCreatedOrDeleted: NotificationCreatedOrDeletedPayload
-    messageCreated: MessageCreatedPayload
+    messageCreated(authUserId: ID!, userId: ID!): MessageCreatedPayload
     newConversation: NewConversationPayload
  }
 `
