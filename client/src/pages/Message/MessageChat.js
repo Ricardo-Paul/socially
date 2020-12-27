@@ -3,6 +3,7 @@ import { Box, makeStyles } from "@material-ui/core";
 import ChatHeading from "./ChatHeading";
 import ChatConversations from "./ChatConversations";
 import { useStore } from "../../store";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -44,7 +45,9 @@ const dummyMessages = [
     }
 ]
 
-const MessageChat = () => {
+const MessageChat = ({ match }) => {
+    const { id: userId } = match.params;
+
     const classes = useStyles();
     const [{ auth }] = useStore();
 
@@ -55,5 +58,4 @@ const MessageChat = () => {
         </Box>
     )
 }
- 
-export default MessageChat;
+export default withRouter(MessageChat);

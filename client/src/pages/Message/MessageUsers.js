@@ -85,7 +85,6 @@ const MessageUsers = () => {
 
     }, [subscribeToMore])
 
-
     return(
         <Box border={1} className={classes.container}>
             <Box className={classes.header}>
