@@ -18,12 +18,7 @@ import Profile from "../../pages/Profile";
 import Message from "../../pages/Message";
 
 import AppHeader from "./AppHeader/AppHeader";
-import {
-  Grid,
-  makeStyles,
-  CssBaseline,
-  Drawer,
-} from "@material-ui/core";
+import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
 import { PageContainer } from "../pageContainer";
 
 const appLayoutStyles = makeStyles((theme) => ({
@@ -58,7 +53,7 @@ const appLayoutStyles = makeStyles((theme) => ({
     top: 70,
     height: "calc(100% - 64px)",
     width: 256,
-    zIndex: 100
+    zIndex: 100,
   },
   grid: {
     height: "100%",
@@ -73,8 +68,7 @@ const AppLayout = ({ authUser }) => {
   const [, dispatch] = useStore();
 
   const classes = appLayoutStyles();
-  const m = `${Routes.MESSAGE}/1`
-
+  const m = `${Routes.MESSAGE}/1`;
 
   useEffect(() => {
     dispatch({
@@ -108,7 +102,7 @@ const AppLayout = ({ authUser }) => {
                 <Route exact path={Routes.HOME} render={() => <Home />} />
                 <Route exact path={Routes.PEOPLE} render={() => <People />} />
                 <Route exact path={Routes.PROFILE} render={() => <Profile />} />
-                <Route exact path={Routes.MESSAGE} render={() => <Message /> } />
+                <Route exact path={Routes.MESSAGE} render={() => <Message />} />
 
                 {/* redirect to  message for development purpose */}
                 {/* <Redirect to={Routes.MESSAGE} /> */}

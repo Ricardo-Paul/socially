@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 import React from "react";
 import { CREATE_FOLLOW, DELETE_FOLLOW } from "../graphql/follow";
 import { useStore } from "../store";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
 // Queries
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
@@ -45,13 +45,13 @@ const Follow = ({ user, icon: Icon }) => {
       },
       { query: GET_AUTH_USER },
       { query: GET_USERS, variables: { userId: auth.user.id } },
-      { query: SUGGEST_PEOPLE, variables: { userId: auth.user.id } }
+      { query: SUGGEST_PEOPLE, variables: { userId: auth.user.id } },
     ],
   });
 
   const handleButtonClick = async () => {
-    console.log('USER', user);
-    console.log('ISFOLLOWING', isFollowing)
+    console.log("USER", user);
+    console.log("ISFOLLOWING", isFollowing);
     try {
       await mutate({
         variables: {
@@ -64,24 +64,24 @@ const Follow = ({ user, icon: Icon }) => {
   };
 
   return (
-  <React.Fragment>
-    <Button
-      variant="contained"
-      color={isFollowing ? "primary" : "secondary"}
-      size="small"
-      onClick={handleButtonClick}
-      fullWidth
-    >
-      {Icon && <Icon style={{marginRight: 10}} /> }
-      {!isFollowing ? "Follow" : "Unfollow"}
-    </Button>
-  </React.Fragment>
+    <React.Fragment>
+      <Button
+        variant="contained"
+        color={isFollowing ? "primary" : "secondary"}
+        size="small"
+        onClick={handleButtonClick}
+        fullWidth
+      >
+        {Icon && <Icon style={{ marginRight: 10 }} />}
+        {!isFollowing ? "Follow" : "Unfollow"}
+      </Button>
+    </React.Fragment>
   );
 };
 
 Follow.propTypes = {
   user: PropTypes.object.isRequired,
-  icon: PropTypes.elementType
-}
+  icon: PropTypes.elementType,
+};
 
 export default Follow;

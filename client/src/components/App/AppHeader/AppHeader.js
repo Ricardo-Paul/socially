@@ -79,7 +79,11 @@ const AppHeader = () => {
           <Typography variant="h6" className={classes.appName}>
             {AppInfo.name}
           </Typography>
-          <Search fullWidth={false} placeholder="Search users..." style={{ marginLeft: 20}} />
+          <Search
+            fullWidth={false}
+            placeholder="Search users..."
+            style={{ marginLeft: 20 }}
+          />
           <div className={classes.grow} />
 
           {/* Right Side */}

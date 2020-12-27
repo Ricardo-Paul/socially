@@ -3,7 +3,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Avatar
+  Avatar,
 } from "@material-ui/core";
 
 const Notification = ({ notification }) => {

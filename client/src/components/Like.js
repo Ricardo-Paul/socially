@@ -39,7 +39,7 @@ const Like = ({ likes, postId, author }) => {
       // { query: GET_AUTH_USER },
       {
         query: GET_FOLLOWED_POSTS,
-        variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT},
+        variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
       },
     ],
   });

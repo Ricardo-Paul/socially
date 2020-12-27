@@ -21,9 +21,9 @@ const peopleStyles = makeStyles((theme) => ({
     border: "0.1px #afafaf",
     cursor: "pointer",
 
-    '&:hover':{
-        backgroundColor: "#efefef",
-    }
+    "&:hover": {
+      backgroundColor: "#efefef",
+    },
   },
   name: {
     fontSize: "16px",
@@ -70,7 +70,12 @@ const PeopleSuggestions = () => {
           <ListItem disableGutters className={classes.item}>
             <img
               src={p.image || defaultAvatar}
-              style={{ width: 80, height: 80, marginRight: 10, objectFit: "cover" }}
+              style={{
+                width: 80,
+                height: 80,
+                marginRight: 10,
+                objectFit: "cover",
+              }}
             />
             <Box display="flex" flexDirection="column">
               <Typography className={classes.name}> {p.fullName} </Typography>

@@ -12,11 +12,12 @@ const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
   return (
     <MenuWrapper isOpen={isOpen} anchorEl={userAnchorEl} closeMenu={closeMenu}>
       <MenuList>
-        <Link to={generatePath(PROFILE, {
-          username: auth.user.username
-        })}
-        style={{textDecoration: "none"}}
-        onClick={closeMenu}
+        <Link
+          to={generatePath(PROFILE, {
+            username: auth.user.username,
+          })}
+          style={{ textDecoration: "none" }}
+          onClick={closeMenu}
         >
           <MenuItem> Profile </MenuItem>
         </Link>

@@ -135,7 +135,7 @@ const CreatePost = () => {
             <div className={classes.avatar}>
               {/* <AccountCircle fontSize="large" /> */}
               <Avatar src={auth.user.image} />
-            </div> 
+            </div>
 
             <textarea
               className={classes.textarea}

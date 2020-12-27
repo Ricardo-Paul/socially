@@ -9,10 +9,17 @@ import React from "react";
 import MenuWrapper from "../App/AppHeader/MenuWrapper";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
 import * as Routes from "../../routes";
-import { generatePath, Link } from "react-router-dom"
+import { generatePath, Link } from "react-router-dom";
 
-const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu, messageSearch }) => {
-
+const SearchResult = ({
+  searchAnchorEl,
+  isOpen,
+  users,
+  query,
+  loading,
+  closeMenu,
+  messageSearch,
+}) => {
   return (
     <MenuWrapper
       isOpen={isOpen}
@@ -27,13 +34,16 @@ const SearchResult = ({ searchAnchorEl, isOpen, users, query, loading, closeMenu
         {users.map((u) => (
           <React.Fragment>
             {/* TODO: replace id */}
-            <ListItem component={Link} to={
-              messageSearch ? generatePath(Routes.MESSAGE, { userId: "replaceId"}) : 
-              generatePath(Routes.PROFILE, {
-                username: u.username
-              })
-            }
-            onClick={closeMenu}
+            <ListItem
+              component={Link}
+              to={
+                messageSearch
+                  ? generatePath(Routes.MESSAGE, { userId: "replaceId" })
+                  : generatePath(Routes.PROFILE, {
+                      username: u.username,
+                    })
+              }
+              onClick={closeMenu}
             >
               <ListItemAvatar>
                 <Avatar alt="user avatar" src={u.image || defaultAvatar} />

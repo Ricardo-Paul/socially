@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   const client = useApolloClient();
   const classes = headerStyles();
-  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [foundUsers, setFoundUsers] = React.useState([]);
@@ -54,12 +54,12 @@ const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   }, [client, debounceSearchQuery]);
 
   return (
-    <div className={classes.search} {...rest} >
+    <div className={classes.search} {...rest}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
       <InputBase
-        fullWidth={fullWidth? true: false}
+        fullWidth={fullWidth ? true : false}
         classes={inputBaseClasses}
         placeholder={placeholder}
         onChange={(event) => handleChange(event)}
@@ -81,7 +81,7 @@ const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
 Search.propTypes = {
   placeholder: PropTypes.string,
   messageSearch: PropTypes.bool,
-  fullWidth: PropTypes.bool
-}
+  fullWidth: PropTypes.bool,
+};
 
 export default Search;

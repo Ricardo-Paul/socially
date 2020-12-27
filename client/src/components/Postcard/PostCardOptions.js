@@ -35,28 +35,27 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
   return (
     <>
       <ClickAwayListener onClickAway={closeMenu}>
-        <Paper elevation={3} 
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start"
-        }}
+        <Paper
+          elevation={3}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
         >
-            <Button style={font} onClick={copyUrl}>
+          <Button style={font} onClick={copyUrl}>
+            {" "}
+            <FileCopy style={{ marginRight: 10 }} />
+            Copy URL
+          </Button>
+          {isUserPost && (
+            <Button style={font} onClick={deletePost}>
               {" "}
-              <FileCopy style={{marginRight: 10}} />
-              Copy URL
+              <Delete style={{ marginRight: 10 }} />
+              Delete
             </Button>
-            {isUserPost && (
-              <Button style={font} onClick={deletePost}>
-                {" "}
-                <Delete style={{marginRight: 10}} />
-                Delete
-              </Button>
-            )}
-            {!isUserPost && 
-               <Follow user={postAuthor} icon={PersonAdd} />
-            }
+          )}
+          {!isUserPost && <Follow user={postAuthor} icon={PersonAdd} />}
         </Paper>
       </ClickAwayListener>
     </>
