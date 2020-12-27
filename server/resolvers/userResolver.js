@@ -44,8 +44,18 @@ const Query = {
    * @param {string} username
    */
 
-  getUser: async (_, { username }, { User }) => {
-    const user = await User.findOne({ username })
+  getUser: async (_, { username, userId }, { User }) => {
+
+    if(username && userId){
+      throw new Error('Either search by username or userId');
+    }
+
+    if(!username && !userId){
+      throw new Error('username or userId required');
+    }
+
+    const query = username ? { username } : {_id: userId}
+    const user = await User.findOne(query)
       .populate({
         path: 'posts',
         options: { sort: { createdAt: 'desc' } },

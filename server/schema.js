@@ -7,7 +7,7 @@ export const schema = gql`
 #-------------------------------------------------------
     type Query{
         getAuthUser: UserPayload
-        getUser(username: String!): UserPayload
+        getUser(username: String, userId: ID): UserPayload
         verifyResetPasswordToken(email: String!, token: String!): SuccessMessage
         postname: String
         getPosts(authUserId: ID!, skip:Int, limit:Int): PostsPayload
