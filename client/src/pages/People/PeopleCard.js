@@ -13,19 +13,19 @@ const peopleCardStyles = makeStyles({
     padding: 20,
     marginRight: 10,
     border: "1px solid #c5c4c4",
-    borderRadius: 0
+    borderRadius: 0,
   },
   avatar: {
     width: 128,
     height: 128,
     borderRadius: "50%",
-    objectFit: "cover"
+    objectFit: "cover",
   },
   cardInfo: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
 const PeopleCard = ({ user }) => {
@@ -38,7 +38,10 @@ const PeopleCard = ({ user }) => {
       </Box>
       <Box className={classes.cardInfo}>
         <Typography> {user.fullName} </Typography>
-        <Typography style={{marginBottom: 10}} color="textSecondary"> @{user.username} </Typography>
+        <Typography style={{ marginBottom: 10 }} color="textSecondary">
+          {" "}
+          @{user.username}{" "}
+        </Typography>
         <Follow user={user} />
       </Box>
     </Paper>

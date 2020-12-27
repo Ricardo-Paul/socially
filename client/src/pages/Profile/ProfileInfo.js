@@ -4,7 +4,7 @@ import { PhotoCamera } from "@material-ui/icons";
 import { GET_AUTH_USER, UPLOAD_USER_PHOTO } from "../../graphql/user";
 import { useApolloClient } from "@apollo/client";
 import { useStore } from "../../store";
-import defaultAvatar from "../../ressources/defaultAvatar.jpg"
+import defaultAvatar from "../../ressources/defaultAvatar.jpg";
 
 const ProfileStyles = makeStyles((theme) => ({
   root: {
@@ -64,9 +64,7 @@ const ProfileInfo = () => {
             imagePublicId: "userphoto",
           },
         },
-        refetchQueries:[
-            {query: GET_AUTH_USER}
-        ]
+        refetchQueries: [{ query: GET_AUTH_USER }],
       });
       console.log(data);
     } catch (err) {
@@ -92,9 +90,18 @@ const ProfileInfo = () => {
       <Box>
         <h1 style={{ textAlign: "center" }}> {auth.user.fullName} </h1>
         <Box className={classes.info}>
-          <Typography variant="subtitle2" color="textSecondary"> {auth.user.posts.length} Posts </Typography>
-          <Typography variant="subtitle2" color="textSecondary"> {auth.user.following.length} Following </Typography>
-          <Typography variant="subtitle2" color="textSecondary"> {auth.user.followers.length} Followers </Typography>
+          <Typography variant="subtitle2" color="textSecondary">
+            {" "}
+            {auth.user.posts.length} Posts{" "}
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary">
+            {" "}
+            {auth.user.following.length} Following{" "}
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary">
+            {" "}
+            {auth.user.followers.length} Followers{" "}
+          </Typography>
         </Box>
       </Box>
     </Box>

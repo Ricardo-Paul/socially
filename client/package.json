@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "author": "Ricardo Paul <ricardopaul@gmail.com>",
+  "author": "Ricardo Paul <ricardopaul459@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "^3.2.7",

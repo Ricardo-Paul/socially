@@ -17,7 +17,7 @@ const ProfileStyles = makeStyles((theme) => ({
   postContainer: {
     marginTop: 20,
     width: "80%",
-  }
+  },
 }));
 
 const Profile = () => {
