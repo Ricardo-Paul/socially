@@ -1,0 +1,29 @@
+{
+  "name": "socially",
+  "version": "1.0.0",
+  "description": "social networking app",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ricardo-Paul/socially.git"
+  },
+  "keywords": [
+    "social",
+    "mongo",
+    "graphql",
+    "express",
+    "react"
+  ],
+  "author": "Ricardo Paul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ricardo-Paul/socially/issues"
+  },
+  "homepage": "https://github.com/Ricardo-Paul/socially#readme"
+}
