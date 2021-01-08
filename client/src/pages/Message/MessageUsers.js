@@ -97,7 +97,7 @@ const MessageUsers = () => {
     <Box border={1} className={classes.container}>
       <Box className={classes.header}>
         <Typography> CHATS </Typography>
-        <IconButton>
+        <IconButton  >
           <CreateIcon />
         </IconButton>
       </Box>

@@ -66,6 +66,10 @@ const Query = {
       .populate('followers')
       .populate('notifications')
 
+      if(!user){
+        throw new Error('User not found')
+      }
+
     return user;
   },
 

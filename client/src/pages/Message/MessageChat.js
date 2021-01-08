@@ -4,6 +4,8 @@ import ChatHeading from "./ChatHeading";
 import ChatConversations from "./ChatConversations";
 import { useStore } from "../../store";
 import { withRouter } from "react-router-dom";
+import { GET_USER } from "../../graphql/user";
+import { useQuery } from "@apollo/client";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -46,7 +48,17 @@ const dummyMessages = [
 ];
 
 const MessageChat = ({ match }) => {
-  const { id: userId } = match.params;
+  const { id } = match.params;
+
+  // const {data, loading} = useQuery(GET_USER,{
+  //   variables: { userId: id },
+  //   skip: !id
+  // });
+
+
+  // if(!loading){
+  //   console.log('USER DATA', data.getUser)
+  // }
 
   const classes = useStyles();
   const [{ auth }] = useStore();
