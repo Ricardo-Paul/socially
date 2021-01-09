@@ -1,4 +1,0 @@
-.env
-# Local Netlify folder
-.netlify
-build/
