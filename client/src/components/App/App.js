@@ -97,6 +97,12 @@ const App = () => {
     };
   }, [subscribeToMore]);
 
+  if(error){
+    return(
+      <h3> Something went wrong, please bear with us since we're still in develoment, we're woring to fix this </h3>
+    )
+  }
+
   return (
     <Router>
       <Switch>
