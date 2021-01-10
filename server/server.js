@@ -20,7 +20,7 @@ const HOST =   process.env.HOST;
 
 const LOCAL_DB = `${MONGO_URL}/${DB_NAME}`;
 const MONGODB_ATLAS = process.env.MONGODB_ATLAS;
-
+const isDev = process.env.NODE_ENV === 'development'
 
 
 // ditch the resolver object by passing the
@@ -57,7 +57,7 @@ httpServer.listen({ port: API_PORT}, () => {
     `)
 })
 
-mongoose.connect(MONGODB_ATLAS, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(isDev ? LOCAL_DB : MONGODB_ATLAS, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log(`API Connected to the databse: ${DB_NAME}`)
 })
