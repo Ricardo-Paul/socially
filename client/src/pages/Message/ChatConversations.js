@@ -112,6 +112,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
             variant="contained"
             size="small"
             color="primary"
+            disabled={message?false:true}
           >
             Send
           </Button>
