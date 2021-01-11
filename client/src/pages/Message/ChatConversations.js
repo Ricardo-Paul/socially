@@ -2,7 +2,7 @@ import React from "react";
 import { Box, makeStyles, Button, InputBase, Avatar } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { useMutation } from "@apollo/client";
-import { CREATE_MESSAGE } from "../../graphql/message";
+import { CREATE_MESSAGE, GET_MESSAGES } from "../../graphql/message";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -57,7 +57,15 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
           message
         }
       },
-      refetchQueries:[]
+      refetchQueries:[
+        {
+          query: GET_MESSAGES,
+          variables: {
+            authUserId: authUser.id,
+            userId: chatUser.id
+          }
+        }
+      ]
     })
   }
 
@@ -113,6 +121,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
             size="small"
             color="primary"
             disabled={message?false:true}
+            onClick={sendMessage}
           >
             Send
           </Button>
