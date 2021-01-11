@@ -30,3 +30,15 @@ export const GET_NEW_CONVERSATIONS = gql`
         }
     }
 `
+
+export const GET_MESSAGES = gql`
+ query($authUserId: ID!, $userId: ID!){
+     getMessages(authUserId: $authUserId, userId: $userId){
+         message
+         sender
+         receiver
+         createdAt
+         seen
+     }
+ }
+`

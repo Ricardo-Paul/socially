@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, makeStyles } from "@material-ui/core";
 import ChatHeading from "./ChatHeading";
 import ChatConversations from "./ChatConversations";
 import { useStore } from "../../store";
 import { withRouter } from "react-router-dom";
-import { GET_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
+import { GET_USER } from "../../graphql/user";
+import { GET_MESSAGES } from "../../graphql/message";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -48,6 +49,9 @@ const dummyMessages = [
 ];
 
 const MessageChat = ({ match }) => {
+  const classes = useStyles();
+  const [{ auth }] = useStore();
+  
   const { id } = match.params;
   let userId = id? id: null
 
@@ -56,21 +60,19 @@ const MessageChat = ({ match }) => {
     skip: !id
   });
 
-  // console.log(data && data.getUser)
+  const { data: messagesData, loading: messagesLoading  } = useQuery(GET_MESSAGES, {
+    variables: {
+      authUserId: auth.user.id,
+      userId
+    }
+  })
 
-
-  if(data){
-    console.log('USER DATA', data.getUser)
-  }
-
-  const classes = useStyles();
-  const [{ auth }] = useStore();
 
   return (
     <Box className={classes.container}>
       <ChatHeading chatUser={data?data.getUser:null} />
       <ChatConversations
-        messages={dummyMessages}
+        messages={messagesData?messagesData.getMessages:[]}
         authUser={auth.user}
         chatUser={data?data.getUser:null}
       />

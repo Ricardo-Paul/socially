@@ -38,12 +38,13 @@ const useStyles = makeStyles((theme) => ({
 
 const ChatConversations = ({ chatUser, messages, authUser }) => {
   const classes = useStyles();
+  console.log('M', messages)
 
   return (
     <Box className={classes.container}>
       <Box className={classes.conversation}>
         {messages.map((message) => {
-          const isAuthUserSender = authUser.id === message.sender.id;
+          const isAuthUserSender = authUser.id === message.sender;
 
           return (
             <Box
