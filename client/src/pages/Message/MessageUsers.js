@@ -125,9 +125,11 @@ const MessageUsers = () => {
                 >
                   <Avatar style={{ marginRight: 10 }} src={user.image} />
                   <Box>
-                    <Typography> {user.fullName}</Typography>
-                    <Typography> {user.lastMessage} </Typography>
-                    {notSeen && <div className={classes.notSeen}></div>}
+                    <Box className={classes.info}>
+                      <Typography> {user.fullName}</Typography>
+                      {notSeen && <div className={classes.notSeen}></div>}
+                    </Box>
+                    <Typography> {user.lastMessage.substring(0, 8)} ... </Typography>
                   </Box>
                 </NavLink>
               );
