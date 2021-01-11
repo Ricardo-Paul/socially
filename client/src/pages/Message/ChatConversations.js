@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
   conversation: {
     flexGrow: 1,
+    maxHeight: "calc(80vh - 50px)",
+    overflow: "auto"
   },
   messageWrapper: {
     padding: 10,
@@ -96,7 +98,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
               className={`${classes.messageWrapper}`}
             >
               {!isAuthUserSender && (
-                <Avatar style={{ marginRight: 5 }} src={chatUser.image || null} />
+                <Avatar style={{ marginRight: 5 }} src={chatUser ? chatUser.image:null} />
               )}
               <Box
                 style={isAuthUserSender ? { backgroundColor: "#29292b", color:"#eaeaea" } : null}

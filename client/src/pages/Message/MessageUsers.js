@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     // backgroundColor: "#cdcde0",
     width: 330,
-    height: "90vh",
+    // height: "90vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -132,10 +132,10 @@ const MessageUsers = () => {
                   <Avatar style={{ marginRight: 10 }} src={user.image} />
                   <Box style={{ width: "100%" }}>
                     <Box className={classes.info}>
-                      <Typography> {user.fullName}</Typography>
+                      <Typography > {user.fullName}</Typography>
                       {notSeen && <div className={classes.notSeen}></div>}
                     </Box>
-                    <Typography> {user.lastMessage.substring(0, 8)} ... </Typography>
+                    <Typography color="secondary" > {user.lastMessage.substring(0, 8)} ... </Typography>
                   </Box>
                 </NavLink>
               );

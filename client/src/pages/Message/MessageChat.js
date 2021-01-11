@@ -11,8 +11,7 @@ import { GET_MESSAGES } from "../../graphql/message";
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: "#dedede",
-    width: "100%",
-    // height:"90vh",
+    width: "100%"
   },
 }));
 
@@ -51,7 +50,7 @@ const dummyMessages = [
 const MessageChat = ({ match }) => {
   const classes = useStyles();
   const [{ auth }] = useStore();
-  
+
   const { id } = match.params;
   let userId = id? id: null
 
