@@ -49,27 +49,30 @@ const dummyMessages = [
 
 const MessageChat = ({ match }) => {
   const { id } = match.params;
+  let userId = id? id: null
 
-  // const {data, loading} = useQuery(GET_USER,{
-  //   variables: { userId: id },
-  //   skip: !id
-  // });
+  const {data, loading} = useQuery(GET_USER,{
+    variables: { userId },
+    skip: !id
+  });
+
+  // console.log(data && data.getUser)
 
 
-  // if(!loading){
-  //   console.log('USER DATA', data.getUser)
-  // }
+  if(data){
+    console.log('USER DATA', data.getUser)
+  }
 
   const classes = useStyles();
   const [{ auth }] = useStore();
 
   return (
     <Box className={classes.container}>
-      <ChatHeading chatUser={user} />
+      <ChatHeading chatUser={data?data.getUser:null} />
       <ChatConversations
         messages={dummyMessages}
         authUser={auth.user}
-        chatUser={user}
+        chatUser={data?data.getUser:null}
       />
     </Box>
   );
