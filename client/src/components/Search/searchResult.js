@@ -33,12 +33,11 @@ const SearchResult = ({
       <List style={{ width: 250, paddingLeft: 10 }}>
         {users.map((u) => (
           <React.Fragment>
-            {/* TODO: replace id */}
             <ListItem
               component={Link}
               to={
                 messageSearch
-                  ? generatePath(Routes.MESSAGE, { userId: "replaceId" })
+                  ? generatePath(Routes.MESSAGE, { id: u.id })
                   : generatePath(Routes.PROFILE, {
                       username: u.username,
                     })
