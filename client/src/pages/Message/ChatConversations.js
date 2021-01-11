@@ -57,16 +57,21 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
           message
         }
       },
-      refetchQueries:[
-        {
-          query: GET_MESSAGES,
-          variables: {
-            authUserId: authUser.id,
-            userId: chatUser.id
-          }
+      refetchQueries: ({ data }) => {
+        if(data && data.createMessage){
+          return [
+            {
+              query: GET_MESSAGES,
+              variables: {
+                authUserId: authUser.id,
+                userId: chatUser.id
+              }
+            }
+          ]
         }
-      ]
-    })
+      }
+    });
+    setMessage("")
   }
 
   const handleChange = (e) => {
@@ -75,7 +80,6 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
 
   const handleKeyDown = (e) => {
     if(e.keyCode === 13 && e.shiftKey === false){
-      alert(message)
       sendMessage()
     }
   }
@@ -114,6 +118,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
             placeholder="Start typing your message..."
             onChange={handleChange}
             onKeyDown={handleKeyDown}
+            value={message}
           />
           <Button
             type="submit"
