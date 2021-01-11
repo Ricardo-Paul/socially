@@ -96,10 +96,10 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
               className={`${classes.messageWrapper}`}
             >
               {!isAuthUserSender && (
-                <Avatar style={{ marginRight: 5 }} src={null} />
+                <Avatar style={{ marginRight: 5 }} src={chatUser.image || null} />
               )}
               <Box
-                style={isAuthUserSender ? { backgroundColor: "#bfbfbf" } : null}
+                style={isAuthUserSender ? { backgroundColor: "#29292b", color:"#eaeaea" } : null}
                 className={classes.message}
               >
                 {" "}
