@@ -55,6 +55,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
     marginLeft: 15,
   },
+  info: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems:"center",
+    width: "100%"
+  }
 }));
 
 const MessageUsers = () => {
@@ -124,7 +130,7 @@ const MessageUsers = () => {
                   })}
                 >
                   <Avatar style={{ marginRight: 10 }} src={user.image} />
-                  <Box>
+                  <Box style={{ width: "100%" }}>
                     <Box className={classes.info}>
                       <Typography> {user.fullName}</Typography>
                       {notSeen && <div className={classes.notSeen}></div>}
