@@ -49,9 +49,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#424242",
   },
   notSeen: {
-    backgroundColor: "#14e8de",
-    width: 8,
-    height: 8,
+    backgroundColor: "#4f60da",
+    width: 10,
+    height: 10,
     borderRadius: "50%",
     marginLeft: 15,
   },
