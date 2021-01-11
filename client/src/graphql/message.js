@@ -42,3 +42,14 @@ export const GET_MESSAGES = gql`
      }
  }
 `
+
+export const CREATE_MESSAGE = gql`
+ mutation($input: CreateMessageInput!){
+     createMessage(input: $input){
+         message
+         sender
+         receiver
+         seen
+     }
+ }
+`
