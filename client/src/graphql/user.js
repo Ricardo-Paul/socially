@@ -140,6 +140,7 @@ export const UPLOAD_USER_PHOTO = gql`
 export const GET_USER = gql`
   query($username: String, $userId: ID){
     getUser(username: $username, userId: $userId){
+      id
       image
       username
       fullName

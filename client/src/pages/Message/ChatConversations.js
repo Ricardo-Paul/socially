@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, makeStyles, Button, InputBase, Avatar } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { useMutation } from "@apollo/client";
+import { CREATE_MESSAGE } from "../../graphql/message";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,7 +40,37 @@ const useStyles = makeStyles((theme) => ({
 
 const ChatConversations = ({ chatUser, messages, authUser }) => {
   const classes = useStyles();
-  console.log('M', messages)
+  const [message, setMessage] = React.useState("");
+
+  const [createMessage] = useMutation(CREATE_MESSAGE)
+
+  const sendMessage = () => {
+    if(!message || message.trim() === ""){
+      return
+    }
+
+    createMessage({
+      variables:{
+        input:{
+          sender: authUser.id,
+          receiver: chatUser.id,
+          message
+        }
+      },
+      refetchQueries:[]
+    })
+  }
+
+  const handleChange = (e) => {
+    setMessage(e.target.value)
+  }
+
+  const handleKeyDown = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false){
+      alert(message)
+      sendMessage()
+    }
+  }
 
   return (
     <Box className={classes.container}>
@@ -72,6 +104,8 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
             type="text"
             style={{ width: "calc(100% - 50px)" }}
             placeholder="Start typing your message..."
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
           />
           <Button
             type="submit"
