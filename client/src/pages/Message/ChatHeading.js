@@ -44,11 +44,14 @@ const ChatHeading = ({ chatUser }) => {
   if (!chatUser) {
     return (
       <Box>
-        <Search
+        {/* <Search
           placeholder="Search user to message..."
           fullWidth
           style={{ borderRadius: 0, width: "100%" }}
-        />
+        /> */}
+        <Typography>
+          SOCIALLY MESSAGE
+        </Typography>
       </Box>
     );
   }

@@ -86,6 +86,12 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
     }
   }
 
+  if(!chatUser){
+    return(
+      <h3> Start sending message </h3>
+    )
+  }
+
   return (
     <Box className={classes.container}>
       <Box className={classes.conversation}>
