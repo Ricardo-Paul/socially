@@ -5,7 +5,23 @@ export const GET_USER_NOTIFICATIONS = gql`
     query($userId:ID!, $skip:Int, $limit:Int){
         getUserNotifications(userId: $userId, skip:$skip, limit:$limit){
             count
-            notifications
+            notifications{
+                sender{
+                    id
+                    image
+                }
+                id
+                seen
+                like{
+                    id
+                }
+                comment{
+                    id
+                }
+                follow{
+                    id
+                }
+            }
         }
     }
 `
