@@ -9,6 +9,7 @@ export const GET_USER_NOTIFICATIONS = gql`
                 sender{
                     id
                     image
+                    fullName
                 }
                 id
                 seen

@@ -2,6 +2,7 @@ import React from "react"
 import { GET_USER_NOTIFICATIONS } from "../../graphql/notification"
 import { useQuery } from "@apollo/client"
 import { useStore } from "../../store"
+import Notification from "../../components/App/Notification"
 
 const Notifications = () => {
     const [{auth}] = useStore();
@@ -34,21 +35,19 @@ const Notifications = () => {
       
           if (!loading && networkStatus != 1) {
             const notifications = data.getUserNotifications.notifications;
-            console.log("NOTIFICATIONS", data.getUserNotifications);
-      
-            notifications.map((p) => {
-              console.log("AUTHOR: ", p.author);
-              console.log("COMMENTS", p.comments);
-            });
       
             if (!notifications.length) {
               return <h5> NO NOTIFICATIONS </h5>;
             }
-    }
+
+            return notifications.map(n => (
+                    <Notification key={n.id} notification={n} />
+                ))
+        }
 }
 
     return(
-        <h3> {renderContent()} </h3>
+        renderContent()
     )
 }
 
