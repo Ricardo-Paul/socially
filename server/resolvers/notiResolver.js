@@ -17,7 +17,6 @@ const Query = {
   }
 }
 
-
 const Mutation = {
   createNotification: async(_, { input: { senderId, receiverId, postId, notificationType, notificationTypeId }}, { Notification, User }) => {
     console.log(typeof(notificationType), notificationType.toLowerCase())

@@ -35,6 +35,8 @@ const Query = {
       match: { seen: false },
     });
 
+    // notice how we pick only seen:false notifications
+    // those that will be displayed at the app bar
     return user;
   },
 
