@@ -43,6 +43,12 @@ export const DELETE_NOTIFICATION = gql`
     }
 `
 
+export const UPDATE_NOTIFICATION_SEEN = gql`
+    mutation($input: UpdateNotificationInput!){
+        updateNotificationSeen(input: $input)
+    }
+`
+
 export const NOTIFICATION_CREATED_OR_DELETED = gql`
     subscription{
         notificationCreatedOrDeleted{

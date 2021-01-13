@@ -5,8 +5,32 @@ import {
   ListItemText,
   Avatar,
 } from "@material-ui/core";
+import { UPDATE_NOTIFICATION_SEEN } from "../../graphql/notification";
+import { useMutation } from "@apollo/client";
+import { useStore } from "../../store";
 
 const Notification = ({ notification }) => {
+  const [{auth}] = useStore();
+
+  const [updateNotification] = useMutation(UPDATE_NOTIFICATION_SEEN, {
+    variables:{
+      input: { receiverId: auth.user.id }
+    }
+  })
+
+  React.useEffect(() => {
+    const update = async () => {
+      try{
+        const r = await updateNotification();
+        console.log(r)
+      }catch(err){
+        console.log(err)
+      }
+    }
+
+    update();
+  }, [auth.user.id]);
+
   if (!notification.like && !notification.comment && !notification.follow) {
     return;
   }
