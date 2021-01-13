@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   conversation: {
     flexGrow: 1,
     maxHeight: "calc(80vh - 50px)",
-    overflow: "auto"
+    overflow: "auto",
   },
   messageWrapper: {
     padding: 10,
@@ -44,52 +44,50 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
   const classes = useStyles();
   const [message, setMessage] = React.useState("");
 
-  const [createMessage] = useMutation(CREATE_MESSAGE)
+  const [createMessage] = useMutation(CREATE_MESSAGE);
 
   const sendMessage = () => {
-    if(!message || message.trim() === ""){
-      return
+    if (!message || message.trim() === "") {
+      return;
     }
 
     createMessage({
-      variables:{
-        input:{
+      variables: {
+        input: {
           sender: authUser.id,
           receiver: chatUser.id,
-          message
-        }
+          message,
+        },
       },
       refetchQueries: ({ data }) => {
-        if(data && data.createMessage){
+        if (data && data.createMessage) {
           return [
             {
               query: GET_MESSAGES,
               variables: {
                 authUserId: authUser.id,
-                userId: chatUser.id
-              }
-            }
-          ]
+                userId: chatUser.id,
+              },
+            },
+          ];
         }
-      }
+      },
     });
-    setMessage("")
-  }
+    setMessage("");
+  };
 
   const handleChange = (e) => {
-    setMessage(e.target.value)
-  }
+    setMessage(e.target.value);
+  };
 
   const handleKeyDown = (e) => {
-    if(e.keyCode === 13 && e.shiftKey === false){
-      sendMessage()
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      sendMessage();
     }
-  }
+  };
 
-  if(!chatUser){
-    return(
-      <h3> Start sending message </h3>
-    )
+  if (!chatUser) {
+    return <h3> Start sending message </h3>;
   }
 
   return (
@@ -104,10 +102,17 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
               className={`${classes.messageWrapper}`}
             >
               {!isAuthUserSender && (
-                <Avatar style={{ marginRight: 5 }} src={chatUser ? chatUser.image:null} />
+                <Avatar
+                  style={{ marginRight: 5 }}
+                  src={chatUser ? chatUser.image : null}
+                />
               )}
               <Box
-                style={isAuthUserSender ? { backgroundColor: "#29292b", color:"#eaeaea" } : null}
+                style={
+                  isAuthUserSender
+                    ? { backgroundColor: "#29292b", color: "#eaeaea" }
+                    : null
+                }
                 className={classes.message}
               >
                 {" "}
@@ -133,7 +138,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
             variant="contained"
             size="small"
             color="primary"
-            disabled={message?false:true}
+            disabled={message ? false : true}
             onClick={sendMessage}
           >
             Send

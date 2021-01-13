@@ -58,9 +58,9 @@ const useStyles = makeStyles((theme) => ({
   info: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems:"center",
-    width: "100%"
-  }
+    alignItems: "center",
+    width: "100%",
+  },
 }));
 
 const MessageUsers = () => {
@@ -103,7 +103,7 @@ const MessageUsers = () => {
     <Box border={1} className={classes.container}>
       <Box className={classes.header}>
         <Typography> CHATS </Typography>
-        <IconButton  >
+        <IconButton>
           <CreateIcon />
         </IconButton>
       </Box>
@@ -132,10 +132,13 @@ const MessageUsers = () => {
                   <Avatar style={{ marginRight: 10 }} src={user.image} />
                   <Box style={{ width: "100%" }}>
                     <Box className={classes.info}>
-                      <Typography > {user.fullName}</Typography>
+                      <Typography> {user.fullName}</Typography>
                       {notSeen && <div className={classes.notSeen}></div>}
                     </Box>
-                    <Typography color="secondary" > {user.lastMessage.substring(0, 8)} ... </Typography>
+                    <Typography color="secondary">
+                      {" "}
+                      {user.lastMessage.substring(0, 8)} ...{" "}
+                    </Typography>
                   </Box>
                 </NavLink>
               );

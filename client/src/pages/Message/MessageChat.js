@@ -11,7 +11,7 @@ import { GET_MESSAGES } from "../../graphql/message";
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: "#dedede",
-    width: "100%"
+    width: "100%",
   },
 }));
 
@@ -52,28 +52,30 @@ const MessageChat = ({ match }) => {
   const [{ auth }] = useStore();
 
   const { id } = match.params;
-  let userId = id? id: null
+  let userId = id ? id : null;
 
-  const {data, loading} = useQuery(GET_USER,{
+  const { data, loading } = useQuery(GET_USER, {
     variables: { userId },
-    skip: !id
+    skip: !id,
   });
 
-  const { data: messagesData, loading: messagesLoading  } = useQuery(GET_MESSAGES, {
-    variables: {
-      authUserId: auth.user.id,
-      userId
+  const { data: messagesData, loading: messagesLoading } = useQuery(
+    GET_MESSAGES,
+    {
+      variables: {
+        authUserId: auth.user.id,
+        userId,
+      },
     }
-  })
-
+  );
 
   return (
     <Box className={classes.container}>
-      <ChatHeading chatUser={data?data.getUser:null} />
+      <ChatHeading chatUser={data ? data.getUser : null} />
       <ChatConversations
-        messages={messagesData?messagesData.getMessages:[]}
+        messages={messagesData ? messagesData.getMessages : []}
         authUser={auth.user}
-        chatUser={data?data.getUser:null}
+        chatUser={data ? data.getUser : null}
       />
     </Box>
   );

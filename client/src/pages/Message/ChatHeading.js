@@ -49,9 +49,7 @@ const ChatHeading = ({ chatUser }) => {
           fullWidth
           style={{ borderRadius: 0, width: "100%" }}
         /> */}
-        <Typography>
-          SOCIALLY MESSAGE
-        </Typography>
+        <Typography>SOCIALLY MESSAGE</Typography>
       </Box>
     );
   }
