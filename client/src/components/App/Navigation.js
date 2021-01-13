@@ -66,7 +66,7 @@ const Navigation = () => {
           >
             {auth.user ? auth.user.fullName : null}
           </Typography>
-          <Typography color="textSecondary">Software Developer</Typography>
+          <Typography color="textSecondary"> STATUS </Typography>
         </Box>
         <Divider />
         <Box p={2}>
