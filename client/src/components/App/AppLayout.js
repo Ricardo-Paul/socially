@@ -1,26 +1,29 @@
 import React, { useEffect } from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import Hidden from "@material-ui/core/Hidden";
 import * as Routes from "../../routes";
 import Navigation from "./Navigation";
 import { colors as appColors } from "../../utils/theme";
 
-// actions
+// ACTION
 import { SET_AUTH_USER } from "../../store/auth";
 
-// hooks
+// HOOKS
 import { useStore } from "../../store";
-import Hidden from "@material-ui/core/Hidden";
 
-// pages
+// APP PAGES
 import Home from "../../pages/Home";
 import People from "../../pages/People/";
 import Profile from "../../pages/Profile";
 import Message from "../../pages/Message";
 import Notifications from "../../pages/Notifications";
+import About from "../../pages/About";
+import Browse from "../../pages/Browse";
 
 import AppHeader from "./AppHeader/AppHeader";
 import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
 import { PageContainer } from "../pageContainer";
+
 
 const appLayoutStyles = makeStyles((theme) => ({
   "@global": {
@@ -105,9 +108,11 @@ const AppLayout = ({ authUser }) => {
                 <Route exact path={Routes.PROFILE} render={() => <Profile />} />
                 <Route exact path={Routes.MESSAGE} render={() => <Message />} />
                 <Route exact path={Routes.NOTIFICATIONS} render={() => <Notifications /> } />
+                <Route exact path={Routes.BROWSE} render={() => <Browse />} />
+                <Route exact path={Routes.ABOUT} render={() => < About />} />
 
-                {/* redirect to  message for development purpose */}
-                {/* <Redirect to={Routes.MESSAGE} /> */}
+                {/* redirect to  notification for development purpose */}
+                <Redirect to={Routes.NOTIFICATIONS} />
               </Switch>
             </PageContainer>
           </Grid>
