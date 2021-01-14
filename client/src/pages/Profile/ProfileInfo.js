@@ -73,6 +73,8 @@ const ProfileInfo = ({ user }) => {
     }
   };
 
+  const isAuthUser = user.username === auth.user.username
+
   return (
     <Box className={classes.root}>
       <Box className={classes.imgContainer}>
@@ -84,9 +86,9 @@ const ProfileInfo = ({ user }) => {
           style={{ display: "none" }}
           onChange={handleFileChange}
         />
-        <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
+        { isAuthUser && <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
           <PhotoCamera />
-        </IconButton>
+        </IconButton> }
       </Box>
       <Box>
         <h1 style={{ textAlign: "center" }}> {user.fullName} </h1>

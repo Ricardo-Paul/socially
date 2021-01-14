@@ -1,6 +1,7 @@
 import { Box, IconButton, makeStyles } from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
 import React from "react";
+import { useStore } from "../../store";
 import defaultCover from "./background2.jpg";
 
 const CoverStyles = makeStyles((theme) => ({
@@ -20,9 +21,11 @@ const CoverStyles = makeStyles((theme) => ({
   },
 }));
 
-const CoverPhotoUpload = () => {
+const CoverPhotoUpload = ({ user }) => {
   const classes = CoverStyles();
   const inputEl = React.useRef(null);
+  const [{ auth }] = useStore();
+  const isAuthUser = user.username === auth.user.username;
 
   const handleIconClick = () => {
     inputEl.current.click();
@@ -39,9 +42,9 @@ const CoverPhotoUpload = () => {
       />
 
       <label>
-        <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
+        { isAuthUser && <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
           <PhotoCamera />
-        </IconButton>
+        </IconButton> }
       </label>
     </Box>
   );

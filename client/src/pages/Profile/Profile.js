@@ -25,8 +25,8 @@ const ProfileStyles = makeStyles((theme) => ({
 
 const Profile = ({ match }) => {
   const classes = ProfileStyles();
-
   const { username } = match.params;
+
 
   const { data, loading } = useQuery(GET_USER, {
     variables: {
@@ -40,21 +40,9 @@ const Profile = ({ match }) => {
     )
   }
 
-  if(!loading){
-    console.log('SINGLE USER', data)
-  }
-
-  const u = {
-    fullName: "ANY",
-    image: "pichere",
-    posts:[],
-    followers:[],
-    following:[]
-  }
-
   return (
     <Box>
-      <CoverPhotoUpload />
+      <CoverPhotoUpload user={data.getUser} />
       <ProfileInfo user={data.getUser} className={classes.info} />
       <Box className={classes.content}>
         <Box className={classes.postContainer}>
