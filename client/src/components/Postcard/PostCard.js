@@ -20,6 +20,7 @@ import Like from "../Like";
 import PostPopUpComments from "../PostPopUp/PostPopUpComments";
 
 import { useStore } from "../../store";
+import * as Routes from "../../routes";
 
 // delete post imports
 import { useMutation } from "@apollo/client";
@@ -29,6 +30,7 @@ import { GET_FOLLOWED_POSTS } from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 
 import { theme } from "../../utils/theme";
+import { generatePath, Link } from "react-router-dom";
 
 const postCardStyles = makeStyles({
   card: {
@@ -77,6 +79,7 @@ const PostCard = ({
   fullName,
   image,
   avatar,
+  username,
   openModal,
   likeNumber,
   commentNumber,
@@ -136,13 +139,15 @@ const PostCard = ({
       <Card className={classes.card}>
         <CardHeader
           className={classes.header}
-          avatar={<Avatar alt="user photo" src={avatar} />}
+          avatar={<Avatar component={Link} to={generatePath(Routes.PROFILE, {
+            username
+          })} alt="user photo" src={avatar} />}
           title={fullName}
           action={
             <IconButton onClick={handleClick}>
               <MoreVert />
             </IconButton>
-          }
+          } 
           subheader={"5 hours ago"}
         />
         <CardContent>{title}</CardContent>
@@ -195,4 +200,5 @@ PostCard.propTypes = {
   avatar: PropTypes.string, //author avatar
   openModal: PropTypes.func.isRequired, //called when image is clicked
   imagePublicId: PropTypes.string, // used to delete the image associated to a post
+  username: PropTypes.string
 };
