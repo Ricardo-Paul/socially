@@ -143,7 +143,7 @@ const PostCard = ({
             username
           })} alt="user photo" src={avatar} />}
           title={
-            <Link to={generatePath(Routes.PROFILE, {
+            <Link style={{textDecoration: "none"}} to={generatePath(Routes.PROFILE, {
               username
             })}> {fullName} </Link>
           }
