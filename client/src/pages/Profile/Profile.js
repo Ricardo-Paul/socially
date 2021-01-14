@@ -6,6 +6,7 @@ import { Box, makeStyles } from "@material-ui/core";
 import { GET_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
 import { withRouter } from "react-router-dom";
+import { useStore } from "../../store";
 
 const ProfileStyles = makeStyles((theme) => ({
   info: {
@@ -24,9 +25,11 @@ const ProfileStyles = makeStyles((theme) => ({
 }));
 
 const Profile = ({ match }) => {
+  const [{ auth }] = useStore();
   const classes = ProfileStyles();
   const { username } = match.params;
 
+  const isAuthUser = username === auth.user.username;
 
   const { data, loading } = useQuery(GET_USER, {
     variables: {
@@ -45,9 +48,9 @@ const Profile = ({ match }) => {
       <CoverPhotoUpload user={data.getUser} />
       <ProfileInfo user={data.getUser} className={classes.info} />
       <Box className={classes.content}>
-        <Box className={classes.postContainer}>
+        {isAuthUser && <Box className={classes.postContainer}>
           <CreatePost />
-        </Box>
+        </Box>}
       </Box>
     </Box>
   );
