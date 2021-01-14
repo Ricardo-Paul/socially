@@ -1,6 +1,6 @@
 import React from "react";
 import { List, Typography, makeStyles, Box, Avatar } from "@material-ui/core";
-import { NavLink as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink, generatePath } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
 import Divider from "@material-ui/core/Divider";
@@ -56,7 +56,9 @@ const Navigation = () => {
             src={auth.user ? auth.user.image : null}
             component={RouterLink}
             className={classes.avatar}
-            to={Routes.HOME}
+            to={generatePath(Routes.PROFILE, {
+              username: auth.user.username
+            })}
           />
           <Typography
             variant="primary"
