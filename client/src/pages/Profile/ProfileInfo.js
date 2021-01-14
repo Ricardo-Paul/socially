@@ -5,6 +5,7 @@ import { GET_AUTH_USER, UPLOAD_USER_PHOTO } from "../../graphql/user";
 import { useApolloClient } from "@apollo/client";
 import { useStore } from "../../store";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
+import PropTypes from "prop-types"
 
 const ProfileStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +43,7 @@ const ProfileStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ user }) => {
   const classes = ProfileStyles();
   const inputRef = React.useRef(null);
   const client = useApolloClient();
@@ -75,7 +76,7 @@ const ProfileInfo = () => {
   return (
     <Box className={classes.root}>
       <Box className={classes.imgContainer}>
-        <img src={auth.user.image || defaultAvatar} className={classes.image} />
+        <img src={user.image || defaultAvatar} className={classes.image} />
         <input
           accept="image/x-png,image/jpeg"
           ref={inputRef}
@@ -88,24 +89,28 @@ const ProfileInfo = () => {
         </IconButton>
       </Box>
       <Box>
-        <h1 style={{ textAlign: "center" }}> {auth.user.fullName} </h1>
+        <h1 style={{ textAlign: "center" }}> {user.fullName} </h1>
         <Box className={classes.info}>
           <Typography variant="subtitle2" color="textSecondary">
             {" "}
-            {auth.user.posts.length} Posts{" "}
+            {user.posts.length} Posts{" "}
           </Typography>
           <Typography variant="subtitle2" color="textSecondary">
             {" "}
-            {auth.user.following.length} Following{" "}
+            {user.following.length} Following{" "}
           </Typography>
           <Typography variant="subtitle2" color="textSecondary">
             {" "}
-            {auth.user.followers.length} Followers{" "}
+            {user.followers.length} Followers{" "}
           </Typography>
         </Box>
       </Box>
     </Box>
   );
 };
+
+ProfileInfo.prototype = {
+  user: PropTypes.object.isRequired
+}
 
 export default ProfileInfo;

@@ -145,6 +145,15 @@ export const GET_USER = gql`
       username
       fullName
       isOnline
+      posts{
+        id
+      }
+      followers{
+        id
+      }
+      following{
+        id
+      }
     }
   }
 `
