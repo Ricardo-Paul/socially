@@ -142,7 +142,11 @@ const PostCard = ({
           avatar={<Avatar component={Link} to={generatePath(Routes.PROFILE, {
             username
           })} alt="user photo" src={avatar} />}
-          title={fullName}
+          title={
+            <Link to={generatePath(Routes.PROFILE, {
+              username
+            })}> {fullName} </Link>
+          }
           action={
             <IconButton onClick={handleClick}>
               <MoreVert />
