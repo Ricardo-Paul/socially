@@ -127,7 +127,7 @@ const MessageUsers = () => {
                   activeClassName={classes.selected}
                   to={generatePath(Routes.MESSAGE, {
                     id: user.id,
-                  })}
+                  })} 
                 >
                   <Avatar style={{ marginRight: 10 }} src={user.image} />
                   <Box style={{ width: "100%" }}>

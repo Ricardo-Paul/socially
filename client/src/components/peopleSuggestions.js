@@ -11,6 +11,8 @@ import { SUGGEST_PEOPLE } from "../graphql/user";
 import { useApolloClient } from "@apollo/client";
 import { useStore } from "../store";
 import defaultAvatar from "../ressources/defaultAvatar.jpg";
+import { Link, generatePath } from "react-router-dom";
+import * as Routes from "../routes"
 
 const peopleStyles = makeStyles((theme) => ({
   item: {
@@ -67,7 +69,11 @@ const PeopleSuggestions = () => {
       <Divider />
       <List style={{ padding: 0 }}>
         {people.map((p) => (
-          <ListItem disableGutters className={classes.item}>
+          <ListItem disableGutters className={classes.item} component={Link} to={
+            generatePath(Routes.PROFILE, {
+              username: p.username
+            })
+          } >
             <img
               src={p.image || defaultAvatar}
               style={{
