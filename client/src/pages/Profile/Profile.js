@@ -6,6 +6,7 @@ import ProfileInfo from "./ProfileInfo";
 import { Box, makeStyles } from "@material-ui/core";
 import { GET_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
+import { withRouter } from "react-router-dom";
 
 const ProfileStyles = makeStyles((theme) => ({
   info: {
@@ -23,11 +24,14 @@ const ProfileStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = () => {
+const Profile = ({ match }) => {
   const classes = ProfileStyles();
+
+  const { username } = match.params;
+
   const { data, loading } = useQuery(GET_USER, {
     variables: {
-      username:'mrjoe'
+      username
     }
   });
 
@@ -62,4 +66,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withRouter(Profile);
