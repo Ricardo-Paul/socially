@@ -13,6 +13,7 @@ import { generatePath } from "react-router-dom";
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
 import { theme } from "../../utils/theme";
 import PeopleSuggestions from "../../components/peopleSuggestions";
+import InfiniteScrolling from "../../components/InfiniteScrolling";
 
 const homeStyles = makeStyles({
   home: {
@@ -49,7 +50,7 @@ const Home = () => {
     limit: HOME_PAGE_POSTS_LIMIT,
   };
 
-  const { data, loading, networkStatus, error } = useQuery(GET_FOLLOWED_POSTS, {
+  const { data, loading, networkStatus, fetchMore, error } = useQuery(GET_FOLLOWED_POSTS, {
     variables,
     notifyOnNetworkStatusChange: true,
   });
@@ -59,9 +60,9 @@ const Home = () => {
       return <h4> loading ... </h4>;
     }
 
-    if (loading && networkStatus === 3) {
-      return <h4> Loading more... </h4>;
-    }
+    // if (loading && networkStatus === 3) {
+    //   return <h4> Loading more... </h4>;
+    // }
 
     console.log(data);
     if (error) {
@@ -70,6 +71,7 @@ const Home = () => {
 
     if (!loading && networkStatus != 1) {
       const posts = data.getFollowedPosts.posts;
+      const count = data.getFollowedPosts.count;
       console.log("FollowedPosts", data.getFollowedPosts.posts);
 
       posts.map((p) => {
@@ -82,38 +84,58 @@ const Home = () => {
       }
       // we compare the id in the state var with the current postid
       // to decide whether to open the modal
-      return posts.map((post) => (
-        <Fragment key={post.id}>
-          {/* modal */}
-          <Modal open={postId === post.id} onClose={closeModal}>
-            <PostPopUp
-              closeModal={closeModal}
-              comments={post.comments}
-              postImage={post.image}
-              author={post.author.fullName}
-              postTitle={post.title}
-              createdAt={post.createdAt}
-            />
-          </Modal>
 
-          {/* regualar post card */}
-          <PostCard
-            title={post.title}
-            image={post.image}
-            fullName={post.author.fullName}
-            username={post.author.username}
-            avatar={post.author.image}
-            openModal={() => openModal(post.id)} //save the post.id in a state var
-            likeNumber={post.likes.length}
-            commentNumber={post.comments.length}
-            likes={post.likes}
-            postId={post.id}
-            postAuthor={post.author}
-            imagePublicId={post.imagePublicId}
-            comments={post.comments}
-          />
-        </Fragment>
-      ));
+      return(
+        <InfiniteScrolling
+        data={posts}
+        fetchMore={fetchMore}
+        dataKey="getFollowedPosts.posts"
+        count={parseInt(count)}
+        variables={variables}
+        >
+          {
+            (data) => {
+
+              const showNextLoading = loading && networkStatus === 3 && count !== data.length;
+
+              return posts.map((post) => (
+                <Fragment key={post.id}>
+                  {/* modal */}
+                  <Modal open={postId === post.id} onClose={closeModal}>
+                    <PostPopUp
+                      closeModal={closeModal}
+                      comments={post.comments}
+                      postImage={post.image}
+                      author={post.author.fullName}
+                      postTitle={post.title}
+                      createdAt={post.createdAt}
+                    />
+                  </Modal>
+        
+                  {/* regualar post card */}
+                  <PostCard
+                    title={post.title}
+                    image={post.image}
+                    fullName={post.author.fullName}
+                    username={post.author.username}
+                    avatar={post.author.image}
+                    openModal={() => openModal(post.id)} //save the post.id in a state var
+                    likeNumber={post.likes.length}
+                    commentNumber={post.comments.length}
+                    likes={post.likes}
+                    postId={post.id}
+                    postAuthor={post.author}
+                    imagePublicId={post.imagePublicId}
+                    comments={post.comments}
+                  />
+
+                  {showNextLoading && <h3> loading more ... </h3> }
+                </Fragment>
+              ))
+            }
+          }
+        </InfiniteScrolling>
+      )
     }
   };
   //

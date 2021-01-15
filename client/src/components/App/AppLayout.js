@@ -39,7 +39,7 @@ const appLayoutStyles = makeStyles((theme) => ({
 
   middle: {
     paddingTop: 80,
-    height: "100vh",
+    // height: "100vh",
     paddingLeft: 256,
     // overflow: "auto",
     // backgroundColor: colors.lightGrey,
@@ -99,7 +99,7 @@ const AppLayout = ({ authUser }) => {
             </Drawer>
           </Hidden>
 
-          {/* Middle */}
+          Middle
           <Grid item xl={10} lg={12} xs={12} className={classes.middle}>
             <PageContainer>
               <Switch>
