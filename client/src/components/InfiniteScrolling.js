@@ -1,14 +1,33 @@
 import { useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { get, uniqBy, setWith, clone } from 'lodash';
+import { get, setWith, clone, uniqBy } from "lodash";
 
 const InfiniteScrolling = ({ data, dataKey, fetchMore, variables, count, children }) => {
   const handleScroll = useMemo(
     () => async () => {
       const loadMore = () => {
-        alert('HIT PAGE BOTTOM')
+        fetchMore({
+            variables: {...variables, skip: data.length},
+            updateQuery: (prev, { fetchMoreResult }) => {
+                const posts = get(prev, dataKey); //const posts = prev.getFollowedPots.posts
+                const newPosts = get(fetchMoreResult, dataKey);
+
+                if(!fetchMoreResult) return prev;
+                // const r = Object.assign({}, prev, {
+                //     posts: [...posts, ...newPosts]
+                // });
+
+               
+
+                console.log("prev", prev)
+                console.log("NEW POSTS", newPosts)
+                // console.log("MERGE RESULT", r)
+                return setWith(clone(prev), dataKey, uniqBy([...posts, ...newPosts], 'id') ,clone)
+            }
+        })
       };
 
+      console.log("DATA LENGHT", data)
+      console.log("COUNT", count)
 
       if (data.length >= count) {
         window.removeEventListener('scroll', handleScroll);
@@ -16,12 +35,15 @@ const InfiniteScrolling = ({ data, dataKey, fetchMore, variables, count, childre
       }
 
       // determine when the page is scrolled near the bottom (-300px)
-      const scrollHeight = document.documentElement.scrollHeight;
-      const scrollPos = window.innerHeight + document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight; //the entire document height
+      const windowHeight = window.innerHeight; // the opening browser window height
+      const scrolledFromTop = document.documentElement.scrollTop;
+
+      const scrollPos = windowHeight + scrolledFromTop;
       const scrolled = (scrollHeight - 300 >= scrollPos) / scrollHeight == 0;
 
       if (scrolled) {
-        // window.removeEventListener('scroll', handleScroll)
+        window.removeEventListener('scroll', handleScroll)
         loadMore();
       }
     },
@@ -37,13 +59,5 @@ const InfiniteScrolling = ({ data, dataKey, fetchMore, variables, count, childre
   return children(data);
 };
 
-InfiniteScrolling.propTypes = {
-  data: PropTypes.array.isRequired,
-  dataKey: PropTypes.string.isRequired,
-  count: PropTypes.number.isRequired,
-  fetchMore: PropTypes.func.isRequired,
-  variables: PropTypes.object.isRequired,
-  children: PropTypes.func.isRequired,
-};
 
 export default InfiniteScrolling;

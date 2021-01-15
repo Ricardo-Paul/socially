@@ -60,31 +60,17 @@ const Home = () => {
       return <h4> loading ... </h4>;
     }
 
-    // if (loading && networkStatus === 3) {
-    //   return <h4> Loading more... </h4>;
-    // }
-
-    console.log(data);
-    if (error) {
-      console.log(error);
-    }
 
     if (!loading && networkStatus != 1) {
       const posts = data.getFollowedPosts.posts;
-      const count = data.getFollowedPosts.count;
-      console.log("FollowedPosts", data.getFollowedPosts.posts);
+      const count = data.getFollowedPosts.count; // total of posts we'll eventually display
 
-      posts.map((p) => {
-        console.log("AUTHOR: ", p.author);
-        console.log("COMMENTS", p.comments);
-      });
 
       if (!posts.length) {
         return <h5> Follow Users, Browse </h5>;
       }
       // we compare the id in the state var with the current postid
       // to decide whether to open the modal
-
       return(
         <InfiniteScrolling
         data={posts}
@@ -95,9 +81,7 @@ const Home = () => {
         >
           {
             (data) => {
-
               const showNextLoading = loading && networkStatus === 3 && count !== data.length;
-
               return posts.map((post) => (
                 <Fragment key={post.id}>
                   {/* modal */}
