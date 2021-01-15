@@ -64,7 +64,6 @@ const Home = () => {
       const posts = data.getFollowedPosts.posts;
       const count = data.getFollowedPosts.count; // total of posts we'll eventually display
 
-
       if (!posts.length) {
         return <h5> Follow Users, Browse </h5>;
       }

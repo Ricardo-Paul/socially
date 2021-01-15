@@ -8,26 +8,20 @@ const InfiniteScrolling = ({ data, dataKey, fetchMore, variables, count, childre
         fetchMore({
             variables: {...variables, skip: data.length},
             updateQuery: (prev, { fetchMoreResult }) => {
-                const posts = get(prev, dataKey); //const posts = prev.getFollowedPots.posts
+                const prevPosts = get(prev, dataKey); //const posts = prev.getFollowedPots.posts
                 const newPosts = get(fetchMoreResult, dataKey);
 
                 if(!fetchMoreResult) return prev;
-                // const r = Object.assign({}, prev, {
-                //     posts: [...posts, ...newPosts]
-                // });
-
-               
-                console.log("prev", prev)
-                console.log("NEW POSTS", newPosts)
-                // console.log("MERGE RESULT", r)
-                return setWith(clone(prev), dataKey, uniqBy([...posts, ...newPosts], 'id') ,clone)
+                // clone prev result and merge new and old posts
+                const r = setWith(clone(prev), dataKey, uniqBy([...prevPosts, ...newPosts], "id"), clone);
+                return r
             }
         })
       };
 
-      console.log("DATA LENGHT", data)
-      console.log("COUNT", count)
-
+    //   meaning all the posts have been loaded
+    // data is the accumulated number of posts we have loaded on each (fetchMore)
+    // count is the total number we have to fetch from the db
       if (data.length >= count) {
         window.removeEventListener('scroll', handleScroll);
         return;
