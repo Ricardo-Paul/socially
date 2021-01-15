@@ -61,7 +61,6 @@ const Home = () => {
     }
 
 
-    if (!loading && networkStatus != 1) {
       const posts = data.getFollowedPosts.posts;
       const count = data.getFollowedPosts.count; // total of posts we'll eventually display
 
@@ -82,7 +81,9 @@ const Home = () => {
           {
             (data) => {
               const showNextLoading = loading && networkStatus === 3 && count !== data.length;
-              return posts.map((post) => (
+              return (
+                <Fragment>
+                  { data.map((post) => (
                 <Fragment key={post.id}>
                   {/* modal */}
                   <Modal open={postId === post.id} onClose={closeModal}>
@@ -115,12 +116,13 @@ const Home = () => {
 
                   {showNextLoading && <h3> loading more ... </h3> }
                 </Fragment>
-              ))
+              ))}
+                </Fragment>
+              )
             }
           }
         </InfiniteScrolling>
       )
-    }
   };
   //
 

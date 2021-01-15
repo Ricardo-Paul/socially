@@ -17,7 +17,6 @@ const InfiniteScrolling = ({ data, dataKey, fetchMore, variables, count, childre
                 // });
 
                
-
                 console.log("prev", prev)
                 console.log("NEW POSTS", newPosts)
                 // console.log("MERGE RESULT", r)
