@@ -13,7 +13,7 @@ const InfiniteScrolling = ({ data, dataKey, fetchMore, variables, count, childre
 
                 if(!fetchMoreResult) return prev;
                 // clone prev result and merge new and old posts
-                const r = setWith(clone(prev), dataKey, uniqBy([...prevPosts, ...newPosts], "id"), clone);
+                let r = setWith(clone(prev), dataKey, uniqBy([...prevPosts, ...newPosts], "id"), clone);
                 return r
             }
         })
@@ -37,7 +37,7 @@ const InfiniteScrolling = ({ data, dataKey, fetchMore, variables, count, childre
 
       if (scrolled) {
         window.removeEventListener('scroll', handleScroll)
-        loadMore();
+            loadMore();
       }
     },
     [count, data.length, dataKey, fetchMore, variables]

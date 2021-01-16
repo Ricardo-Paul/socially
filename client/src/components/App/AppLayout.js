@@ -26,16 +26,16 @@ import { PageContainer } from "../pageContainer";
 
 
 const appLayoutStyles = makeStyles((theme) => ({
-  "@global": {
-    "*::-webkit-scrollbar": {
-      width: "0.4em",
-      height: "0.4em",
-    },
-    "*::-webkit-scrollbar-thumb": {
-      backgroundColor: "rgba(0,0,0,.4)",
-      outline: "1px solid slategrey",
-    },
-  },
+  // "@global": {
+  //   "*::-webkit-scrollbar": {
+  //     width: "0.4em",
+  //     height: "0.4em",
+  //   },
+  //   "*::-webkit-scrollbar-thumb": {
+  //     backgroundColor: "rgba(0,0,0,.4)",
+  //     outline: "1px solid slategrey",
+  //   },
+  // },
 
   middle: {
     paddingTop: 80,
