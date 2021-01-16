@@ -21,8 +21,7 @@ const HeaderNotificationDropDown = ({
         closeMenu={closeMenu}
       >
         <Typography color="textSecondary" style={{ padding: 10 }}>
-          {" "}
-          No New Notifications{" "}
+          No new notifications
         </Typography>
       </MenuWrapper>
     );

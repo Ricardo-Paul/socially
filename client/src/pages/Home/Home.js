@@ -8,7 +8,7 @@ import { useStore } from "../../store";
 import Modal from "../../components/Modal";
 import PostPopUp from "../../components/PostPopUp";
 import * as Routes from "../../routes";
-import { generatePath } from "react-router-dom";
+import { generatePath, withRouter } from "react-router-dom";
 
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
 import { theme } from "../../utils/theme";
@@ -29,9 +29,19 @@ const homeStyles = makeStyles({
   },
 });
 
-const Home = () => {
+const Home = ({ history }) => {
   const [{ auth }] = useStore();
   const [postId, setPostId] = React.useState(null);
+
+  // kind of a hack
+  // prevent app from crashing when on logout
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(!token){
+      history.push(Routes.SIGNIN)
+      return
+    }
+  }, [auth.user])
 
   // pushState args (state, title, url)
   const openModal = (postId) => {
@@ -144,4 +154,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withRouter(Home);
