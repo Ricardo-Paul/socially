@@ -34,7 +34,7 @@ const Home = ({ history }) => {
   const [postId, setPostId] = React.useState(null);
 
   // kind of a hack
-  // prevent app from crashing when on logout
+  // prevent app from crashing when logout
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     if(!token){
