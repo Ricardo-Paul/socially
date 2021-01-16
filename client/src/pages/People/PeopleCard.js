@@ -3,6 +3,8 @@ import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import Proptypes from "prop-types";
 import Follow from "../../components/Follow";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
+import { generatePath, Link } from "react-router-dom";
+import * as Routes from "../../routes";
 
 const peopleCardStyles = makeStyles({
   container: {
@@ -33,7 +35,9 @@ const PeopleCard = ({ user }) => {
 
   return (
     <Paper className={classes.container} elevation={2}>
-      <Box>
+      <Box component={Link} to={generatePath(Routes.PROFILE, {
+        username: user.username
+      })}>
         <img src={user.image || defaultAvatar} className={classes.avatar} />
       </Box>
       <Box className={classes.cardInfo}>

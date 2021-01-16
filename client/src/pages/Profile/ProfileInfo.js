@@ -120,7 +120,7 @@ const ProfileInfo = ({ user }) => {
         <Button style={{marginLeft: '5px', color:"#ffffff", backgroundColor: "#1577f1"}} variant="contained" size="small" component={Link} to={generatePath(Routes.MESSAGE, {
           id: user.id
         })} >
-         <MessageIcon />
+         <MessageIcon fontSize="small" />
         </Button>
       </Box>}
     </Box>
