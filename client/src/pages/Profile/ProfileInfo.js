@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, IconButton, makeStyles, Typography } from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
 import { GET_AUTH_USER, UPLOAD_USER_PHOTO } from "../../graphql/user";
 import { useApolloClient } from "@apollo/client";
@@ -7,6 +7,9 @@ import { useStore } from "../../store";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
 import PropTypes from "prop-types"
 import Follow from "../../components/Follow";
+import { Link, generatePath } from "react-router-dom";
+import * as Routes from "../../routes";
+import MessageIcon from "@material-ui/icons/Message";
 
 const ProfileStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +45,9 @@ const ProfileStyles = makeStyles((theme) => ({
     right: 0,
     bottom: 0,
   },
+  connect: {
+    display: "flex"
+  }
 }));
 
 const ProfileInfo = ({ user }) => {
@@ -111,6 +117,11 @@ const ProfileInfo = ({ user }) => {
 
     {!isAuthUser && <Box className={classes.connect}>
         <Follow user={user} />
+        <Button style={{marginLeft: '5px', color:"#ffffff", backgroundColor: "#1577f1"}} variant="contained" size="small" component={Link} to={generatePath(Routes.MESSAGE, {
+          id: user.id
+        })} >
+         <MessageIcon />
+        </Button>
       </Box>}
     </Box>
   );
