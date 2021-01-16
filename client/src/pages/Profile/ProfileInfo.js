@@ -6,6 +6,7 @@ import { useApolloClient } from "@apollo/client";
 import { useStore } from "../../store";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
 import PropTypes from "prop-types"
+import Follow from "../../components/Follow";
 
 const ProfileStyles = makeStyles((theme) => ({
   root: {
@@ -107,6 +108,10 @@ const ProfileInfo = ({ user }) => {
           </Typography>
         </Box>
       </Box>
+
+    {!isAuthUser && <Box className={classes.connect}>
+        <Follow user={user} />
+      </Box>}
     </Box>
   );
 };

@@ -150,9 +150,11 @@ export const GET_USER = gql`
       }
       followers{
         id
+        follower
       }
       following{
         id
+        follower
       }
     }
   }

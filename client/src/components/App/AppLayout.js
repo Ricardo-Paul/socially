@@ -72,7 +72,7 @@ const AppLayout = ({ authUser }) => {
   const [, dispatch] = useStore();
 
   const classes = appLayoutStyles();
-  const m = `${Routes.MESSAGE}/1`;
+  const m = `${Routes.PROFILE}`;
 
   useEffect(() => {
     dispatch({
@@ -112,7 +112,7 @@ const AppLayout = ({ authUser }) => {
                 <Route exact path={Routes.ABOUT} render={() => < About />} />
 
                 {/* redirect to  notification for development purpose */}
-                <Redirect to={Routes.NOTIFICATIONS} />
+                <Redirect to={Routes.HOME} />
               </Switch>
             </PageContainer>
           </Grid>
