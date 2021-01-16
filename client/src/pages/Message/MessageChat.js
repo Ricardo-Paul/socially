@@ -17,35 +17,6 @@ const useStyles = makeStyles((theme) => ({
 
 const avatar = "https://material-ui.com/static/images/avatar/3.jpg";
 
-const user = {
-  id: 1,
-  image: avatar,
-  fullName: "Roger Alexander",
-  lastMessageSender: true,
-  lastMessage: "Hey fine",
-  isOnline: true,
-};
-
-const dummyMessages = [
-  {
-    id: 1,
-    sender: {
-      id: "5fc26ff2329e5d026d4f301f",
-      image: avatar,
-    },
-    message: "Hey boy",
-    cratedAt: "23 - 09 - 2020",
-  },
-  {
-    id: 1,
-    sender: {
-      id: "5fc2703d329e5d026d4f3020",
-      image: avatar,
-    },
-    message: "Hey There",
-    cratedAt: "23 - 09 - 2020",
-  },
-];
 
 const MessageChat = ({ match }) => {
   const classes = useStyles();
