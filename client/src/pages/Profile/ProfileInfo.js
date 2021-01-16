@@ -31,6 +31,10 @@ const ProfileStyles = makeStyles((theme) => ({
     display: "flex",
     width: 600,
     justifyContent: "space-between",
+    backgroundColor: "#ececec",
+    border: "1px solid #d0d0d0",
+    marginBottom: 10,
+    padding: 15
   },
   imgContainer: {
     display: "flex",
@@ -46,7 +50,7 @@ const ProfileStyles = makeStyles((theme) => ({
     bottom: 0,
   },
   connect: {
-    display: "flex"
+    display: "flex",
   }
 }));
 
@@ -117,10 +121,15 @@ const ProfileInfo = ({ user }) => {
 
     {!isAuthUser && <Box className={classes.connect}>
         <Follow user={user} />
-        <Button style={{marginLeft: '5px', color:"#ffffff", backgroundColor: "#1577f1"}} variant="contained" size="small" component={Link} to={generatePath(Routes.MESSAGE, {
+        <Button style={{marginLeft: '5px', color:"#ffffff", backgroundColor: "#1577f1"}}
+        fullWidth 
+        variant="contained" 
+        component={Link} 
+        size="small"
+        to={generatePath(Routes.MESSAGE, {
           id: user.id
         })} >
-         <MessageIcon fontSize="small" />
+         <MessageIcon style={{ marginRight: 10 }} fontSize="small" /> {" "} Message
         </Button>
       </Box>}
     </Box>
