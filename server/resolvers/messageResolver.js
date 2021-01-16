@@ -103,6 +103,10 @@ const Mutation = {
             };
     
             // publish new conversation
+            // on our client side we subscribe to this NEW NOTIFICATION subscription
+            // subscribeToMore({document: NEW_CONVERSATION})
+            // we only release the new message to the user receiving user if she's active
+            // by taking the newConversation payload and merge it with the user existing conversations
             pubSub.publish(NEW_CONVERSATION, {
                 newConversation: {
                     receiverId: receiver,
