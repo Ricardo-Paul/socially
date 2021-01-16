@@ -125,11 +125,11 @@ const ProfileInfo = ({ user }) => {
         fullWidth 
         variant="contained" 
         component={Link} 
-        size="small"
+        // size="small"
         to={generatePath(Routes.MESSAGE, {
           id: user.id
         })} >
-         <MessageIcon style={{ marginRight: 10 }} fontSize="small" /> {" "} Message
+         Message
         </Button>
       </Box>}
     </Box>
