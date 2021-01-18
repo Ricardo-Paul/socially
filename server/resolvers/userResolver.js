@@ -62,9 +62,9 @@ const Query = {
         $replaceRoot: { newRoot: '$s_doc' }
       }, // merge the s_doc object into the parent object {_id: '', seen: false} now we dont have a nested object
       {
-        $lookup: {
-          localField: "sender",
-          from: "users",
+        $lookup: { //perform a join search
+          localField: "sender", //Message.sender field
+          from: "users", // User._id field (notice we use the db collection name)
           foreignField: "_id",
           as: "sender",
         }
@@ -85,7 +85,8 @@ const Query = {
     //         posts: [],
     //         comments: []
     //       }
-    //     ]
+    //     ],
+    //      message: 'text'
     //   },
     //   {
     //     id:"",
@@ -97,18 +98,31 @@ const Query = {
     //         posts: [],
     //         comments: []
     //       }
-    //     ]
+    //     ],
+    //      message: 'text'
     //   }
     // ]
 
 
-    const lkup = lastUnseenMessages.map( u => {
-      console.log('SENDER FROM LOOKUP', u.sender[0].username);
+    let conversations = [];
+    lastUnseenMessages.map( u => {
+
+      const sender = {
+        id: u.sender[0]._id, //acess the only user object in the sender array
+        fullName: u.sender[0].fullName,
+        username: u.sender[0].username,
+        image: u.sender[0].image,
+        lastMessage: u.message,
+        lastMessageCreatedAt: u.createdAt
+      };
+
+      conversations.push(sender);
     })
 
-    console.log('UNSEEN MESSAGES :', lastUnseenMessages, 'SENDER FROM LOOKUP RESULT :', lkup, user.id)
+    console.log('UNSEEN MESSAGES :', lastUnseenMessages, 'CONVERSATIONS :', conversations, user.id)
     console.log('UNSEEN MESSAGES LENGTH :', lastUnseenMessages.length)
 
+    user.conversations = conversations; 
 
     return user;
   },
