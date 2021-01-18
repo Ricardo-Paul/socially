@@ -53,8 +53,11 @@ query{
       id
     }
     conversations{
+      id
       lastMessage
       fullName
+      image
+      isOnline
     }
     following{
       id

@@ -1,6 +1,7 @@
 import React from "react";
 import { MenuList, MenuItem } from "@material-ui/core";
 import MenuWrapper from "./MenuWrapper";
+import MessageCard from "../../MessageCard";
 
 const HeaderMessageDropDown = ({
   isOpen,
@@ -8,6 +9,9 @@ const HeaderMessageDropDown = ({
   closeMenu,
   dropDownData,
 }) => {
+  React.useEffect(() => {
+    console.log("MESSAGE DATA", dropDownData)
+  }, [dropDownData])
   return (
     <MenuWrapper
       isOpen={isOpen}
@@ -16,8 +20,11 @@ const HeaderMessageDropDown = ({
       dropDownData={dropDownData}
     >
       <MenuList>
-        <MenuItem> First message </MenuItem>
-        <MenuItem> Second message </MenuItem>
+        {dropDownData.map( u => {
+          return (
+            <MessageCard user={u} />
+          )
+        })}
       </MenuList>
     </MenuWrapper>
   );

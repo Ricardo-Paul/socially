@@ -103,7 +103,7 @@ const App = () => {
       document: GET_NEW_CONVERSATIONS,
       updateQuery: (prev, { subscriptionData }) => {
         if(!subscriptionData.data) return prev;
-        
+
         if(window.location.href.split("/")[3] === 'message'){
           return prev;
         }
@@ -115,8 +115,6 @@ const App = () => {
 
         let authUser = prev.getAuthUser;
         authUser.conversations = conversations;
-
-
 
         return {
           getAuthUser: authUser
