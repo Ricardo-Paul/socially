@@ -44,7 +44,18 @@ const Query = {
     const lastUnseenMessages = await Message.aggregate([
       {
         $match: {
-          receiver: mongoose.Types.ObjectId(user.id)
+          receiver: mongoose.Types.ObjectId(user.id),
+          seen: false
+        }
+      }, //return 45 messages
+      {
+        $sort: { createdAt: -1 }
+      },{
+        $group: {
+          _id: "$sender", //group 45 messages by sender ( return 6 senders i an object ) {_id: senderId}
+          doc: { // including not just the ids but the whole document held by the $$ROOT var
+            $first: '$$ROOT' // ['first message', 'last message'] $first:$$ROOT return the first message document
+          } //we pick $first accumulator to pick the last message because we have inverted the sorting
         }
       }
     ]);
