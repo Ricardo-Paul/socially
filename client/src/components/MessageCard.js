@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const MessageCard = ({ user }) => {
+const MessageCard = ({ user, unseen }) => {
     const classes = useStyles();
     const [{ auth }] = useStore();
 
@@ -68,7 +68,7 @@ const MessageCard = ({ user }) => {
         <Box style={{ width: "100%" }}>
           <Box className={classes.info}>
             <Typography> {user.fullName}</Typography>
-            <div className={classes.notSeen}></div>
+            {unseen? <div className={classes.notSeen}></div> : null}
           </Box>
           <Typography color="secondary">
             {" "}
@@ -80,7 +80,8 @@ const MessageCard = ({ user }) => {
 };
 
 MessageCard.propTypes = {
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    unseen: PropTypes.bool
 }
 
 export default MessageCard;

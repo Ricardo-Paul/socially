@@ -17,6 +17,7 @@ import {
 } from "../../graphql/message";
 import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
+import MessageCard from "../../components/MessageCard";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -122,25 +123,7 @@ const MessageUsers = () => {
 
               console.log("CONVERSATIONS", data.getConversations);
               return (
-                <NavLink
-                  className={classes.user}
-                  activeClassName={classes.selected}
-                  to={generatePath(Routes.MESSAGE, {
-                    id: user.id,
-                  })} 
-                >
-                  <Avatar style={{ marginRight: 10 }} src={user.image} />
-                  <Box style={{ width: "100%" }}>
-                    <Box className={classes.info}>
-                      <Typography> {user.fullName}</Typography>
-                      {notSeen && <div className={classes.notSeen}></div>}
-                    </Box>
-                    <Typography color="secondary">
-                      {" "}
-                      {user.lastMessage.substring(0, 8)} ...{" "}
-                    </Typography>
-                  </Box>
-                </NavLink>
+                <MessageCard user={user} unseen={notSeen} />
               );
             })}
         </List>
