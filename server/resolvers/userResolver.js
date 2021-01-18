@@ -61,14 +61,59 @@ const Query = {
       {
         $replaceRoot: { newRoot: '$s_doc' }
       }, // merge the s_doc object into the parent object {_id: '', seen: false} now we dont have a nested object
+      {
+        $lookup: {
+          localField: "sender",
+          from: "users",
+          foreignField: "_id",
+          as: "sender",
+        }
+      }
     ]);
 
-    console.log('UNSEEN MESSAGES :', lastUnseenMessages, user.id)
+    //$lookup as: "sender" => this includes a sender array in the result. The array contains one object which is the sender we looked up from the "users" documents.
+
+    // data form
+    // [
+    //   {
+    //     id:"",
+    //     seen: "",
+    //     sender: [
+    //       {
+    //         _id:"",
+    //         fullName:"",
+    //         posts: [],
+    //         comments: []
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     id:"",
+    //     seen: "",
+    //     sender: [
+    //       {
+    //         _id:"",
+    //         fullName:"",
+    //         posts: [],
+    //         comments: []
+    //       }
+    //     ]
+    //   }
+    // ]
+
+
+    const lkup = lastUnseenMessages.map( u => {
+      console.log('SENDER FROM LOOKUP', u.sender[0].username);
+    })
+
+    console.log('UNSEEN MESSAGES :', lastUnseenMessages, 'SENDER FROM LOOKUP RESULT :', lkup, user.id)
     console.log('UNSEEN MESSAGES LENGTH :', lastUnseenMessages.length)
 
 
     return user;
   },
+
+  
 
   /**
    * get user by username
