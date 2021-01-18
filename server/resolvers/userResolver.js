@@ -4,6 +4,7 @@ import ms from 'ms';
 import { sendEmail } from '../utils/sendEmail';
 import Follow from '../models/Follow';
 import { uploadToCloudinary } from '../utils/fileUploads';
+import mongoose from 'mongoose';
 
 
 
@@ -14,12 +15,12 @@ const Query = {
   /**
    * get current user
    */
-  getAuthUser: async (_, args, { authenticatedUser, User }) => {
+  getAuthUser: async (_, args, { authenticatedUser, User, Message }) => {
     // third arguments are returned form context by apolloServer
     // they are called context BTW
     if (!authenticatedUser) return null;
     const { email, username } = authenticatedUser;
-    const user = User.findOne({ email, username })
+    const user = await User.findOne({ email, username })
     .populate('posts')
     .populate('likes')
     .populate('followers')
@@ -37,6 +38,21 @@ const Query = {
 
     // notice how we pick only seen:false notifications
     // those that will be displayed at the app bar
+
+
+    // unseen messages 
+    const lastUnseenMessages = await Message.aggregate([
+      {
+        $match: {
+          receiver: mongoose.Types.ObjectId(user.id)
+        }
+      }
+    ]);
+
+    console.log('UNSEEN MESSAGES :', lastUnseenMessages, user.id)
+    console.log('UNSEEN MESSAGES LENGTH :', lastUnseenMessages.length)
+
+
     return user;
   },
 
