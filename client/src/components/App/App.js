@@ -98,20 +98,36 @@ const App = () => {
     };
   }, [subscribeToMore]);
 
-  // useEffect(() => {
-  //   const unsubscribe = subscribeToMore({
-  //     document: GET_NEW_CONVERSATIONS,
-  //     updateQuery: (prev, { subscriptionData }) => {
-  //       let oldConversations = prev.getAuthUser.conversations
+  useEffect(() => {
+    const unsubscribe = subscribeToMore({
+      document: GET_NEW_CONVERSATIONS,
+      updateQuery: (prev, { subscriptionData }) => {
+        if(!subscriptionData.data) return prev;
+        
+        if(window.location.href.split("/")[3] === 'message'){
+          return prev;
+        }
 
-  //       console.log('OLD CONVERSATIONS: ', oldConversations)
-  //     }
-  //   });
+        let oldConversations = prev.getAuthUser.conversations;
+        let newConversations = subscriptionData.data.newConversation;
 
-  //   return () => {
-  //     unsubscribe();
-  //   }
-  // }, )
+        const conversations = [...oldConversations, ...newConversations];
+
+        let authUser = prev.getAuthUser;
+        authUser.conversations = conversations;
+
+
+
+        return {
+          getAuthUser: authUser
+        }
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    }
+  }, [subscribeToMore])
 
   if (error) {
     return (
