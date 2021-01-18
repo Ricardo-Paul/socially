@@ -31,6 +31,7 @@ const HeaderDropDowns = ({
     ),
     MESSAGE: (
       <HeaderMessageDropDown
+        dropDownData={dropDownData}
         isOpen={isOpen}
         messageAnchorEl={messageAnchorEl}
         closeMenu={closeMenu}

@@ -28,6 +28,9 @@ const AppHeader = () => {
   const [{ auth }] = useStore();
 
   const [notifications, setNotifications] = React.useState([]);
+  const [conversations, setConversations] = React.useState([]);
+
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [dropDownData, setDropDownData] = useState([]);
@@ -36,6 +39,7 @@ const AppHeader = () => {
   React.useEffect(() => {
     if (auth.user != null) {
       setNotifications(auth.user.notifications);
+      setConversations(auth.user.conversations)
     }
   }, [auth]);
 
@@ -50,6 +54,7 @@ const AppHeader = () => {
 
   const handleIconClick = (event, dropdownType) => {
     if (dropdownType === "MESSAGE") {
+      setDropDownData(conversations)
       openDropDown(event);
     }
     if (dropdownType === "NOTIFICATION") {
@@ -100,7 +105,7 @@ const AppHeader = () => {
             color="inherit"
             onClick={(event) => handleIconClick(event, "MESSAGE")}
           >
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={conversations.length} color="secondary">
               <MailIcon color="primary" fontSize="small" />
             </Badge>
           </IconButton>

@@ -70,7 +70,6 @@ const Home = ({ history }) => {
       return <h4> loading ... </h4>;
     }
 
-
       const posts = data.getFollowedPosts.posts;
       const count = data.getFollowedPosts.count; // total of posts we'll eventually display
 

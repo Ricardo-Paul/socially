@@ -6,13 +6,14 @@ const HeaderMessageDropDown = ({
   isOpen,
   messageAnchorEl,
   closeMenu,
-  messageData,
+  dropDownData,
 }) => {
   return (
     <MenuWrapper
       isOpen={isOpen}
       anchorEl={messageAnchorEl}
       closeMenu={closeMenu}
+      dropDownData={dropDownData}
     >
       <MenuList>
         <MenuItem> First message </MenuItem>

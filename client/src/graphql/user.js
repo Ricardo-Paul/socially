@@ -52,6 +52,10 @@ query{
     posts{
       id
     }
+    conversations{
+      lastMessage
+      fullName
+    }
     following{
       id
     }

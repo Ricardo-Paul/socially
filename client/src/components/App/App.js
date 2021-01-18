@@ -7,6 +7,7 @@ import { GET_AUTH_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
 import ScrollTop from "./ScrollTop";
 import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
+import { GET_NEW_CONVERSATIONS } from "../../graphql/message";
 
 /**
  * as the app top level component
@@ -96,6 +97,21 @@ const App = () => {
       unsubscribe();
     };
   }, [subscribeToMore]);
+
+  // useEffect(() => {
+  //   const unsubscribe = subscribeToMore({
+  //     document: GET_NEW_CONVERSATIONS,
+  //     updateQuery: (prev, { subscriptionData }) => {
+  //       let oldConversations = prev.getAuthUser.conversations
+
+  //       console.log('OLD CONVERSATIONS: ', oldConversations)
+  //     }
+  //   });
+
+  //   return () => {
+  //     unsubscribe();
+  //   }
+  // }, )
 
   if (error) {
     return (
