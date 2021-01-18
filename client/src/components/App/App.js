@@ -109,9 +109,15 @@ const App = () => {
         }
 
         let oldConversations = prev.getAuthUser.conversations;
-        let newConversations = subscriptionData.data.newConversation;
+        let newConversation = subscriptionData.data.newConversation; //a single conversation object
 
-        const conversations = [...oldConversations, ...newConversations];
+        // if there's already an unseen message from the same user remove it before merging the new message
+        let index = oldConversations.findIndex( old => old.id === newConversation.id );
+        if(index){
+          oldConversations.splice(index, 1);
+        }
+
+        const conversations = [newConversation ,...oldConversations];
 
         let authUser = prev.getAuthUser;
         authUser.conversations = conversations;
