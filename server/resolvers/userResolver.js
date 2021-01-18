@@ -112,6 +112,7 @@ const Query = {
         fullName: u.sender[0].fullName,
         username: u.sender[0].username,
         image: u.sender[0].image,
+        isOnline: u.sender[0].isOnline,
         lastMessage: u.message,
         lastMessageCreatedAt: u.createdAt
       };
@@ -123,6 +124,7 @@ const Query = {
     console.log('UNSEEN MESSAGES LENGTH :', lastUnseenMessages.length)
 
     user.conversations = conversations; 
+    // attaching a new prop to the user goes with adding that prop in the UserPayload schema
 
     return user;
   },

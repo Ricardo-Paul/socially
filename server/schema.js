@@ -127,6 +127,8 @@ type UserPayload{
     following: [Follow]
     followers: [Follow]
     notifications: [Notification]
+    conversations: [NewConversationPayload]
+
 
     isOnline: Boolean
     messages: [Message]
