@@ -51,13 +51,16 @@ const Query = {
       {
         $sort: { createdAt: -1 }
       },{
-        $group: {
-          _id: "$sender", //group 45 messages by sender ( return 6 senders i an object ) {_id: senderId}
-          doc: { // including not just the ids but the whole document held by the $$ROOT var
-            $first: '$$ROOT' // ['first message', 'last message'] $first:$$ROOT return the first message document
-          } //we pick $first accumulator to pick the last message because we have inverted the sorting
-        }
-      }
+          $group: {
+            _id: "$sender", //group 45 messages by sender ( return 6 senders i an object ) {_id: senderId}
+            s_doc: { // including not just the ids but the whole document held by the $$ROOT var {_id: '', s_doc: {seen: false, message: "hello"}}
+              $first: '$$ROOT' // ['first message', 'last message'] $first:$$ROOT return the first message document
+            } //we pick $first accumulator to pick the last message because we have inverted the sorting
+          }
+      },
+      {
+        $replaceRoot: { newRoot: '$s_doc' }
+      }, // merge the s_doc object into the parent object {_id: '', seen: false} now we dont have a nested object
     ]);
 
     console.log('UNSEEN MESSAGES :', lastUnseenMessages, user.id)
