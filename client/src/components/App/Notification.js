@@ -35,33 +35,39 @@ const notiStyles = makeStyles((theme) => ({
 }));
 
 const Notification = ({ notification }) => {
+  console.log('NOTIFI ', notification);
+  
   const [{ auth }] = useStore();
   const classes = notiStyles();
 
-  const [updateNotification] = useMutation(UPDATE_NOTIFICATION_SEEN, {
-    variables: {
-      input: { receiverId: auth.user.id },
-    },
-  });
+  // const [updateNotification] = useMutation(UPDATE_NOTIFICATION_SEEN, {
+  //   variables: {
+  //     input: { receiverId: auth.user.id },
+  //   },
+  // });
 
-  React.useEffect(() => {
-    const update = async () => {
-      try {
-        const r = await updateNotification();
-        console.log(r);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  // React.useEffect(() => {
+  //   const update = async () => {
+  //     try {
+  //       const r = await updateNotification();
+  //       console.log(r);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
 
-    update();
-  }, [auth.user.id]);
+  //   update();
+  // }, [auth.user.id]);
 
   if (!notification.like && !notification.comment && !notification.follow) {
     return;
   }
 
-  let senderName = notification.sender ? notification.sender.fullName : null;
+  const senderName = notification.sender ? notification.sender.fullName : null;
+  const isLikeOrComment = notification.comment || notification.like;
+
+  // const postId = notification && notification.comment.post.id || notification.like.post.id;
+
 
   const showPostImage = () => {
     return (
@@ -81,9 +87,9 @@ const Notification = ({ notification }) => {
             disableGutters
             className={classes.item}
             component={Link}
-            // to={generatePath(Routes.PROFILE, {
-            //   username: notification.sender.username
-            // })}
+            to={generatePath(Routes.POST, {
+              id: "5fc41e21260a6b369fee628a"
+            })}
           >
             <Link
               to={generatePath(Routes.PROFILE, {
@@ -93,15 +99,15 @@ const Notification = ({ notification }) => {
               <img
                 src={notification.sender.image || defaultAvatar}
                 style={{
-                  width: 80,
-                  height: 80,
+                  width: 40,
+                  height: 40,
                   marginRight: 10,
                   objectFit: "cover",
                 }}
               />
             </Link>
 
-            <Box display="flex" flexDirection="column">
+            <Box display="flex" flexDirection="row">
             {notification.like && (
           <>
             <ListItemText secondary={`${senderName} likes your post`} />

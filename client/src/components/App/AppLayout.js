@@ -19,6 +19,7 @@ import Message from "../../pages/Message";
 import Notifications from "../../pages/Notifications";
 import About from "../../pages/About";
 import Browse from "../../pages/Browse";
+import Post from "../../pages/Post";
 
 import AppHeader from "./AppHeader/AppHeader";
 import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
@@ -112,6 +113,7 @@ const AppLayout = ({ authUser }) => {
                 />
                 <Route exact path={Routes.BROWSE} render={() => <Browse />} />
                 <Route exact path={Routes.ABOUT} render={() => <About />} />
+                <Route exact path={Routes.POST} render={() => <Post />} />
 
                 {/* redirect to  notification for development purpose */}
                 <Redirect to={Routes.HOME} />

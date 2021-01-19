@@ -18,12 +18,14 @@ export const GET_USER_NOTIFICATIONS = gql`
                     id
                     post{
                         id
+                        image
                     }
                 }
                 comment{
                     id
                     post{
                         id
+                        image
                     }
                 }
                 follow{

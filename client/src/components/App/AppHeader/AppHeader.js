@@ -27,7 +27,7 @@ const AppHeader = () => {
   const classes = headerStyles();
   const [{ auth }] = useStore();
 
-  const [notifications, setNotifications] = React.useState([]);
+  const [notifications, setNotifications] = React.useState(null);
   const [conversations, setConversations] = React.useState([]);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -40,7 +40,7 @@ const AppHeader = () => {
       setNotifications(auth.user.notifications);
       setConversations(auth.user.conversations);
     }
-  }, [auth]);
+  }, [auth.user]);
 
   const openDropDown = (event) =>
     setAnchorEl(
@@ -95,7 +95,7 @@ const AppHeader = () => {
             color="inherit"
             onClick={(event) => handleIconClick(event, "NOTIFICATION")}
           >
-            <Badge badgeContent={notifications.length} color="secondary">
+            <Badge badgeContent={notifications ? notifications.length : null} color="secondary">
               <NotificationIcon color="primary" fontSize="small" />
             </Badge>
           </IconButton>

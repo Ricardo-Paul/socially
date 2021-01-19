@@ -3,7 +3,6 @@ import { GET_USER_NOTIFICATIONS } from "../../graphql/notification";
 import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
 import Notification from "../../components/App/Notification";
-import { Typography } from "@material-ui/core";
 
 const Notifications = () => {
   const [{ auth }] = useStore();
@@ -18,8 +17,6 @@ const Notifications = () => {
     },
     notifyOnNetworkStatusChange: true,
   });
-
-  const count = data ? data.getUserNotifications.count : null;
 
   const renderContent = () => {
     if (loading && networkStatus === 1) {
@@ -37,8 +34,8 @@ const Notifications = () => {
         return <h5> NO NOTIFICATIONS </h5>;
       }
 
-      return notifications.map((n) => (
-        <Notification key={n.id} notification={n} />
+      return notifications.map((ntfct) => (
+        <Notification key={ntfct.id} notification={ntfct} />
       ));
     }
   };

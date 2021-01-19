@@ -46,7 +46,7 @@ const Home = ({ history }) => {
   // pushState args (state, title, url)
   const openModal = (postId) => {
     setPostId(postId);
-    window.history.pushState("", "", generatePath(Routes.POST, { id: postId }));
+    // window.history.pushState("", "", generatePath(Routes.POST, { id: postId }));
   };
 
   const closeModal = () => {
@@ -106,7 +106,7 @@ const Home = ({ history }) => {
                       postTitle={post.title}
                       createdAt={post.createdAt}
                     />
-                  </Modal>
+                  </Modal> 
 
                   {/* regualar post card */}
                   <PostCard

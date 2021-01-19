@@ -14,7 +14,7 @@ import {
 import { Close } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
 
-const PostStyles = makeStyles({
+const PostStyles = makeStyles({ 
   paper: {
     maxHeight: "80%",
     overflow: "auto",
