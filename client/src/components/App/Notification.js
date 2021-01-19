@@ -4,13 +4,39 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
+  makeStyles,
+  Box
 } from "@material-ui/core";
 import { UPDATE_NOTIFICATION_SEEN } from "../../graphql/notification";
 import { useMutation } from "@apollo/client";
 import { useStore } from "../../store";
+import { Link, generatePath } from "react-router-dom";
+import * as Routes from '../../routes';
+import defaultAvatar from "../../ressources/defaultAvatar.jpg";
+
+const notiStyles = makeStyles((theme) => ({
+  item: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    padding: 5,
+    border: "0.1px #afafaf",
+    cursor: "pointer",
+
+    "&:hover": {
+      backgroundColor: "#efefef",
+    },
+  },
+  name: {
+    fontSize: "16px",
+    fontFamily: "roboto",
+    fontWeight: 500,
+  },
+}));
 
 const Notification = ({ notification }) => {
   const [{ auth }] = useStore();
+  const classes = notiStyles();
 
   const [updateNotification] = useMutation(UPDATE_NOTIFICATION_SEEN, {
     variables: {
@@ -51,11 +77,28 @@ const Notification = ({ notification }) => {
 
   return (
     <React.Fragment>
-      <ListItem button>
-        <ListItemAvatar>
-          <Avatar alt="user avatar" src={notification.sender.image} />
-        </ListItemAvatar>
-        {notification.like && (
+      <ListItem
+            disableGutters
+            className={classes.item}
+            component={Link}
+            // to={generatePath(Routes.PROFILE, {
+            //   username: notification.sender.username
+            // })}
+          >
+            <img
+              src={notification.sender.image || defaultAvatar}
+              style={{
+                width: 80,
+                height: 80,
+                marginRight: 10,
+                objectFit: "cover",
+              }}
+              href={generatePath(Routes.PROFILE, {
+                username: notification.sender.username
+              })}
+            />
+            <Box display="flex" flexDirection="column">
+            {notification.like && (
           <>
             <ListItemText secondary={`${senderName} likes your post`} />
             {showPostImage}
@@ -68,6 +111,7 @@ const Notification = ({ notification }) => {
             {showPostImage}
           </>
         )}
+            </Box>
       </ListItem>
     </React.Fragment>
   );

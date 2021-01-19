@@ -45,7 +45,6 @@ const Notifications = () => {
 
   return (
     <React.Fragment>
-      <Typography> Notifications {count} </Typography>
       {renderContent()}
     </React.Fragment>
   );

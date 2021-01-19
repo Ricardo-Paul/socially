@@ -10,14 +10,21 @@ export const GET_USER_NOTIFICATIONS = gql`
                     id
                     image
                     fullName
+                    username
                 }
                 id
                 seen
                 like{
                     id
+                    post{
+                        id
+                    }
                 }
                 comment{
                     id
+                    post{
+                        id
+                    }
                 }
                 follow{
                     id
