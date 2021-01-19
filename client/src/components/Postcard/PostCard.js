@@ -139,19 +139,32 @@ const PostCard = ({
       <Card className={classes.card}>
         <CardHeader
           className={classes.header}
-          avatar={<Avatar component={Link} to={generatePath(Routes.PROFILE, {
-            username
-          })} alt="user photo" src={avatar} />}
+          avatar={
+            <Avatar
+              component={Link}
+              to={generatePath(Routes.PROFILE, {
+                username,
+              })}
+              alt="user photo"
+              src={avatar}
+            />
+          }
           title={
-            <Link style={{textDecoration: "none"}} to={generatePath(Routes.PROFILE, {
-              username
-            })}> {fullName} </Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              to={generatePath(Routes.PROFILE, {
+                username,
+              })}
+            >
+              {" "}
+              {fullName}{" "}
+            </Link>
           }
           action={
             <IconButton onClick={handleClick}>
               <MoreVert />
             </IconButton>
-          } 
+          }
           subheader={"5 hours ago"}
         />
         <CardContent>{title}</CardContent>
@@ -204,5 +217,5 @@ PostCard.propTypes = {
   avatar: PropTypes.string, //author avatar
   openModal: PropTypes.func.isRequired, //called when image is clicked
   imagePublicId: PropTypes.string, // used to delete the image associated to a post
-  username: PropTypes.string
+  username: PropTypes.string,
 };

@@ -102,9 +102,9 @@ const App = () => {
     const unsubscribe = subscribeToMore({
       document: GET_NEW_CONVERSATIONS,
       updateQuery: (prev, { subscriptionData }) => {
-        if(!subscriptionData.data) return prev;
+        if (!subscriptionData.data) return prev;
 
-        if(window.location.href.split("/")[3] === 'message'){
+        if (window.location.href.split("/")[3] === "message") {
           return prev;
         }
 
@@ -112,26 +112,28 @@ const App = () => {
         let newConversation = subscriptionData.data.newConversation; //a single conversation object
 
         // if there's already an unseen message from the same user remove it before merging the new message
-        let index = oldConversations.findIndex( old => old.id === newConversation.id );
-        if(index){
+        let index = oldConversations.findIndex(
+          (old) => old.id === newConversation.id
+        );
+        if (index) {
           oldConversations.splice(index, 1);
         }
 
-        const conversations = [newConversation ,...oldConversations];
+        const conversations = [newConversation, ...oldConversations];
 
         let authUser = prev.getAuthUser;
         authUser.conversations = conversations;
 
         return {
-          getAuthUser: authUser
-        }
-      }
+          getAuthUser: authUser,
+        };
+      },
     });
 
     return () => {
       unsubscribe();
-    }
-  }, [subscribeToMore])
+    };
+  }, [subscribeToMore]);
 
   if (error) {
     return (

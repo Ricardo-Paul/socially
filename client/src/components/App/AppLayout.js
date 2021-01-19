@@ -24,7 +24,6 @@ import AppHeader from "./AppHeader/AppHeader";
 import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
 import { PageContainer } from "../pageContainer";
 
-
 const appLayoutStyles = makeStyles((theme) => ({
   // "@global": {
   //   "*::-webkit-scrollbar": {
@@ -98,7 +97,6 @@ const AppLayout = ({ authUser }) => {
               <Navigation />
             </Drawer>
           </Hidden>
-
           Middle
           <Grid item xl={10} lg={12} xs={12} className={classes.middle}>
             <PageContainer>
@@ -107,9 +105,13 @@ const AppLayout = ({ authUser }) => {
                 <Route exact path={Routes.PEOPLE} render={() => <People />} />
                 <Route exact path={Routes.PROFILE} render={() => <Profile />} />
                 <Route exact path={Routes.MESSAGE} render={() => <Message />} />
-                <Route exact path={Routes.NOTIFICATIONS} render={() => <Notifications /> } />
+                <Route
+                  exact
+                  path={Routes.NOTIFICATIONS}
+                  render={() => <Notifications />}
+                />
                 <Route exact path={Routes.BROWSE} render={() => <Browse />} />
-                <Route exact path={Routes.ABOUT} render={() => < About />} />
+                <Route exact path={Routes.ABOUT} render={() => <About />} />
 
                 {/* redirect to  notification for development purpose */}
                 <Redirect to={Routes.HOME} />

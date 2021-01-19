@@ -10,23 +10,23 @@ import { useMutation } from "@apollo/client";
 import { useStore } from "../../store";
 
 const Notification = ({ notification }) => {
-  const [{auth}] = useStore();
+  const [{ auth }] = useStore();
 
   const [updateNotification] = useMutation(UPDATE_NOTIFICATION_SEEN, {
-    variables:{
-      input: { receiverId: auth.user.id }
-    }
-  })
+    variables: {
+      input: { receiverId: auth.user.id },
+    },
+  });
 
   React.useEffect(() => {
     const update = async () => {
-      try{
+      try {
         const r = await updateNotification();
-        console.log(r)
-      }catch(err){
-        console.log(err)
+        console.log(r);
+      } catch (err) {
+        console.log(err);
       }
-    }
+    };
 
     update();
   }, [auth.user.id]);

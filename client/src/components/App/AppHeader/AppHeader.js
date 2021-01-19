@@ -30,7 +30,6 @@ const AppHeader = () => {
   const [notifications, setNotifications] = React.useState([]);
   const [conversations, setConversations] = React.useState([]);
 
-
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [dropDownData, setDropDownData] = useState([]);
@@ -39,7 +38,7 @@ const AppHeader = () => {
   React.useEffect(() => {
     if (auth.user != null) {
       setNotifications(auth.user.notifications);
-      setConversations(auth.user.conversations)
+      setConversations(auth.user.conversations);
     }
   }, [auth]);
 
@@ -54,7 +53,7 @@ const AppHeader = () => {
 
   const handleIconClick = (event, dropdownType) => {
     if (dropdownType === "MESSAGE") {
-      setDropDownData(conversations)
+      setDropDownData(conversations);
       openDropDown(event);
     }
     if (dropdownType === "NOTIFICATION") {

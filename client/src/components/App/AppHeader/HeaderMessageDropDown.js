@@ -10,8 +10,8 @@ const HeaderMessageDropDown = ({
   dropDownData,
 }) => {
   React.useEffect(() => {
-    console.log("MESSAGE DATA", dropDownData)
-  }, [dropDownData])
+    console.log("MESSAGE DATA", dropDownData);
+  }, [dropDownData]);
   return (
     <MenuWrapper
       isOpen={isOpen}
@@ -20,10 +20,8 @@ const HeaderMessageDropDown = ({
       dropDownData={dropDownData}
     >
       <MenuList>
-        {dropDownData.map( u => {
-          return (
-            <MessageCard user={u} />
-          )
+        {dropDownData.map((u) => {
+          return <MessageCard user={u} />;
         })}
       </MenuList>
     </MenuWrapper>

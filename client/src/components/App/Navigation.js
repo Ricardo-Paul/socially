@@ -57,7 +57,7 @@ const Navigation = () => {
             component={RouterLink}
             className={classes.avatar}
             to={generatePath(Routes.PROFILE, {
-              username: auth.user.username
+              username: auth.user.username,
             })}
           />
           <Typography
