@@ -85,3 +85,30 @@ export const GET_FOLLOWED_POSTS = gql`
         }
     }
 `
+
+export const GET_POST = gql`
+    query($id:ID!){
+        getPost{
+            createdAt
+            id
+            image
+            title
+            comments{
+                id
+                createdAt
+                comment
+                author{
+                    image
+                    fullName
+                }
+            }
+            author{
+                image
+                fullName
+            }
+            likes{
+                id
+            }
+        }
+    }
+`
