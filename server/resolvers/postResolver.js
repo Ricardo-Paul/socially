@@ -29,7 +29,20 @@ const Query = {
   getPost: async (_, { id }, { Post }) => {
     // remember to populate an instance to be able to
     // query its value
-    const post = await Post.findOne({ _id: id }).populate('author');
+    const post = await Post.findOne({ _id: id })
+    .populate('author')
+    .populate({
+      path: 'comments',
+      populate:[
+        {path: 'author', populate: 'posts'}
+      ]
+    })
+    .populate({
+      path: 'likes',
+      populate:[{
+        path: 'user'
+      }]
+    })
 
     return post;
   },

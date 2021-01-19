@@ -40,7 +40,8 @@ const Query = {
     // those that will be displayed at the app bar
 
 
-    // unseen messages 
+    // query the db for all unseen messages grouped by user
+    // also add the user props with a lookup (join query)
     const lastUnseenMessages = await Message.aggregate([
       {
         $match: {
@@ -125,6 +126,7 @@ const Query = {
 
     user.conversations = conversations; 
     // attaching a new prop to the user goes with adding that prop in the UserPayload schema
+    // unseenMessages would have been a better name, just an after thought
 
     return user;
   },
