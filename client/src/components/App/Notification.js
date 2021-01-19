@@ -85,18 +85,22 @@ const Notification = ({ notification }) => {
             //   username: notification.sender.username
             // })}
           >
-            <img
-              src={notification.sender.image || defaultAvatar}
-              style={{
-                width: 80,
-                height: 80,
-                marginRight: 10,
-                objectFit: "cover",
-              }}
-              href={generatePath(Routes.PROFILE, {
+            <Link
+              to={generatePath(Routes.PROFILE, {
                 username: notification.sender.username
               })}
-            />
+            >
+              <img
+                src={notification.sender.image || defaultAvatar}
+                style={{
+                  width: 80,
+                  height: 80,
+                  marginRight: 10,
+                  objectFit: "cover",
+                }}
+              />
+            </Link>
+
             <Box display="flex" flexDirection="column">
             {notification.like && (
           <>
