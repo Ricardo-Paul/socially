@@ -122,9 +122,7 @@ const MessageUsers = () => {
               console.log("NOT SEEN", notSeen);
 
               console.log("CONVERSATIONS", data.getConversations);
-              return (
-                <MessageCard user={user} unseen={notSeen} />
-              );
+              return <MessageCard user={user} unseen={notSeen} />;
             })}
         </List>
       </Box>

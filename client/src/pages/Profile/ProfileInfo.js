@@ -1,11 +1,17 @@
 import React from "react";
-import { Box, Button, IconButton, makeStyles, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  IconButton,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
 import { GET_AUTH_USER, UPLOAD_USER_PHOTO } from "../../graphql/user";
 import { useApolloClient } from "@apollo/client";
 import { useStore } from "../../store";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import Follow from "../../components/Follow";
 import { Link, generatePath } from "react-router-dom";
 import * as Routes from "../../routes";
@@ -34,7 +40,7 @@ const ProfileStyles = makeStyles((theme) => ({
     backgroundColor: "#ececec",
     border: "1px solid #d0d0d0",
     marginBottom: 10,
-    padding: 15
+    padding: 15,
   },
   imgContainer: {
     display: "flex",
@@ -51,7 +57,7 @@ const ProfileStyles = makeStyles((theme) => ({
   },
   connect: {
     display: "flex",
-  }
+  },
 }));
 
 const ProfileInfo = ({ user }) => {
@@ -84,7 +90,7 @@ const ProfileInfo = ({ user }) => {
     }
   };
 
-  const isAuthUser = user.username === auth.user.username
+  const isAuthUser = user.username === auth.user.username;
 
   return (
     <Box className={classes.root}>
@@ -97,9 +103,11 @@ const ProfileInfo = ({ user }) => {
           style={{ display: "none" }}
           onChange={handleFileChange}
         />
-        { isAuthUser && <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
-          <PhotoCamera />
-        </IconButton> }
+        {isAuthUser && (
+          <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
+            <PhotoCamera />
+          </IconButton>
+        )}
       </Box>
       <Box>
         <h1 style={{ textAlign: "center" }}> {user.fullName} </h1>
@@ -119,25 +127,33 @@ const ProfileInfo = ({ user }) => {
         </Box>
       </Box>
 
-    {!isAuthUser && <Box className={classes.connect}>
-        <Follow user={user} />
-        <Button style={{marginLeft: '5px', color:"#ffffff", backgroundColor: "#1577f1"}}
-        fullWidth 
-        variant="contained" 
-        component={Link} 
-        // size="small"
-        to={generatePath(Routes.MESSAGE, {
-          id: user.id
-        })} >
-         Message
-        </Button>
-      </Box>}
+      {!isAuthUser && (
+        <Box className={classes.connect}>
+          <Follow user={user} />
+          <Button
+            style={{
+              marginLeft: "5px",
+              color: "#ffffff",
+              backgroundColor: "#1577f1",
+            }}
+            fullWidth
+            variant="contained"
+            component={Link}
+            // size="small"
+            to={generatePath(Routes.MESSAGE, {
+              id: user.id,
+            })}
+          >
+            Message
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };
 
 ProfileInfo.prototype = {
-  user: PropTypes.object.isRequired
-}
+  user: PropTypes.object.isRequired,
+};
 
 export default ProfileInfo;

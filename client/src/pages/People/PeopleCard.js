@@ -35,9 +35,12 @@ const PeopleCard = ({ user }) => {
 
   return (
     <Paper className={classes.container} elevation={2}>
-      <Box component={Link} to={generatePath(Routes.PROFILE, {
-        username: user.username
-      })}>
+      <Box
+        component={Link}
+        to={generatePath(Routes.PROFILE, {
+          username: user.username,
+        })}
+      >
         <img src={user.image || defaultAvatar} className={classes.avatar} />
       </Box>
       <Box className={classes.cardInfo}>

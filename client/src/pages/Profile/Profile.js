@@ -33,14 +33,12 @@ const Profile = ({ match }) => {
 
   const { data, loading } = useQuery(GET_USER, {
     variables: {
-      username
-    }
+      username,
+    },
   });
 
-  if(loading){
-    return (
-      <h3> Loading... </h3>
-    )
+  if (loading) {
+    return <h3> Loading... </h3>;
   }
 
   return (
@@ -48,9 +46,11 @@ const Profile = ({ match }) => {
       <CoverPhotoUpload user={data.getUser} />
       <ProfileInfo user={data.getUser} className={classes.info} />
       <Box className={classes.content}>
-        {isAuthUser && <Box className={classes.postContainer}>
-          <CreatePost />
-        </Box>}
+        {isAuthUser && (
+          <Box className={classes.postContainer}>
+            <CreatePost />
+          </Box>
+        )}
       </Box>
     </Box>
   );

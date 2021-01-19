@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useMutation } from "@apollo/client";
 import { CREATE_MESSAGE, GET_MESSAGES } from "../../graphql/message";
 import { generatePath, Link } from "react-router-dom";
-import * as Routes from '../../routes';
+import * as Routes from "../../routes";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -107,7 +107,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
                 <Avatar
                   component={Link}
                   to={generatePath(Routes.PROFILE, {
-                    username: chatUser.username
+                    username: chatUser.username,
                   })}
                   style={{ marginRight: 5 }}
                   src={chatUser ? chatUser.image : null}

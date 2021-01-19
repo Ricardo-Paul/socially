@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 
 const avatar = "https://material-ui.com/static/images/avatar/3.jpg";
 
-
 const MessageChat = ({ match }) => {
   const classes = useStyles();
   const [{ auth }] = useStore();

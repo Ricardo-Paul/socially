@@ -37,11 +37,11 @@ const Home = ({ history }) => {
   // prevent app from crashing when logout
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-    if(!token){
-      history.push(Routes.SIGNIN)
-      return
+    if (!token) {
+      history.push(Routes.SIGNIN);
+      return;
     }
-  }, [auth.user])
+  }, [auth.user]);
 
   // pushState args (state, title, url)
   const openModal = (postId) => {
@@ -60,38 +60,41 @@ const Home = ({ history }) => {
     limit: HOME_PAGE_POSTS_LIMIT,
   };
 
-  const { data, loading, networkStatus, fetchMore, error } = useQuery(GET_FOLLOWED_POSTS, {
-    variables,
-    notifyOnNetworkStatusChange: true,
-  });
+  const { data, loading, networkStatus, fetchMore, error } = useQuery(
+    GET_FOLLOWED_POSTS,
+    {
+      variables,
+      notifyOnNetworkStatusChange: true,
+    }
+  );
 
   const renderContent = () => {
     if (loading && networkStatus === 1) {
       return <h4> loading ... </h4>;
     }
 
-      const posts = data.getFollowedPosts.posts;
-      const count = data.getFollowedPosts.count; // total of posts we'll eventually display
+    const posts = data.getFollowedPosts.posts;
+    const count = data.getFollowedPosts.count; // total of posts we'll eventually display
 
-      if (!posts.length) {
-        return <h5> Follow Users, Browse </h5>;
-      }
-      // we compare the id in the state var with the current postid
-      // to decide whether to open the modal
-      return(
-        <InfiniteScrolling
+    if (!posts.length) {
+      return <h5> Follow Users, Browse </h5>;
+    }
+    // we compare the id in the state var with the current postid
+    // to decide whether to open the modal
+    return (
+      <InfiniteScrolling
         data={posts}
         fetchMore={fetchMore}
         dataKey="getFollowedPosts.posts"
         count={parseInt(count)}
         variables={variables}
-        >
-          {
-            (data) => {
-              const showNextLoading = loading && networkStatus === 3 && count !== data.length;
-              return (
-                <Fragment>
-                  { data.map((post) => (
+      >
+        {(data) => {
+          const showNextLoading =
+            loading && networkStatus === 3 && count !== data.length;
+          return (
+            <Fragment>
+              {data.map((post) => (
                 <Fragment key={post.id}>
                   {/* modal */}
                   <Modal open={postId === post.id} onClose={closeModal}>
@@ -104,7 +107,7 @@ const Home = ({ history }) => {
                       createdAt={post.createdAt}
                     />
                   </Modal>
-        
+
                   {/* regualar post card */}
                   <PostCard
                     title={post.title}
@@ -122,15 +125,14 @@ const Home = ({ history }) => {
                     comments={post.comments}
                   />
 
-                  {showNextLoading && <h3> loading more ... </h3> }
+                  {showNextLoading && <h3> loading more ... </h3>}
                 </Fragment>
               ))}
-                </Fragment>
-              )
-            }
-          }
-        </InfiniteScrolling>
-      )
+            </Fragment>
+          );
+        }}
+      </InfiniteScrolling>
+    );
   };
   //
 

@@ -42,9 +42,11 @@ const CoverPhotoUpload = ({ user }) => {
       />
 
       <label>
-        { isAuthUser && <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
-          <PhotoCamera />
-        </IconButton> }
+        {isAuthUser && (
+          <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
+            <PhotoCamera />
+          </IconButton>
+        )}
       </label>
     </Box>
   );

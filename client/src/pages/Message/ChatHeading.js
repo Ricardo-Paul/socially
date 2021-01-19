@@ -42,11 +42,7 @@ const ChatHeading = ({ chatUser }) => {
   }
 
   if (!chatUser) {
-    return (
-      <Box>
-
-      </Box>
-    );
+    return <Box></Box>;
   }
 };
 
