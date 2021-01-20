@@ -13,6 +13,8 @@ import {
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
+import { useQuery } from "@apollo/client";
+import { GET_POST } from "../../graphql/post";
 
 const PostStyles = makeStyles({ 
   paper: {
@@ -65,8 +67,27 @@ const PostPopUp = ({
   author,
   postTitle,
   createdAt,
+  id
 }) => {
   const classes = PostStyles();
+
+  const { data, loading } = useQuery(GET_POST, {
+    variables: {
+      id
+    }
+  });
+
+  if(!loading){
+    console.log('POST DATA', data)
+  }
+
+  // if(loading){
+  //   return <h3> loading... </h3>
+  // }
+
+  // const post = data && data.getPost;
+  // console.log("POST", post);
+
   return (
     <ClickAwayListener onClickAway={closeModal}>
       <Paper className={classes.paper}>

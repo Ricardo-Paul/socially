@@ -26,7 +26,7 @@ const homeStyles = makeStyles({
     fontSize: "16px",
     fontFamily: "roboto",
     fontWeight: 500,
-  },
+  }
 });
 
 const Home = ({ history }) => {
@@ -99,6 +99,7 @@ const Home = ({ history }) => {
                   {/* modal */}
                   <Modal open={postId === post.id} onClose={closeModal}>
                     <PostPopUp
+                      id={post.id}
                       closeModal={closeModal}
                       comments={post.comments}
                       postImage={post.image}
