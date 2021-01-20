@@ -89,7 +89,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
   };
 
   // if (!chatUser) {
-  //   return <h3> Start sending message </h3>;
+  //   // return <h3> lo </h3>;
   // }
 
   return (
@@ -107,7 +107,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
                 <Avatar
                   component={Link}
                   to={generatePath(Routes.PROFILE, {
-                    username: chatUser.username,
+                    username: chatUser && chatUser.username,
                   })}
                   style={{ marginRight: 5 }}
                   src={chatUser ? chatUser.image : null}

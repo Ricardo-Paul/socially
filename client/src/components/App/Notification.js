@@ -13,6 +13,7 @@ import { useStore } from "../../store";
 import { Link, generatePath } from "react-router-dom";
 import * as Routes from '../../routes';
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
+import { GET_AUTH_USER } from "../../graphql/user";
 
 const notiStyles = makeStyles((theme) => ({
   item: {
@@ -40,24 +41,27 @@ const Notification = ({ notification }) => {
   const [{ auth }] = useStore();
   const classes = notiStyles();
 
-  // const [updateNotification] = useMutation(UPDATE_NOTIFICATION_SEEN, {
-  //   variables: {
-  //     input: { receiverId: auth.user.id },
-  //   },
-  // });
+  const [updateNotification] = useMutation(UPDATE_NOTIFICATION_SEEN, {
+    variables: {
+      input: { receiverId: auth.user.id },
+    },
+    refetchQueries: [
+      {query: GET_AUTH_USER}
+    ]
+  });
 
-  // React.useEffect(() => {
-  //   const update = async () => {
-  //     try {
-  //       const r = await updateNotification();
-  //       console.log(r);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
+  React.useEffect(() => {
+    const update = async () => {
+      try {
+        const r = await updateNotification();
+        console.log(r);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
-  //   update();
-  // }, [auth.user.id]);
+    update();
+  }, [auth.user.id]);
 
   if (!notification.like && !notification.comment && !notification.follow) {
     return;
@@ -88,7 +92,7 @@ const Notification = ({ notification }) => {
             className={classes.item}
             component={Link}
             to={generatePath(Routes.POST, {
-              id: "5fc41e21260a6b369fee628a"
+              id: isLikeOrComment.post.id
             })}
           >
             <Link

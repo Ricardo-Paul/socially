@@ -67,9 +67,7 @@ const PostPopUp = ({
   const classes = PostStyles();
 
   const { data, loading } = useQuery(GET_POST, {
-    variables: {
-      id
-    }
+    variables: { id }
   });
 
   if(!loading){
@@ -97,9 +95,11 @@ const PostPopUp = ({
             subheader={post.createdAt}
           />
           <CardContent> {post.title} </CardContent>
-          <div className={classes.mediaContainer}>
-            <img src={post.image} alt="post image" className={classes.media} />
-          </div>
+          {post.image && 
+            <div className={classes.mediaContainer}>
+              <img src={post.image} alt="post image" className={classes.media} />
+            </div>
+          }
           <PostPopUpComments comments={post.comments} closeComments={closeModal} />
         </Card>
       </Paper>
@@ -110,7 +110,7 @@ const PostPopUp = ({
 export default PostPopUp;
 
 PostPopUp.propTypes = {
-  closeModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func,
   comments: PropTypes.array.isRequired,
   author: PropTypes.string.isRequired,
   postTitle: PropTypes.string,
