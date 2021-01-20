@@ -51,7 +51,6 @@ const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
   };
 
   return (
-    <ClickAwayListener onClickAway={closeComments}>
       <List>
         {comments.reverse().map((c) => (
           <ListItem key={c.id}>
@@ -80,7 +79,6 @@ const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
         ))}
         {comments.length > 1 && <Divider variant="inset" component="li" />}
       </List>
-    </ClickAwayListener>
   );
 };
 
