@@ -26,6 +26,11 @@ const homeStyles = makeStyles({
     fontSize: "16px",
     fontFamily: "roboto",
     fontWeight: 500,
+  },
+  grid: {
+    display: "flex",
+    alignContent: "flex-end",
+    flexDirection: "row"
   }
 });
 
@@ -132,8 +137,8 @@ const Home = ({ history }) => {
   return (
     <>
       <div className={classes.home}>
-        <Grid container spacing={3}>
-          <Grid item md="8" xs="12">
+        <Grid container spacing={3} className={classes.grid}>
+          <Grid item md="6" xs="12">
             <Box>
               <CreatePost />
               {renderContent()}

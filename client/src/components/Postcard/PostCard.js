@@ -33,11 +33,11 @@ import { theme } from "../../utils/theme";
 import { generatePath, Link } from "react-router-dom";
 
 const postCardStyles = makeStyles({
-  card: {
+  postCard: {
     marginTop: 20,
-    maxWidth: "100%",
-    boxShadow: shadows.md,
-
+    width: "100%",
+    height: "auto",
+    border: "1px solid #dcd7d7",
     // transform: "translate(-50%, -50%)",
     // backgroundColor: "white",
     // position: "absolute",
@@ -61,13 +61,14 @@ const postCardStyles = makeStyles({
   },
   media: {
     [theme.breakpoints.up("xl")]: {
-      height: 600,
+      maxHeight: "90%",
     },
     [theme.breakpoints.down("sm")]: {
       height: 300,
     },
-    height: 400,
+    display: "block",
     objectFit: "cover",
+    width: "100%"
   },
   footer: {
     position: "relative",
@@ -136,7 +137,7 @@ const PostCard = ({
         />
       </Popper>
       {/*  */}
-      <Card className={classes.card}>
+      <div className={classes.postCard}>
         <CardHeader
           className={classes.header}
           avatar={<Avatar component={Link} to={generatePath(Routes.PROFILE, {
@@ -156,9 +157,9 @@ const PostCard = ({
         />
         <CardContent>{title}</CardContent>
         {image && (
-          <CardMedia
+          <img
             className={classes.media}
-            image={image}
+            src={image}
             onClick={openModal}
           />
         )}
@@ -190,7 +191,7 @@ const PostCard = ({
             <CreateComment postId={postId} focus={isCommentOpen} />
           )}
         </div>
-      </Card>
+      </div>
     </>
   );
 };
