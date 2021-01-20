@@ -98,15 +98,7 @@ const Home = ({ history }) => {
                 <Fragment key={post.id}>
                   {/* modal */}
                   <Modal open={postId === post.id} onClose={closeModal}>
-                    <PostPopUp
-                      id={post.id}
-                      closeModal={closeModal}
-                      comments={post.comments}
-                      postImage={post.image}
-                      author={post.author.fullName}
-                      postTitle={post.title}
-                      createdAt={post.createdAt}
-                    />
+                    <PostPopUp id={post.id} closeModal={closeModal} />
                   </Modal> 
 
                   {/* regualar post card */}

@@ -62,11 +62,6 @@ const PostStyles = makeStyles({
 
 const PostPopUp = ({
   closeModal,
-  postImage,
-  comments,
-  author,
-  postTitle,
-  createdAt,
   id
 }) => {
   const classes = PostStyles();
@@ -81,32 +76,31 @@ const PostPopUp = ({
     console.log('POST DATA', data)
   }
 
-  // if(loading){
-  //   return <h3> loading... </h3>
-  // }
+  if(loading){
+    return <h3> loading... </h3>
+  }
 
-  // const post = data && data.getPost;
-  // console.log("POST", post);
+  const post = data && data.getPost;
 
   return (
     <ClickAwayListener onClickAway={closeModal}>
       <Paper className={classes.paper}>
         <Card className={classes.card}>
           <CardHeader
-            avatar={<Avatar>A</Avatar>}
+            avatar={<Avatar src={post.author.image} />}
             action={
               <IconButton onClick={closeModal}>
                 <Close />
               </IconButton>
             }
-            title={author}
-            subheader={createdAt}
+            title={post.author.fullName}
+            subheader={post.createdAt}
           />
-          <CardContent> {postTitle} </CardContent>
+          <CardContent> {post.title} </CardContent>
           <div className={classes.mediaContainer}>
-            <img src={postImage} alt="post image" className={classes.media} />
+            <img src={post.image} alt="post image" className={classes.media} />
           </div>
-          <PostPopUpComments comments={comments} closeComments={closeModal} />
+          <PostPopUpComments comments={post.comments} closeComments={closeModal} />
         </Card>
       </Paper>
     </ClickAwayListener>
