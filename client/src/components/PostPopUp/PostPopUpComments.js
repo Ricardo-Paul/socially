@@ -8,25 +8,24 @@ import {
   Typography,
   Divider,
   Avatar,
-  makeStyles,
   IconButton,
-  ClickAwayListener,
 } from "@material-ui/core";
 
 import { Delete } from "@material-ui/icons";
 import PropTypes from "prop-types";
-
 import { useStore } from "../../store";
 
 import { DELETE_COMMENT } from "../../graphql/comment";
 import { useMutation } from "@apollo/client";
 
 import { GET_AUTH_USER } from "../../graphql/user";
-import { GET_FOLLOWED_POSTS } from "../../graphql/post";
+import { GET_FOLLOWED_POSTS, GET_POST } from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
+import { withRouter } from "react-router-dom";
 
-const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
+const PostPopUpComments = ({ match, comments, postId }) => {
   const [{ auth }] = useStore();
+  // alert(postId)
 
   const [remove] = useMutation(DELETE_COMMENT, {
     refetchQueries: [
@@ -35,6 +34,12 @@ const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
         query: GET_FOLLOWED_POSTS,
         variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
       },
+      {
+        query: GET_POST,
+        variables: {
+          id: postId
+        }
+      }
     ],
   });
 
@@ -82,9 +87,10 @@ const PostPopUpComments = ({ comments, userAvatar, closeComments }) => {
   );
 };
 
-export default PostPopUpComments;
+export default withRouter(PostPopUpComments);
 
 PostPopUpComments.propTypes = {
   comments: PropTypes.array.isRequired,
   userAvatar: PropTypes.string,
+  postId: PropTypes.string.isRequired
 };

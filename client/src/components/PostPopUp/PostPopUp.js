@@ -79,6 +79,8 @@ const PostPopUp = ({
   }
 
   const post = data && data.getPost;
+  alert(post.id)
+
 
   return (
     <ClickAwayListener onClickAway={closeModal}>
@@ -100,7 +102,7 @@ const PostPopUp = ({
               <img src={post.image} alt="post image" className={classes.media} />
             </div>
           }
-          <PostPopUpComments comments={post.comments} closeComments={closeModal} />
+          <PostPopUpComments postId={post.id} comments={post.comments} closeComments={closeModal} />
         </Card>
       </Paper>
     </ClickAwayListener>

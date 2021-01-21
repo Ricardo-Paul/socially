@@ -11,7 +11,7 @@ import { CREATE_LIKE, DELETE_LIKE } from "./../graphql/like";
 
 // queries to refetch
 import { GET_FOLLOWED_POSTS } from "./../graphql/post";
-import { GET_USER_POSTS } from "../graphql/user";
+import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
 
 const Like = ({ likes, postId, author }) => {
   // decide what operation to execute
@@ -37,7 +37,7 @@ const Like = ({ likes, postId, author }) => {
   const [mutate] = useMutation(options[operation].mutation, {
     // TODO: also refetch the user posts
     refetchQueries: [
-      // { query: GET_AUTH_USER },
+      { query: GET_AUTH_USER },
       {
         query: GET_USER_POSTS,
         variables: { username: author.username }

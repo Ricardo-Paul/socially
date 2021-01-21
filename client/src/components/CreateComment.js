@@ -7,9 +7,9 @@ import { useMutation } from "@apollo/client";
 import { useStore } from "../store";
 import { Send } from "@material-ui/icons";
 
-import { GET_AUTH_USER } from "../graphql/user";
-import { GET_FOLLOWED_POSTS } from "../graphql/post";
-import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
+import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
+import { GET_FOLLOWED_POSTS, GET_POST } from "../graphql/post";
+import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
 const commenStyles = makeStyles({
   textField: {
@@ -51,6 +51,19 @@ const CreateComment = ({ focus, postId }) => {
         query: GET_FOLLOWED_POSTS,
         variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
       },
+      {
+        query: GET_USER_POSTS,
+        variables: {
+          username: auth.user.username,
+          limit: USER_PAGE_POSTS_LIMIT
+        }
+      },
+      {
+        query: GET_POST,
+        variables: {
+          id: postId
+        }
+      }
     ],
   });
 

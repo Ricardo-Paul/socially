@@ -184,6 +184,7 @@ const PostCard = ({
             <PostPopUpComments
               comments={comments}
               closeComments={() => setIsCommentOpen(false)}
+              postId={postId}
             />
           )}
           {isCommentOpen && (
