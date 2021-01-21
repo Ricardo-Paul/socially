@@ -13,7 +13,7 @@ export const schema = gql`
         getPosts(authUserId: ID!, skip:Int, limit:Int): PostsPayload
         getPost(id: ID!): PostPayload
         getFollowedPosts(userId: ID!, skip:Int, limit:Int): PostsPayload
-        getUserPosts(userId: ID!, skip: Int, limit: Int): PostsPayload
+        getUserPosts(username: String!, skip: Int, limit: Int): PostsPayload
         getUsers(userId: ID!, skip:Int, limit:Int): UsersPayload
         searchUsers(searchQuery: String): [UserPayload]
         suggestPeople(userId: ID!): UsersPayload
@@ -148,6 +148,7 @@ type CommentPayload{
     author: UserPayload
     post: PostPayload
     comment: String!
+    createdAt: String
 }
 type PostsPayload{
     posts: [PostPayload]
