@@ -168,4 +168,40 @@ export const GET_USER = gql`
       }
     }
   }
+` 
+
+export const GET_USER_POSTS = gql`
+  query($username: String!, $skip: Int, $limit: Int){
+    getUserPosts(username: $username, skip: $skip, limit: $limit){
+      count
+      posts{
+        id
+        title
+        image
+        createdAt
+        author{
+          id
+          fullName
+          username
+          image
+        }
+        comments{
+          id
+          comment
+          author{
+            id
+            image
+            fullName
+          }
+        }
+        likes{
+          id
+          user{
+            image
+            fullName
+          }
+        }
+      }
+    }
+  }
 `
