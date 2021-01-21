@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   makeStyles,
-  Card,
-  CardMedia,
   CardContent,
   Avatar,
   IconButton,
@@ -13,7 +11,6 @@ import {
 import { MoreVert, Comment } from "@material-ui/icons";
 import CardHeader from "@material-ui/core/CardHeader";
 
-import { shadows } from "../../utils/theme";
 import PostCardOptions from "./PostCardOptions";
 import CreateComment from "../CreateComment";
 import Like from "../Like";
@@ -38,10 +35,6 @@ const postCardStyles = makeStyles({
     width: "100%",
     height: "auto",
     border: "1px solid #dcd7d7",
-    // transform: "translate(-50%, -50%)",
-    // backgroundColor: "white",
-    // position: "absolute",
-    // width: "30%"
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100%",
     },
