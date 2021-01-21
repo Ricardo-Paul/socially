@@ -37,7 +37,7 @@ const ProfilePosts = ({ username }) => {
                     return(
                         <Fragment>
                             {
-                                posts.map(post => (
+                                data.map(post => (
                                     <PostCard
                                     title={post.title}
                                     image={post.image}

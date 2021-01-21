@@ -11,6 +11,7 @@ import { CREATE_LIKE, DELETE_LIKE } from "./../graphql/like";
 
 // queries to refetch
 import { GET_FOLLOWED_POSTS } from "./../graphql/post";
+import { GET_USER_POSTS } from "../graphql/user";
 
 const Like = ({ likes, postId, author }) => {
   // decide what operation to execute
@@ -37,6 +38,10 @@ const Like = ({ likes, postId, author }) => {
     // TODO: also refetch the user posts
     refetchQueries: [
       // { query: GET_AUTH_USER },
+      {
+        query: GET_USER_POSTS,
+        variables: { username: author.username }
+      },
       {
         query: GET_FOLLOWED_POSTS,
         variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },

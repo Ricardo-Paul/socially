@@ -197,6 +197,7 @@ export const GET_USER_POSTS = gql`
         likes{
           id
           user{
+            id
             image
             fullName
           }
