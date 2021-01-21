@@ -15,7 +15,6 @@ import PropTypes from "prop-types";
 import Follow from "../../components/Follow";
 import { Link, generatePath } from "react-router-dom";
 import * as Routes from "../../routes";
-import MessageIcon from "@material-ui/icons/Message";
 
 const ProfileStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +34,6 @@ const ProfileStyles = makeStyles((theme) => ({
   },
   info: {
     display: "flex",
-    width: 600,
     justifyContent: "space-between",
     backgroundColor: "#ececec",
     border: "1px solid #d0d0d0",
@@ -109,7 +107,7 @@ const ProfileInfo = ({ user }) => {
           </IconButton>
         )}
       </Box>
-      <Box>
+      <Box style={{ width: "100%" }} >
         <h1 style={{ textAlign: "center" }}> {user.fullName} </h1>
         <Box className={classes.info}>
           <Typography variant="subtitle2" color="textSecondary">

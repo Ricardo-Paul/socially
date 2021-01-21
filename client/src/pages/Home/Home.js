@@ -1,4 +1,4 @@
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import { Box, Grid, Hidden, makeStyles } from "@material-ui/core";
 import React, { Fragment } from "react";
 import CreatePost from "../../components/CreatePost";
 import PostCard from "../../components/Postcard";
@@ -138,6 +138,9 @@ const Home = ({ history }) => {
     <>
       <div className={classes.home}>
         <Grid container spacing={3} className={classes.grid}>
+          <Hidden>
+            <Grid item md={2} />
+          </Hidden>
           <Grid item md="6" xs="12">
             <Box>
               <CreatePost />

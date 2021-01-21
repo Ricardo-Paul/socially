@@ -2,12 +2,13 @@ import React from "react";
 import CreatePost from "../../components/CreatePost";
 import CoverPhotoUpload from "./CoverPhotoUpload";
 import ProfileInfo from "./ProfileInfo";
-import { Box, makeStyles } from "@material-ui/core";
+import { Box, Grid, makeStyles } from "@material-ui/core";
 import { GET_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
 import { withRouter } from "react-router-dom";
 import { useStore } from "../../store";
 import ProfilePosts from "./ProfilePosts";
+
 
 const ProfileStyles = makeStyles((theme) => ({
   info: {
@@ -21,7 +22,7 @@ const ProfileStyles = makeStyles((theme) => ({
   },
   postContainer: {
     marginTop: 20,
-    width: "80%",
+    width: "100%",
   },
 }));
 
@@ -43,18 +44,23 @@ const Profile = ({ match }) => {
   }
 
   return (
-    <Box>
-      <CoverPhotoUpload user={data.getUser} />
-      <ProfileInfo user={data.getUser} className={classes.info} />
-      <Box className={classes.content}>
-        {isAuthUser && (
-          <Box className={classes.postContainer}>
-            <CreatePost />
-          </Box>
-        )} 
+    <Grid container>
+      <Grid item md={2} />
+      <Grid item md={6} xs={12}>
+        <Box>
+        <CoverPhotoUpload user={data.getUser} />
+        <ProfileInfo user={data.getUser} className={classes.info} />
+        <Box className={classes.content}>
+          {isAuthUser && (
+            <Box className={classes.postContainer}>
+              <CreatePost />
+            </Box>
+          )} 
+        </Box>
+        <ProfilePosts username={username} />
       </Box>
-      <ProfilePosts username={username} />
-    </Box>
+      </Grid>
+    </Grid>
   );
 };
 
