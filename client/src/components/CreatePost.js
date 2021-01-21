@@ -1,7 +1,6 @@
 import { Avatar, Box, Button, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useStore } from "../store";
-import { AccountCircle } from "@material-ui/icons";
 import { MAX_POST_IMAGE_SIZE } from "../constants/ImageSizeLimit";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
@@ -12,9 +11,10 @@ import UploadPostImage from "./UploadPostImage";
 import ImagePreview from "./ImagePreview";
 
 import { colors, shadows } from "../utils/theme";
-import { GET_AUTH_USER } from "../graphql/user";
+import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
-import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
+import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
+import { withRouter } from "react-router-dom";
 
 const postStyles = makeStyles((theme) => ({
   container: {
@@ -70,7 +70,8 @@ const postStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreatePost = () => {
+const CreatePost = ({ match }) => {
+
   const [isFocused, setIsFocused] = useState(null);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
@@ -81,6 +82,10 @@ const CreatePost = () => {
   const [createPost, { loading }] = useMutation(CREATE_POST, {
     refetchQueries: [
       { query: GET_AUTH_USER },
+      {
+        query: GET_USER_POSTS,
+        variables: { username: auth.user.username, limit: USER_PAGE_POSTS_LIMIT }
+      },
       {
         query: GET_FOLLOWED_POSTS,
         variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
@@ -181,4 +186,4 @@ const CreatePost = () => {
     </>
   );
 };
-export default CreatePost;
+export default withRouter(CreatePost);

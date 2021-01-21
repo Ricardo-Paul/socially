@@ -19,12 +19,11 @@ import PostPopUpComments from "../PostPopUp/PostPopUpComments";
 import { useStore } from "../../store";
 import * as Routes from "../../routes";
 
-// delete post imports
 import { useMutation } from "@apollo/client";
 import { DELETE_POST } from "../../graphql/post";
-import { GET_AUTH_USER } from "../../graphql/user";
+import { GET_AUTH_USER, GET_USER_POSTS } from "../../graphql/user";
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
-import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
+import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 
 import { theme } from "../../utils/theme";
 import { generatePath, Link } from "react-router-dom";
@@ -104,6 +103,13 @@ const PostCard = ({
         query: GET_FOLLOWED_POSTS,
         variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
       },
+      {
+        query: GET_USER_POSTS,
+        variables: {
+          username: auth.user.username,
+          limit: USER_PAGE_POSTS_LIMIT
+        }
+      }
     ],
   });
 
