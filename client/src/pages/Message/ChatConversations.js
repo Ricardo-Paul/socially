@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   conversation: {
     flexGrow: 1,
-    maxHeight: "calc(80vh - 50px)",
+    maxHeight: "calc(80vh - 77px)",
     overflow: "auto",
   },
   messageWrapper: {

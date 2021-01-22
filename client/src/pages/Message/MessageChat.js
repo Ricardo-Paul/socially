@@ -39,6 +39,7 @@ const MessageChat = ({ match }) => {
     }
   );
 
+
   useEffect(() => {
     const unsubscribe = subscribeToMore({
       document: GET_NEW_MESSAGE,
@@ -48,6 +49,9 @@ const MessageChat = ({ match }) => {
       },
       updateQuery: (prev, { subscriptionData }) => {
         if(!subscriptionData) return prev;
+        if(!prev.getMessages) return;
+
+        console.log('PREV MESSAGES', prev)
 
         const newMessage = subscriptionData.data.messageCreated;
         const mergedMessages = [...prev.getMessages, newMessage];

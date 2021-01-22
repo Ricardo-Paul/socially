@@ -74,6 +74,9 @@ const MessageUsers = () => {
     },
   });
 
+  // const notSeen = user.seen === false && user.lastMessageSender === false;
+  // let notSeen;
+
   React.useEffect(() => {
     const unsubscribe = subscribeToMore({
       document: GET_NEW_CONVERSATIONS,
@@ -82,15 +85,25 @@ const MessageUsers = () => {
         const { newConversation } = subscriptionData.data;
         const oldConversations = prev.getConversations;
 
-        const existedUserInChat = oldConversations.some(
-          (u) => u.id === newConversation.id
+        console.log('VERY NEW CONV', newConversation);
+
+        console.log('OLD CONVOS', oldConversations)
+
+        // remove existed user before merging to avoid duplicate
+        let index = oldConversations.findIndex(
+          (old) => old.id === newConversation.id
         );
-        if (existedUserInChat) return prev;
-        // newConversation.id is the senderUser id
+        if (index) {
+          oldConversations.splice(index, 1);
+        }
+
 
         let mergedConversations = [...oldConversations, newConversation];
+        console.log('MERGED CONVOS', mergedConversations)
+        let r = mergedConversations.reverse().splice(mergedConversations.findIndex( u => u.id === newConversation.id ), mergedConversations.length - 1)
+
         return {
-          getConversations: mergedConversations,
+          getConversations: r
         };
       },
     });
@@ -117,17 +130,28 @@ const MessageUsers = () => {
         <List>
           {!loading &&
             data.getConversations.map((user) => {
-              const notSeen =
-                user.seen === false && user.lastMessageSender === false;
+              console.log('USER MESSAGE', user);
+
+              let  notSeen = user.seen === false && user.id !== auth.user.id;
+
               console.log("NOT SEEN", notSeen);
 
               console.log("CONVERSATIONS", data.getConversations);
-              return <MessageCard user={user} unseen={notSeen} />;
+              return <MessageCard user={user} notSeen={notSeen} />;
             })}
         </List>
       </Box>
     </Box>
   );
-};
+}; 
 
 export default MessageUsers;
+
+
+// let a = [
+//   {id: 1, message:"hi"},
+//   {id: 1, message:"Bro"},
+//   {id: 2, message:"Fine"}
+// ]
+
+// a.filter((v,i,a)=>a.findIndex(t=>(t.place === v.place && t.name===v.name))===i)

@@ -104,9 +104,9 @@ const App = () => {
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
 
-        if (window.location.href.split("/")[3] === "message") {
-          return prev;
-        }
+        // if (window.location.href.split("/")[3] === "message") {
+        //   return prev;
+        // }
 
         let oldConversations = prev.getAuthUser.conversations;
         let newConversation = subscriptionData.data.newConversation; //a single conversation object

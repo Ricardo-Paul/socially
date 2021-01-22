@@ -41,6 +41,7 @@ export const CREATE_MESSAGE = gql`
 export const GET_NEW_CONVERSATIONS = gql`
     subscription{
         newConversation{
+            id
             username
             fullName
             image
@@ -58,6 +59,10 @@ export const GET_NEW_MESSAGE = gql`
         messageCreated(authUserId: $authUserId, userId: $userId){
            message
            createdAt
+           sender{
+               fullName
+               username
+           }
         }
     }
 `
