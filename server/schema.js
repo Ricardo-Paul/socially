@@ -308,7 +308,6 @@ type NotificationCreatedOrDeletedPayload{
 }
 
 type MessageCreatedPayload{
-        id: ID
         sender: UserPayload
         receiver: UserPayload
         message: String

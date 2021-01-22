@@ -76,6 +76,7 @@ const Query = {
     // TODO: populate the posts
     // TODO: seed db to test this method:: DONE
     const followedPosts = Post.find(query)
+    .sort({ createdAt: "desc" })
     .populate({
       path: 'author',
       populate: [
@@ -100,7 +101,6 @@ const Query = {
     })
     .skip(skip)
     .limit(limit)
-    .sort({ createdAt: "desc" })
 
     return{
       count: postCount,

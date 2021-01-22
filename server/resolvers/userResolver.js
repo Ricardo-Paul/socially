@@ -5,6 +5,7 @@ import { sendEmail } from '../utils/sendEmail';
 import Follow from '../models/Follow';
 import { uploadToCloudinary } from '../utils/fileUploads';
 import mongoose from 'mongoose';
+import { sortBy } from 'lodash';
 
 
 
@@ -121,8 +122,8 @@ const Query = {
       conversations.push(sender);
     })
 
-    console.log('UNSEEN MESSAGES :', lastUnseenMessages, 'CONVERSATIONS :', conversations, user.id)
-    console.log('UNSEEN MESSAGES LENGTH :', lastUnseenMessages.length)
+    // console.log('UNSEEN MESSAGES :', lastUnseenMessages, 'CONVERSATIONS :', conversations, user.id)
+    // console.log('UNSEEN MESSAGES LENGTH :', lastUnseenMessages.length)
 
     user.conversations = conversations; 
     // attaching a new prop to the user goes with adding that prop in the UserPayload schema
@@ -185,7 +186,19 @@ const Query = {
 
     // TODO: populate posts
     const posts = await Post.find({ author: user._id })
+    .sort({ createdAt: -1 })
     .populate("author")
+    .populate({
+      path: 'comments',
+      populate: { path: 'author' },
+      options: {
+        sort: { createdAt: "desc" }
+      }
+    })
+    .populate({ 
+      path: 'likes',
+      populate: 'user'
+     })
     .skip(skip)
     .limit(limit);
 

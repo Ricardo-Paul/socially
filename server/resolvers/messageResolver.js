@@ -84,6 +84,12 @@ const Mutation = {
                 receiver: receiver,
                 message: message
             }).save();
+
+            // populate message sender and receiver fields
+            newMessage = await newMessage
+            .populate("sender")
+            .populate("receiver")
+            .execPopulate();
     
             // publish messsage created
             pubSub.publish(MESSAGE_CREATED, {
@@ -92,7 +98,7 @@ const Mutation = {
     
             // push sender to receiver messages collection
             // push receiver to sender messages collection
-            // if it is the first conversation
+            // if it is the first message they event sent to each other
     
             const senderUser = await User.findById(sender);
     
@@ -134,18 +140,20 @@ const Mutation = {
 
 const Subscription = {
     messageCreated: {
-        subscribe: withFilter( () => pubSub.asyncIterator(MESSAGE_CREATED),
-        (payload, variables) => {
-            const { sender, receiver } = payload.messageCreated;
+        subscribe: () => pubSub.asyncIterator(MESSAGE_CREATED)
+        // subscribe: withFilter( () => pubSub.asyncIterator(MESSAGE_CREATED),
+        // (payload, variables) => {
+        //     const { sender, receiver } = payload.messageCreated;
+        //     console.log("VARS", variables)
 
-            const authUserId = variables.authUserId.toString();
-            const userId = variables.userId.toString();
+        //     const authUserId = variables.authUserId.toString();
+        //     const userId = variables.userId.toString();
 
-            const isAuthUserSenderOrReceiver = authUserId === sender.toString() || authUserId == receiver.toString();
-            const isUserSenderOrReceiver = userId === sender.toString()  || userId === receiver.toString();
+        //     const isAuthUserSenderOrReceiver = authUserId === sender.toString() || authUserId == receiver.toString();
+        //     const isUserSenderOrReceiver = userId === sender.toString()  || userId === receiver.toString();
 
-            return isAuthUserSenderOrReceiver && isUserSenderOrReceiver
-        })
+        //     return isAuthUserSenderOrReceiver && isUserSenderOrReceiver
+        // })
     },
     newConversation: {
         subscribe: withFilter(() => pubSub.asyncIterator(NEW_CONVERSATION), 
