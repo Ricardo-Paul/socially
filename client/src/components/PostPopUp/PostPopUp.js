@@ -28,9 +28,21 @@ const useStyles = makeStyles({
   imageParent: {
     display: "flex",
     alignItems: "center"
+  },
+  right: {
+    backgroundColor: "#373737",
+    width: "100%",
+    height: "100%"
+  },
+  rightHeader: {
+    height: 61,
+    width: "100%",
+    borderBottom: "0.5px solid #bebebf",
+    display: "flex",
+    alignItems: "flex-end"
   }
 });
-
+// #848484
 const PostPopUp = ({
   closeModal,
   id
@@ -54,7 +66,7 @@ const PostPopUp = ({
   return (
     <ClickAwayListener onClickAway={closeModal}>
       <Grid container style={{height: "100%"}}>
-        <Grid item md={9} xs={12}>
+        <Grid item md={10} xs={12}>
             <Grid container justify="center" style={{height: "100%"}}>
               <Grid item md={6} className={classes.imageParent} style={{height: "100%"}}>
                 <Box className={classes.imageContainer}>
@@ -67,8 +79,14 @@ const PostPopUp = ({
               </Grid>
             </Grid>
         </Grid>
-        <Grid item md={3} xs={12}>
-          COMMENTS
+        <Grid item md={2} xs={12}>
+          <Box className={classes.right}>
+              <Box className={classes.rightHeader}>
+                <IconButton>
+                  <Avatar />
+                </IconButton>
+              </Box>
+          </Box>
         </Grid>
       </Grid>
     </ClickAwayListener>
