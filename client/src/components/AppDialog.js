@@ -17,7 +17,7 @@ const AppDialog = ({ children, open }) => {
 
     return(
         <Dialog fullScreen open={open}>
-            <AppBar position="relative" style={{marginBottom: 10, backgroundColor:"#fffefe"}} classes={classes.appBar} >
+            <AppBar position="relative" style={{backgroundColor:"#fffefe"}} classes={classes.appBar} >
                 <ToolBar>
                     <IconButton>
                         <CloseIcon />

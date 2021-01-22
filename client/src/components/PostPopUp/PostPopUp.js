@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Box, Grid, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { theme } from "../../utils/theme";
 import {
@@ -16,55 +16,26 @@ import PostPopUpComments from "./PostPopUpComments";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../../graphql/post";
 
-const PostStyles = makeStyles({ 
-  paper: {
-    maxHeight: "80%",
-    overflow: "auto",
-    [theme.breakpoints.up("lg")]: {
-      top: "55%",
-    },
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    position: "absolute",
-    maxWidth: "50%",
-    zIndex: 900,
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "100%",
-      width: "100%",
-    },
-  },
-  card: {
-    height: "100%",
-  },
-  mediaContainer: {
-    height: 400,
-    [theme.breakpoints.up("xl")]: {
-      height: 600,
-    },
-    [theme.breakpoints.down("sm")]: {
-      height: 300,
-    },
-    width: "95%",
-    backgroundColor: "blue",
-    margin: "0 auto",
-  },
-  media: {
+const useStyles = makeStyles({ 
+  imageContainer: {
     width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    [theme.breakpoints.down("sm")]: {
-      height: "100%",
-      width: "100%",
-    },
+    height: "auto"
   },
+  image: {
+    width: "100%",
+    height: "100%"
+  },
+  imageParent: {
+    display: "flex",
+    alignItems: "center"
+  }
 });
 
 const PostPopUp = ({
   closeModal,
   id
 }) => {
-  const classes = PostStyles();
+  const classes = useStyles();
 
   const { data, loading } = useQuery(GET_POST, {
     variables: { id }
@@ -82,9 +53,19 @@ const PostPopUp = ({
 
   return (
     <ClickAwayListener onClickAway={closeModal}>
-      <Grid container>
+      <Grid container style={{height: "100%"}}>
         <Grid item md={9} xs={12}>
-            PHOTO
+            <Grid container justify="center" style={{height: "100%"}}>
+              <Grid item md={6} className={classes.imageParent} style={{height: "100%"}}>
+                <Box className={classes.imageContainer}>
+                  <img 
+                    src={post.image}
+                    alt="post picture"
+                    className={classes.image}
+                  />
+              </Box>
+              </Grid>
+            </Grid>
         </Grid>
         <Grid item md={3} xs={12}>
           COMMENTS
