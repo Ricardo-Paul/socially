@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Box, makeStyles } from "@material-ui/core";
 import ChatHeading from "./ChatHeading";
 import ChatConversations from "./ChatConversations";
@@ -6,7 +6,7 @@ import { useStore } from "../../store";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../../graphql/user";
-import { GET_MESSAGES } from "../../graphql/message";
+import { GET_MESSAGES, GET_NEW_MESSAGE } from "../../graphql/message";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -29,7 +29,7 @@ const MessageChat = ({ match }) => {
     skip: !id,
   });
 
-  const { data: messagesData, loading: messagesLoading } = useQuery(
+  const { data: messagesData, loading: messagesLoading, subscribeToMore } = useQuery(
     GET_MESSAGES,
     {
       variables: {
@@ -38,6 +38,32 @@ const MessageChat = ({ match }) => {
       },
     }
   );
+
+  useEffect(() => {
+    const unsubscribe = subscribeToMore({
+      document: GET_NEW_MESSAGE,
+      variables: {
+        authUserId: auth.user.id,
+        userId: userId
+      },
+      updateQuery: (prev, { subscriptionData }) => {
+        if(!subscriptionData) return prev;
+
+        const newMessage = subscriptionData.data.messageCreated;
+        const mergedMessages = [...prev.getMessages, newMessage];
+
+        console.log('MESSAGE DATA', subscriptionData, "MESSAGE", newMessage);
+        
+        return {
+          getMessages: mergedMessages
+        }
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    }
+  }, [ subscribeToMore, userId ])
 
   return (
     <Box className={classes.container}>

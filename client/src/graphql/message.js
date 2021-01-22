@@ -15,22 +15,6 @@ export const GET_CONVERSATIONS = gql`
     }
 `
 
-export const GET_NEW_CONVERSATIONS = gql`
-    subscription{
-        newConversation{
-            id
-            username
-            fullName
-            image
-            isOnline
-            lastMessage
-            lastMessageCreatedAt
-            lastMessageSender
-            seen
-        }
-    }
-`
-
 export const GET_MESSAGES = gql`
  query($authUserId: ID!, $userId: ID!){
      getMessages(authUserId: $authUserId, userId: $userId){
@@ -52,4 +36,28 @@ export const CREATE_MESSAGE = gql`
          seen
      }
  }
+`
+
+export const GET_NEW_CONVERSATIONS = gql`
+    subscription{
+        newConversation{
+            username
+            fullName
+            image
+            isOnline
+            lastMessage
+            lastMessageCreatedAt
+            lastMessageSender
+            seen
+        }
+    }
+`
+
+export const GET_NEW_MESSAGE = gql`
+    subscription($authUserId: ID!, $userId: ID!){
+        messageCreated(authUserId: $authUserId, userId: $userId){
+           message
+           createdAt
+        }
+    }
 `

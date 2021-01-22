@@ -60,7 +60,8 @@ const postCardStyles = makeStyles({
     },
     display: "block",
     objectFit: "cover",
-    width: "100%"
+    width: "100%",
+    cursor: "pointer"
   },
   footer: {
     position: "relative",
