@@ -89,8 +89,8 @@ export const GET_FOLLOWED_POSTS = gql`
 export const GET_POST = gql`
     query($id:ID!){
         getPost(id: $id){
-            createdAt
             id
+            createdAt
             image
             title
             comments{

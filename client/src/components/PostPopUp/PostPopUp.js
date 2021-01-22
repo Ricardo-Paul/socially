@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { theme } from "../../utils/theme";
 import {
@@ -79,32 +79,17 @@ const PostPopUp = ({
   }
 
   const post = data && data.getPost;
-  alert(post.id)
-
 
   return (
     <ClickAwayListener onClickAway={closeModal}>
-      <Paper className={classes.paper}>
-        <Card className={classes.card}>
-          <CardHeader
-            avatar={<Avatar src={post.author.image} />}
-            action={
-              <IconButton onClick={closeModal}>
-                <Close />
-              </IconButton>
-            }
-            title={post.author.fullName}
-            subheader={post.createdAt}
-          />
-          <CardContent> {post.title} </CardContent>
-          {post.image && 
-            <div className={classes.mediaContainer}>
-              <img src={post.image} alt="post image" className={classes.media} />
-            </div>
-          }
-          <PostPopUpComments postId={post.id} comments={post.comments} closeComments={closeModal} />
-        </Card>
-      </Paper>
+      <Grid container>
+        <Grid item md={9} xs={12}>
+            PHOTO
+        </Grid>
+        <Grid item md={3} xs={12}>
+          COMMENTS
+        </Grid>
+      </Grid>
     </ClickAwayListener>
   );
 };
@@ -118,3 +103,25 @@ PostPopUp.propTypes = {
   postTitle: PropTypes.string,
   createdAt: PropTypes.string.isRequired,
 };
+
+{/* <Paper className={classes.paper}>
+<Card className={classes.card}>
+  <CardHeader
+    avatar={<Avatar src={post.author.image} />}
+    action={
+      <IconButton onClick={closeModal}>
+        <Close />
+      </IconButton>
+    }
+    title={post.author.fullName}
+    subheader={post.createdAt}
+  />
+  <CardContent> {post.title} </CardContent>
+  {post.image && 
+    <div className={classes.mediaContainer}>
+      <img src={post.image} alt="post image" className={classes.media} />
+    </div>
+  }
+  <PostPopUpComments postId={post.id} comments={post.comments} closeComments={closeModal} />
+</Card>
+</Paper> */}
