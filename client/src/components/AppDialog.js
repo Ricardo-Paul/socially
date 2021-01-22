@@ -12,11 +12,11 @@ const useStyles = makeStyles({
     }
 })
 
-const AppDialog = ({ children, open }) => {
+const AppDialog = ({ children, open, onClose }) => {
     const classes = useStyles();
 
     return(
-        <Dialog fullScreen open={open}>
+        <Dialog fullScreen open={open} onClose={onClose} >
             <AppBar position="relative" style={{backgroundColor:"#fffefe"}} classes={classes.appBar} >
                 <ToolBar>
                     <IconButton>
