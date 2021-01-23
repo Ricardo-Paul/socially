@@ -100,9 +100,7 @@ const useStyles = makeStyles({
     }
   },
   create_comment: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
+    // width: "100%",
     margin: "0.5rem"
   }
 });

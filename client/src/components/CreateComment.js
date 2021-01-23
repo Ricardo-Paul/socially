@@ -33,18 +33,8 @@ const commenStyles = makeStyles({
     fontSize: "1rem"
   },
   form: {
-    display: "flex",
-    // flexDirection: "row",
-    // justifyContent: "space-between",
-    // [theme.breakpoints.down("sm")]: {
-    //   // flexDirection: "column",
-    // },
-  },
-  button: {
-    [theme.breakpoints.down("sm")]: {
-      // width: "100%",
-    },
-  },
+    display: "flex"
+  }
 });
 
 const CreateComment = ({ focus, postId }) => {
