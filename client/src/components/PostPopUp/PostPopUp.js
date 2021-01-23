@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { theme } from "../../utils/theme";
 import {
@@ -11,10 +11,12 @@ import {
   IconButton,
   Paper,
 } from "@material-ui/core";
-import { Close } from "@material-ui/icons";
+import { Close, MoreHoriz } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../../graphql/post";
+
+const text_color = "#e4e6eb"
 
 const useStyles = makeStyles({ 
   imageContainer: {
@@ -31,15 +33,36 @@ const useStyles = makeStyles({
   },
   right: {
     backgroundColor: "#373737",
+    color: `${text_color}`,
+    fontSize: "1rem",
     width: "100%",
     height: "100%"
   },
-  rightHeader: {
-    height: 61,
+  right_header: {
+    height: 75,
     width: "100%",
     borderBottom: "0.5px solid #bebebf",
     display: "flex",
     alignItems: "flex-end"
+  },
+  post_info: {
+    padding: 10
+  },
+  user_info: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: 10
+  },
+  left_user_info: {
+    display: "flex"
+  },
+  name_and_hour: {
+
+  },
+  like_comment_info: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: 20
   }
 });
 // #848484
@@ -63,10 +86,14 @@ const PostPopUp = ({
 
   const post = data && data.getPost;
 
+  const dummyText = "A new Administration means a new lunch partner. My first weekly lunch with Vice President Kamala Harris is in the books!"
+  const avatar = "https://material-ui.com/static/images/avatar/3.jpg";
+  const name_and_hour = ["President Joe Biden", "12h"]
+
   return (
     <ClickAwayListener onClickAway={closeModal}>
       <Grid container style={{height: "100%"}}>
-        <Grid item md={10} xs={12}>
+        <Grid item md={9} xs={12}>
             <Grid container justify="center" style={{height: "100%"}}>
               <Grid item md={6} className={classes.imageParent} style={{height: "100%"}}>
                 <Box className={classes.imageContainer}>
@@ -79,12 +106,36 @@ const PostPopUp = ({
               </Grid>
             </Grid>
         </Grid>
-        <Grid item md={2} xs={12}>
+        <Grid item md={3} xs={12}>
           <Box className={classes.right}>
-              <Box className={classes.rightHeader}>
+              <Box className={classes.right_header}>
                 <IconButton>
                   <Avatar />
                 </IconButton>
+              </Box>
+              <Box className={classes.post_info}>
+                <Box className={classes.user_info}>
+                  <Box className={classes.left_user_info}>
+                    <Avatar src={avatar} style={{ marginRight: 5 }} />
+                    <Box className={classes.name_and_hour}>
+                      <Typography>
+                        <Box fontWeight="bold"> {name_and_hour[0]} </Box>
+                      </Typography>
+                      <Typography> {name_and_hour[1]} </Typography>
+                    </Box>
+                  </Box>
+                  <Box className={classes.right_user_info}>
+                    <IconButton style={{color: `${text_color}`}}>
+                      <MoreHoriz />
+                    </IconButton>
+                  </Box>
+                </Box>
+                  {dummyText}
+                <Box className={classes.like_comment_info}>
+                  <Typography> 508K Likes </Typography>
+                  <Typography> 20K Comments </Typography>
+                  <Typography> 8.3K Shares </Typography>
+                </Box>
               </Box>
           </Box>
         </Grid>
