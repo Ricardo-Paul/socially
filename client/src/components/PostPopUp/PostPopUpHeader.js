@@ -7,7 +7,6 @@ import Avatar from "@material-ui/core/Avatar";
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 
-
 const text_color = "#e4e6eb"
 const light_background = "#545454"
 
@@ -40,7 +39,6 @@ const PostPopUpHeader = ({ image }) => {
         <NotificationsNoneOutlinedIcon />
       </IconButton>
       <IconButton className={classes.right_header_icons}>
-        {/* change to auth user image */}
         <Avatar src={image} />
       </IconButton>
     </Box>

@@ -3,17 +3,15 @@ import { Box, Button, Grid, Hidden, makeStyles, Typography } from "@material-ui/
 import PropTypes from "prop-types";
 import { theme } from "../../utils/theme";
 import {
-  Card,
-  CardHeader,
-  CardContent,
   ClickAwayListener,
   Avatar,
   IconButton,
-  Paper,
 } from "@material-ui/core";
 import { Close, MoreHoriz } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
 import PostPopUpHeader from "./PostPopUpHeader";
+import PostPopUpInfo from "./PostPopUpInfo";
+
 
 import CreateComment from "../CreateComment";
 import { useQuery } from "@apollo/client";
@@ -63,42 +61,6 @@ const useStyles = makeStyles({
     width: 50,
     height: 50,
     margin: "0.2rem"
-  },
-  post_info: {
-    padding: "1.5rem",
-    backgroundColor: `${light_background}`,
-    margin: "0.6rem",
-    borderRadius: 10
-  },
-  user_info: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: 10
-  },
-  left_user_info: {
-    display: "flex"
-  },
-  name_and_hour: {
-
-  },
-  like_comment_info: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: 20
-  },
-  like_comment_buttons: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: 5,
-    borderBottom: "0.5px solid #727273",
-    borderTop: "0.5px solid #727273",
-    padding: 5,
-  },
-  like_comment_button: {
-    width: "70%",
-    '&:hover': {
-      backgroundColor: `${dark_background}`,
-    }
   },
   create_comment: {
     // width: "100%",
@@ -151,53 +113,9 @@ const PostPopUp = ({
         <Grid item md={3} xs={12}>
           <Box className={classes.right}>
               <PostPopUpHeader image={post.author.image} />
-              <Box className={classes.post_info}>
-                <Box className={classes.user_info}>
-                  <Box className={classes.left_user_info}>
-                    <Avatar src={avatar} style={{ marginRight: 5 }} />
-                    <Box className={classes.name_and_hour}>
-                      <Typography>
-                        <Box fontWeight="bold"> {name_and_hour[0]} </Box>
-                      </Typography>
-                      <Typography> {name_and_hour[1]} </Typography>
-                    </Box>
-                  </Box>
-                  <Box className={classes.right_user_info}>
-                    <IconButton style={inner_color}>
-                      <MoreHoriz />
-                    </IconButton>
-                  </Box>
-                </Box>
-                <Box fontWeight={400} >
-                  {dummyText}
-                </Box>
-                <Box className={classes.like_comment_info}>
-                  <Typography> 508K Likes </Typography>
-                  <Typography> 20K Comments </Typography>
-                  <Typography> 8.3K Shares </Typography>
-                </Box>
-                <Box className={classes.like_comment_buttons}>
-                  <Button className={classes.like_comment_button} style={inner_color} >
-                    <ThumbUpAltOutlinedIcon style={{marginRight: "0.5rem"}} />
-                    <Hidden xsDown>
-                      Like
-                    </Hidden>
-                  </Button>
-                  <Button className={classes.like_comment_button} style={inner_color} > 
-                    <ChatBubbleOutlineOutlinedIcon style={{marginRight: "0.5rem"}} />
-                    <Hidden xsDown>
-                      Comment
-                    </Hidden>
-                  </Button>
-                  <Button className={classes.like_comment_button} style={inner_color} >
-                    <ShareOutlinedIcon style={{marginRight: "0.5rem"}} />
-                    <Hidden xsDown>
-                      Share
-                    </Hidden>
-                  </Button>
-                </Box>
-              </Box>
+              <PostPopUpInfo authorImage={avatar} />
               
+              {/* create comment */}
               <Box className={classes.create_comment}>
                 <CreateComment focus={true} postId={post.id} />
               </Box>
