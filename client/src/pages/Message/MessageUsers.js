@@ -74,6 +74,8 @@ const MessageUsers = () => {
     },
   });
 
+
+
   // const notSeen = user.seen === false && user.lastMessageSender === false;
   // let notSeen;
 
@@ -97,13 +99,23 @@ const MessageUsers = () => {
           oldConversations.splice(index, 1);
         }
 
+        // if(newConversation.seen === false && newConversation.id !== auth.user.id ){
+        //   notSeen = true;
+        // }
+
+        // const existedUserInChat = oldConversations.some(
+        //   (u) => u.id === newConversation.id
+        // );
+
+        // if (existedUserInChat) return prev;
+        // newConversation.id is the senderUser id
+        
 
         let mergedConversations = [...oldConversations, newConversation];
         console.log('MERGED CONVOS', mergedConversations)
-        let r = mergedConversations.reverse().splice(mergedConversations.findIndex( u => u.id === newConversation.id ), mergedConversations.length - 1)
 
         return {
-          getConversations: r
+          getConversations: mergedConversations
         };
       },
     });
@@ -146,12 +158,3 @@ const MessageUsers = () => {
 }; 
 
 export default MessageUsers;
-
-
-// let a = [
-//   {id: 1, message:"hi"},
-//   {id: 1, message:"Bro"},
-//   {id: 2, message:"Fine"}
-// ]
-
-// a.filter((v,i,a)=>a.findIndex(t=>(t.place === v.place && t.name===v.name))===i)

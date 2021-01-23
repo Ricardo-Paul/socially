@@ -2,9 +2,10 @@ import React from "react";
 import { Box, makeStyles, Button, InputBase, Avatar } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { useMutation } from "@apollo/client";
-import { CREATE_MESSAGE, GET_MESSAGES } from "../../graphql/message";
+import { CREATE_MESSAGE, GET_MESSAGES, GET_CONVERSATIONS } from "../../graphql/message";
 import { generatePath, Link } from "react-router-dom";
 import * as Routes from "../../routes";
+import { GET_AUTH_USER } from "../../graphql/user";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,37 +45,43 @@ const useStyles = makeStyles((theme) => ({
 
 const ChatConversations = ({ chatUser, messages, authUser }) => {
   const classes = useStyles();
+  const [createMessage] = useMutation(CREATE_MESSAGE, {
+    refetchQueries: ({ data }) => {
+      if(data && data.createMessage.message){
+        return [
+          { query: GET_CONVERSATIONS, variables: { authUserId: authUser.id } },
+          { query: GET_AUTH_USER }
+        ]
+      }
+    }
+  });
   const [message, setMessage] = React.useState("");
 
-  const [createMessage] = useMutation(CREATE_MESSAGE);
 
-  const sendMessage = () => {
+  if (!chatUser) {
+    return <h3> error </h3>;
+  }
+
+  const sendMessage = async () => {
     if (!message || message.trim() === "") {
       return;
     }
 
-    createMessage({
-      variables: {
-        input: {
-          sender: authUser.id,
-          receiver: chatUser.id,
-          message,
-        },
-      },
-      refetchQueries: ({ data }) => {
-        if (data && data.createMessage) {
-          return [
-            {
-              query: GET_MESSAGES,
-              variables: {
-                authUserId: authUser.id,
-                userId: chatUser.id,
-              },
-            },
-          ];
+    try{
+      const r = await createMessage({
+        variables: {
+          input: {
+            sender: authUser.id,
+            receiver: chatUser.id,
+            message,
+          },
         }
-      },
-    });
+      });
+      console.log('CREATE MESSAGE :', r)
+    } catch(e){
+      console.log(e)
+    }
+
     setMessage("");
   };
 
@@ -88,9 +95,6 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
     }
   };
 
-  // if (!chatUser) {
-  //   // return <h3> lo </h3>;
-  // }
 
   return (
     <Box className={classes.container}>

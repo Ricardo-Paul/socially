@@ -11,6 +11,7 @@ export const GET_CONVERSATIONS = gql`
             seen
             lastMessage
             lastMessageSender
+            lastMessageCreatedAt
         }
     }
 `
@@ -32,6 +33,7 @@ export const CREATE_MESSAGE = gql`
      createMessage(input: $input){
          message
          sender
+         createdAt
          receiver
          seen
      }
@@ -59,10 +61,6 @@ export const GET_NEW_MESSAGE = gql`
         messageCreated(authUserId: $authUserId, userId: $userId){
            message
            createdAt
-           sender{
-               fullName
-               username
-           }
         }
     }
 `
