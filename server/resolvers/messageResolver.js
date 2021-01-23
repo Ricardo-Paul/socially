@@ -69,7 +69,6 @@ const Query = {
         conversations.push(user);
        })
 
-
       const sortedConversations = conversations.sort((a, b) => {
         return b.lastMessageCreatedAt.toString().localeCompare(a.lastMessageCreatedAt)
       });
@@ -148,20 +147,20 @@ const Mutation = {
 
 const Subscription = {
     messageCreated: {
-        subscribe: () => pubSub.asyncIterator(MESSAGE_CREATED)
-        // subscribe: withFilter( () => pubSub.asyncIterator(MESSAGE_CREATED),
-        // (payload, variables) => {
-        //     const { sender, receiver } = payload.messageCreated;
-        //     console.log("VARS", variables)
+        // subscribe: () => pubSub.asyncIterator(MESSAGE_CREATED)
+        subscribe: withFilter( () => pubSub.asyncIterator(MESSAGE_CREATED),
+        (payload, variables) => {
+            const { sender, receiver } = payload.messageCreated;
+            console.log("VARS", variables)
 
-        //     const authUserId = variables.authUserId.toString();
-        //     const userId = variables.userId.toString();
+            const authUserId = variables.authUserId.toString();
+            const userId = variables.userId.toString();
 
-        //     const isAuthUserSenderOrReceiver = authUserId === sender.toString() || authUserId == receiver.toString();
-        //     const isUserSenderOrReceiver = userId === sender.toString()  || userId === receiver.toString();
+            const isAuthUserSenderOrReceiver = authUserId === sender.toString() || authUserId == receiver.toString();
+            const isUserSenderOrReceiver = userId === sender.toString()  || userId === receiver.toString();
 
-        //     return isAuthUserSenderOrReceiver && isUserSenderOrReceiver
-        // })
+            return isAuthUserSenderOrReceiver && isUserSenderOrReceiver
+        })
     },
     newConversation: {
         subscribe: withFilter(() => pubSub.asyncIterator(NEW_CONVERSATION), 
