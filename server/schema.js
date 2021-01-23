@@ -32,6 +32,7 @@ export const schema = gql`
         isOnline: Boolean
         seen: Boolean
         lastMessageSender: Boolean
+        lastMessageCreatedAt: String
     }
     type NotificationsPayload{
         notifications: [Notification]

@@ -69,8 +69,9 @@ const Query = {
         conversations.push(user);
        })
 
+
       const sortedConversations = conversations.sort((a, b) => {
-        b.lastMessageCreatedAt.toString().localeCompare(a.lastMessageCreatedAt)
+        return b.lastMessageCreatedAt.toString().localeCompare(a.lastMessageCreatedAt)
       });
 
        return sortedConversations;
@@ -79,17 +80,24 @@ const Query = {
 
 const Mutation = {
     createMessage: async (root, { input: { message, sender, receiver } }, {Message, User}) => {
-            let newMessage = await new Message({
+
+        console.log("SENDER", sender, "RECEIVER", receiver)
+
+        let newMessage;
+        try{
+            newMessage = await new Message({
                 sender: sender,
                 receiver: receiver,
                 message: message
             }).save();
 
             // populate message sender and receiver fields
-            newMessage = await newMessage
-            .populate("sender")
-            .populate("receiver")
-            .execPopulate();
+            // await newMessage.populate("sender").populate("receiver").execPopulate();
+
+        }catch(e){
+            console.log(e)
+        }
+
     
             // publish messsage created
             pubSub.publish(MESSAGE_CREATED, {

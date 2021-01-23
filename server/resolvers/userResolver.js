@@ -125,7 +125,11 @@ const Query = {
     // console.log('UNSEEN MESSAGES :', lastUnseenMessages, 'CONVERSATIONS :', conversations, user.id)
     // console.log('UNSEEN MESSAGES LENGTH :', lastUnseenMessages.length)
 
-    user.conversations = conversations; 
+    const sortedConversations = conversations.sort((a, b) =>
+      b.lastMessageCreatedAt.toString().localeCompare(a.lastMessageCreatedAt)
+    );
+
+    user.conversations = sortedConversations; 
     // attaching a new prop to the user goes with adding that prop in the UserPayload schema
     // unseenMessages would have been a better name, just an after thought
 
