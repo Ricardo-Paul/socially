@@ -28,16 +28,27 @@ import { GET_FOLLOWED_POSTS, GET_POST } from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 import { withRouter } from "react-router-dom";
 
+const light_background = "#545454"
 
 const useStyles = makeStyles({
-  comment_box: {
-
+  comment_item: {
+    display: "flex",
+    backgroundColor: `${light_background}`,
+    padding: "0.5rem",
+    marginBottom: "1.5rem",
+    position: "relative",
+    borderRadius: 15
   },
   comment: {
 
   },
   comment_box_span:{
-
+    position: "absolute",
+    right: "0.7rem",
+    bottom: "-0.78rem",
+    backgroundColor: `${light_background}`,
+    padding: "0.2rem",
+    borderRadius: "10px"
   }
 })
 
@@ -80,19 +91,19 @@ const PostPopUpComments = ({ match, comments, postId }) => {
     <React.Fragment>
       {comments.map(c => {
         return(
-          <Box key={c.id}>
-            <Avatar alt="user avatar"src={c.author.image} />
-            <Box className={classes.comment_box}>
-              <Box fontWeight={300}>
+          <Box className={classes.comment_item} key={c.id}>
+            <Avatar alt="user avatar"src={c.author.image} style={{marginRight: "0.5rem"}} />
+            <Box className={classes.comment_box} >
+              <Box fontWeight={"bold"}>
                 <Typography> {dummyUserName} </Typography>
               </Box>
               <Box className={classes.comment}>
                 {dummyComment}
               </Box>
-              <span className={classes.comment_box_span} >
-                {`2 days ago`}
-              </span>
             </Box>
+            <span className={classes.comment_box_span} >
+              {`2 days ago`}
+            </span>
           </Box>
         )
       })}

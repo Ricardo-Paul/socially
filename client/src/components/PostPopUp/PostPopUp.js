@@ -46,7 +46,8 @@ const useStyles = makeStyles({
   },
   right_body: {
     overflow: "auto",
-    maxHeight: "calc(100vh - 140px)"
+    maxHeight: "calc(100vh - 140px)",
+    padding: "0.7rem",
   },
   right_header_icons: {
     backgroundColor: `${light_background}`,

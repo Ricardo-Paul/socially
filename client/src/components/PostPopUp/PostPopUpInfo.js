@@ -20,8 +20,8 @@ const useStyles = makeStyles({
     post_info: {
         padding: "1.5rem",
         backgroundColor: `${light_background}`,
-        margin: "0.6rem",
-        borderRadius: 10
+        borderRadius: 10,
+        marginBottom: "0.7rem"
       },
       user_info: {
         display: "flex",
