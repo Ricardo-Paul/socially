@@ -13,6 +13,8 @@ import {
 } from "@material-ui/core";
 import { Close, MoreHoriz } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
+import PostPopUpHeader from "./PostPopUpHeader";
+
 import CreateComment from "../CreateComment";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../../graphql/post";
@@ -21,7 +23,6 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 
-import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 
 const text_color = "#e4e6eb"
 const light_background = "#545454"
@@ -149,18 +150,7 @@ const PostPopUp = ({
         </Grid>
         <Grid item md={3} xs={12}>
           <Box className={classes.right}>
-              <Box className={classes.right_header}>
-                <IconButton className={classes.right_header_icons}>
-                  <ChatBubbleOutlineOutlinedIcon />
-                </IconButton>
-                <IconButton className={classes.right_header_icons}>
-                  <NotificationsNoneOutlinedIcon />
-                </IconButton>
-                <IconButton className={classes.right_header_icons}>
-                  {/* change to auth user image */}
-                  <Avatar src={post.author.image} />
-                </IconButton>
-              </Box>
+              <PostPopUpHeader image={post.author.image} />
               <Box className={classes.post_info}>
                 <Box className={classes.user_info}>
                   <Box className={classes.left_user_info}>
