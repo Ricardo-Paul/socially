@@ -62,7 +62,6 @@ const useStyles = makeStyles({
 
 
     const PostPopUpInfo = ({ authorImage }) => {
-
         const classes = useStyles();
 
         return(

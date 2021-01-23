@@ -1,13 +1,7 @@
 import React from "react";
-import { Box, Button, Grid, Hidden, makeStyles, Typography } from "@material-ui/core";
+import { Box, Grid, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { theme } from "../../utils/theme";
-import {
-  ClickAwayListener,
-  Avatar,
-  IconButton,
-} from "@material-ui/core";
-import { Close, MoreHoriz } from "@material-ui/icons";
+import { ClickAwayListener } from "@material-ui/core";
 import PostPopUpComments from "./PostPopUpComments";
 import PostPopUpHeader from "./PostPopUpHeader";
 import PostPopUpInfo from "./PostPopUpInfo";
@@ -16,11 +10,6 @@ import PostPopUpInfo from "./PostPopUpInfo";
 import CreateComment from "../CreateComment";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../../graphql/post";
-
-import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
-import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
-import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
-
 
 const text_color = "#e4e6eb"
 const light_background = "#545454"
@@ -63,7 +52,6 @@ const useStyles = makeStyles({
     margin: "0.2rem"
   },
   create_comment: {
-    // width: "100%",
     margin: "0.5rem"
   }
 });
