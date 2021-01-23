@@ -89,33 +89,22 @@ const MessageUsers = () => {
 
         console.log('VERY NEW CONV', newConversation);
 
-        console.log('OLD CONVOS', oldConversations)
+        // let n;
+        // // remove existed user before merging to avoid duplicate
 
-        // remove existed user before merging to avoid duplicate
-        let index = oldConversations.findIndex(
-          (old) => old.id === newConversation.id
-        );
-        if (index) {
-          oldConversations.splice(index, 1);
-        }
 
-        // if(newConversation.seen === false && newConversation.id !== auth.user.id ){
-        //   notSeen = true;
-        // }
 
-        // const existedUserInChat = oldConversations.some(
-        //   (u) => u.id === newConversation.id
-        // );
-
-        // if (existedUserInChat) return prev;
-        // newConversation.id is the senderUser id
-        
-
+     
         let mergedConversations = [...oldConversations, newConversation];
-        console.log('MERGED CONVOS', mergedConversations)
+
+        let unwanted = oldConversations.find(n => n.id === newConversation.id);
+        let r = oldConversations.filter(n => n.id !== unwanted.id )
+        console.log('NID', unwanted)
+        console.log('FINISHED', r)
+
 
         return {
-          getConversations: mergedConversations
+          getConversations: [newConversation, ...r]
         };
       },
     });

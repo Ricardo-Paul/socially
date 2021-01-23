@@ -48,6 +48,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
   const [createMessage] = useMutation(CREATE_MESSAGE, {
     refetchQueries: ({ data }) => {
       if(data && data.createMessage.message){
+        alert("WILL REFETCH")
         return [
           { query: GET_CONVERSATIONS, variables: { authUserId: authUser.id } },
           { query: GET_AUTH_USER }
