@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, Grid, Hidden, makeStyles, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { theme } from "../../utils/theme";
 import {
@@ -16,7 +16,14 @@ import PostPopUpComments from "./PostPopUpComments";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../../graphql/post";
 
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
+
+import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
+
 const text_color = "#e4e6eb"
+const light_background = "#545454"
 
 const useStyles = makeStyles({ 
   imageContainer: {
@@ -39,14 +46,24 @@ const useStyles = makeStyles({
     height: "100%"
   },
   right_header: {
-    height: 75,
+    padding: 10,
     width: "100%",
-    borderBottom: "0.5px solid #bebebf",
+    borderBottom: "0.5px solid #727273",
     display: "flex",
-    alignItems: "flex-end"
+    justifyContent:"flex-end"
+  },
+  right_header_icons: {
+    backgroundColor: `${light_background}`,
+    color: `${text_color}`,
+    width: 50,
+    height: 50,
+    margin: "0.2rem"
   },
   post_info: {
-    padding: 10
+    padding: "1.5rem",
+    backgroundColor: `${light_background}`,
+    margin: "0.6rem",
+    borderRadius: 10
   },
   user_info: {
     display: "flex",
@@ -63,6 +80,20 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
     marginTop: 20
+  },
+  like_comment_buttons: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: 5,
+    borderBottom: "0.5px solid #727273",
+    borderTop: "0.5px solid #727273",
+    padding: 5,
+  },
+  like_comment_button: {
+    width: "70%",
+    '&:hover': {
+      backgroundColor: `${light_background}`,
+    }
   }
 });
 // #848484
@@ -90,6 +121,8 @@ const PostPopUp = ({
   const avatar = "https://material-ui.com/static/images/avatar/3.jpg";
   const name_and_hour = ["President Joe Biden", "12h"]
 
+  const inner_color = {color: `${text_color}`}
+
   return (
     <ClickAwayListener onClickAway={closeModal}>
       <Grid container style={{height: "100%"}}>
@@ -109,8 +142,15 @@ const PostPopUp = ({
         <Grid item md={3} xs={12}>
           <Box className={classes.right}>
               <Box className={classes.right_header}>
-                <IconButton>
-                  <Avatar />
+                <IconButton className={classes.right_header_icons}>
+                  <ChatBubbleOutlineOutlinedIcon />
+                </IconButton>
+                <IconButton className={classes.right_header_icons}>
+                  <NotificationsNoneOutlinedIcon />
+                </IconButton>
+                <IconButton className={classes.right_header_icons}>
+                  {/* change to auth user image */}
+                  <Avatar src={post.author.image} />
                 </IconButton>
               </Box>
               <Box className={classes.post_info}>
@@ -125,16 +165,38 @@ const PostPopUp = ({
                     </Box>
                   </Box>
                   <Box className={classes.right_user_info}>
-                    <IconButton style={{color: `${text_color}`}}>
+                    <IconButton style={inner_color}>
                       <MoreHoriz />
                     </IconButton>
                   </Box>
                 </Box>
+                <Box fontWeight={400} >
                   {dummyText}
+                </Box>
                 <Box className={classes.like_comment_info}>
                   <Typography> 508K Likes </Typography>
                   <Typography> 20K Comments </Typography>
                   <Typography> 8.3K Shares </Typography>
+                </Box>
+                <Box className={classes.like_comment_buttons}>
+                  <Button className={classes.like_comment_button} style={inner_color} >
+                    <ThumbUpAltOutlinedIcon style={{marginRight: "0.5rem"}} />
+                    <Hidden xsDown>
+                      Like
+                    </Hidden>
+                  </Button>
+                  <Button className={classes.like_comment_button} style={inner_color} > 
+                    <ChatBubbleOutlineOutlinedIcon style={{marginRight: "0.5rem"}} />
+                    <Hidden xsDown>
+                      Comment
+                    </Hidden>
+                  </Button>
+                  <Button className={classes.like_comment_button} style={inner_color} >
+                    <ShareOutlinedIcon style={{marginRight: "0.5rem"}} />
+                    <Hidden xsDown>
+                      Share
+                    </Hidden>
+                  </Button>
                 </Box>
               </Box>
           </Box>
