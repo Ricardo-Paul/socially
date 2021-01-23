@@ -9,6 +9,13 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles({
     appBar: {
         marginBottom: 10
+    },
+    exit: {
+        position: "absolute",
+        top: 5,
+        left: 5,
+        backgroundColor: "#373737",
+        color: "#cecccc"
     }
 })
 
@@ -17,13 +24,9 @@ const AppDialog = ({ children, open, onClose }) => {
 
     return(
         <Dialog fullScreen open={open} onClose={onClose} >
-            <AppBar position="relative" style={{backgroundColor:"#fffefe"}} classes={classes.appBar} >
-                <ToolBar>
-                    <IconButton>
-                        <CloseIcon />
-                    </IconButton>
-                </ToolBar>
-            </AppBar>
+                <IconButton className={classes.exit}>
+                    <CloseIcon />
+                </IconButton>
             {children}
         </Dialog>
     )

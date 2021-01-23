@@ -87,21 +87,21 @@ const MessageUsers = () => {
         const { newConversation } = subscriptionData.data;
         const oldConversations = prev.getConversations;
 
-        console.log('VERY NEW CONV', newConversation);
+
+        let uniqueConversations = oldConversations.filter((elem, index) => {
+          return oldConversations.findIndex(obj => obj.id === elem.id ) === index;
+        })
+
+        console.log('UNIQUE', uniqueConversations)
 
         // let n;
         // // remove existed user before merging to avoid duplicate
-
-
-
-     
-        let mergedConversations = [...oldConversations, newConversation];
-
-        let unwanted = oldConversations.find(n => n.id === newConversation.id);
+        let unwanted = uniqueConversations.find(n => n.id === newConversation.id);
         let r = oldConversations.filter(n => n.id !== unwanted.id )
+
+
         console.log('NID', unwanted)
         console.log('FINISHED', r)
-
 
         return {
           getConversations: [newConversation, ...r]

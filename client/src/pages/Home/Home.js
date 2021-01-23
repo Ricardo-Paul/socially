@@ -103,7 +103,7 @@ const Home = ({ history }) => {
               {data.map((post) => (
                 <Fragment key={post.id}>
                   {/* modal postId === post.id*/}
-                  <AppDialog open={postId === post.id} onClose={closeModal}>
+                  <AppDialog open={true} onClose={closeModal}>
                     <PostPopUp id={post.id} closeModal={closeModal} />
                   </AppDialog> 
 
@@ -138,9 +138,9 @@ const Home = ({ history }) => {
     <>
       <div className={classes.home}>
         <Grid container spacing={3} className={classes.grid}>
-          <Hidden>
+          {/* <Hidden>
             <Grid item md={2} />
-          </Hidden>
+          </Hidden> */}
           <Grid item md="6" xs="12">
             <Box>
               <CreatePost />

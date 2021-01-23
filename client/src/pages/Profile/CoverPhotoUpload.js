@@ -6,7 +6,7 @@ import defaultCover from "./background2.jpg";
 
 const CoverStyles = makeStyles((theme) => ({
   background: {
-    height: 350,
+    height: 210,
     width: "100%",
     backgroundImage: `url(${defaultCover})`,
     backgroundSize: "cover",
