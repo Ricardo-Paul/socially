@@ -19,6 +19,7 @@ const commenStyles = makeStyles({
     [theme.breakpoints.down("sm")]: {
       marginBottom: 2,
     },
+    color: "#ffffff"
   },
   form: {
     padding: 5,
@@ -112,7 +113,7 @@ const CreateComment = ({ focus, postId }) => {
           size="small"
           variant="contained"
           className={classes.button}
-          color="primary"
+          color="secondary"
           type="submit"
           ref={buttonEl}
           type="submit"

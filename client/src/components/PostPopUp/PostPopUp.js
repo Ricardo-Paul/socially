@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { Close, MoreHoriz } from "@material-ui/icons";
 import PostPopUpComments from "./PostPopUpComments";
+import CreateComment from "../CreateComment";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../../graphql/post";
 
@@ -24,6 +25,7 @@ import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneO
 
 const text_color = "#e4e6eb"
 const light_background = "#545454"
+const dark_background = "#373737"
 
 const useStyles = makeStyles({ 
   imageContainer: {
@@ -39,11 +41,13 @@ const useStyles = makeStyles({
     alignItems: "center"
   },
   right: {
-    backgroundColor: "#373737",
+    backgroundColor: `${dark_background}`,
     color: `${text_color}`,
     fontSize: "1rem",
     width: "100%",
-    height: "100%"
+    height: "100%",
+
+    position: "relative"
   },
   right_header: {
     padding: 10,
@@ -92,8 +96,13 @@ const useStyles = makeStyles({
   like_comment_button: {
     width: "70%",
     '&:hover': {
-      backgroundColor: `${light_background}`,
+      backgroundColor: `${dark_background}`,
     }
+  },
+  create_comment: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%"
   }
 });
 // #848484
@@ -198,6 +207,10 @@ const PostPopUp = ({
                     </Hidden>
                   </Button>
                 </Box>
+              </Box>
+              
+              <Box className={classes.create_comment}>
+                <CreateComment focus={true} postId={post.id} />
               </Box>
           </Box>
         </Grid>
