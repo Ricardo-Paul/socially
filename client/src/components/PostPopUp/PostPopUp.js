@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     width: "100%",
     height: "100%",
 
-    position: "relative"
+    position: "relative",
   },
   right_header: {
     padding: 10,
@@ -43,6 +43,10 @@ const useStyles = makeStyles({
     borderBottom: "0.5px solid #727273",
     display: "flex",
     justifyContent:"flex-end"
+  },
+  right_body: {
+    overflow: "auto",
+    maxHeight: "calc(100vh - 140px)"
   },
   right_header_icons: {
     backgroundColor: `${light_background}`,
@@ -55,11 +59,7 @@ const useStyles = makeStyles({
     margin: "0.5rem"
   }
 });
-// #848484
-const PostPopUp = ({
-  closeModal,
-  id
-}) => {
+const PostPopUp = ({ closeModal, id }) => {
   const classes = useStyles();
 
   const { data, loading } = useQuery(GET_POST, {
@@ -75,6 +75,7 @@ const PostPopUp = ({
   }
 
   const post = data && data.getPost;
+  const { image, comments, author: { image: authorImage, fullName } } = post;
 
   const dummyText = "A new Administration means a new lunch partner. My first weekly lunch with Vice President Kamala Harris is in the books!"
   const avatar = "https://material-ui.com/static/images/avatar/3.jpg";
@@ -85,12 +86,12 @@ const PostPopUp = ({
   return (
     <ClickAwayListener onClickAway={closeModal}>
       <Grid container style={{height: "100%"}}>
-        <Grid item md={9} xs={12}>
+        <Grid item md={8} xl={9} xs={12}>
             <Grid container justify="center" style={{height: "100%"}}>
               <Grid item md={6} className={classes.imageParent} style={{height: "100%"}}>
                 <Box className={classes.imageContainer}>
                   <img 
-                    src={post.image}
+                    src={image}
                     alt="post picture"
                     className={classes.image}
                   />
@@ -98,12 +99,13 @@ const PostPopUp = ({
               </Grid>
             </Grid>
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={4} xl={3} xs={12}>
           <Box className={classes.right}>
-              <PostPopUpHeader image={post.author.image} />
-              <PostPopUpInfo authorImage={avatar} />
-              
-              {/* create comment */}
+              <PostPopUpHeader image={authorImage} />
+              <Box className={classes.right_body}>
+                <PostPopUpInfo authorImage={avatar} />
+                <PostPopUpComments comments={post.comments} />
+              </Box>
               <Box className={classes.create_comment}>
                 <CreateComment focus={true} postId={post.id} />
               </Box>

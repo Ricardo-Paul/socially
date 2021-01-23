@@ -85,10 +85,10 @@ const useStyles = makeStyles({
                 <Box fontWeight={400} >
                   {dummyText}
                 </Box>
-                <Box className={classes.like_comment_info}>
-                  <Typography> 508K Likes </Typography>
-                  <Typography> 20K Comments </Typography>
-                  <Typography> 8.3K Shares </Typography>
+                <Box fontSize="0.9rem" className={classes.like_comment_info}>
+                  <span> {"508K Likes"} </span>
+                  <span> {"20K Comments"} </span>
+                  <span> {"8.3K Shares"} </span>
                 </Box>
                 <Box className={classes.like_comment_buttons}>
                   <Button className={classes.like_comment_button} style={inner_color} >
