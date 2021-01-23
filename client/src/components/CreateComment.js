@@ -11,25 +11,34 @@ import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
 import { GET_FOLLOWED_POSTS, GET_POST } from "../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
+const text_color = "#e4e6eb"
+
 const commenStyles = makeStyles({
   textField: {
     marginRight: 5,
-    paddingTop: 10,
+    padding: 13,
     paddingLeft: 15,
     [theme.breakpoints.down("sm")]: {
       marginBottom: 2,
     },
-    color: "#ffffff"
+    backgroundColor: "#636362",
+    borderRadius: 20,
+    outline: "none",
+    border: "none",
+    width: "90%",
+    color: `${text_color}`,
+    '&::placeholder': {
+      color: `${text_color}`
+    },
+    fontSize: "1rem"
   },
   form: {
-    padding: 5,
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-    [theme.breakpoints.down("sm")]: {
-      // flexDirection: "column",
-    },
+    // flexDirection: "row",
+    // justifyContent: "space-between",
+    // [theme.breakpoints.down("sm")]: {
+    //   // flexDirection: "column",
+    // },
   },
   button: {
     [theme.breakpoints.down("sm")]: {
@@ -92,22 +101,22 @@ const CreateComment = ({ focus, postId }) => {
 
   // focus is a boolean.. we'll focus on the
   // text area when comment is open
-  React.useEffect(() => {
-    focus && textareaEl.current.focus();
-  }, [focus]);
+  // React.useEffect(() => {
+  //   focus && input.current.focus();
+  // }, [focus]);
 
   return (
     <>
       <form onSubmit={handleSubmit} className={classes.form}>
-        <TextField
+        <input
+          type="text"
           inputRef={textareaEl}
-          multiline
-          fullWidth
           className={classes.textField}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           value={comment}
           placeholder="comment..."
+          id="input"
         />
         <IconButton
           size="small"
@@ -117,7 +126,7 @@ const CreateComment = ({ focus, postId }) => {
           type="submit"
           ref={buttonEl}
           type="submit"
-          disabled={!comment.trim()}
+          // disabled={!comment.trim()}
         >
           <Send />
         </IconButton>
