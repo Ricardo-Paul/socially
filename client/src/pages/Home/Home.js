@@ -103,7 +103,7 @@ const Home = ({ history }) => {
               {data.map((post) => (
                 <Fragment key={post.id}>
                   {/* modal postId === post.id*/}
-                  <AppDialog open={true} onClose={closeModal}>
+                  <AppDialog open={postId === post.id} onClose={closeModal}>
                     <PostPopUp id={post.id} closeModal={closeModal} />
                   </AppDialog> 
 

@@ -38,19 +38,21 @@ const PeopleSuggestions = () => {
   const client = useApolloClient();
   const [{ auth }] = useStore();
   const [people, setPeople] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   const classes = peopleStyles();
 
   React.useEffect(() => {
     const getSuggestedPeople = async () => {
       try {
-        const { data } = await client.query({
+        const {data} = await client.query({
           query: SUGGEST_PEOPLE,
           variables: {
             userId: auth.user.id,
           },
         });
         setPeople(data.suggestPeople.users);
+        setLoading(loading);
       } catch (err) {
         console.log(err);
       }
@@ -59,8 +61,10 @@ const PeopleSuggestions = () => {
     getSuggestedPeople();
   }, [auth]);
 
-  if (!people.length > 0) {
-    return null;
+
+  if (!people.length > 0) return null;
+  if(loading){
+    return <h3> LOADING ... </h3>
   }
 
   return (
