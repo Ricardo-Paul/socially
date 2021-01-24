@@ -13,20 +13,27 @@ import { SET_AUTH_USER } from "../../store/auth";
 import { useStore } from "../../store";
 
 // APP PAGES
-import Home from "../../pages/Home";
-import People from "../../pages/People/";
+// import Home from "../../pages/Home";
+// import People from "../../pages/People/";
 // import Profile from "../../pages/Profile";
-import Message from "../../pages/Message";
-import Notifications from "../../pages/Notifications";
-import About from "../../pages/About";
-import Browse from "../../pages/Browse";
-import Post from "../../pages/Post";
+// import Message from "../../pages/Message";
+// import Notifications from "../../pages/Notifications";
+// import About from "../../pages/About";
+// import Browse from "../../pages/Browse";
+// import Post from "../../pages/Post";
 
 import AppHeader from "./AppHeader/AppHeader";
 import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
 import { PageContainer } from "../pageContainer";
 
-const Profile = lazy(() => import("../../pages/Profile") );
+const Profile = lazy(() => import("../../pages/Profile"));
+const Home = lazy(() => import("../../pages/Home"));
+const People = lazy(() => import("../../pages/People"));
+const Message = lazy(() => import("../../pages/Message"));
+const Notifications = lazy(() => import("../../pages/Notifications"));
+const About = lazy(() => import("../../pages/About"));
+const Browse = lazy(() => import("../../pages/Browse"));
+const Post = lazy(() => import("../../pages/Post"));
 
 
 const useStyles = makeStyles((theme) => ({
