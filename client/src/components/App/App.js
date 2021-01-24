@@ -9,30 +9,6 @@ import ScrollTop from "./ScrollTop";
 import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
 import { GET_NEW_CONVERSATIONS } from "../../graphql/message";
 
-/**
- * as the app top level component
- * we render everything inside BrowserRouter
- */
-
-/**
- * root component of our front-end
- * responsible for global authentication
- * and rendering app global layout
- */
-
-/**
- * @AuthLayout for unauthenticated user
- * @AppLayout for authenticated user        {!loading && data.getAuthUser ? (
-          <Route exact render={() => <AppLayout authUser={data.getAuthUser} />}  />
-        ) : (
-          <Route exact render={() => <AuthLayout refetch={refetch} />} />
-        )}
- */
-
-/**
- * @AuthUser render layouts based on
- * user auth
- */
 
 const App = () => {
   const { loading, data, error, subscribeToMore, refetch } = useQuery(
@@ -138,7 +114,6 @@ const App = () => {
   if (error) {
     return (
       <h3>
-        {" "}
         Something went wrong, please bear with us since we're still in
         develoment, we're woring to fix this{" "}
       </h3>
@@ -148,16 +123,9 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <ScrollTop>
-          {!loading && data.getAuthUser ? ( //authUser prop is available on the layout
-            <Route
-              exact
-              render={() => <AppLayout authUser={data.getAuthUser} />}
-            />
-          ) : (
-            <Route exact render={() => <AuthLayout refetch={refetch} />} />
-          )}
-        </ScrollTop>
+          {!loading && data.getAuthUser ?
+            (<Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />) : 
+            (<Route exact render={() => <AuthLayout refetch={refetch} />} />)}
       </Switch>
     </Router>
   );

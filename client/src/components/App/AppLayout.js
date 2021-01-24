@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import Hidden from "@material-ui/core/Hidden";
 import * as Routes from "../../routes";
 import Navigation from "./Navigation";
 import { colors as appColors } from "../../utils/theme";
+
 
 // ACTION
 import { SET_AUTH_USER } from "../../store/auth";
@@ -14,7 +15,7 @@ import { useStore } from "../../store";
 // APP PAGES
 import Home from "../../pages/Home";
 import People from "../../pages/People/";
-import Profile from "../../pages/Profile";
+// import Profile from "../../pages/Profile";
 import Message from "../../pages/Message";
 import Notifications from "../../pages/Notifications";
 import About from "../../pages/About";
@@ -25,7 +26,10 @@ import AppHeader from "./AppHeader/AppHeader";
 import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
 import { PageContainer } from "../pageContainer";
 
-const appLayoutStyles = makeStyles((theme) => ({
+const Profile = lazy(() => import("../../pages/Profile") );
+
+
+const useStyles = makeStyles((theme) => ({
   // "@global": {
   //   "*::-webkit-scrollbar": {
   //     width: "0.4em",
@@ -39,10 +43,7 @@ const appLayoutStyles = makeStyles((theme) => ({
 
   middle: {
     paddingTop: 80,
-    // height: "100vh",
     paddingLeft: 256,
-    // overflow: "auto",
-    // backgroundColor: colors.lightGrey,
     paddingRight: 25,
     [theme.breakpoints.down("sm")]: {
       padding: 0,
@@ -66,64 +67,58 @@ const appLayoutStyles = makeStyles((theme) => ({
 
 /**
  *
- *
  */
 const AppLayout = ({ authUser }) => {
   const [, dispatch] = useStore();
+  const classes = useStyles();
 
-  const classes = appLayoutStyles();
-  const m = `${Routes.PROFILE}`;
-
+  // auth user available in app global store
   useEffect(() => {
     dispatch({
       type: SET_AUTH_USER,
       payload: authUser,
     });
-  }, [authUser, dispatch]); // dispatch and authUser used as the effect dependencies
+  }, [authUser, dispatch]);
 
-  return (
-    <>
-      <AppHeader />
-
-      <div className={classes.root}>
-        <CssBaseline />
-        <Grid container className={classes.grid}>
-          {/* hidden on mobile */}
-          <Hidden smDown>
-            <Drawer
-              open
-              variant="persistent"
-              classes={{ paper: classes.desktopDrawer }}
-            >
-              <Navigation />
-            </Drawer>
-          </Hidden>
-          Middle
-          <Grid item xl={10} lg={12} xs={12} className={classes.middle}>
-            <PageContainer>
-              <Switch>
-                <Route exact path={Routes.HOME} render={() => <Home />} />
-                <Route exact path={Routes.PEOPLE} render={() => <People />} />
-                <Route exact path={Routes.PROFILE} render={() => <Profile />} />
-                <Route exact path={Routes.MESSAGE} render={() => <Message />} />
-                <Route
-                  exact
-                  path={Routes.NOTIFICATIONS}
-                  render={() => <Notifications />}
-                />
-                <Route exact path={Routes.BROWSE} render={() => <Browse />} />
-                <Route exact path={Routes.ABOUT} render={() => <About />} />
-                <Route exact path={Routes.POST} render={() => <Post />} />
-
-                {/* redirect to  notification for development purpose */}
-                <Redirect to={Routes.HOME} />
-              </Switch>
-            </PageContainer>
+  const renderRoutes = () => {
+    return (
+      <React.Fragment>
+        <AppHeader />
+          <CssBaseline />
+          <Grid container className={classes.grid}>
+            {/* hidden on mobile */}
+            <Hidden smDown>
+              <Drawer open variant="persistent" classes={{ paper: classes.desktopDrawer }}>
+                <Navigation />
+              </Drawer>
+            </Hidden>
+  
+            <Grid item xl={10} lg={12} xs={12} className={classes.middle}>
+              <PageContainer>
+                <Switch>
+                  <Route exact path={Routes.HOME} render={() => <Home />} />
+                  <Route exact path={Routes.PEOPLE} render={() => <People />} />
+                  <Route exact path={Routes.PROFILE} render={() => <Profile />} />
+                  <Route exact path={Routes.MESSAGE} render={() => <Message />} />
+                  <Route exact path={Routes.NOTIFICATIONS} render={() => <Notifications />} />
+                  <Route exact path={Routes.BROWSE} render={() => <Browse />} />
+                  <Route exact path={Routes.ABOUT} render={() => <About />} />
+                  <Route exact path={Routes.POST} render={() => <Post />} />
+                  <Redirect to={Routes.HOME} />
+                </Switch>
+              </PageContainer>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
-    </>
-  );
+      </React.Fragment>
+    );
+  }
+
+  return(
+    <Suspense fallback={<div> SUSPENSE ... </div>}>
+      {renderRoutes()}
+    </Suspense>
+  )
+
 };
 
 // give AppLayout access to path, location and history

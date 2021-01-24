@@ -81,7 +81,6 @@ const Home = ({ history }) => {
 
     const { posts, count } = data.getFollowedPosts;
 
-
     if (!posts.length) {
       return <h5> Follow Users, Browse </h5>;
     }
