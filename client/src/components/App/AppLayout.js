@@ -4,27 +4,16 @@ import Hidden from "@material-ui/core/Hidden";
 import * as Routes from "../../routes";
 import Navigation from "./Navigation";
 import { colors as appColors } from "../../utils/theme";
-
-
-// ACTION
 import { SET_AUTH_USER } from "../../store/auth";
-
-// HOOKS
 import { useStore } from "../../store";
-
-// APP PAGES
-// import Home from "../../pages/Home";
-// import People from "../../pages/People/";
-// import Profile from "../../pages/Profile";
-// import Message from "../../pages/Message";
-// import Notifications from "../../pages/Notifications";
-// import About from "../../pages/About";
-// import Browse from "../../pages/Browse";
-// import Post from "../../pages/Post";
-
 import AppHeader from "./AppHeader/AppHeader";
-import { Grid, makeStyles, CssBaseline, Drawer } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Drawer from "@material-ui/core/Drawer";
 import { PageContainer } from "../pageContainer";
+import Loading from "../../pages/Loading/Loading";
+
 
 const Profile = lazy(() => import("../../pages/Profile"));
 const Home = lazy(() => import("../../pages/Home"));
@@ -121,7 +110,7 @@ const AppLayout = ({ authUser }) => {
   }
 
   return(
-    <Suspense fallback={<div> SUSPENSE ... </div>}>
+    <Suspense fallback={<Loading />}>
       {renderRoutes()}
     </Suspense>
   )

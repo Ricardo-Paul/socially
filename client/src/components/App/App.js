@@ -10,6 +10,7 @@ import { useQuery } from "@apollo/client";
 import ScrollTop from "./ScrollTop";
 import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
 import { GET_NEW_CONVERSATIONS } from "../../graphql/message";
+import Loading from "../../pages/Loading/Loading";
 
 const AppLayout = React.lazy(() => import("./AppLayout"));
 const AuthLayout = React.lazy(() => import("../../pages/Auth/AuthLayout"))
@@ -116,12 +117,12 @@ const App = () => {
   }
 
   if(loading){
-    return <div> APP LOADING ... </div>
+    return <Loading />
   }
 
   return (
     <Router>
-      <Suspense fallback={<div> STILL LOADING ... </div>} >
+      <Suspense fallback={<Loading />} >
       <Switch>
         {data.getAuthUser ?
           (<Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />) : 
