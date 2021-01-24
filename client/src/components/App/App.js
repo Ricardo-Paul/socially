@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //layouts
-import AppLayout from "./AppLayout";
-import AuthLayout from "../../pages/Auth/AuthLayout";
+// import AppLayout from "./AppLayout";
+// import AuthLayout from "../../pages/Auth/AuthLayout";
+
+
 import { GET_AUTH_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
 import ScrollTop from "./ScrollTop";
 import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
 import { GET_NEW_CONVERSATIONS } from "../../graphql/message";
 
+const AppLayout = React.lazy(() => import("./AppLayout"));
+const AuthLayout = React.lazy(() => import("../../pages/Auth/AuthLayout"))
 
 const App = () => {
   const { loading, data, error, subscribeToMore, refetch } = useQuery(
@@ -79,11 +83,6 @@ const App = () => {
       document: GET_NEW_CONVERSATIONS,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
-
-        // if (window.location.href.split("/")[3] === "message") {
-        //   return prev;
-        // }
-
         let oldConversations = prev.getAuthUser.conversations;
         let newConversation = subscriptionData.data.newConversation; //a single conversation object
 
@@ -91,12 +90,8 @@ const App = () => {
         let index = oldConversations.findIndex(
           (old) => old.id === newConversation.id
         );
-        if (index) {
-          oldConversations.splice(index, 1);
-        }
-
+        if (index) {oldConversations.splice(index, 1)}
         const conversations = [newConversation, ...oldConversations];
-
         let authUser = prev.getAuthUser;
         authUser.conversations = conversations;
 
@@ -120,13 +115,19 @@ const App = () => {
     );
   }
 
+  if(loading){
+    return <div> APP LOADING ... </div>
+  }
+
   return (
     <Router>
+      <Suspense fallback={<div> STILL LOADING ... </div>} >
       <Switch>
-          {!loading && data.getAuthUser ?
-            (<Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />) : 
-            (<Route exact render={() => <AuthLayout refetch={refetch} />} />)}
+        {data.getAuthUser ?
+          (<Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />) : 
+          (<Route exact render={() => <AuthLayout refetch={refetch} />} />)}
       </Switch>
+      </Suspense>
     </Router>
   );
 };
