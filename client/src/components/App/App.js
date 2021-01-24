@@ -116,13 +116,19 @@ const App = () => {
     );
   }
 
-  if(loading){
-    return <Loading />
+
+  // if(true){
+  //   return <Loading text="Socially v1.0.0" />
+  // }
+
+  if(!data && localStorage.getItem("token") || loading){
+    return <Loading text={`Socially V1.0.0`} />
   }
+
 
   return (
     <Router>
-      <Suspense fallback={<Loading />} >
+      <Suspense fallback={<Loading text={`Socially V1.0.0`} />} >
       <Switch>
         {data.getAuthUser ?
           (<Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />) : 
