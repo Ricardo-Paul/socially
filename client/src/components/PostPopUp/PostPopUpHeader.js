@@ -10,7 +10,7 @@ import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineO
 const text_color = "#e4e6eb"
 const light_background = "#545454"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   right_header: {
     padding: 10,
     width: "100%",
@@ -19,13 +19,13 @@ const useStyles = makeStyles({
     justifyContent:"flex-end"
   },
   right_header_icons: {
-    backgroundColor: `${light_background}`,
-    color: `${text_color}`,
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
     width: 50,
     height: 50,
     margin: "0.2rem"
   },
-})
+}))
 
 const PostPopUpHeader = ({ image }) => {
   const classes = useStyles();

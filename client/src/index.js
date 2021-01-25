@@ -19,9 +19,10 @@ const getMuiTheme = SELECTED_THEME => createMuiTheme({
 const APP_THEMES = {
   [DARK_THEME]: {
     primary: {
-      main: "#000000",
-      dark:"",
-      light: ""
+      dark:"#000000",
+      main: "#373737",
+      light: "#545454",
+      contrastText: "#e4e6eb"
   },
   secondary: {
       main: "#a7a6a6",
@@ -33,9 +34,10 @@ const APP_THEMES = {
 
   [LIGHT_THEME]: {
     primary: {
+      dark:"#ffffff",
       main: "#000000",
-      dark:"",
-      light: ""
+      light: "",
+      contrastText: ""
   },
   secondary: {
       main: "#a7a6a6",

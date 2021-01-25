@@ -15,7 +15,10 @@ const text_color = "#e4e6eb"
 const light_background = "#545454"
 const dark_background = "#373737"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+  left: {
+    backgroundColor: theme.palette.primary.dark
+  },
   imageContainer: {
     width: "100%",
     height: "auto"
@@ -29,8 +32,8 @@ const useStyles = makeStyles({
     alignItems: "center"
   },
   right: {
-    backgroundColor: `${dark_background}`,
-    color: `${text_color}`,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
     fontSize: "1rem",
     width: "100%",
     height: "100%",
@@ -50,8 +53,8 @@ const useStyles = makeStyles({
     padding: "0.7rem",
   },
   right_header_icons: {
-    backgroundColor: `${light_background}`,
-    color: `${text_color}`,
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
     width: 50,
     height: 50,
     margin: "0.2rem"
@@ -59,7 +62,8 @@ const useStyles = makeStyles({
   create_comment: {
     margin: "0.5rem"
   }
-});
+}));
+
 const PostPopUp = ({ closeModal, id }) => {
   const classes = useStyles();
 
@@ -87,7 +91,7 @@ const PostPopUp = ({ closeModal, id }) => {
   return (
     <ClickAwayListener onClickAway={closeModal}>
       <Grid container style={{height: "100%"}}>
-        <Grid item md={8} xl={9} xs={12}>
+        <Grid item md={8} xl={9} xs={12} className={classes.left} >
             <Grid container justify="center" style={{height: "100%"}}>
               <Grid item md={6} className={classes.imageParent} style={{height: "100%"}}>
                 <Box className={classes.imageContainer}>

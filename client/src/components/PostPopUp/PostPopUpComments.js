@@ -31,10 +31,10 @@ import { withRouter } from "react-router-dom";
 const light_background = "#545454"
 const lighter_background = "#6b6b6b"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   comment_item: {
     display: "flex",
-    backgroundColor: `${light_background}`,
+    backgroundColor: theme.palette.primary.light,
     padding: "0.5rem",
     marginBottom: "1.5rem",
     position: "relative",
@@ -47,11 +47,11 @@ const useStyles = makeStyles({
     position: "absolute",
     right: "0.7rem",
     bottom: "-0.78rem",
-    backgroundColor: `${lighter_background}`,
+    backgroundColor: theme.palette.primary.light,
     padding: "0.2rem",
     borderRadius: "10px"
   }
-})
+}))
 
 const dummyUserName = `Carli Andersen`
 const dummyComment = `Glad you had a conversation with my PM today. Justin Trudeau is a true Canadian and a friend of the United States. Glad you had a conversation with my PM today`
@@ -119,23 +119,3 @@ PostPopUpComments.propTypes = {
   userAvatar: PropTypes.string,
   postId: PropTypes.string.isRequired
 };
-
-/* <ListItemText
-primary={c.author.fullName}
-secondary={
-  <Fragment>
-    <Typography component="span" variant="body2">
-      {/* 2 days ago */
-//     </Typography>
-//     {c.comment}
-//   </Fragment>
-// }
-// />
-// <ListItemSecondaryAction>
-// {auth.user.id === c.author.id && (
-//   <IconButton onClick={() => deleteComment(c.id)}>
-//     <Delete />
-//   </IconButton>
-// )}
-// </ListItemSecondaryAction> */}
-/* {comments.length > 1 && <Divider variant="inset" component="li" />} */
