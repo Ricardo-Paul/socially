@@ -28,12 +28,14 @@ import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../../constants/Da
 import { theme } from "../../utils/theme";
 import { generatePath, Link } from "react-router-dom";
 
-const postCardStyles = makeStyles({
+const postCardStyles = makeStyles(theme => ({
   postCard: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    borderRadius: theme.palette.shape.borderRadius,
     marginTop: 20,
     width: "100%",
     height: "auto",
-    border: "1px solid #dcd7d7",
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100%",
     },
@@ -66,7 +68,7 @@ const postCardStyles = makeStyles({
   footer: {
     position: "relative",
   },
-});
+}));
 
 const PostCard = ({
   title,

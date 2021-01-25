@@ -12,6 +12,8 @@ import { GET_AUTH_USER } from "../../graphql/user";
 import { GET_FOLLOWED_POSTS, GET_POST } from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 import { withRouter } from "react-router-dom";
+import { themes } from "../../constants/AppTheme";
+import { useTheme } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   comment_item: {
@@ -41,6 +43,7 @@ const dummyComment = `Glad you had a conversation with my PM today. Justin Trude
 const PostPopUpComments = ({ match, comments, postId }) => {
   const [{ auth }] = useStore();
   const classes = useStyles();
+  const theme = useTheme();
 
   const [remove] = useMutation(DELETE_COMMENT, {
     refetchQueries: [
@@ -70,11 +73,17 @@ const PostPopUpComments = ({ match, comments, postId }) => {
     }
   };
 
+  const isLightTeme = localStorage.getItem("theme") === themes.LIGHT_THEME;
+  const comment_light_style = {
+    backgroundColor: `${isLightTeme && `${theme.palette.primary.main}`}`,
+    boxShadow: `${isLightTeme && `1px 1px 7px #bbbbbb`}`
+  }
+
   return(
     <React.Fragment>
       {comments.map(c => {
         return(
-          <Box className={classes.comment_item} key={c.id}>
+          <Box style={comment_light_style} className={classes.comment_item} key={c.id}>
             <Avatar alt="user avatar"src={c.author.image} style={{marginRight: "0.5rem"}} />
             <Box className={classes.comment_box} >
               <Box fontWeight={"bold"}>
@@ -84,7 +93,7 @@ const PostPopUpComments = ({ match, comments, postId }) => {
                 {dummyComment}
               </Box>
             </Box>
-            <span className={classes.comment_box_span} >
+            <span style={comment_light_style} className={classes.comment_box_span} >
               {`2 days ago`}
             </span>
           </Box>

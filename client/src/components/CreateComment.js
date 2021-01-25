@@ -11,9 +11,7 @@ import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
 import { GET_FOLLOWED_POSTS, GET_POST } from "../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 
-const text_color = "#e4e6eb"
-
-const commenStyles = makeStyles({
+const commenStyles = makeStyles(theme => ({
   textField: {
     marginRight: 5,
     padding: 13,
@@ -21,21 +19,21 @@ const commenStyles = makeStyles({
     [theme.breakpoints.down("sm")]: {
       marginBottom: 2,
     },
-    backgroundColor: "#636362",
+    backgroundColor: theme.palette.primary.light,
     borderRadius: 20,
     outline: "none",
     border: "none",
     width: "90%",
-    color: `${text_color}`,
+    color: theme.palette.primary.contrastText,
     '&::placeholder': {
-      color: `${text_color}`
+      color: theme.palette.primary.contrastText
     },
     fontSize: "1rem"
   },
   form: {
     display: "flex"
   }
-});
+}));
 
 const CreateComment = ({ focus, postId }) => {
   const classes = commenStyles();

@@ -19,30 +19,35 @@ const getMuiTheme = SELECTED_THEME => createMuiTheme({
 const APP_THEMES = {
   [DARK_THEME]: {
     primary: {
-      dark:"#000000",
-      main: "#373737",
-      light: "#545454",
-      contrastText: "#e4e6eb"
+      dark:"#18191A", // 
+      main: "#242526", // dark_background
+      light: "#3A3B3C", // light_background
+      contrastText: "#e4e6eb" // text_color
   },
   secondary: {
       main: "#a7a6a6",
       dark: "#888584", //icons fill color
-      light: "#d8d8d847"
-    }
+      light: "#d8d8d847",
+    },
+  shape: {
+    borderRadius: "0.5rem"
+  }
   },
-
 
   [LIGHT_THEME]: {
     primary: {
-      dark:"#ffffff",
-      main: "#000000",
-      light: "",
-      contrastText: ""
+      dark:"#f3f3f3",
+      main: "#ffffff",
+      light: "#efefef",
+      contrastText: "#505050"
   },
   secondary: {
       main: "#a7a6a6",
       dark: "#888584", //icons fill color
       light: "#d8d8d847"
+    },
+  shape: {
+      borderRadius: "0.5rem"
     }
   }
 }
