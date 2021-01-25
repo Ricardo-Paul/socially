@@ -18,7 +18,7 @@ const peopleStyles = makeStyles((theme) => ({
   people_box: {
     width: "100%",
     backgroundColor: theme.palette.primary.main,
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: theme.palette.shape.borderRadius,
     color: theme.palette.primary.contrastText,
     padding: 10
   },

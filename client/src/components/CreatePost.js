@@ -18,11 +18,11 @@ import { withRouter } from "react-router-dom";
 
 const postStyles = makeStyles((theme) => ({
   container: {
-    borderColor: "#afafaf",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: colors.white,
-    padding: 5,
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: theme.shape.borderRadius,
+    padding: 10,
     [theme.breakpoints.down("sm")]: {
       padding: 0,
     },
@@ -41,17 +41,20 @@ const postStyles = makeStyles((theme) => ({
     marginLeft: 10,
     marginRight: 10,
     width: "100%",
-    height: 50,
+    borderRadius: theme.palette.shape.inputBorderRadius,
+    border: "none",
+    height: "3rem",
+    lineHeight: "1.5rem",
+    fontSize: "1.1rem",
+    fontFamily: "roboto",
+    // height: 50,
     outline: "none",
-    border: "1px solid #d0d0d0",
-    paddingTop: 10,
     paddingLeft: 15,
-    backgroundColor: "#efefef",
+    backgroundColor: theme.palette.primary.light,
     [theme.breakpoints.down("sm")]: {
       margin: 0,
       width: "100%",
       height: 50,
-      paddingTop: 5,
       paddingLeft: 5,
     },
   },
@@ -60,6 +63,8 @@ const postStyles = makeStyles((theme) => ({
     color: "white",
   },
   buttons: {
+    borderTop: "0.11rem solid #424242",
+    paddingTop: 10,
     marginTop: 10,
     display: "flex",
     flexDirection: "row",
@@ -142,7 +147,8 @@ const CreatePost = ({ match }) => {
               <Avatar src={auth.user.image} />
             </div>
 
-            <textarea
+            <input
+              type="text"
               className={classes.textarea}
               placeholder="What's on your mind..."
               value={title}

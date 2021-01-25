@@ -21,7 +21,7 @@ const APP_THEMES = {
     primary: {
       dark:"#18191A", // 
       main: "#242526", // dark_background
-      light: "#3A3B3C", // light_background
+      light: "#424242", // light_background
       contrastText: "#e4e6eb" // text_color
   },
   secondary: {
@@ -30,7 +30,8 @@ const APP_THEMES = {
       light: "#d8d8d847",
     },
   shape: {
-    borderRadius: "0.5rem"
+    borderRadius: "0.5rem",
+    inputBorderRadius: "1.5rem"
   },
   custom: {
     palette: {
