@@ -1,35 +1,17 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
 
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  ListItemSecondaryAction,
-  Typography,
-  Divider,
-  Avatar,
-  IconButton,
-  Box,
-} from "@material-ui/core";
-
-
-
-import { Delete } from "@material-ui/icons";
 import PropTypes from "prop-types";
 import { useStore } from "../../store";
-
 import { DELETE_COMMENT } from "../../graphql/comment";
 import { useMutation } from "@apollo/client";
-
 import { GET_AUTH_USER } from "../../graphql/user";
 import { GET_FOLLOWED_POSTS, GET_POST } from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 import { withRouter } from "react-router-dom";
-
-const light_background = "#545454"
-const lighter_background = "#6b6b6b"
 
 const useStyles = makeStyles(theme => ({
   comment_item: {

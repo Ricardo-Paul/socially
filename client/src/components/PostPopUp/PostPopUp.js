@@ -93,7 +93,7 @@ const PostPopUp = ({ closeModal, id }) => {
       <Grid container style={{height: "100%"}}>
         <Grid item md={8} xl={9} xs={12} className={classes.left} >
             <Grid container justify="center" style={{height: "100%"}}>
-              <Grid item md={6} className={classes.imageParent} style={{height: "100%"}}>
+              <Grid item md={7} className={classes.imageParent} style={{height: "100%"}}>
                 <Box className={classes.imageContainer}>
                   <img 
                     src={image}
