@@ -7,17 +7,60 @@ import { createApolloClient } from './utils/createApolloClient';
 
 // root component
 import App from './components/App/App';
-
 import { StoreProvider } from './store/store';
-import { MuiThemeProvider } from '@material-ui/core';
-import { getMuiTheme } from './utils/getMuiTheme';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { themes } from './constants/AppTheme';
+const { DARK_THEME, LIGHT_THEME, DEFAULT_THEME } = themes;
 
-const SELECTED_COLOR_SCHEME = 'LIGHT';
-const theme = getMuiTheme(SELECTED_COLOR_SCHEME);
+const getMuiTheme = SELECTED_THEME => createMuiTheme({
+  palette: APP_THEMES[SELECTED_THEME]
+});
+
+const APP_THEMES = {
+  [DARK_THEME]: {
+    primary: {
+      main: "#000000",
+      dark:"",
+      light: ""
+  },
+  secondary: {
+      main: "#a7a6a6",
+      dark: "#888584", //icons fill color
+      light: "#d8d8d847"
+    }
+  },
+
+
+  [LIGHT_THEME]: {
+    primary: {
+      main: "#000000",
+      dark:"",
+      light: ""
+  },
+  secondary: {
+      main: "#a7a6a6",
+      dark: "#888584", //icons fill color
+      light: "#d8d8d847"
+    }
+  }
+}
+
+let theme;
+
+const SELECTED_THEME = localStorage.getItem("theme");
+if(!SELECTED_THEME){
+  theme = getMuiTheme(DEFAULT_THEME);
+  localStorage.setItem("theme", DEFAULT_THEME)
+}
+
+if(SELECTED_THEME === DARK_THEME || SELECTED_THEME === LIGHT_THEME ){
+  theme = getMuiTheme(SELECTED_THEME)
+  localStorage.setItem("theme", SELECTED_THEME)
+}
 
 // http and websockekt links
-const apiUrl = "http://localhost:8080/graphql"
-const webSocketApiUrl = "ws://localhost:8080/graphql"
+const apiUrl = "http://localhost:8080/graphql";
+const webSocketApiUrl = "ws://localhost:8080/graphql";
 const client = createApolloClient(apiUrl, webSocketApiUrl);
 
 render(
@@ -31,3 +74,4 @@ render(
     document.getElementById("root")
   );
 
+ 

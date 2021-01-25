@@ -1,13 +1,8 @@
 import React, { useEffect, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-//layouts
-// import AppLayout from "./AppLayout";
-// import AuthLayout from "../../pages/Auth/AuthLayout";
-
 
 import { GET_AUTH_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
-import ScrollTop from "./ScrollTop";
 import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
 import { GET_NEW_CONVERSATIONS } from "../../graphql/message";
 import Loading from "../../pages/Loading/Loading";
@@ -16,9 +11,7 @@ const AppLayout = React.lazy(() => import("./AppLayout"));
 const AuthLayout = React.lazy(() => import("../../pages/Auth/AuthLayout"))
 
 const App = () => {
-  const { loading, data, error, subscribeToMore, refetch } = useQuery(
-    GET_AUTH_USER
-  );
+  const { loading, data, error, subscribeToMore, refetch } = useQuery(GET_AUTH_USER);
   console.log("AUTH USER", data);
 
   // we use subscribeToMore to execute our subscriptions
@@ -59,15 +52,12 @@ const App = () => {
             console.log("INDEX: ", index, "should spliced");
           }
           let notifications = oldNotifications;
-
           // reassign notifications (with the deletion)
           newNotifications = notifications;
         }
-
         // attach new notifications to authUser
         let authUser = prev.getAuthUser;
         authUser.notifications = newNotifications;
-
         // reassign the inial query
         return { getAuthUser: authUser };
       },
@@ -124,7 +114,6 @@ const App = () => {
   if(!data && localStorage.getItem("token") || loading){
     return <Loading text={`Socially V1.0.0`} />
   }
-
 
   return (
     <Router>

@@ -6,13 +6,6 @@ import { palette } from './theme';
  * @param {string} SELECTED_COLOR_SCHEME LIGH or DARK color scheme
  */
 export const getMuiTheme = SELECTED_COLOR_SCHEME => createMuiTheme({
-    palette: palette[SELECTED_COLOR_SCHEME],
-    overrides: {
-        MuiBadge: {
-            colorSecondary:{
-                color: "white",
-                backgroundColor: "#dc0d0d"
-            }
-        }
-    },
+    palette: palette[SELECTED_COLOR_SCHEME]
 });
+

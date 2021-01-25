@@ -15,7 +15,7 @@ const text_color = "#e4e6eb"
 const light_background = "#545454"
 const dark_background = "#373737"
 
-const useStyles = makeStyles({ 
+const useStyles = makeStyles({
   imageContainer: {
     width: "100%",
     height: "auto"
@@ -126,25 +126,3 @@ PostPopUp.propTypes = {
   postTitle: PropTypes.string,
   createdAt: PropTypes.string.isRequired,
 };
-
-{/* <Paper className={classes.paper}>
-<Card className={classes.card}>
-  <CardHeader
-    avatar={<Avatar src={post.author.image} />}
-    action={
-      <IconButton onClick={closeModal}>
-        <Close />
-      </IconButton>
-    }
-    title={post.author.fullName}
-    subheader={post.createdAt}
-  />
-  <CardContent> {post.title} </CardContent>
-  {post.image && 
-    <div className={classes.mediaContainer}>
-      <img src={post.image} alt="post image" className={classes.media} />
-    </div>
-  }
-  <PostPopUpComments postId={post.id} comments={post.comments} closeComments={closeModal} />
-</Card>
-</Paper> */}

@@ -29,6 +29,7 @@ import { HOME_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 import { withRouter } from "react-router-dom";
 
 const light_background = "#545454"
+const lighter_background = "#6b6b6b"
 
 const useStyles = makeStyles({
   comment_item: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles({
     position: "absolute",
     right: "0.7rem",
     bottom: "-0.78rem",
-    backgroundColor: `${light_background}`,
+    backgroundColor: `${lighter_background}`,
     padding: "0.2rem",
     borderRadius: "10px"
   }
