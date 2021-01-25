@@ -31,7 +31,6 @@ const homeStyles = makeStyles({
   grid: {
     display: "flex",
     // alignContent: "flex-end",
-    flexDirection: "row"
   }
 });
 

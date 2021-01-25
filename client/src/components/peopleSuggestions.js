@@ -20,10 +20,17 @@ const peopleStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     borderRadius: theme.palette.shape.borderRadius,
     color: theme.palette.primary.contrastText,
-    padding: 10
+    position: "fixed",
+    width: theme.palette.custom.peopleBoxWidth,
+    padding: 10,
+    boxShadow: theme.palette.custom.boxShadow
   },
   people_header: {
-    fontSize: "1rem"
+    fontSize: "1.2rem",
+    fontWeight: "bold",
+    borderRadius: theme.shape.borderRadius,
+    padding: "0.5rem",
+    fontFamily: "sans-serif",
   },
   item: {
     display: "flex",

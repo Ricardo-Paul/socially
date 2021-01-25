@@ -80,7 +80,7 @@ const PostPopUp = ({ closeModal, id }) => {
   }
 
   const post = data && data.getPost;
-  const { image, comments, author: { image: authorImage, fullName } } = post;
+  const { image, comments, author: { image: authorImage, fullName, username } } = post;
 
   const dummyText = "A new Administration means a new lunch partner. My first weekly lunch with Vice President Kamala Harris is in the books!"
   const avatar = "https://material-ui.com/static/images/avatar/3.jpg";
@@ -108,7 +108,12 @@ const PostPopUp = ({ closeModal, id }) => {
           <Box className={classes.right}>
               <PostPopUpHeader image={authorImage} />
               <Box className={classes.right_body}>
-                <PostPopUpInfo authorImage={avatar} />
+                <PostPopUpInfo 
+                authorImage={avatar} 
+                authorName={name_and_hour[0]} 
+                createdAt={name_and_hour[1]}
+                username={username}
+                />
                 <PostPopUpComments comments={post.comments} />
               </Box>
               <Box className={classes.create_comment}>

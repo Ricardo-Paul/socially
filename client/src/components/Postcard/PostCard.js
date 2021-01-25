@@ -7,6 +7,7 @@ import {
   IconButton,
   Divider,
   Popper,
+  Box,
 } from "@material-ui/core";
 import { MoreVert, Comment } from "@material-ui/icons";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -25,8 +26,8 @@ import { GET_AUTH_USER, GET_USER_POSTS } from "../../graphql/user";
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../../constants/DataLimit";
 
-import { theme } from "../../utils/theme";
 import { generatePath, Link } from "react-router-dom";
+import PostUserInfo from "../PostPopUp/PostUserInfo";
 
 const postCardStyles = makeStyles(theme => ({
   postCard: {
@@ -52,6 +53,9 @@ const postCardStyles = makeStyles(theme => ({
     justifyContent: "space-between",
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  card_header: {
+    padding: 10
   },
   media: {
     [theme.breakpoints.up("xl")]: {
@@ -127,6 +131,8 @@ const PostCard = ({
     setAnchorEl(null);
   };
 
+  const dummyDate = `13 days ago`
+
   return (
     <>
       <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
@@ -140,23 +146,14 @@ const PostCard = ({
       </Popper>
       {/*  */}
       <div className={classes.postCard}>
-        <CardHeader
-          className={classes.header}
-          avatar={<Avatar component={Link} to={generatePath(Routes.PROFILE, {
-            username
-          })} alt="user photo" src={avatar} />}
-          title={
-            <Link style={{textDecoration: "none"}} to={generatePath(Routes.PROFILE, {
-              username
-            })}> {fullName} </Link>
-          }
-          action={
-            <IconButton onClick={handleClick}>
-              <MoreVert />
-            </IconButton>
-          } 
-          subheader={"5 hours ago"}
-        />
+        <Box className={classes.card_header}>
+          <PostUserInfo 
+          authorImage={avatar} 
+          authorName={fullName} 
+          createdAt={dummyDate} 
+          username={username}
+          />
+        </Box>
         <CardContent>{title}</CardContent>
         {image && (
           <img
@@ -210,3 +207,22 @@ PostCard.propTypes = {
   imagePublicId: PropTypes.string, // used to delete the image associated to a post
   username: PropTypes.string
 };
+
+
+// <CardHeader
+// className={classes.header}
+// avatar={<Avatar component={Link} to={generatePath(Routes.PROFILE, {
+//   username
+// })} alt="user photo" src={avatar} />}
+// title={
+//   <Link style={{textDecoration: "none"}} to={generatePath(Routes.PROFILE, {
+//     username
+//   })}> {fullName} </Link>
+// }
+// action={
+//   <IconButton onClick={handleClick}>
+//     <MoreVert />
+//   </IconButton>
+// } 
+// subheader={"5 hours ago"}
+// />

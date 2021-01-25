@@ -107,6 +107,7 @@ export const GET_POST = gql`
                 id
                 image
                 fullName
+                username
             }
             likes{
                 id

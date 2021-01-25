@@ -22,7 +22,7 @@ const APP_THEMES = {
       dark:"#18191A", // 
       main: "#242526", // dark_background
       light: "#424242", // light_background
-      contrastText: "#e4e6eb" // text_color
+      contrastText: "#bbbbba" // text_color
   },
   secondary: {
       main: "#a7a6a6",
@@ -35,11 +35,14 @@ const APP_THEMES = {
   },
   custom: {
     palette: {
-      drawerBackground: "#100e2f"
+      drawerBackground: "#333333",
+      paleNuance: "#2f2f2f"
     },
-    drawerWidth: 300
+    drawerWidth: 300,
+    peopleBoxWidth: 450,
+    boxShadow: "0px 4px 9px 0px #0c0c0c"
   }
-  },
+},
 
   [LIGHT_THEME]: {
     primary: {
@@ -60,7 +63,9 @@ const APP_THEMES = {
       palette: {
         drawerBackground: "#100e2f"
       },
-      drawerWidth: 320
+      drawerWidth: 300,
+      peopleBoxWidth: 450,
+      boxShadow: "0px 4px 2px 0px #0c0c0c"
     }
   }
 }

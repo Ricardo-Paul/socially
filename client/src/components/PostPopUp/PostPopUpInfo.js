@@ -7,11 +7,11 @@ import Button from "@material-ui/core/Button"
 
 import Avatar from "@material-ui/core/Avatar";
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
-import { MoreHoriz } from "@material-ui/icons";
 import { Hidden } from "@material-ui/core";
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import useTheme from "@material-ui/core/styles/useTheme"
+import PostUserInfo from "./PostUserInfo";
 
 const text_color = "#e4e6eb"
 const light_background = "#545454"
@@ -23,17 +23,6 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.light,
       borderRadius: 10,
       marginBottom: "0.7rem"
-    },
-    user_info: {
-      display: "flex",
-      justifyContent: "space-between",
-      marginBottom: 10
-    },
-    left_user_info: {
-      display: "flex"
-    },
-    name_and_hour: {
-  
     },
     like_comment_info: {
       display: "flex",
@@ -61,29 +50,19 @@ const useStyles = makeStyles(theme => ({
 
 
 
-    const PostPopUpInfo = ({ authorImage }) => {
+    const PostPopUpInfo = ({ authorImage, authorName, createdAt, username }) => {
         const classes = useStyles();
         const theme = useTheme();
         const inner_color = {color: theme.palette.primary.contrastText}
 
         return(
             <Box className={classes.post_info}>
-                <Box className={classes.user_info}>
-                  <Box className={classes.left_user_info}>
-                    <Avatar src={authorImage} style={{ marginRight: 5 }} />
-                    <Box className={classes.name_and_hour}>
-                      <Typography>
-                        <Box fontWeight="bold"> {name_and_hour[0]} </Box>
-                      </Typography>
-                      <Typography> {name_and_hour[1]} </Typography>
-                    </Box>
-                  </Box>
-                  <Box className={classes.right_user_info}>
-                    <IconButton style={inner_color}>
-                      <MoreHoriz />
-                    </IconButton>
-                  </Box>
-                </Box>
+                <PostUserInfo 
+                  authorImage={authorImage} 
+                  authorName={authorName} 
+                  createdAt={createdAt} 
+                  username={username}
+                  />
                 <Box fontWeight={400} >
                   {dummyText}
                 </Box>
