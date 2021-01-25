@@ -30,7 +30,7 @@ const homeStyles = makeStyles({
   },
   grid: {
     display: "flex",
-    alignContent: "flex-end",
+    // alignContent: "flex-end",
     flexDirection: "row"
   }
 });
@@ -136,17 +136,15 @@ const Home = ({ history }) => {
   return (
     <>
       <div className={classes.home}>
-        <Grid container spacing={3} className={classes.grid}>
+        <Grid container spacing={2} className={classes.grid}>
           {/* <Hidden>
             <Grid item md={2} />
           </Hidden> */}
-          <Grid item md="6" xs="12">
-            <Box>
+          <Grid item md="8" lg="7" xs="12">
               <CreatePost />
               {renderContent()}
-            </Box>
           </Grid>
-          <Grid item md="4" xs="12">
+          <Grid item md="4" lg="4" xs="12">
             <PeopleSuggestions />
           </Grid>
         </Grid>

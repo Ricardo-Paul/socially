@@ -36,11 +36,13 @@ const useStyles = makeStyles((theme) => ({
   //     outline: "1px solid slategrey",
   //   },
   // },
-
+  grid: {
+    height: "100%",
+    backgroundColor: theme.palette.primary.dark,
+  },
   middle: {
     paddingTop: 80,
-    paddingLeft: 256,
-    paddingRight: 25,
+    paddingLeft: theme.palette.custom.drawerWidth,
     [theme.breakpoints.down("sm")]: {
       padding: 0,
     },
@@ -53,12 +55,10 @@ const useStyles = makeStyles((theme) => ({
   desktopDrawer: {
     top: 70,
     height: "calc(100% - 64px)",
-    width: 256,
+    width: theme.palette.custom.drawerWidth,
     zIndex: 100,
-  },
-  grid: {
-    height: "100%",
-  },
+    backgroundColor: theme.palette.custom.palette.drawerBackground
+  }
 }));
 
 /**
@@ -89,7 +89,7 @@ const AppLayout = ({ authUser }) => {
               </Drawer>
             </Hidden>
   
-            <Grid item xl={10} lg={12} xs={12} className={classes.middle}>
+            <Grid item xl={10} lg={11} xs={12} className={classes.middle}>
               <PageContainer>
                 <Switch>
                   <Route exact path={Routes.HOME} render={() => <Home />} />

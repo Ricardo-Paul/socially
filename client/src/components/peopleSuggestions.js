@@ -1,6 +1,5 @@
 import React from "react";
-import {
-  Divider,
+import { Divider,
   Box,
   List,
   ListItem,
@@ -13,8 +12,19 @@ import { useStore } from "../store";
 import defaultAvatar from "../ressources/defaultAvatar.jpg";
 import { Link, generatePath } from "react-router-dom";
 import * as Routes from "../routes";
+import useTheme from "@material-ui/core/styles/useTheme";
 
 const peopleStyles = makeStyles((theme) => ({
+  people_box: {
+    width: "100%",
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: theme.shape.borderRadius,
+    color: theme.palette.primary.contrastText,
+    padding: 10
+  },
+  people_header: {
+    fontSize: "1rem"
+  },
   item: {
     display: "flex",
     flexDirection: "row",
@@ -31,6 +41,7 @@ const peopleStyles = makeStyles((theme) => ({
     fontSize: "16px",
     fontFamily: "roboto",
     fontWeight: 500,
+    color: theme.palette.primary.contrastText
   },
 }));
 
@@ -39,7 +50,7 @@ const PeopleSuggestions = () => {
   const [{ auth }] = useStore();
   const [people, setPeople] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-
+  const theme = useTheme();
   const classes = peopleStyles();
 
   React.useEffect(() => {
@@ -68,8 +79,10 @@ const PeopleSuggestions = () => {
   }
 
   return (
-    <Box border={1} style={{ width: "80%", borderColor: "#afafaf" }}>
-      <h4 style={{ paddingLeft: 10 }}> USER SUGGESTIONS </h4>
+    <Box className={classes.people_box}>
+      <Box className={classes.people_header}>
+        Suggestions for you
+      </Box>
       <Divider />
       <List style={{ padding: 0 }}>
         {people.map((p) => (
@@ -91,8 +104,12 @@ const PeopleSuggestions = () => {
               }}
             />
             <Box display="flex" flexDirection="column">
-              <Typography className={classes.name}> {p.fullName} </Typography>
-              <Typography variant="body2"> @{p.username} </Typography>
+              <Typography className={classes.name}>
+                <Box> { p.fullName } </Box>
+              </Typography>
+              <Typography variant="body2">
+                <Box color={theme.palette.primary.contrastText} > @{p.username} </Box>  
+              </Typography>
             </Box>
           </ListItem>
         ))}

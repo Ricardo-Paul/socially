@@ -134,8 +134,8 @@ const CreatePost = ({ match }) => {
 
   return (
     <>
-      <form onSubmit={(e) => handleSubmit(e, createPost)}>
-        <Box border={1} className={classes.container}>
+      <form style={{border: "none"}} onSubmit={(e) => handleSubmit(e, createPost)}>
+        <Box className={classes.container}>
           <div className={classes.row1}>
             <div className={classes.avatar}>
               {/* <AccountCircle fontSize="large" /> */}

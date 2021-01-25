@@ -19,6 +19,7 @@ const navStyles = makeStyles((theme) => ({
     fontWeight: 500,
     fontSize: 16,
     fontFamily: "roboto",
+    color: theme.palette.primary.contrastText
   },
   avatar: {
     width: 64,

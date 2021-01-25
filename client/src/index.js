@@ -31,6 +31,12 @@ const APP_THEMES = {
     },
   shape: {
     borderRadius: "0.5rem"
+  },
+  custom: {
+    palette: {
+      drawerBackground: "#100e2f"
+    },
+    drawerWidth: 300
   }
   },
 
@@ -48,6 +54,12 @@ const APP_THEMES = {
     },
   shape: {
       borderRadius: "0.5rem"
+    },
+  custom: {
+      palette: {
+        drawerBackground: "#100e2f"
+      },
+      drawerWidth: 320
     }
   }
 }

@@ -32,8 +32,8 @@ const navItemStyles = makeStyles((theme) => ({
     paddingBottom: 0,
   },
   button: {
-    color: palette.text.secondary,
-    fontWeight: theme.typography.fontWeightMedium,
+    color: theme.palette.primary.contrastText,
+    fontWeight: 400,
     width: "100%",
     padding: "10px 8px",
     justifyContent: "flex-start",
