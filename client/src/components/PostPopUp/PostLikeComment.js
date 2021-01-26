@@ -19,14 +19,15 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         justifyContent: "space-between",
         marginTop: 5,
-        borderBottom: "0.5px solid #727273",
-        borderTop: "0.5px solid #727273",
+        // borderBottom: "0.5px solid #727273",
+        // borderTop: "0.5px solid #727273",
         padding: 5,
       },
       like_comment_button: {
-        width: "70%",
+        width: "30%",
+        backgroundColor: theme.palette.custom.palette.paleNuance,
         '&:hover': {
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.primary.light,
         }
       },
 }))

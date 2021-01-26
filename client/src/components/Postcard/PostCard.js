@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import {
   makeStyles,
@@ -28,9 +28,10 @@ import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../../constants/Da
 
 import { generatePath, Link } from "react-router-dom";
 import PostUserInfo from "../PostPopUp/PostUserInfo";
+import PostLikeComment from "../PostPopUp/PostLikeComment";
 
-const postCardStyles = makeStyles(theme => ({
-  postCard: {
+const useStyles = makeStyles(theme => ({
+  post_card: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     borderRadius: theme.palette.shape.borderRadius,
@@ -69,13 +70,14 @@ const postCardStyles = makeStyles(theme => ({
     width: "100%",
     cursor: "pointer"
   },
-  footer: {
-    position: "relative",
+  card_footer: {
+    padding: "0rem 1rem 0.09rem 1rem",
+    // paddingRight: "1rem"
   },
 }));
 
 const PostCard = ({
-  title,
+  title: content,
   fullName,
   image,
   avatar,
@@ -89,12 +91,21 @@ const PostCard = ({
   imagePublicId,
   comments,
 }) => {
-  const classes = postCardStyles();
+  const classes = useStyles();
   const [{ auth }] = useStore();
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [recentComments, setRecentComments] = useState([]);
 
+  React.useEffect(() => {
+    if(comments.length >= 2){
+      setRecentComments(comments.slice(-2))
+    } else{
+      setRecentComments(comments)
+    }
+  }, [comments, postId])
+
+  
   // if anchorEl has any value set it to null
   // otherwise add the event currentTarget to it
   const handleClick = (event) => {
@@ -134,7 +145,7 @@ const PostCard = ({
   const dummyDate = `13 days ago`
 
   return (
-    <>
+    <Fragment>
       <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
         <PostCardOptions
           closeMenu={() => setAnchorEl(null)}
@@ -144,8 +155,7 @@ const PostCard = ({
           deletePost={deletePost}
         />
       </Popper>
-      {/*  */}
-      <div className={classes.postCard}>
+      <div className={classes.post_card}>
         <Box className={classes.card_header}>
           <PostUserInfo 
           authorImage={avatar} 
@@ -154,45 +164,14 @@ const PostCard = ({
           username={username}
           />
         </Box>
-        <CardContent>{title}</CardContent>
-        {image && (
-          <img
-            className={classes.media}
-            src={image}
-            onClick={openModal}
-          />
-        )}
-        <div className={classes.footer}>
-          <div className={classes.cardData}>
-            <h5>
-              {" "}
-              {likeNumber} {likeNumber > 1 ? "likes" : "like"}{" "}
-            </h5>
-            <h5>
-              {" "}
-              {commentNumber} {commentNumber > 1 ? "comments" : "comment"}{" "}
-            </h5>
-          </div>
-          <Divider />
-          <div className={classes.icons}>
-            <Like likes={likes} postId={postId} author={postAuthor} />
-            <IconButton onClick={() => setIsCommentOpen(!isCommentOpen)}>
-              <Comment />
-            </IconButton>
-          </div>
-          {isCommentOpen && (
-            <PostPopUpComments
-              comments={comments}
-              closeComments={() => setIsCommentOpen(false)}
-              postId={postId}
-            />
-          )}
-          {isCommentOpen && (
-            <CreateComment postId={postId} focus={isCommentOpen} />
-          )}
-        </div>
+        <CardContent> { content } </CardContent>
+        {image && ( <img className={classes.media} src={image} onClick={openModal} /> )}
+        <Box className={classes.card_footer}>
+          <PostLikeComment />
+          <PostPopUpComments comments={recentComments} postId={postId} />
+        </Box>
       </div>
-    </>
+    </Fragment>
   );
 };
 
@@ -226,3 +205,34 @@ PostCard.propTypes = {
 // } 
 // subheader={"5 hours ago"}
 // />
+
+
+{/* <div className={classes.footer}>
+<div className={classes.cardData}>
+  <h5>
+    {" "}
+    {likeNumber} {likeNumber > 1 ? "likes" : "like"}{" "}
+  </h5>
+  <h5>
+    {" "}
+    {commentNumber} {commentNumber > 1 ? "comments" : "comment"}{" "}
+  </h5>
+</div>
+<Divider />
+<div className={classes.icons}>
+  <Like likes={likes} postId={postId} author={postAuthor} />
+  <IconButton onClick={() => setIsCommentOpen(!isCommentOpen)}>
+    <Comment />
+  </IconButton>
+</div>
+{isCommentOpen && (
+  <PostPopUpComments
+    comments={comments}
+    closeComments={() => setIsCommentOpen(false)}
+    postId={postId}
+  />
+)}
+{isCommentOpen && (
+  <CreateComment postId={postId} focus={isCommentOpen} />
+)}
+</div> */}

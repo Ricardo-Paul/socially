@@ -22,7 +22,8 @@ const useStyles = makeStyles(theme => ({
     padding: "0.5rem",
     marginBottom: "1.5rem",
     position: "relative",
-    borderRadius: 15
+    borderRadius: 15,
+    marginTop: "1rem"
   },
   comment: {
 
@@ -33,17 +34,25 @@ const useStyles = makeStyles(theme => ({
     bottom: "-0.78rem",
     backgroundColor: theme.palette.primary.light,
     padding: "0.2rem",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    display: "none" //partially
+  },
+  no_comment: {
+    padding: "0.5rem",
+    fontWeight: 600,
+    color: theme.palette.custom.palette.helperText
   }
 }))
 
 const dummyUserName = `Carli Andersen`
 const dummyComment = `Glad you had a conversation with my PM today. Justin Trudeau is a true Canadian and a friend of the United States. Glad you had a conversation with my PM today`
+const no_comment_text = `Be the first to comment`
 
 const PostPopUpComments = ({ match, comments, postId }) => {
   const [{ auth }] = useStore();
   const classes = useStyles();
   const theme = useTheme();
+
 
   const [remove] = useMutation(DELETE_COMMENT, {
     refetchQueries: [
@@ -77,6 +86,14 @@ const PostPopUpComments = ({ match, comments, postId }) => {
   const comment_light_style = {
     backgroundColor: `${isLightTeme && `${theme.palette.primary.main}`}`,
     boxShadow: `${isLightTeme && `1px 1px 7px #bbbbbb`}`
+  }
+
+  if(comments.length < 1){
+    return(
+      <Box className={classes.no_comment}>
+        {no_comment_text}
+      </Box>
+    )
   }
 
   return(

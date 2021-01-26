@@ -7,7 +7,7 @@ import PostLikeComment from "./PostLikeComment";
 const useStyles = makeStyles(theme => ({
   post_info: {
       padding: "1.5rem",
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.custom.palette.paleNuance,
       borderRadius: 10,
       marginBottom: "0.7rem"
     }
