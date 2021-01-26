@@ -3,6 +3,7 @@ import Logo from "../../assets/logo.svg"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box"
 import PropTypes from "prop-types";
+import { useTheme } from "@material-ui/core";
 
 const useStyles = makeStyles({
     container: {
@@ -11,7 +12,6 @@ const useStyles = makeStyles({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        backgroundColor: "#ffffff"
     },
     logo: {
         width: "4rem",
@@ -22,9 +22,14 @@ const useStyles = makeStyles({
 
 const Loading = ({ text }) => {
     const classes = useStyles();
+    const theme = useTheme();
+
+    const style = {
+        backgroundColor: theme.palette.primary.dark
+    }
 
     return(
-        <div className={classes.container}> 
+        <div style={style} className={classes.container}> 
             <img className={classes.logo} src={Logo} />
             {text &&
             <Box fontFamily="monospace">

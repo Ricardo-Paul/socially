@@ -1,11 +1,11 @@
 import React, { useEffect, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import { GET_AUTH_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
 import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
 import { GET_NEW_CONVERSATIONS } from "../../graphql/message";
 import Loading from "../../pages/Loading/Loading";
+import { useTheme } from "@material-ui/core";
 
 const AppLayout = React.lazy(() => import("./AppLayout"));
 const AuthLayout = React.lazy(() => import("../../pages/Auth/AuthLayout"))
@@ -13,6 +13,12 @@ const AuthLayout = React.lazy(() => import("../../pages/Auth/AuthLayout"))
 const App = () => {
   const { loading, data, error, subscribeToMore, refetch } = useQuery(GET_AUTH_USER);
   console.log("AUTH USER", data);
+
+  const theme = useTheme();
+
+  useEffect(() => {
+    document.body.style.backgroundColor = theme.palette.primary.dark;
+  }, [document])
 
   // we use subscribeToMore to execute our subscriptions
   // and push updates to the original query result (data.getAuthUser)
@@ -119,9 +125,9 @@ const App = () => {
     <Router>
       <Suspense fallback={<Loading text={`Socially V1.0.0`} />} >
       <Switch>
-        {data.getAuthUser ?
-          (<Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />) : 
-          (<Route exact render={() => <AuthLayout refetch={refetch} />} />)}
+          {data.getAuthUser ?
+            (<Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />) : 
+            (<Route exact render={() => <AuthLayout refetch={refetch} />} />)}
       </Switch>
       </Suspense>
     </Router>

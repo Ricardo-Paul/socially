@@ -26,16 +26,19 @@ const Post = lazy(() => import("../../pages/Post"));
 
 
 const useStyles = makeStyles((theme) => ({
-  // "@global": {
-  //   "*::-webkit-scrollbar": {
-  //     width: "0.4em",
-  //     height: "0.4em",
-  //   },
-  //   "*::-webkit-scrollbar-thumb": {
-  //     backgroundColor: "rgba(0,0,0,.4)",
-  //     outline: "1px solid slategrey",
-  //   },
-  // },
+  "@global": {
+    "*::-webkit-scrollbar": {
+      width: "0.8em",
+      height: "0.4em",
+    },
+    "*::-webkit-scrollbar-thumb": {
+      backgroundColor: theme.palette.primary.contrastText,
+      borderRadius: "1rem"
+    },
+    "::-webkit-scrollbar-track": {
+      borderRadius: "1rem"
+    }
+  },
   grid: {
     height: "100%",
     backgroundColor: theme.palette.primary.dark,
