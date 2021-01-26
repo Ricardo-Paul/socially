@@ -5,14 +5,14 @@ const { makeStyles } = require("@material-ui/core");
 const headerStyles = makeStyles((theme) => ({
   appBar: {
     position: "fixed",
-    backgroundColor: colors.white,
+    backgroundColor: theme.palette.primary.dark,
     display: "flex",
     justifyContent: "center",
+    borderBottom: "1px solid #3c3c3c"
   },
   toolBar: {
     zIndex: 700,
     display: "flex",
-    backgroundColor: colors.white,
     width: "70%",
     margin: "0 auto",
     [theme.breakpoints.down("sm")]: {
@@ -21,14 +21,15 @@ const headerStyles = makeStyles((theme) => ({
     },
   },
   search: {
-    border: "1.2px solid #a9a8a8",
-    backgroundColor: "#efefef",
+    backgroundColor: theme.palette.primary.light,
     display: "flex",
-    borderRadius: 5,
-    // marginLeft: 20,
+    borderRadius: theme.palette.shape.inputBorderRadius,
     [theme.breakpoints.down("sm")]: {
       marginLeft: 5,
     },
+    '&::placeholder':{
+      color: theme.palette.primary.contrastText
+    }
   },
   searchIcon: {
     color: "black",

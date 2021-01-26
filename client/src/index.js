@@ -13,7 +13,14 @@ import { themes } from './constants/AppTheme';
 const { DARK_THEME, LIGHT_THEME, DEFAULT_THEME } = themes;
 
 const getMuiTheme = SELECTED_THEME => createMuiTheme({
-  palette: APP_THEMES[SELECTED_THEME]
+  palette: APP_THEMES[SELECTED_THEME],
+  overrides: {
+    MuiIconButton: {
+      fontSizeSmall: {
+        fontSize: "1.7rem"
+      }
+    },
+  }
 });
 
 const APP_THEMES = {
@@ -59,7 +66,8 @@ const APP_THEMES = {
       light: "#d8d8d847"
     },
   shape: {
-      borderRadius: "0.5rem"
+      borderRadius: "0.5rem",
+      inputBorderRadius: "1.5rem"
     },
   custom: {
       palette: {

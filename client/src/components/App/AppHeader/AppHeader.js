@@ -5,6 +5,7 @@ import {
   Toolbar,
   Typography,
   Badge,
+  makeStyles,
 } from "@material-ui/core";
 
 import {
@@ -12,7 +13,7 @@ import {
   AccountCircle,
   Mail as MailIcon,
 } from "@material-ui/icons";
-
+ 
 import React, { useState } from "react";
 import AppInfo from "../../../constants/AppInfo.json";
 import headerStyles from "./headerStyles";
@@ -22,9 +23,21 @@ import Navigation from "../Navigation";
 import { useStore } from "../../../store";
 import HeaderDropDowns from "./HeaderDropDowns";
 import Search from "../../Search";
+import Box from "@material-ui/core/Box";
+import useTheme from "@material-ui/core/styles/useTheme";
+
+const useStyles = makeStyles(theme => ({
+  badge: {
+    backgroundColor: "#ff0000",
+    color: "#ffffff",
+    fontSize: ".8rem"
+  }
+}))
 
 const AppHeader = () => {
   const classes = headerStyles();
+  const badge_override = useStyles();
+  const theme = useTheme();
   const [{ auth }] = useStore();
 
   const [notifications, setNotifications] = React.useState(null);
@@ -80,8 +93,17 @@ const AppHeader = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.appName}>
-            {AppInfo.name}
+          {/* partial styling */}
+          <Typography variant="h6">
+            <Box style={{
+              backgroundColor: "#333333",
+              color: "#d44b21",
+              fontWeight: 600,
+              borderRadius: "1rem",
+              padding: ".35rem"
+            }} >
+              {AppInfo.name}
+            </Box>
           </Typography>
           <Search
             fullWidth={false}
@@ -95,17 +117,17 @@ const AppHeader = () => {
             color="inherit"
             onClick={(event) => handleIconClick(event, "NOTIFICATION")}
           >
-            <Badge badgeContent={notifications ? notifications.length : null} color="secondary">
-              <NotificationIcon color="primary" fontSize="small" />
+            <Badge max={10} classes={{ badge: badge_override.badge }}  badgeContent={notifications ? notifications.length : null} color="secondary">
+              <NotificationIcon style={{color: "white"}} fontSize="small" />
             </Badge>
           </IconButton>
 
           <IconButton
             color="inherit"
             onClick={(event) => handleIconClick(event, "MESSAGE")}
-          >
-            <Badge badgeContent={conversations.length} color="secondary">
-              <MailIcon color="primary" fontSize="small" />
+          > 
+            <Badge max={10} badgeContent={conversations.length } classes={{ badge: badge_override.badge }} >
+              <MailIcon style={{color: "white"}} fontSize="small" />
             </Badge>
           </IconButton>
 
@@ -113,7 +135,7 @@ const AppHeader = () => {
             color="inherit"
             onClick={(event) => handleIconClick(event, "USER")}
           >
-            <AccountCircle color="primary" />
+            <AccountCircle style={{color: "white"}} />
           </IconButton>
         </Toolbar>
       </AppBar>

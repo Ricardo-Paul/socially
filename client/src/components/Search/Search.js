@@ -1,5 +1,5 @@
 import { useApolloClient } from "@apollo/client";
-import { InputBase } from "@material-ui/core";
+import { InputBase, useTheme } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import { SEARCH_USERS } from "../../graphql/search";
@@ -11,6 +11,8 @@ import PropTypes from "prop-types";
 const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   const client = useApolloClient();
   const classes = headerStyles();
+  const theme = useTheme();
+  const text_color = theme.palette.primary.contrastText;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -19,11 +21,12 @@ const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   const [loading, setLoading] = React.useState(false);
 
   const inputBaseClasses = {
-    root: classes.inputRoot,
+    // root: classes.inputRoot,
     input: classes.inputInput,
   };
 
   const debounceSearchQuery = useDebounce(searchQuery, 500);
+
   const closeMenu = () => setSearchQuery("");
   // handle input change
   const handleChange = (event) => {
@@ -56,13 +59,14 @@ const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   return (
     <div className={classes.search} {...rest}>
       <div className={classes.searchIcon}>
-        <SearchIcon />
+        <SearchIcon style={{color: text_color}} />
       </div>
       <InputBase
         fullWidth={fullWidth ? true : false}
-        classes={inputBaseClasses}
+        // classes={inputBaseClasses}
         placeholder={placeholder}
         onChange={(event) => handleChange(event)}
+        style={{color: text_color, padding: ".3rem"}}
       />
 
       <SearchResult

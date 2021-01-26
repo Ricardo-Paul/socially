@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   desktopDrawer: {
-    top: 70,
+    top: 66,
     height: "calc(100% - 64px)",
     width: theme.palette.custom.drawerWidth,
     zIndex: 100,
