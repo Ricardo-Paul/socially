@@ -96,6 +96,8 @@ const PostCard = ({
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [recentComments, setRecentComments] = useState([]);
+  const [isCreateCommentOpen, setCreateCommentOpen] = React.useState(false);
+
 
   React.useEffect(() => {
     if(comments.length >= 2){
@@ -105,14 +107,12 @@ const PostCard = ({
     }
   }, [comments, postId])
 
-  
+
   // if anchorEl has any value set it to null
   // otherwise add the event currentTarget to it
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
-
-  const [isCommentOpen, setIsCommentOpen] = React.useState(false);
 
   const [remove] = useMutation(DELETE_POST, {
     refetchQueries: [
@@ -167,7 +167,8 @@ const PostCard = ({
         <CardContent> { content } </CardContent>
         {image && ( <img className={classes.media} src={image} onClick={openModal} /> )}
         <Box className={classes.card_footer}>
-          <PostLikeComment />
+          <PostLikeComment handleCommentClick={() => setCreateCommentOpen(!isCreateCommentOpen)} />
+          { isCreateCommentOpen && <CreateComment postId={postId} /> }
           <PostPopUpComments comments={recentComments} postId={postId} />
         </Box>
       </div>

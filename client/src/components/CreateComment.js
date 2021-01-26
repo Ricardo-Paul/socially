@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, makeStyles, TextField, IconButton } from "@material-ui/core";
-import { theme } from "../utils/theme";
+import { Button, makeStyles, IconButton } from "@material-ui/core";
 import { CREATE_COMMENT } from "../graphql/comment";
 import { useMutation } from "@apollo/client";
 import { useStore } from "../store";
@@ -31,7 +30,8 @@ const commenStyles = makeStyles(theme => ({
     fontSize: "1rem"
   },
   form: {
-    display: "flex"
+    display: "flex",
+    marginTop: "0.5rem"
   }
 }));
 
@@ -94,7 +94,7 @@ const CreateComment = ({ focus, postId }) => {
   // }, [focus]);
 
   return (
-    <>
+    <React.Fragment>
       <form onSubmit={handleSubmit} className={classes.form}>
         <input
           type="text"
@@ -103,7 +103,7 @@ const CreateComment = ({ focus, postId }) => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           value={comment}
-          placeholder="comment..."
+          placeholder="Write a comment..."
           id="input"
         />
         <IconButton
@@ -119,7 +119,7 @@ const CreateComment = ({ focus, postId }) => {
           <Send />
         </IconButton>
       </form>
-    </>
+    </React.Fragment>
   );
 };
 

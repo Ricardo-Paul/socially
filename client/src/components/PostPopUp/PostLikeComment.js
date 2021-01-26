@@ -7,6 +7,7 @@ import { Hidden } from "@material-ui/core";
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import useTheme from "@material-ui/core/styles/useTheme";
+import PropTypes from "prop-types";
 
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +33,7 @@ const useStyles = makeStyles(theme => ({
       },
 }))
 
-const PostLikeComment = ({}) => {
+const PostLikeComment = ({ handleCommentClick }) => {
     const classes = useStyles();
     const theme = useTheme();
     const inner_color = {color: theme.palette.primary.contrastText}
@@ -49,7 +50,7 @@ const PostLikeComment = ({}) => {
           <ThumbUpAltOutlinedIcon style={{ marginRight: "0.5rem" }} />
           <Hidden xsDown>Like</Hidden>
         </Button>
-        <Button className={classes.like_comment_button} style={inner_color}>
+        <Button onClick={handleCommentClick} className={classes.like_comment_button} style={inner_color}>
           <ChatBubbleOutlineOutlinedIcon style={{ marginRight: "0.5rem" }} />
           <Hidden xsDown>Comment</Hidden>
         </Button>
@@ -61,5 +62,9 @@ const PostLikeComment = ({}) => {
     </Fragment>
   );
 };
+
+PostLikeComment.propTypes = {
+  handleCommentClick: PropTypes.func.isRequired
+}
 
 export default PostLikeComment;
