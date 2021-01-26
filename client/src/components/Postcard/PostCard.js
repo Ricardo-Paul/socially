@@ -72,8 +72,13 @@ const useStyles = makeStyles(theme => ({
   },
   card_footer: {
     padding: "0rem 1rem 0.09rem 1rem",
-    // paddingRight: "1rem"
   },
+  more_comment: {
+    cursor: "pointer",
+    '&:hover':{
+      textDecoration: "underline"
+    }
+  }
 }));
 
 const PostCard = ({
@@ -97,15 +102,15 @@ const PostCard = ({
   const open = Boolean(anchorEl);
   const [recentComments, setRecentComments] = useState([]);
   const [isCreateCommentOpen, setCreateCommentOpen] = React.useState(false);
-
+  const isMoreComments = comments && comments.length > 1;
 
   React.useEffect(() => {
     if(comments.length >= 2){
-      setRecentComments(comments.slice(-2))
+      setRecentComments(comments.slice(-1))
     } else{
       setRecentComments(comments)
     }
-  }, [comments, postId])
+  }, [comments, postId]);
 
 
   // if anchorEl has any value set it to null
@@ -143,6 +148,7 @@ const PostCard = ({
   };
 
   const dummyDate = `13 days ago`
+  const moreCommentText = `See more comments`;
 
   return (
     <Fragment>
@@ -170,6 +176,7 @@ const PostCard = ({
           <PostLikeComment handleCommentClick={() => setCreateCommentOpen(!isCreateCommentOpen)} />
           { isCreateCommentOpen && <CreateComment postId={postId} /> }
           <PostPopUpComments comments={recentComments} postId={postId} />
+          {isMoreComments && <Box className={classes.more_comment} onClick={openModal}> { moreCommentText } </Box> }
         </Box>
       </div>
     </Fragment>

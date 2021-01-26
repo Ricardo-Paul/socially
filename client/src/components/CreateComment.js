@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, makeStyles, IconButton } from "@material-ui/core";
+import { makeStyles, IconButton, Avatar } from "@material-ui/core";
 import { CREATE_COMMENT } from "../graphql/comment";
 import { useMutation } from "@apollo/client";
 import { useStore } from "../store";
 import { Send } from "@material-ui/icons";
+import Box from "@material-ui/core/Box";
 
 import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
 import { GET_FOLLOWED_POSTS, GET_POST } from "../graphql/post";
@@ -31,7 +32,22 @@ const commenStyles = makeStyles(theme => ({
   },
   form: {
     display: "flex",
-    marginTop: "0.5rem"
+    marginTop: "0.5rem",
+    marginBottom: "0.5rem",
+    paddingLeft: "0.5rem"
+  },
+  avatar: {
+    position: "relative",
+    marginRight: 10
+  },
+  oneline_indicator: {
+    width: 10,
+    height: 10,
+    backgroundColor: "#00ff00", //greencolor 
+    position: "absolute",
+    right: "-3px",
+    bottom: "4px",
+    borderRadius: "50%"
   }
 }));
 
@@ -96,6 +112,10 @@ const CreateComment = ({ focus, postId }) => {
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit} className={classes.form}>
+        <Box className={classes.avatar}>
+          <Avatar src={auth.user.image} />
+          <Box className={classes.oneline_indicator} ></Box>
+        </Box>
         <input
           type="text"
           inputRef={textareaEl}

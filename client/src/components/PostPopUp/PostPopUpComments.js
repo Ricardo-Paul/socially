@@ -26,9 +26,8 @@ const useStyles = makeStyles(theme => ({
   },
   comment_box: {
     backgroundColor: theme.palette.primary.light,
-    width: "100%",
     padding: "0.5rem",
-    borderRadius: "1.5rem"
+    borderRadius: "0.5rem"
   },
   comment_box_span:{
     position: "absolute",
@@ -41,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   no_comment: {
     padding: "0.5rem",
     fontWeight: 600,
-    color: theme.palette.custom.palette.helperText
+    color: theme.palette.custom.palette.helperText,
   }
 }))
 
@@ -104,7 +103,7 @@ const PostPopUpComments = ({ match, comments, postId }) => {
           <Box style={comment_light_style} className={classes.comment_item} key={c.id}>
             <Avatar alt="user avatar"src={c.author.image} style={{marginRight: "0.5rem"}} />
             <Box className={classes.comment_box} >
-              <Box fontWeight={"bold"}>
+              <Box fontWeight={600}>
                 <Typography> {c.author.fullName} </Typography>
               </Box>
               <Box className={classes.comment}>
