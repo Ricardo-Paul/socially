@@ -18,21 +18,22 @@ import { useTheme } from "@material-ui/core";
 const useStyles = makeStyles(theme => ({
   comment_item: {
     display: "flex",
-    backgroundColor: theme.palette.primary.light,
     padding: "0.5rem",
-    marginBottom: "1.5rem",
     position: "relative",
-    borderRadius: 15,
-    marginTop: "1rem"
   },
   comment: {
 
+  },
+  comment_box: {
+    backgroundColor: theme.palette.primary.light,
+    width: "100%",
+    padding: "0.5rem",
+    borderRadius: "1.5rem"
   },
   comment_box_span:{
     position: "absolute",
     right: "0.7rem",
     bottom: "-0.78rem",
-    backgroundColor: theme.palette.primary.light,
     padding: "0.2rem",
     borderRadius: "10px",
     display: "none" //partially
@@ -104,10 +105,10 @@ const PostPopUpComments = ({ match, comments, postId }) => {
             <Avatar alt="user avatar"src={c.author.image} style={{marginRight: "0.5rem"}} />
             <Box className={classes.comment_box} >
               <Box fontWeight={"bold"}>
-                <Typography> {dummyUserName} </Typography>
+                <Typography> {c.author.fullName} </Typography>
               </Box>
               <Box className={classes.comment}>
-                {dummyComment}
+                {c.comment}
               </Box>
             </Box>
             <span style={comment_light_style} className={classes.comment_box_span} >
