@@ -36,6 +36,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prettier": "prettier",
     "format:pages": "prettier ./src/pages --write",
     "format:components": "prettier ./src/components --write",
     "build": "react-scripts build",

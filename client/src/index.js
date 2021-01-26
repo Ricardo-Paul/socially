@@ -61,7 +61,7 @@ const APP_THEMES = {
     },
   custom: {
       palette: {
-        drawerBackground: "#100e2f"
+        drawerBackground: "#191919"
       },
       drawerWidth: 300,
       peopleBoxWidth: 450,
