@@ -111,6 +111,9 @@ export const GET_POST = gql`
             }
             likes{
                 id
+                user{
+                    id
+                }
             }
         }
     }

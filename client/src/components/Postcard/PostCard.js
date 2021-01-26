@@ -103,6 +103,8 @@ const PostCard = ({
   const [recentComments, setRecentComments] = useState([]);
   const [isCreateCommentOpen, setCreateCommentOpen] = React.useState(false);
   const isMoreComments = comments && comments.length > 1;
+  const likeProps = { likes, postId, author: postAuthor }
+
 
   React.useEffect(() => {
     if(comments.length >= 2){
@@ -112,7 +114,6 @@ const PostCard = ({
     }
   }, [comments, postId]);
 
-  const likeProps = { likes, postId, author: postAuthor }
 
 
   // if anchorEl has any value set it to null

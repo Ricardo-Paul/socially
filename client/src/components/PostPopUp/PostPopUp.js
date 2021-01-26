@@ -80,13 +80,19 @@ const PostPopUp = ({ closeModal, id }) => {
   }
 
   const post = data && data.getPost;
-  const { image, comments, author: { image: authorImage, fullName, username } } = post;
+  const { id: postId, image, comments, likes, author: { image: authorImage, fullName, username } } = post;
 
   const dummyText = "A new Administration means a new lunch partner. My first weekly lunch with Vice President Kamala Harris is in the books!"
   const avatar = "https://material-ui.com/static/images/avatar/3.jpg";
   const name_and_hour = ["President Joe Biden", "12h"]
 
   const inner_color = {color: `${text_color}`}
+
+  const likeProps = {
+    likes,
+    postId,
+    author: post.author
+  }
 
   return (
     <ClickAwayListener onClickAway={closeModal}>
@@ -113,6 +119,7 @@ const PostPopUp = ({ closeModal, id }) => {
                 authorName={name_and_hour[0]} 
                 createdAt={name_and_hour[1]}
                 username={username}
+                likeProps={likeProps}
                 />
                 <PostPopUpComments comments={post.comments} />
               </Box>

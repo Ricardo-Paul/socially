@@ -37,7 +37,8 @@ const APP_THEMES = {
     palette: {
       drawerBackground: "#333333",
       paleNuance: "#2f2e2e",
-      helperText: "#a9482a"
+      helperText: "#a9482a",
+      likeColor: "#0b80ef"
     },
     drawerWidth: 300,
     peopleBoxWidth: 450,
@@ -64,7 +65,8 @@ const APP_THEMES = {
       palette: {
         drawerBackground: "#191919",
         paleNuance: "#2f2e2e",
-        helperText: "#a9482a"
+        helperText: "#a9482a",
+        likeColor: "#0b80ef"
       },
       drawerWidth: 300,
       peopleBoxWidth: 450,

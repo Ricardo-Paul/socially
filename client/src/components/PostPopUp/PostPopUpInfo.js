@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 const dummyText = "A new Administration means a new lunch partner. My first weekly lunch with Vice President Kamala Harris is in the books!"
 
 
-const PostPopUpInfo = ({ authorImage, authorName, createdAt, username }) => {
+const PostPopUpInfo = ({ authorImage, authorName, createdAt, username, likeProps }) => {
   const classes = useStyles();
   
   return(
@@ -30,7 +30,7 @@ const PostPopUpInfo = ({ authorImage, authorName, createdAt, username }) => {
         <Box fontWeight={400} >
           {dummyText}
         </Box>
-        <PostLikeComment />
+        <PostLikeComment likeProps={likeProps} />
       </Box>
     )
     }
