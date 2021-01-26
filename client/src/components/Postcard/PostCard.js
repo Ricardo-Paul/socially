@@ -112,6 +112,8 @@ const PostCard = ({
     }
   }, [comments, postId]);
 
+  const likeProps = { likes, postId, author: postAuthor }
+
 
   // if anchorEl has any value set it to null
   // otherwise add the event currentTarget to it
@@ -173,7 +175,7 @@ const PostCard = ({
         <CardContent> { content } </CardContent>
         {image && ( <img className={classes.media} src={image} onClick={openModal} /> )}
         <Box className={classes.card_footer}>
-          <PostLikeComment handleCommentClick={() => setCreateCommentOpen(!isCreateCommentOpen)} />
+          <PostLikeComment likeProps={likeProps} handleCommentClick={() => setCreateCommentOpen(!isCreateCommentOpen)}  />
           { isCreateCommentOpen && <CreateComment postId={postId} /> }
           <PostPopUpComments comments={recentComments} postId={postId} />
           {isMoreComments && <Box className={classes.more_comment} onClick={openModal}> { moreCommentText } </Box> }

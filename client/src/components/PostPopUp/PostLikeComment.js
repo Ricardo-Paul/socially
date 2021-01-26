@@ -4,10 +4,10 @@ import Button from "@material-ui/core/Button"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import { Hidden } from "@material-ui/core";
-import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import useTheme from "@material-ui/core/styles/useTheme";
 import PropTypes from "prop-types";
+import Like from "../Like";
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,10 +33,11 @@ const useStyles = makeStyles(theme => ({
       },
 }))
 
-const PostLikeComment = ({ handleCommentClick }) => {
+const PostLikeComment = ({ handleCommentClick, likeProps }) => {
     const classes = useStyles();
     const theme = useTheme();
     const inner_color = {color: theme.palette.primary.contrastText}
+    // const { likes, postId, author } = likeProps;
 
   return (
     <Fragment>
@@ -46,10 +47,7 @@ const PostLikeComment = ({ handleCommentClick }) => {
         <span> {"8.3K Shares"} </span>
       </Box>
       <Box className={classes.like_comment_buttons}>
-        <Button className={classes.like_comment_button} style={inner_color}>
-          <ThumbUpAltOutlinedIcon style={{ marginRight: "0.5rem" }} />
-          <Hidden xsDown>Like</Hidden>
-        </Button>
+        <Like {...likeProps} like_style={classes.like_comment_button} />
         <Button onClick={handleCommentClick} className={classes.like_comment_button} style={inner_color}>
           <ChatBubbleOutlineOutlinedIcon style={{ marginRight: "0.5rem" }} />
           <Hidden xsDown>Comment</Hidden>

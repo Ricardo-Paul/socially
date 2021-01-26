@@ -5,23 +5,23 @@ import { useStore } from "./../store";
 import PropTypes from "prop-types";
 import { useMutation } from "@apollo/client";
 import { HOME_PAGE_POSTS_LIMIT } from "./../constants/DataLimit";
-
-// mutation
 import { CREATE_LIKE, DELETE_LIKE } from "./../graphql/like";
-
-// queries to refetch
 import { GET_FOLLOWED_POSTS, GET_POST } from "./../graphql/post";
 import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import Button from "@material-ui/core/Button"
+import useTheme from "@material-ui/core/styles/useTheme";
+import { Hidden } from "@material-ui/core";
 
-const Like = ({ likes, postId, author }) => {
-  // decide what operation to execute
-  // based on whether the current user has liked
-  // the post
 
+const Like = ({ likes, postId, author, like_style }) => {
+  const theme = useTheme();
+  const inner_color = {color: theme.palette.primary.contrastText}
   const [{ auth }] = useStore();
   const existedLike = likes.find((like) => like.user.id === auth.user.id);
-
+  // decide what operation to execute based on whether the current user has liked the post
   const operation = existedLike ? "delete" : "create";
+
 
   const options = {
     create: {
@@ -60,9 +60,13 @@ const Like = ({ likes, postId, author }) => {
   };
 
   return (
-    <IconButton onClick={() => handleButtonClick(mutate)}>
-      <ThumbUpAlt style={{ color: existedLike ? "#0b80ef" : "#d4d4d4" }} />
-    </IconButton>
+      <Button onClick={() => handleButtonClick(mutate)} 
+      className={like_style} 
+      style={inner_color}>
+        <ThumbUpAltOutlinedIcon style={{ marginRight: "0.5rem", 
+        color: existedLike ? "#0b80ef" : "#d4d4d4" }} />
+        <Hidden xsDown>Like</Hidden>
+      </Button>
   );
 };
 
@@ -75,3 +79,6 @@ Like.propTypes = {
 };
 
 // db.users.update({username:'mrjoe'}, {$set: {likes: []}})
+{/* <IconButton onClick={() => handleButtonClick(mutate)}>
+<ThumbUpAlt style={{ color: existedLike ? "#0b80ef" : "#d4d4d4" }} />
+</IconButton> */}
