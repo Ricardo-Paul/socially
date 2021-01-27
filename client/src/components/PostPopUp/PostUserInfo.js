@@ -8,6 +8,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { useTheme } from "@material-ui/core";
 import { generatePath, Link } from "react-router-dom";
 import * as Routes from "../../routes";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
     user_info: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const PostUserInfo = ({ authorImage, createdAt, authorName, username }) => {
+const PostUserInfo = ({ authorImage, createdAt, authorName, username, openPopOver }) => {
     const classes = useStyles();
     const theme = useTheme();
     const inner_color = {color: theme.palette.primary.contrastText}
@@ -42,12 +43,20 @@ const PostUserInfo = ({ authorImage, createdAt, authorName, username }) => {
           </Box>
         </Box>
         <Box className={classes.right_user_info}>
-          <IconButton style={inner_color}>
+          <IconButton style={inner_color} onClick={openPopOver} >
             <MoreHoriz />
           </IconButton>
         </Box>
       </Box>
     )
+};
+
+PostUserInfo.propTypes = {
+  authorImage: PropTypes.string,
+  createdAt: PropTypes.string,
+  authorName: PropTypes.string,
+  username: PropTypes.string,
+  openPopOver: PropTypes.func.isRequired
 }
 
 export default PostUserInfo;

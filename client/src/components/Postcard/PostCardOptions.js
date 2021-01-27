@@ -1,10 +1,9 @@
 import React from "react";
 import {
-  MenuList,
-  MenuItem,
   Paper,
   ClickAwayListener,
   Button,
+  useTheme,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { generatePath } from "react-router-dom";
@@ -13,8 +12,22 @@ import { useStore } from "../../store";
 import { Delete, FileCopy, PersonAdd } from "@material-ui/icons";
 import Follow from "../Follow";
 
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles(theme => ({
+  button_style: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    width: "100%",
+    display: "flex",
+    justifyContent: "flex-start"
+  }
+}))
+
 const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
   const [{ auth }] = useStore();
+  const theme = useTheme();
+  const classes = useStyles();
 
   const font = { fontSize: 12 };
   //TODO: REPLACE REACT_APP_CLIENT_URL when deployed,
@@ -41,15 +54,21 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
+            backgroundColor: theme.palette.primary.main,
+            borderRadius: 3,
+            width: "12rem",
+            height: "12rem",
+            padding: ".5rem",
+            border: theme.palette.custom.border
           }}
         >
-          <Button style={font} onClick={copyUrl}>
+          <Button classes={{root: classes.button_style}} style={font} onClick={copyUrl}>
             {" "}
             <FileCopy style={{ marginRight: 10 }} />
             Copy URL
           </Button>
           {isUserPost && (
-            <Button style={font} onClick={deletePost}>
+            <Button classes={{root: classes.button_style}} style={font} onClick={deletePost}>
               {" "}
               <Delete style={{ marginRight: 10 }} />
               Delete

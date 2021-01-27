@@ -118,7 +118,7 @@ const PostCard = ({
 
   // if anchorEl has any value set it to null
   // otherwise add the event currentTarget to it
-  const handleClick = (event) => {
+  const openPopOver = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
@@ -171,6 +171,7 @@ const PostCard = ({
           authorName={fullName} 
           createdAt={dummyDate} 
           username={username}
+          openPopOver={openPopOver}
           />
         </Box>
         <CardContent> { content } </CardContent>
