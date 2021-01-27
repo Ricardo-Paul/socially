@@ -97,8 +97,6 @@ const AppHeader = () => {
           <Typography variant="h6">
             <Box style={{
               backgroundColor: "#333333",
-              color: "#d44b21",
-              fontWeight: 600,
               borderRadius: "1rem",
               padding: ".35rem"
             }} >

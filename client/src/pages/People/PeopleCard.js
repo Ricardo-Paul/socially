@@ -6,16 +6,17 @@ import defaultAvatar from "../../ressources/defaultAvatar.jpg";
 import { generatePath, Link } from "react-router-dom";
 import * as Routes from "../../routes";
 
-const peopleCardStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: theme.palette.primary.main,
     padding: 20,
     marginRight: 10,
-    border: "1px solid #c5c4c4",
+    // border: "1px solid #c5c4c4",
     borderRadius: 0,
+    // boxShadow: theme.palette.custom.boxShadow
   },
   avatar: {
     width: 128,
@@ -27,11 +28,13 @@ const peopleCardStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    width: "100%",
+    color: theme.palette.primary.contrastText
   },
-});
+}));
 
 const PeopleCard = ({ user }) => {
-  const classes = peopleCardStyles();
+  const classes = useStyles();
 
   return (
     <Paper className={classes.container} elevation={2}>
@@ -45,7 +48,7 @@ const PeopleCard = ({ user }) => {
       </Box>
       <Box className={classes.cardInfo}>
         <Typography> {user.fullName} </Typography>
-        <Typography style={{ marginBottom: 10 }} color="textSecondary">
+        <Typography style={{ marginBottom: 10 }}>
           {" "}
           @{user.username}{" "}
         </Typography>
