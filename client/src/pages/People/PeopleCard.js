@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     padding: 20,
     marginRight: 10,
-    // border: "1px solid #c5c4c4",
+    border: theme.palette.custom.border,
     borderRadius: 0,
     // boxShadow: theme.palette.custom.boxShadow
   },

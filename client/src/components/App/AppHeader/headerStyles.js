@@ -8,9 +8,9 @@ const headerStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.dark,
     display: "flex",
     justifyContent: "center",
-    borderBottom: "1px solid #3c3c3c"
+    borderBottom: theme.palette.custom.border
   },
-  toolBar: {
+  toolBar: { 
     zIndex: 700,
     display: "flex",
     width: "70%",

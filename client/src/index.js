@@ -49,7 +49,8 @@ const APP_THEMES = {
     },
     drawerWidth: 300,
     peopleBoxWidth: 450,
-    boxShadow: "0px 4px 9px 0px #0c0c0c"
+    boxShadow: "0px 4px 9px 0px #0c0c0c",
+    border: "0.1px solid #424242"
   }
 },
 
