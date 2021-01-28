@@ -108,7 +108,10 @@ const PostCard = ({
 
   React.useEffect(() => {
     if(comments.length >= 2){
-      setRecentComments(comments.slice(-1))
+      const sortedComments = comments.sort((a, b) => {
+        return a.createdAt.toString().localeCompare(b.createdAt.toString())
+      });
+      setRecentComments(sortedComments.slice(-1))
     } else{
       setRecentComments(comments)
     }

@@ -22,7 +22,6 @@ const ProfilePosts = ({ username }) => {
 
     const { posts, count } = data.getUserPosts;
 
-
     return(
         <InfiniteScrolling
         data={posts}

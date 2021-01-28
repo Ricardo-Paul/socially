@@ -184,6 +184,12 @@ export const GET_USER_POSTS = gql`
           fullName
           username
           image
+          following{
+            id
+          }
+          followers{
+            id
+          }
         }
         comments{
           id

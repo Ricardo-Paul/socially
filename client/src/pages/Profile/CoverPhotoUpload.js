@@ -6,11 +6,12 @@ import defaultCover from "./background2.jpg";
 
 const CoverStyles = makeStyles((theme) => ({
   background: {
-    height: 210,
+    height: 320,
     width: "100%",
     backgroundImage: `url(${defaultCover})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
+    borderRadius: "0 0 .5rem .5rem"
   },
   uploadIcon: {
     borderRadius: 1,

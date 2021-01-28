@@ -49,6 +49,7 @@ const postCommentsPayload = `
 comments {
     id
     comment
+    createdAt
     author {
         id
         username

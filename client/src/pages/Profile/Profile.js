@@ -8,7 +8,7 @@ import { useQuery } from "@apollo/client";
 import { withRouter } from "react-router-dom";
 import { useStore } from "../../store";
 import ProfilePosts from "./ProfilePosts";
-
+ 
 const ProfileStyles = makeStyles((theme) => ({
   info: {
     backgroundColor: "#efefef",
@@ -44,7 +44,6 @@ const Profile = ({ match }) => {
 
   return (
     <Grid container>
-      {/* <Grid item md={2} /> */}
       <Grid item md={6} xs={12}>
         <Box>
         <CoverPhotoUpload user={data.getUser} />

@@ -25,11 +25,11 @@ const ProfileStyles = makeStyles((theme) => ({
     paddingBottom: 10,
   },
   image: {
-    width: 200,
-    height: 200,
-    marginTop: -100,
+    width: 180,
+    height: 180,
+    marginTop: -147,
     borderRadius: "50%",
-    border: "7px solid #ffffff",
+    border: "3px solid #3c3c3c",
     objectFit: "cover",
   },
   info: {
@@ -108,7 +108,7 @@ const ProfileInfo = ({ user }) => {
         )}
       </Box>
       <Box style={{ width: "100%" }} >
-        <h1 style={{ textAlign: "center" }}> {user.fullName} </h1>
+        <h1 style={{ textAlign: "center", color:"#d2d2d2", fontSize: "2rem" }}> {user.fullName} </h1>
         <Box className={classes.info}>
           <Typography variant="subtitle2" color="textSecondary">
             {" "}
