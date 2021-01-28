@@ -51,6 +51,7 @@ const postStyles = makeStyles((theme) => ({
     outline: "none",
     paddingLeft: 15,
     backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
     [theme.breakpoints.down("sm")]: {
       margin: 0,
       width: "100%",
@@ -73,6 +74,15 @@ const postStyles = makeStyles((theme) => ({
       margin: 2,
     },
   },
+  button_disabled: {
+    color: "red",
+    backgroundColor: "black"
+  },
+  upload_button: {
+    "& :Mui-disabled": {
+      backgroundColor: "red"
+    }
+  }
 }));
 
 const CreatePost = ({ match }) => {
@@ -149,6 +159,7 @@ const CreatePost = ({ match }) => {
 
             <input
               type="text"
+              multiline="true"
               className={classes.textarea}
               placeholder="What's on your mind..."
               value={title}
@@ -175,12 +186,16 @@ const CreatePost = ({ match }) => {
                 {!title && !image ? `CLOSE` : `CANCEL`}
               </Button>
               <Button
-                color="secondary"
                 size="small"
                 startIcon={<CloudUploadIcon />}
                 variant="contained"
                 style={{ marginLeft: 5 }}
                 type="submit"
+                classes={{
+                  disabled: classes.button_disabled,
+                  
+                }}
+                className={classes.upload_button}
                 disabled={isUploadDisabled}
               >
                 SHARE

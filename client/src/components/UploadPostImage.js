@@ -13,10 +13,9 @@ const inputStyles = makeStyles({
   },
   avatar: {
     color: "#ffffff",
-    backgroundColor: "#7c7d82",
-    width: 50,
-    height: 50,
-    borderRadius: 5,
+    backgroundColor: "#b100a4",
+    height: "2.9rem",
+    borderRadius: "1rem",
     padding: 15,
     [theme.breakpoints.down("sm")]: {
       padding: 3,
