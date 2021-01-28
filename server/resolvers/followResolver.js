@@ -27,7 +27,7 @@ const Mutation = {
 
   /**
    * delete a follow/following relationship
-   * 
+   *
    * @params {string} followId
    */
 

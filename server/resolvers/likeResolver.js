@@ -1,12 +1,16 @@
 const Mutation = {
   /**
    * check user authentication and create a like
-   * 
+   *
    * @param {string} userId - id of the current user
    * @param {string} postId - id of the post to be liked
    * @returns {obj} a new like object
    */
-  createLike: async (_, { input: { userId, postId, authorId } }, { User, Post, Like, authenticatedUser, Notification }) => {
+  createLike: async (
+    _,
+    { input: { userId, postId, authorId } },
+    { User, Post, Like, authenticatedUser, Notification }
+  ) => {
     // TODO: put this logic in the middleware
     // an identical logic is described in getAuthUser query but will probably
     // used only on the client side
@@ -18,16 +22,16 @@ const Mutation = {
       post: postId,
     }).save();
 
-    if(userId != authorId){
+    if (userId != authorId) {
       const newNotification = await new Notification({
         sender: userId,
         receiver: authorId,
         post: postId,
-        like: newLike.id
+        like: newLike.id,
       }).save();
 
-    // set a notification for the post author
-    await User.findOneAndUpdate({_id: authorId}, { $push: { notifications: newNotification._id} });
+      // set a notification for the post author
+      await User.findOneAndUpdate({ _id: authorId }, { $push: { notifications: newNotification._id } });
     }
 
     await Post.findOneAndUpdate({ _id: postId }, { $push: { likes: newLike._id } });
@@ -40,17 +44,17 @@ const Mutation = {
     // according to the docs findOneAndRemove is deprecated
     const like = await Like.findOneAndDelete({ _id: likeId });
     if (!like) return;
-    
+
     await User.findOneAndUpdate({ _id: like.user }, { $pull: { likes: like._id } });
     await Post.findOneAndUpdate({ _id: like.post }, { $pull: { likes: like.id } });
 
     // remove from user collection
     // we only perform the notification removal if the user unliking (lke.user)
     // is not the post author (post.author)
-    const post = await Post.findOne({_id: like.post});
-    if(post.author.toString() !== like.user.toString()){
-      const notification = await Notification.findOneAndDelete({like: likeId});
-      await User.findOneAndUpdate({_id: notification.receiver}, {$pull: { notifications: notification._id}});
+    const post = await Post.findOne({ _id: like.post });
+    if (post.author.toString() !== like.user.toString()) {
+      const notification = await Notification.findOneAndDelete({ like: likeId });
+      await User.findOneAndUpdate({ _id: notification.receiver }, { $pull: { notifications: notification._id } });
     }
 
     return like;

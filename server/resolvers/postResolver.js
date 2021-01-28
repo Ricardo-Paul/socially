@@ -1,5 +1,5 @@
 // import Follow from '../models/Follow';
-import cloudinary from 'cloudinary'
+import cloudinary from 'cloudinary';
 import { deleteFromCloudinary, uploadToCloudinary } from '../utils/fileUploads';
 const generateUniqueId = require('generate-unique-id');
 
@@ -30,19 +30,19 @@ const Query = {
     // remember to populate an instance to be able to
     // query its value
     const post = await Post.findOne({ _id: id })
-    .populate('author')
-    .populate({
-      path: 'comments',
-      populate:[
-        {path: 'author', populate: 'posts'}
-      ]
-    })
-    .populate({
-      path: 'likes',
-      populate:[{
-        path: 'user'
-      }]
-    })
+      .populate('author')
+      .populate({
+        path: 'comments',
+        populate: [{ path: 'author', populate: 'posts' }],
+      })
+      .populate({
+        path: 'likes',
+        populate: [
+          {
+            path: 'user',
+          },
+        ],
+      });
 
     return post;
   },
@@ -58,7 +58,7 @@ const Query = {
    * @param {string} userId the current user
    */
 
-  getFollowedPosts: async(_, {userId, skip, limit}, {Post, Follow}) => {
+  getFollowedPosts: async (_, { userId, skip, limit }, { Post, Follow }) => {
     // find the users that the current user is following
 
     let followedUsers = [];
@@ -70,43 +70,41 @@ const Query = {
 
     // select in the post collecion all posts where the authors are in this array (followeUsers)
     // also where author is the current user
-    const query = {$or: [{author: { $in: followedUsers }}, { author: userId }]};
+    const query = { $or: [{ author: { $in: followedUsers } }, { author: userId }] };
     const postCount = Post.find(query).countDocuments();
 
     // TODO: populate the posts
     // TODO: seed db to test this method:: DONE
     const followedPosts = Post.find(query)
-    .sort({ createdAt: "desc" })
-    .populate({
-      path: 'author',
-      populate: [
-        { path: "following" },
-        { path: "followers" },
-        {  path: 'notifications',
-        populate: [{ path: 'author' }, { path: 'follow' }, { path: 'like' }, { path: 'comment' }],
-        }
-      ]
-    })
-    .populate({
-      path: "comments",
-      options: { sort: { createdAt: "desc" } },
-      populate: { path: "author" }
-    })
-    .populate({
-      path: "likes",
-      populate:[
-        {path: "user"},
-        {path: "post"}
-      ]
-    })
-    .skip(skip)
-    .limit(limit)
+      .sort({ createdAt: 'desc' })
+      .populate({
+        path: 'author',
+        populate: [
+          { path: 'following' },
+          { path: 'followers' },
+          {
+            path: 'notifications',
+            populate: [{ path: 'author' }, { path: 'follow' }, { path: 'like' }, { path: 'comment' }],
+          },
+        ],
+      })
+      .populate({
+        path: 'comments',
+        options: { sort: { createdAt: 'desc' } },
+        populate: { path: 'author' },
+      })
+      .populate({
+        path: 'likes',
+        populate: [{ path: 'user' }, { path: 'post' }],
+      })
+      .skip(skip)
+      .limit(limit);
 
-    return{
+    return {
       count: postCount,
-      posts: followedPosts
-    }
-  }
+      posts: followedPosts,
+    };
+  },
 };
 
 // any file sent is a promise that resolves an object:
@@ -130,14 +128,14 @@ const Mutation = {
     if (image) {
       const { createReadStream } = await image;
       const stream = createReadStream();
-      try{
+      try {
         const upload = await uploadToCloudinary(stream, 'postimages', generateUniqueId());
-        if(upload.secure_url){
-          imageUrl = upload.secure_url
-          imagePublicId = upload.public_id
+        if (upload.secure_url) {
+          imageUrl = upload.secure_url;
+          imagePublicId = upload.public_id;
         }
-      } catch(err){
-        console.log(err)
+      } catch (err) {
+        console.log(err);
       }
     }
 
@@ -153,7 +151,7 @@ const Mutation = {
     return newPost;
   },
 
-  deletePost: async (_, {input:{ id, imagePublicId} }, { Post, User,Comment, authenticatedUser }) => {
+  deletePost: async (_, { input: { id, imagePublicId } }, { Post, User, Comment, authenticatedUser }) => {
     if (!authenticatedUser) throw new Error(`Unauthenticated`);
 
     const postToDelete = await Post.findOne({ _id: id });
@@ -162,11 +160,11 @@ const Mutation = {
 
     // TODO: delete associated post picture on cloudinary
     if (imagePublicId) {
-      try{
+      try {
         const deletedImage = await deleteFromCloudinary(imagePublicId);
-        console.log(deletedImage)
-      } catch (err){
-        console.log(err)
+        console.log(deletedImage);
+      } catch (err) {
+        console.log(err);
       }
     }
 

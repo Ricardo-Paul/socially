@@ -73,7 +73,7 @@ const Query = {
         return b.lastMessageCreatedAt.toString().localeCompare(a.lastMessageCreatedAt)
       });
 
-       return sortedConversations;
+       return conversations;
     }
 }
 

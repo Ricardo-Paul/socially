@@ -1,11 +1,15 @@
-import { withFilter } from "apollo-server";
-import { NOTIFICATION_CREATED_OR_DELETED } from "../constants/Subscriptions";
-import { pubSub } from "../utils/apolloServer";
+import { withFilter } from 'apollo-server';
+import { NOTIFICATION_CREATED_OR_DELETED } from '../constants/Subscriptions';
+import { pubSub } from '../utils/apolloServer';
 import Models from '../models';
 const User = Models.User;
 
 const Mutation = {
-  createComment: async (_, { input: { comment, authorId, postId } }, { Comment, User, Post, authenticatedUser, Notification }) => {
+  createComment: async (
+    _,
+    { input: { comment, authorId, postId } },
+    { Comment, User, Post, authenticatedUser, Notification }
+  ) => {
     if (!authenticatedUser) throw new Error(`Please login first`);
     const commentAuthorId = authorId;
 
@@ -21,24 +25,24 @@ const Mutation = {
 
     // create notification
     // find post author
-    const post = await Post.findOne({ _id: postId}) // the post author
+    const post = await Post.findOne({ _id: postId }); // the post author
     console.log('POST AUTHOR', post.author);
 
-    if(commentAuthorId != post.author){
+    if (commentAuthorId != post.author) {
       let newNotification = await new Notification({
         sender: commentAuthorId,
         receiver: post.author,
         comment: newComment._id,
-        post: postId
+        post: postId,
       }).save();
       // set a notification for the post author
-      await User.findOneAndUpdate({_id: post.author}, { $push: { notifications: newNotification._id } });
+      await User.findOneAndUpdate({ _id: post.author }, { $push: { notifications: newNotification._id } });
 
       newNotification = await newNotification
-        .populate("sender")
-        .populate("follow")
-        .populate({path: "comment", populate: { path: "post" }})
-        .populate({ path: "like", populate: { path: "post" } })
+        .populate('sender')
+        .populate('follow')
+        .populate({ path: 'comment', populate: { path: 'post' } })
+        .populate({ path: 'like', populate: { path: 'post' } })
         .execPopulate();
 
       // publish the notification creation event
@@ -46,9 +50,9 @@ const Mutation = {
         // our payload
         notificationCreatedOrDeleted: {
           operation: 'CREATE',
-          notification: newNotification
-        }
-      })
+          notification: newNotification,
+        },
+      });
     }
 
     return newComment;
@@ -62,14 +66,15 @@ const Mutation = {
     await User.findOneAndUpdate({ _id: comment.author }, { $pull: { comments: comment._id } });
 
     // delete associated notification
-    const post = await Post.findOne({ _id: comment.post});
-    if(comment.author.toString() !== post.author.toString()){
-      const notification = await Notification.findOneAndDelete({comment: comment._id});
+    const post = await Post.findOne({ _id: comment.post });
+    if (comment.author.toString() !== post.author.toString()) {
+      const notification = await Notification.findOneAndDelete({ comment: comment._id });
 
-      notification.populate("sender")
-        .populate("follow")
-        .populate({path: "comment", populate: { path: "post" }})
-        .populate({ path: "like", populate: { path: "post" } })
+      notification
+        .populate('sender')
+        .populate('follow')
+        .populate({ path: 'comment', populate: { path: 'post' } })
+        .populate({ path: 'like', populate: { path: 'post' } })
         .execPopulate();
       await User.findOneAndUpdate({ _id: notification.receiver }, { $pull: { notifications: notification._id } });
 
@@ -77,10 +82,10 @@ const Mutation = {
       pubSub.publish(NOTIFICATION_CREATED_OR_DELETED, {
         // our payload
         notificationCreatedOrDeleted: {
-          operation: "DELETE",
-          notification: notification
-        }
-      })
+          operation: 'DELETE',
+          notification: notification,
+        },
+      });
     }
 
     return comment;
@@ -99,16 +104,16 @@ const Subscription = {
       // and must return a boolean to know if we should pass the payload
       // to the subscriber
       async (payload, variables, { authenticatedUser }) => {
-        // make sure the user receiving the notification is (active) 
+        // make sure the user receiving the notification is (active)
         const receiverId = payload.notificationCreatedOrDeleted.notification.receiver.toString();
 
-        const authUser = await User.findOne({email: authenticatedUser.email});
+        const authUser = await User.findOne({ email: authenticatedUser.email });
         return authUser && authUser.id === receiverId;
       }
-    )
-  }
+    ),
+  },
 };
 export default {
   Mutation,
-  Subscription
+  Subscription,
 };
