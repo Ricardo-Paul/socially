@@ -14,6 +14,7 @@ import { Link, generatePath } from "react-router-dom";
 import * as Routes from '../../routes';
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
 import { GET_AUTH_USER } from "../../graphql/user";
+import { LocalDining } from "@material-ui/icons";
 
 const notiStyles = makeStyles((theme) => ({
   item: {
@@ -37,7 +38,7 @@ const notiStyles = makeStyles((theme) => ({
   },
 }));
 
-const Notification = ({ notification }) => {
+const Notification = ({ notification, loading }) => {
   console.log('NOTIFI ', notification);
   
   const [{ auth }] = useStore();
@@ -72,15 +73,13 @@ const Notification = ({ notification }) => {
   const senderName = notification.sender ? notification.sender.fullName : null;
   const isLikeOrComment = notification.comment || notification.like;
 
-  // const postId = notification && notification.comment.post.id || notification.like.post.id;
-
-
   const showPostImage = () => {
+    if(loading) return (<h3> Please wait... </h3>) 
     if(!notification.like){
-      return <h3> loading... </h3>
+      return <h3>  </h3>
     }
     return (
-      <div style={{ width: 45, height: 45, marginLeft: 5 }}>
+      <div style={{ width: "4rem", height: "4rem" }}>
         <img
           alt="post-pic"
           src={notification.like.post.image}
@@ -93,18 +92,17 @@ const Notification = ({ notification }) => {
   return (
     <React.Fragment>
       <ListItem
-            disableGutters
-            className={classes.item}
-            component={Link}
-            to={generatePath(Routes.POST, {
-              id: isLikeOrComment.post.id
+        disableGutters
+        className={classes.item}
+        component={Link}
+        to={generatePath(Routes.POST, {
+          id: isLikeOrComment.post.id
+        })}>
+          <Link
+            to={generatePath(Routes.PROFILE, {
+              username: notification.sender.username
             })}
           >
-            <Link
-              to={generatePath(Routes.PROFILE, {
-                username: notification.sender.username
-              })}
-            >
               <img
                 src={notification.sender.image || defaultAvatar}
                 style={{
@@ -112,21 +110,22 @@ const Notification = ({ notification }) => {
                   height: 40,
                   marginRight: 10,
                   objectFit: "cover",
+                  borderRadius: "50%"
                 }}
               />
             </Link>
 
-            <Box display="flex" width="100%" justifyContent="space-between">
+            <Box display="flex" width="100%" justifyContent="space-between" alignItems="center">
               {notification.like && (
               <Fragment>
-                <Box> ${senderName} liked your post </Box>
+                <Box> <span style={{fontWeight:"bold"}}> {senderName} </span> liked your post </Box>
                 {showPostImage()}
               </Fragment>
             )}
 
             {notification.comment && (
               <Fragment>
-                <Box> ${senderName} liked your post </Box>
+                <Box>  <span style={{fontWeight:"bold"}}> {senderName} </span> commented on your post </Box>
                 {showPostImage()}
               </Fragment>
             )}

@@ -44,8 +44,8 @@ const Notifications = () => {
         return <h5> NO NOTIFICATIONS </h5>;
       }
 
-      return notifications.map((ntfct) => (
-        <Notification key={ntfct.id} notification={ntfct} />
+      return notifications.map((n) => (
+        <Notification key={n.id} loading={loading} notification={n} />
       ));
     }
   };
