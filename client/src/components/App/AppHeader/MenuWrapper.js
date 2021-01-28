@@ -4,7 +4,7 @@ import headerStyles from "./headerStyles";
 
 const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
   const classes = headerStyles();
-
+ 
   return (
     <Popper
       className={classes.popper}
@@ -23,7 +23,7 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
                 placement === "top" ? "center bottom" : "center top",
             }}
           >
-            <Paper square="true" elevation={21} variant="outlined">
+            <Paper square="false" elevation={21}>
               {children}
             </Paper>
           </Grow>

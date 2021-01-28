@@ -96,7 +96,6 @@ const AppHeader = () => {
           {/* partial styling */}
           <Typography variant="h6">
             <Box style={{
-              backgroundColor: "#333333",
               borderRadius: "1rem",
               padding: ".35rem"
             }} >

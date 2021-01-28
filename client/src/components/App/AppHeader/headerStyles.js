@@ -52,7 +52,6 @@ const headerStyles = makeStyles((theme) => ({
     },
   },
   appName: {
-    color: colors.lighRed,
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
@@ -64,7 +63,10 @@ const headerStyles = makeStyles((theme) => ({
     },
     maxHeight: 350,
     overflow: "auto",
+    backgroundColor: theme.palette.primary.dark,
+    borderRadius: "1rem",
+    boxShadow: theme.palette.custom.boxShadow
   },
 }));
-
+ 
 export default headerStyles;

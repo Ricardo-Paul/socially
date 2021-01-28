@@ -32,7 +32,7 @@ const APP_THEMES = {
       contrastText: "#bbbbba" // text_color
   },
   secondary: {
-      main: "#a7a6a6",
+      main: "#242526",
       dark: "#888584", //icons fill color
       light: "#d8d8d847",
     },
