@@ -4,6 +4,7 @@ import * as Routes from "./../routes";
 import { Avatar, Box, Typography, makeStyles } from "@material-ui/core";
 import { useStore } from "../store";
 import PropTypes from "prop-types";
+import useTheme from "@material-ui/core/styles/useTheme";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
   },
   selected: {
-    backgroundColor: "#ceced0",
+    backgroundColor: theme.palette.primary.light,
   },
   user: {
     display: "flex",
@@ -33,7 +34,11 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     alignItems: "center",
     padding: 5,
+    borderRadius: ".5rem",
     color: "#424242",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.light
+    }
   },
   notSeen: {
     backgroundColor: "#ce2803",
@@ -53,6 +58,8 @@ const useStyles = makeStyles((theme) => ({
 const MessageCard = ({ user, notSeen }) => {
   const classes = useStyles();
   const [{ auth }] = useStore();
+  const theme = useTheme();
+  const text_color = theme.palette.primary.contrastText;
 
   return (
     <NavLink
@@ -63,15 +70,12 @@ const MessageCard = ({ user, notSeen }) => {
       })}
     >
       <Avatar style={{ marginRight: 10 }} src={user.image} />
-      <Box style={{ width: "100%" }}>
+      <Box style={{ width: "100%", color: text_color }}>
         <Box className={classes.info}>
-          <Typography> {user.fullName}</Typography>
+          <span style={{fontWeight:"bold"}} > {user.fullName} </span>
           {notSeen ? <div className={classes.notSeen}></div> : null}
         </Box>
-        <Typography color="secondary">
-          {" "}
           {user.lastMessage.substring(0, 8)} ...{" "}
-        </Typography>
       </Box>
     </NavLink>
   );

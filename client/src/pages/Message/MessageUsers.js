@@ -21,14 +21,12 @@ import MessageCard from "../../components/MessageCard";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    // backgroundColor: "#cdcde0",
     width: 330,
-    // height: "90vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     borderColor: "#d0d0d0",
-    backgroundColor: "#ffffff",
+    backgroundColor: theme.palette.primary.main,
   },
   header: {
     display: "flex",
@@ -36,9 +34,12 @@ const useStyles = makeStyles((theme) => ({
     padding: 5,
     alignItems: "center",
     width: "90%",
+    color: theme.palette.primary.contrastText,
+    fontSize: "1rem",
+    fontWeight: "bold"
   },
   selected: {
-    backgroundColor: "#ceced0",
+    backgroundColor: theme.palette.primary.main,
   },
   user: {
     display: "flex",
@@ -62,6 +63,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "100%",
   },
+  user_list: {
+    width: "100%",
+    padding: ".5rem"
+  },
+  icon_button: {
+    color: theme.palette.primary.contrastText
+  }
 }));
 
 const MessageUsers = () => {
@@ -115,11 +123,11 @@ const MessageUsers = () => {
   }, [subscribeToMore]);
 
   return (
-    <Box border={1} className={classes.container}>
+    <Box className={classes.container}>
       <Box className={classes.header}>
-        <Typography> CHATS </Typography>
-        <IconButton>
-          <CreateIcon />
+        New message
+        <IconButton classes={{ root: classes.icon_button }} >
+          <CreateIcon sytle={{color: "red"}} />
         </IconButton>
       </Box>
       <Search
@@ -127,17 +135,11 @@ const MessageUsers = () => {
         messageSearch
         placeholder="Chat users..."
       />
-      <Box width="100%">
+      <Box className={classes.user_list} >
         <List>
           {!loading &&
             data.getConversations.map((user) => {
-              console.log('USER MESSAGE', user);
-
               let  notSeen = user.seen === false && user.id !== auth.user.id;
-
-              console.log("NOT SEEN", notSeen);
-
-              console.log("CONVERSATIONS", data.getConversations);
               return <MessageCard user={user} notSeen={notSeen} />;
             })}
         </List>
