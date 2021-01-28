@@ -188,8 +188,7 @@ const Query = {
       .sort({ createdAt: -1 })
       .populate({
         path: 'author',
-        populate: 'followers',
-        populate: 'following'
+        populate: [{path: 'following'}, {path: 'followers'}]
       })
       .populate({
         path: 'comments',
