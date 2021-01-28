@@ -3,9 +3,19 @@ import { GET_USER_NOTIFICATIONS } from "../../graphql/notification";
 import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
 import Notification from "../../components/App/Notification";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Box from "@material-ui/core/Box";
+
+const useStyles = makeStyles(theme => ({
+  notifications: {
+    backgroundColor: theme.palette.primary.main,
+    padding: ".5rem"
+  }
+}))
 
 const Notifications = () => {
   const [{ auth }] = useStore();
+  const classes = useStyles();
 
   // TODO: rep skip and limit with constant VARS
   // USE FetchMore
@@ -42,7 +52,9 @@ const Notifications = () => {
 
   return (
     <React.Fragment>
-      {renderContent()}
+      <Box className={classes.notifications} >
+        {renderContent()}
+      </Box>
     </React.Fragment>
   );
 };

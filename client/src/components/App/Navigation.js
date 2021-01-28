@@ -1,9 +1,10 @@
 import React from "react";
-import { List, Typography, makeStyles, Box, Avatar } from "@material-ui/core";
+import { List, Typography, makeStyles, Box, Avatar, ListItem, Button } from "@material-ui/core";
 import { NavLink as RouterLink, generatePath } from "react-router-dom";
 import * as Routes from "../../routes";
 import { useStore } from "../../store";
 import Divider from "@material-ui/core/Divider";
+
 
 // icons
 import HomeIcon from "@material-ui/icons/Home";
@@ -13,7 +14,7 @@ import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import MessageIcon from "@material-ui/icons/Message";
 import InfoIcon from "@material-ui/icons/Info";
 import NavItem from "./NavItem";
-
+ 
 const navStyles = makeStyles((theme) => ({
   name: {
     fontWeight: 500,
@@ -73,7 +74,7 @@ const Navigation = () => {
         </Box>
         <Divider />
         <Box p={2}>
-          <List>{list}</List>
+            <List>{list}</List>
         </Box>
       </Box>
     </>

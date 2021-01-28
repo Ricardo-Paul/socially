@@ -65,14 +65,14 @@ const CreateComment = ({ focus, postId }) => {
         query: GET_FOLLOWED_POSTS,
         variables: { userId: auth.user.id, limit: HOME_PAGE_POSTS_LIMIT },
       },
-      {
-        query: GET_USER_POSTS,
-        variables: {
-          username: auth.user.username,
-          limit: USER_PAGE_POSTS_LIMIT
-        }
-      },
-      {
+      // {
+      //   query: GET_USER_POSTS,
+      //   variables: {
+      //     username: auth.user.username,
+      //     limit: USER_PAGE_POSTS_LIMIT
+      //   }
+      // },
+      { 
         query: GET_POST,
         variables: {
           id: postId

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   ListItem,
   ListItemAvatar,
@@ -23,9 +23,11 @@ const notiStyles = makeStyles((theme) => ({
     padding: 5,
     border: "0.1px #afafaf",
     cursor: "pointer",
+    color: theme.palette.primary.contrastText,
+    borderRadius: ".5rem",
 
     "&:hover": {
-      backgroundColor: "#efefef",
+      backgroundColor: theme.palette.primary.light,
     },
   },
   name: {
@@ -74,6 +76,9 @@ const Notification = ({ notification }) => {
 
 
   const showPostImage = () => {
+    if(!notification.like){
+      return <h3> loading... </h3>
+    }
     return (
       <div style={{ width: 45, height: 45, marginLeft: 5 }}>
         <img
@@ -111,20 +116,20 @@ const Notification = ({ notification }) => {
               />
             </Link>
 
-            <Box display="flex" flexDirection="row">
-            {notification.like && (
-          <>
-            <ListItemText secondary={`${senderName} likes your post`} />
-            {showPostImage}
-          </>
-        )}
+            <Box display="flex" width="100%" justifyContent="space-between">
+              {notification.like && (
+              <Fragment>
+                <Box> ${senderName} liked your post </Box>
+                {showPostImage()}
+              </Fragment>
+            )}
 
-        {notification.comment && (
-          <>
-            <ListItemText secondary={`${senderName} commented on your post`} />
-            {showPostImage}
-          </>
-        )}
+            {notification.comment && (
+              <Fragment>
+                <Box> ${senderName} liked your post </Box>
+                {showPostImage()}
+              </Fragment>
+            )}
             </Box>
       </ListItem>
     </React.Fragment>

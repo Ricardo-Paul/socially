@@ -193,6 +193,7 @@ export const GET_USER_POSTS = gql`
         }
         comments{
           id
+          createdAt
           comment
           author{
             id

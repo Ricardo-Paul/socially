@@ -59,7 +59,7 @@ const Like = ({ likes, postId, author, like_style }) => {
   };
 
   return (
-      <Button disabled={loading} onClick={() => handleButtonClick(mutate)} className={like_style} style={inner_color}>
+      <Button onClick={() => handleButtonClick(mutate)} className={like_style} style={inner_color}>
         <ThumbUpAlt style={{ marginRight: "0.5rem", color: existedLike ? `${like_color}` : "#4f4f50" }} />
         <Hidden xsDown> 
           <span style={{color: existedLike ? `${like_color}` : "#4f4f50"}}>
