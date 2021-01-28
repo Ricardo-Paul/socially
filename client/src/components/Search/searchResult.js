@@ -15,6 +15,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(theme => ({
   list_item: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
     borderRadius: "1rem",
     "&:hover":{
       backgroundColor: theme.palette.primary.light,
@@ -43,10 +45,12 @@ const SearchResult = ({
       style={{ marginLeft: -50 }}
       closeMenu={closeMenu}
     >
-      {loading && <ListItem> searching... </ListItem>}
 
-      {!users.length > 0 && <ListItem> No result found for {query}</ListItem>}
-      <List style={{ width: 250, padding: ".5rem", backgroundColor: bg_color }}>
+
+      <Box style={{ width: 250, padding: ".5rem", backgroundColor: bg_color }}>
+      {loading && <ListItem className={classes.list_item} > searching... </ListItem>}
+      {!users.length > 0 && <ListItem className={classes.list_item} > No result found for {query}</ListItem>}
+
         {users.map((u) => (
           <React.Fragment>
             <ListItem
@@ -71,7 +75,7 @@ const SearchResult = ({
             </ListItem>
           </React.Fragment>
         ))}
-      </List>
+      </Box>
     </MenuWrapper>
   );
 };

@@ -7,6 +7,7 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
  
   return (
     <Popper
+      style={{willChange: "auto"}}
       className={classes.popper}
       anchorEl={anchorEl}
       open={isOpen}
@@ -23,9 +24,7 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
                 placement === "top" ? "center bottom" : "center top",
             }}
           >
-            <Paper square="false" elevation={21}>
-              {children}
-            </Paper>
+            {children}
           </Grow>
         </ClickAwayListener>
       )}

@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import { colors } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import { IconWrapper } from "../IconWrapper";
 
 // temporary palette
 const palette = {
@@ -30,6 +32,9 @@ const navItemStyles = makeStyles((theme) => ({
     display: "flex",
     paddingTop: 0,
     paddingBottom: 0,
+    "&:hover":{
+      backgroundColor: theme.palette.primary.light
+    }
   },
   button: {
     color: theme.palette.primary.contrastText,
@@ -40,8 +45,11 @@ const navItemStyles = makeStyles((theme) => ({
     textTransform: "none",
     letterSpacing: 0.1,
   },
+  icon_container: {
+    backgroundColor: "red"
+  },
   icon: {
-    marginRight: theme.spacing(1),
+
   },
   title: {
     marginRight: "auto",
@@ -67,7 +75,9 @@ const NavItem = ({ icon: Icon, title, href, className, ...rest }) => {
         className={classes.button}
         activeClassName={classes.active}
       >
-        {Icon && <Icon className={classes.icon} />}
+        <IconWrapper>
+          {Icon && <Icon className={classes.icon} />}
+        </IconWrapper>
         <span className={classes.title}>{title}</span>
       </Button>
     </ListItem>

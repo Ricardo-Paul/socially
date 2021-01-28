@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuList, MenuItem } from "@material-ui/core";
+import { MenuList } from "@material-ui/core";
 import MenuWrapper from "./MenuWrapper";
 import MessageCard from "../../MessageCard";
 
@@ -18,7 +18,7 @@ const HeaderMessageDropDown = ({
       anchorEl={messageAnchorEl}
       closeMenu={closeMenu}
       dropDownData={dropDownData}
-    >
+    > 
       <MenuList>
         {dropDownData.map((u) => {
           return <MessageCard user={u} />;

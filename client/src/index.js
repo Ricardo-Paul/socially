@@ -32,7 +32,7 @@ const APP_THEMES = {
       contrastText: "#bbbbba" // text_color
   },
   secondary: {
-      main: "#242526",
+      main: "#424242",
       dark: "#888584", //icons fill color
       light: "#d8d8d847",
     },
@@ -72,7 +72,7 @@ const APP_THEMES = {
     },
   custom: {
       palette: {
-        drawerBackground: "#191919",
+        drawerBackground: "#1b1a1a",
         paleNuance: "#2f2e2e",
         helperText: "#a9482a",
         likeColor: "#0b80ef"

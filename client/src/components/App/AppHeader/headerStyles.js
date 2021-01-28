@@ -65,7 +65,8 @@ const headerStyles = makeStyles((theme) => ({
     overflow: "auto",
     backgroundColor: theme.palette.primary.dark,
     borderRadius: "1rem",
-    boxShadow: theme.palette.custom.boxShadow
+    boxShadow: theme.palette.custom.boxShadow,
+    willChange: "unset"
   },
 }));
  
