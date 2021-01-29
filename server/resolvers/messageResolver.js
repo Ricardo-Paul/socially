@@ -139,6 +139,10 @@ const Mutation = {
 
     return message;
   },
+
+  /**
+   * update all of the auth user messages from a particular conversation as seen
+   */
   updateMessageSeen: async (_, { input: { sender, receiver } }, { Message }) => {
     // the auth user is the receiver
     try {
@@ -148,6 +152,23 @@ const Mutation = {
       return false;
     }
   },
+
+  /**
+   * update all of the user messages from all conversations as seen
+   */
+  updateAllMessagesAsSeen: async (_, { input: { receiver } }, { Message, User }) => {
+    //   the auth user is the receiver
+    const user = await User.find({_id: receiver});
+    if (!user) throw new Error('User not found');
+    try{
+        await Message.updateMany({ receiver, seen:false }, { seen: true }, { multi: true });
+        console.log('UPDATED as SEEN');
+        return true;
+    } catch(e){
+        console.log(e)
+        return false;
+    }
+  }
 };
 
 const Subscription = {
@@ -158,13 +179,10 @@ const Subscription = {
       (payload, variables) => {
         const { sender, receiver } = payload.messageCreated;
         console.log('VARS', variables);
-
         const authUserId = variables.authUserId.toString();
         const userId = variables.userId.toString();
-
         const isAuthUserSenderOrReceiver = authUserId === sender.toString() || authUserId == receiver.toString();
         const isUserSenderOrReceiver = userId === sender.toString() || userId === receiver.toString();
-
         return isAuthUserSenderOrReceiver && isUserSenderOrReceiver;
       }
     ),

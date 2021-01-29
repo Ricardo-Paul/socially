@@ -190,6 +190,7 @@ enum NotificationType{
         createMessage(input: CreateMessageInput!): Message
         deleteMessage(input: DeleteMessageInput!): Message
         updateMessageSeen(input: UpdateMessageSeenInput!): Boolean
+        updateAllMessagesAsSeen(input: UpdateAllMessagesAsSeenInput!): Boolean
     }
 
     type Message{
@@ -218,6 +219,10 @@ enum NotificationType{
 #-------------------------------------------------------
 # INPUTS
 #-------------------------------------------------------
+
+   input UpdateAllMessagesAsSeenInput{
+       receiver: ID!
+   }
 
    input UpdateMessageSeenInput{
        sender: ID!
