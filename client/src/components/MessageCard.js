@@ -5,12 +5,13 @@ import { Avatar, Box, Typography, makeStyles } from "@material-ui/core";
 import { useStore } from "../store";
 import PropTypes from "prop-types";
 import useTheme from "@material-ui/core/styles/useTheme";
+import { GET_CONVERSATIONS, UPDATE_MESSAGE_SEEN } from "../graphql/message";
+import { useMutation } from "@apollo/client";
+import { GET_AUTH_USER } from "../graphql/user";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    // backgroundColor: "#cdcde0",
     width: 330,
-    // height: "90vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -61,6 +62,32 @@ const MessageCard = ({ user, notSeen }) => {
   const theme = useTheme();
   const text_color = theme.palette.primary.contrastText;
 
+  const unseenMessages = auth.user.conversations; // all user unseen conversations in real time
+  let unSeen = unseenMessages.find( m => m.id === user.id); // if we find a particular conversation in the unseen conversations, indicate it as unseen
+
+  const [update] = useMutation(UPDATE_MESSAGE_SEEN, {
+    variables: {
+      input: {
+        sender: user.id,
+        receiver: auth.user.id
+      }
+    },
+    refetchQueries:[
+      { query: GET_AUTH_USER },
+      { query: GET_CONVERSATIONS, variables: {
+        authUserId: auth.user.id
+      }}
+    ]
+  });
+  
+  const updateMessages = async () => {
+    try{
+      await update();
+    }catch(e){
+      console.log(e)
+    }
+  }
+
   return (
     <NavLink
       className={classes.user}
@@ -68,12 +95,13 @@ const MessageCard = ({ user, notSeen }) => {
       to={generatePath(Routes.MESSAGE, {
         id: user.id,
       })}
+      onClick={updateMessages}
     >
       <Avatar style={{ marginRight: 10 }} src={user.image} />
       <Box style={{ width: "100%", color: text_color }}>
         <Box className={classes.info}>
           <span style={{fontWeight:"bold"}} > {user.fullName} </span>
-          {notSeen ? <div className={classes.notSeen}></div> : null}
+          {unSeen ? <div className={classes.notSeen}></div> : null}
         </Box>
           {user.lastMessage.substring(0, 8)} ...{" "}
       </Box>

@@ -64,3 +64,9 @@ export const GET_NEW_MESSAGE = gql`
         }
     }
 `
+
+export const UPDATE_MESSAGE_SEEN = gql`
+    mutation($input: UpdateMessageSeenInput!){
+        updateMessageSeen(input: $input)
+    }
+`

@@ -107,7 +107,6 @@ const MessageUsers = () => {
         let unwanted = uniqueConversations.find(n => n.id === newConversation.id);
         let r = oldConversations.filter(n => n.id !== unwanted.id )
 
-
         console.log('NID', unwanted)
         console.log('FINISHED', r)
 
@@ -139,7 +138,9 @@ const MessageUsers = () => {
         <List>
           {!loading &&
             data.getConversations.map((user) => {
-              let  notSeen = user.seen === false && user.id !== auth.user.id;
+              // user carries message data
+              console.log("SINGLE MESSAGE", user)
+              let  notSeen = user.seen === false;
               return <MessageCard user={user} notSeen={notSeen} />;
             })}
         </List>
@@ -149,3 +150,8 @@ const MessageUsers = () => {
 }; 
 
 export default MessageUsers;
+
+// mrjoe id 5fc2703d329e5d026d4f3020
+// me id 5fc26ff2329e5d026d4f301f
+
+// db.messages.updateMany({ receiver: ObjectId("5fc26ff2329e5d026d4f301f"), sender:ObjectId("5fc2703d329e5d026d4f3020") }, { $set: { seen: true } }, { multi: true })

@@ -66,6 +66,7 @@ const AppHeader = () => {
 
   const handleIconClick = (event, dropdownType) => {
     if (dropdownType === "MESSAGE") {
+      console.log('UNSEEN MESSAGES',conversations)
       setDropDownData(conversations);
       openDropDown(event);
     }
