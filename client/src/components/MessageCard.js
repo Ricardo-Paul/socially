@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MessageCard = ({ user, notSeen }) => {
+const MessageCard = ({ user, notSeen, loading }) => {
   const classes = useStyles();
   const [{ auth }] = useStore();
   const theme = useTheme();
@@ -97,6 +97,7 @@ const MessageCard = ({ user, notSeen }) => {
       })}
       onClick={updateMessages}
     >
+      { loading && <h3> loading ... </h3>  }
       <Avatar style={{ marginRight: 10 }} src={user.image} />
       <Box style={{ width: "100%", color: text_color }}>
         <Box className={classes.info}>

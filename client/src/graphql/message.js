@@ -70,3 +70,9 @@ export const UPDATE_MESSAGE_SEEN = gql`
         updateMessageSeen(input: $input)
     }
 `
+
+export const UPDATE_ALL_MESSAGES_AS_SEEN = gql`
+    mutation($input: UpdateAllMessagesAsSeenInput!){
+        updateAllMessagesAsSeen(input: $input)
+    }
+`

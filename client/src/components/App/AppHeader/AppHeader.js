@@ -48,12 +48,15 @@ const AppHeader = () => {
   const [dropDownData, setDropDownData] = useState([]);
   const [dropDownOpen, setDropDownOpen] = useState(null);
 
+
   React.useEffect(() => {
     if (auth.user != null) {
       setNotifications(auth.user.notifications);
       setConversations(auth.user.conversations);
     }
   }, [auth.user]);
+
+
 
   const openDropDown = (event) =>
     setAnchorEl(
@@ -64,7 +67,7 @@ const AppHeader = () => {
     setAnchorEl(null);
   };
 
-  const handleIconClick = (event, dropdownType) => {
+  const handleIconClick = async (event, dropdownType) => {
     if (dropdownType === "MESSAGE") {
       console.log('UNSEEN MESSAGES',conversations)
       setDropDownData(conversations);
