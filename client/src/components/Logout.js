@@ -1,13 +1,15 @@
 import React from "react";
 import { useApolloClient } from "@apollo/client";
 import { withRouter } from "react-router-dom";
-import { MenuItem } from "@material-ui/core";
+import { Link, useTheme } from "@material-ui/core";
 import { useStore } from "../store/store";
 import { CLEAR_AUTH_USER } from "../store/auth";
 import { SIGNIN } from "../routes";
 
 const Logout = ({ history }) => {
   const client = useApolloClient();
+  const theme = useTheme();
+  const text_color = theme.palette.primary.contrastText;
   const [, dispatch] = useStore();
 
   const handleLogout = () => {
@@ -17,7 +19,7 @@ const Logout = ({ history }) => {
     history.push(SIGNIN);
   };
 
-  return <MenuItem onClick={handleLogout}>Logout</MenuItem>;
+  return <Link style={{color: text_color}} onClick={handleLogout}>Logout</Link>;
 };
 
 export default withRouter(Logout);

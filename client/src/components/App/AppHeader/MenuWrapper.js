@@ -1,5 +1,5 @@
 import React from "react";
-import { Popper, Grow, Paper, ClickAwayListener } from "@material-ui/core";
+import { Popper, Grow, Box, ClickAwayListener } from "@material-ui/core";
 import headerStyles from "./headerStyles";
 
 const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
@@ -24,7 +24,9 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
                 placement === "top" ? "center bottom" : "center top",
             }}
           >
-            {children}
+            <Box fontSize="1rem">
+              {children}
+            </Box>
           </Grow>
         </ClickAwayListener>
       )}

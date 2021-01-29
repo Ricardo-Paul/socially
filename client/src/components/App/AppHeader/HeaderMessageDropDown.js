@@ -6,6 +6,7 @@ import { GET_AUTH_USER } from "../../../graphql/user";
 import { useStore } from "../../../store";
 import { GET_CONVERSATIONS, UPDATE_ALL_MESSAGES_AS_SEEN } from "../../../graphql/message";
 import { useMutation } from "@apollo/client";
+import MessageUsers from "../../../pages/Message/MessageUsers";
 
 const HeaderMessageDropDown = ({
   isOpen,
@@ -61,9 +62,7 @@ const HeaderMessageDropDown = ({
             return <MessageCard loadin={loading} user={u} />;
           })}
         </MenuList> :
-        <Box color="white" >
-          {text_1}
-        </Box>
+        <MessageUsers />
         }
 
     </MenuWrapper>

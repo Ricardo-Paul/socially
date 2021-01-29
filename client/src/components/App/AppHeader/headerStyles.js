@@ -61,12 +61,12 @@ const headerStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("lg")]: {
       marginTop: 15,
     },
-    maxHeight: 350,
+    maxHeight: 450,
     overflow: "auto",
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.main,
     borderRadius: "1rem",
     boxShadow: theme.palette.custom.boxShadow,
-    willChange: "unset"
+    padding: "1rem"
   },
 }));
  

@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuList, MenuItem } from "@material-ui/core";
+import { MenuList, MenuItem, useTheme } from "@material-ui/core";
 import MenuWrapper from "./MenuWrapper";
 import { generatePath, Link } from "react-router-dom";
 import { PROFILE } from "../../../routes";
@@ -8,6 +8,8 @@ import Logout from "../../Logout";
 
 const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
   const [{ auth }] = useStore();
+  const theme = useTheme();
+  const text_color = theme.palette.primary.contrastText;
 
   return (
     <MenuWrapper isOpen={isOpen} anchorEl={userAnchorEl} closeMenu={closeMenu}>
@@ -16,7 +18,7 @@ const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
           to={generatePath(PROFILE, {
             username: auth.user.username,
           })}
-          style={{ textDecoration: "none" }}
+          style={{ textDecoration: "none", color: text_color }}
           onClick={closeMenu}
         >
           <MenuItem> Profile </MenuItem>
