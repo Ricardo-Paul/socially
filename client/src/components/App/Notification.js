@@ -38,7 +38,7 @@ const notiStyles = makeStyles((theme) => ({
   },
 }));
 
-const Notification = ({ notification, loading }) => {
+const Notification = ({ notification, loading, closeMenu }) => {
   console.log('NOTIFI ', notification);
   
   const [{ auth }] = useStore();
@@ -92,6 +92,7 @@ const Notification = ({ notification, loading }) => {
   return (
     <React.Fragment>
       <ListItem
+        onClick={closeMenu}
         disableGutters
         className={classes.item}
         component={Link}

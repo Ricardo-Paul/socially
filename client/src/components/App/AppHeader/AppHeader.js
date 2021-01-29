@@ -25,12 +25,16 @@ import HeaderDropDowns from "./HeaderDropDowns";
 import Search from "../../Search";
 import Box from "@material-ui/core/Box";
 import useTheme from "@material-ui/core/styles/useTheme";
+import { IconWrapper } from "../../IconWrapper";
 
 const useStyles = makeStyles(theme => ({
   badge: {
     backgroundColor: "#ff0000",
     color: "#ffffff",
     fontSize: ".8rem"
+  },
+  icon_button: {
+    padding: 0
   }
 }))
 
@@ -55,8 +59,6 @@ const AppHeader = () => {
       setConversations(auth.user.conversations);
     }
   }, [auth.user]);
-
-
 
   const openDropDown = (event) =>
     setAnchorEl(
@@ -114,29 +116,26 @@ const AppHeader = () => {
           <div className={classes.grow} />
 
           {/* Right Side */}
-          <IconButton
-            color="inherit"
-            onClick={(event) => handleIconClick(event, "NOTIFICATION")}
-          >
-            <Badge max={10} classes={{ badge: badge_override.badge }}  badgeContent={notifications ? notifications.length : null} color="secondary">
-              <NotificationIcon style={{color: "white"}} fontSize="small" />
-            </Badge>
+          <IconButton classes={{ root: classes.icon_button }} color="inherit" onClick={(event) => handleIconClick(event, "NOTIFICATION")} >
+            {/* <IconWrapper> */}
+              <Badge max={10} classes={{ badge: badge_override.badge }}  badgeContent={notifications ? notifications.length : 10} color="secondary">
+                  <NotificationIcon style={{color: "white"}} fontSize="small" />
+              </Badge>
+            {/* </IconWrapper> */}
           </IconButton>
 
-          <IconButton
-            color="inherit"
-            onClick={(event) => handleIconClick(event, "MESSAGE")}
-          > 
-            <Badge max={10} badgeContent={conversations.length } classes={{ badge: badge_override.badge }} >
-              <MailIcon style={{color: "white"}} fontSize="small" />
-            </Badge>
+          <IconButton classes={{ root: classes.icon_button }}  color="inherit" onClick={(event) => handleIconClick(event, "MESSAGE")}> 
+            {/* <IconWrapper> */}
+              <Badge max={10} badgeContent={conversations.length } classes={{ badge: badge_override.badge }} >
+                <MailIcon style={{color: "white"}} fontSize="small" />
+              </Badge>
+            {/* </IconWrapper> */}
           </IconButton>
 
-          <IconButton
-            color="inherit"
-            onClick={(event) => handleIconClick(event, "USER")}
-          >
-            <AccountCircle style={{color: "white"}} />
+          <IconButton className={classes.icon_button}  color="inherit" onClick={(event) => handleIconClick(event, "USER")}>
+            {/* <IconWrapper> */}
+              <AccountCircle style={{color: "white"}} />
+            {/* </IconWrapper> */}
           </IconButton>
         </Toolbar>
       </AppBar>

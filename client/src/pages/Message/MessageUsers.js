@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const MessageUsers = () => {
+const MessageUsers = ({ closeMenu }) => {
   const classes = useStyles();
   const [{ auth }] = useStore();
 
@@ -141,7 +141,7 @@ const MessageUsers = () => {
               // user carries message data
               console.log("SINGLE MESSAGE", user)
               let  notSeen = user.seen === false;
-              return <MessageCard user={user} notSeen={notSeen} />;
+              return <MessageCard user={user} notSeen={notSeen} closeMenu={closeMenu} />;
             })}
         </List>
       </Box>

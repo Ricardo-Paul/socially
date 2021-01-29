@@ -62,7 +62,7 @@ const HeaderMessageDropDown = ({
             return <MessageCard loadin={loading} user={u} />;
           })}
         </MenuList> :
-        <MessageUsers />
+        <MessageUsers closeMenu={closeMenu} />
         }
 
     </MenuWrapper>

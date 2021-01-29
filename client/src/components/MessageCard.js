@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MessageCard = ({ user, notSeen, loading }) => {
+const MessageCard = ({ user, notSeen, loading, closeMenu }) => {
   const classes = useStyles();
   const [{ auth }] = useStore();
   const theme = useTheme();
@@ -81,6 +81,7 @@ const MessageCard = ({ user, notSeen, loading }) => {
   });
   
   const updateMessages = async () => {
+    closeMenu();
     try{
       await update();
     }catch(e){
@@ -113,6 +114,7 @@ const MessageCard = ({ user, notSeen, loading }) => {
 MessageCard.propTypes = {
   user: PropTypes.object.isRequired,
   notSeen: PropTypes.bool,
+  closeMenu: PropTypes.func
 };
 
 export default MessageCard;

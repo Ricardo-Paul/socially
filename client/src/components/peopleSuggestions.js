@@ -22,7 +22,7 @@ const peopleStyles = makeStyles((theme) => ({
     color: theme.palette.primary.contrastText,
     position: "fixed",
     width: theme.palette.custom.peopleBoxWidth,
-    padding: 10,
+    padding: ".5rem",
     boxShadow: theme.palette.custom.boxShadow
   },
   people_header: {
@@ -39,9 +39,11 @@ const peopleStyles = makeStyles((theme) => ({
     padding: 5,
     border: "0.1px #afafaf",
     cursor: "pointer",
+    borderRadius: theme.shape.borderRadius,
+    padding: ".5rem",
 
     "&:hover": {
-      backgroundColor: "#efefef",
+      backgroundColor: theme.palette.primary.light,
     },
   },
   name: {
