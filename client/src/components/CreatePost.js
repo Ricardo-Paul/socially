@@ -22,6 +22,7 @@ const postStyles = makeStyles((theme) => ({
     flexDirection: "column",
     backgroundColor: theme.palette.primary.main,
     borderRadius: theme.shape.borderRadius,
+    boxShadow: theme.palette.custom.boxShadow,
     padding: 10,
     [theme.breakpoints.down("sm")]: {
       padding: 0,

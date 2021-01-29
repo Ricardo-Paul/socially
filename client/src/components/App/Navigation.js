@@ -35,7 +35,7 @@ const Navigation = () => {
 
   const options = [
     { title: "Home", icon: HomeIcon, to: Routes.HOME },
-    { title: "Browse Feed", icon: WebIcon, to: Routes.BROWSE },
+    { title: "Explore photos", icon: WebIcon, to: Routes.BROWSE },
     { title: "People", icon: PeopleIcon, to: Routes.PEOPLE },
     {
       title: "Notifications",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Box, makeStyles, Button, InputBase, Avatar } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { useMutation } from "@apollo/client";
@@ -45,6 +45,14 @@ const useStyles = makeStyles((theme) => ({
 
 const ChatConversations = ({ chatUser, messages, authUser }) => {
   const classes = useStyles();
+  const chatBottomRef = useRef(null);
+
+  useEffect(() => {
+    chatBottomRef.current && chatBottomRef.current.scrollIntoView({
+      behavior: "smooth"
+    })
+  }, [chatUser, chatBottomRef, messages])
+
   const [createMessage] = useMutation(CREATE_MESSAGE, {
     refetchQueries: ({ data }) => {
       if(data && data.createMessage.message){
@@ -131,6 +139,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
             </Box>
           );
         })}
+      <div ref={chatBottomRef} />
       </Box>
 
       {chatUser && (
