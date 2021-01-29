@@ -14,9 +14,9 @@ import { theme } from "../../utils/theme";
 import PeopleSuggestions from "../../components/peopleSuggestions";
 import InfiniteScrolling from "../../components/InfiniteScrolling";
 import AppDialog from "../../components/AppDialog";
-import { Skeleton } from "@material-ui/lab";
+import PostSkeleton from "../../components/PostSkeleton";
 
-const homeStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   home: {
     position: "relative",
     [theme.breakpoints.down("sm")]: {
@@ -31,22 +31,6 @@ const homeStyles = makeStyles(theme => ({
   grid: {
     display: "flex",
     // alignContent: "flex-end",
-  },
-  post_skeleton: {
-    borderRadius: theme.palette.shape.borderRadius,
-    padding: ".5rem"
-  },
-  skeleton_header:{
-    display: "flex",
-    justifyContent: "center"
-  },
-  skeleton_header_text:{
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    paddingLeft: "1rem",
-    marginBottom: "2rem"
   }
 }));
 
@@ -64,17 +48,15 @@ const Home = ({ history }) => {
     }
   }, [auth.user]);
 
-  // pushState args (state, title, url)
   const openModal = (postId) => {
     setPostId(postId);
-    // window.history.pushState("", "", generatePath(Routes.POST, { id: postId }));
   };
 
   const closeModal = () => {
     setPostId(null);
   };
 
-  const classes = homeStyles();
+  const classes = useStyles();
 
   const variables = {
     userId: auth.user.id,
@@ -91,22 +73,7 @@ const Home = ({ history }) => {
 
   const renderContent = () => {
     if (loading && networkStatus === 1) {
-      // return <h4> loading ... </h4>;
-      const count = [0, 1, 2];
-      return count.map(s=> (
-        <Box className={classes.post_skeleton}>
-        <Box className={classes.skeleton_header}>
-          <Skeleton variant="circle" width={40} height={40} style={{backgroundColor: "#424242"}}  />
-          <Box className={classes.skeleton_header_text}>
-            <Skeleton animation="wave"  variant="text" width="20%" height={"1rem"}
-            style={{backgroundColor: "#424242"}}  />
-            <Skeleton animation="wave"  variant="text" width="10%" height={"1rem"} 
-            style={{backgroundColor: "#424242"}} />
-          </Box>
-          </Box>
-          <Skeleton animation="wave" variant="rect" width="100%" height={210} style={{backgroundColor: "#424242"}} />
-      </Box>
-      ))
+      return <PostSkeleton />
     }
 
     const { posts, count } = data.getFollowedPosts;
