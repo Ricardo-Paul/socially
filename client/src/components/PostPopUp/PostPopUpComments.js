@@ -20,6 +20,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     padding: "0.5rem",
     position: "relative",
+    border: theme.palette.shape.borderColor,
+    borderRadius: theme.palette.shape.borderRadius,
+    marginBottom: ".5rem"
   },
   comment: {
 
@@ -44,8 +47,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const dummyUserName = `Carli Andersen`
-const dummyComment = `Glad you had a conversation with my PM today. Justin Trudeau is a true Canadian and a friend of the United States. Glad you had a conversation with my PM today`
+
 const no_comment_text = `Be the first to comment`
 
 const PostPopUpComments = ({ match, comments, postId }) => {
@@ -85,7 +87,6 @@ const PostPopUpComments = ({ match, comments, postId }) => {
   const isLightTeme = localStorage.getItem("theme") === themes.LIGHT_THEME;
   const comment_light_style = {
     backgroundColor: `${isLightTeme && `${theme.palette.primary.main}`}`,
-    boxShadow: `${isLightTeme && `1px 1px 7px #bbbbbb`}`
   }
 
   if(comments.length < 1){

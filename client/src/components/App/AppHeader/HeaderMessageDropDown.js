@@ -16,8 +16,6 @@ const HeaderMessageDropDown = ({
 }) => {
 
   const [{ auth }] = useStore();
-  const text_1 = `You have no new messages for now`
-
   const [update, { loading }] = useMutation(UPDATE_ALL_MESSAGES_AS_SEEN, {
     variables:{
       input: {

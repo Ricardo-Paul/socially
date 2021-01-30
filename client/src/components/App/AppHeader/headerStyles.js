@@ -1,5 +1,3 @@
-import { colors } from "../../../utils/theme";
-
 const { makeStyles } = require("@material-ui/core");
 
 const headerStyles = makeStyles((theme) => ({

@@ -120,6 +120,5 @@ const AppLayout = ({ authUser }) => {
 
 };
 
-// give AppLayout access to path, location and history
-// we'll use location to access location.pathname
+
 export default withRouter(AppLayout);

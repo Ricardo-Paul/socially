@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuList, MenuItem, useTheme } from "@material-ui/core";
+import { MenuList, useTheme } from "@material-ui/core";
 import MenuWrapper from "./MenuWrapper";
 import { generatePath, Link } from "react-router-dom";
 import { PROFILE } from "../../../routes";
@@ -13,15 +13,14 @@ const HeaderUserDropDown = ({ isOpen, userAnchorEl, closeMenu }) => {
 
   return (
     <MenuWrapper isOpen={isOpen} anchorEl={userAnchorEl} closeMenu={closeMenu}>
-      <MenuList>
+      <MenuList style={{display: "flex", flexDirection: "column"}}>
         <Link
           to={generatePath(PROFILE, {
             username: auth.user.username,
           })}
-          style={{ textDecoration: "none", color: text_color }}
-          onClick={closeMenu}
-        >
-          <MenuItem> Profile </MenuItem>
+          style={{ textDecoration: "none", color: text_color, padding: ".5rem" }}
+          onClick={closeMenu}>
+          Profile
         </Link>
         <Logout />
       </MenuList>

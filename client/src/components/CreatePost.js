@@ -10,14 +10,15 @@ import { useMutation } from "@apollo/client";
 import UploadPostImage from "./UploadPostImage";
 import ImagePreview from "./ImagePreview";
 
-import { colors, shadows } from "../utils/theme";
+import { colors } from "../utils/theme";
 import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 import { withRouter } from "react-router-dom";
 
-const postStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   container: {
+    border: theme.palette.shape.borderColor,
     display: "flex",
     flexDirection: "column",
     backgroundColor: theme.palette.primary.main,
@@ -93,7 +94,7 @@ const CreatePost = ({ match }) => {
   const [image, setImage] = useState("");
   const [uploadError, setUploadError] = useState("");
   const [{ auth }] = useStore();
-  const classes = postStyles();
+  const classes = useStyles();
 
   const [createPost, { loading }] = useMutation(CREATE_POST, {
     refetchQueries: [

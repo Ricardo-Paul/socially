@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     borderRadius: theme.palette.shape.borderRadius,
+    border: theme.palette.shape.borderColor,
     marginTop: 20,
     width: "100%",
     height: "auto",

@@ -23,6 +23,8 @@ const getMuiTheme = SELECTED_THEME => createMuiTheme({
   }
 });
 
+const white = "#ffffff"
+
 const APP_THEMES = {
   [DARK_THEME]: {
     primary: {
@@ -38,7 +40,8 @@ const APP_THEMES = {
     },
   shape: {
     borderRadius: "0.5rem",
-    inputBorderRadius: "1.5rem"
+    inputBorderRadius: "1.5rem",
+    borderColor: "0px solid #d4d2d2"
   },
   custom: {
     palette: {
@@ -50,14 +53,15 @@ const APP_THEMES = {
     drawerWidth: 300,
     peopleBoxWidth: 450,
     boxShadow: "0px 4px 9px 0px #0c0c0c",
-    border: "0.1px solid #424242"
+    border: "0.1px solid #424242",
+    buttonGradient: "linear-gradient( 59deg, rgb(0 0 0) 0%, rgb(97 95 95) 50%, rgb(0 0 0) 100%)",
   }
 },
 
   [LIGHT_THEME]: {
     primary: {
       dark:"#f3f3f3",
-      main: "#ffffff",
+      main: white,
       light: "#efefef",
       contrastText: "#505050"
   },
@@ -68,18 +72,20 @@ const APP_THEMES = {
     },
   shape: {
       borderRadius: "0.5rem",
-      inputBorderRadius: "1.5rem"
+      inputBorderRadius: "1.5rem",
+      borderColor: "1px solid #d4d2d2"
     },
   custom: {
       palette: {
-        drawerBackground: "#1b1a1a",
-        paleNuance: "#2f2e2e",
+        drawerBackground: "#ffffff",
+        paleNuance: "#ffffff",
         helperText: "#a9482a",
         likeColor: "#0b80ef"
       },
       drawerWidth: 300,
       peopleBoxWidth: 450,
-      boxShadow: "0px 4px 2px 0px #0c0c0c"
+      boxShadow: "rgb(255 255 255) 0px 0px 0px",
+      buttonGradient: "linear-gradient( 59deg, rgb(255 255 255) 0%, rgb(214 214 214) 50%, rgb(255 255 255) 100%)"
     }
   }
 }

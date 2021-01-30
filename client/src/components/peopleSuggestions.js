@@ -23,7 +23,8 @@ const peopleStyles = makeStyles((theme) => ({
     position: "fixed",
     width: theme.palette.custom.peopleBoxWidth,
     padding: ".5rem",
-    boxShadow: theme.palette.custom.boxShadow
+    boxShadow: theme.palette.custom.boxShadow,
+    border: theme.palette.shape.borderColor
   },
   people_header: {
     fontSize: "1.2rem",

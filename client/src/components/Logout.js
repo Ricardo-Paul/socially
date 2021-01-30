@@ -19,7 +19,7 @@ const Logout = ({ history }) => {
     history.push(SIGNIN);
   };
 
-  return <Link style={{color: text_color}} onClick={handleLogout}>Logout</Link>;
+  return <Link style={{color: text_color, padding: ".5rem"}} onClick={handleLogout}>Logout</Link>;
 };
 
 export default withRouter(Logout);
