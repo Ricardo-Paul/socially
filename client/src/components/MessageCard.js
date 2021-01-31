@@ -81,7 +81,7 @@ const MessageCard = ({ user, notSeen, loading, closeMenu }) => {
   });
   
   const updateMessages = async () => {
-    closeMenu();
+    // closeMenu();
     try{
       await update();
     }catch(e){
