@@ -4,28 +4,7 @@ import { Button, ListItem } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
-import { colors } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
 import { IconWrapper } from "../IconWrapper";
-
-// temporary palette
-const palette = {
-  background: {
-    dark: "#F4F6F8",
-    default: colors.common.white,
-    paper: colors.common.white,
-  },
-  primary: {
-    main: colors.indigo[500],
-  },
-  secondary: {
-    main: colors.indigo[500],
-  },
-  text: {
-    primary: colors.blueGrey[900],
-    secondary: colors.blueGrey[600],
-  },
-};
 
 const navItemStyles = makeStyles((theme) => ({
   item: {
@@ -38,9 +17,7 @@ const navItemStyles = makeStyles((theme) => ({
   },
   button: {
     color: theme.palette.primary.contrastText,
-    fontWeight: 400,
     width: "100%",
-    padding: "10px 8px",
     justifyContent: "flex-start",
     textTransform: "none",
     letterSpacing: 0.1,
@@ -56,7 +33,7 @@ const navItemStyles = makeStyles((theme) => ({
   },
   active: {
     color: "#fdfdfd",
-    backgroundColor: "#505050",
+    backgroundColor: theme.palette.primary.light,
   },
 }));
 

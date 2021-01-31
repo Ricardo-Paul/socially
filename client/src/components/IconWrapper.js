@@ -1,4 +1,4 @@
-import { withStyles, Box, useTheme } from "@material-ui/core";
+import { withStyles, Box} from "@material-ui/core";
 let gradient;
 const theme = localStorage.getItem('theme');
 

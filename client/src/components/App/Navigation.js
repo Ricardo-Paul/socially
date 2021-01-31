@@ -70,10 +70,9 @@ const Navigation = () => {
           >
             {auth.user ? auth.user.fullName : null}
           </Typography>
-          <Box color="#a9482a"> My Status </Box>
         </Box>
         <Divider />
-        <Box p={2}>
+        <Box>
             <List>{list}</List>
         </Box>
       </Box>

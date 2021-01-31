@@ -14,7 +14,6 @@ import Drawer from "@material-ui/core/Drawer";
 import { PageContainer } from "../pageContainer";
 import Loading from "../../pages/Loading/Loading";
 
-
 const Profile = lazy(() => import("../../pages/Profile"));
 const Home = lazy(() => import("../../pages/Home"));
 const People = lazy(() => import("../../pages/People"));
@@ -23,7 +22,6 @@ const Notifications = lazy(() => import("../../pages/Notifications"));
 const About = lazy(() => import("../../pages/About"));
 const Browse = lazy(() => import("../../pages/Browse"));
 const Post = lazy(() => import("../../pages/Post"));
-
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
