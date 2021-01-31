@@ -54,7 +54,6 @@ const APP_THEMES = {
     peopleBoxWidth: 450,
     boxShadow: "0px 4px 9px 0px #0c0c0c",
     border: "0.1px solid #424242",
-    buttonGradient: "linear-gradient( 59deg, rgb(0 0 0) 0%, rgb(97 95 95) 50%, rgb(0 0 0) 100%)",
   }
 },
 
@@ -85,7 +84,6 @@ const APP_THEMES = {
       drawerWidth: 300,
       peopleBoxWidth: 450,
       boxShadow: "rgb(255 255 255) 0px 0px 0px",
-      buttonGradient: "linear-gradient( 59deg, rgb(255 255 255) 0%, rgb(214 214 214) 50%, rgb(255 255 255) 100%)"
     }
   }
 }

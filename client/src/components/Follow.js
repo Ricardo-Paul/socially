@@ -4,6 +4,7 @@ import React from "react";
 import { CREATE_FOLLOW, DELETE_FOLLOW } from "../graphql/follow";
 import { useStore } from "../store";
 import PropTypes from "prop-types";
+import * as Routes from "./../routes";
 
 // Queries
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
@@ -67,7 +68,7 @@ const Follow = ({ user, icon: Icon }) => {
     <React.Fragment>
       <Button
         variant="contained"
-        color={isFollowing ? "primary" : "secondary"}
+        color={isFollowing ? "secondary" : "#6c6c6d"}
         size="small"
         onClick={handleButtonClick}
         fullWidth

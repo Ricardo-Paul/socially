@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Avatar,
-  List,
   ListItem,
   ListItemAvatar,
 } from "@material-ui/core";

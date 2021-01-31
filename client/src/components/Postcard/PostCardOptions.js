@@ -47,11 +47,11 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.main,
     borderRadius: ".8rem",
-    height: "12rem",
+    // height: "12rem",
     padding: ".3rem",
-    paddingRight: "5rem",
+    // paddingRight: "5rem",
     border: theme.palette.custom.border
   }
 
