@@ -10,8 +10,8 @@ import { GET_MESSAGES, GET_NEW_MESSAGE } from "../../graphql/message";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: "#dedede",
     width: "100%",
+    position: "relative"
   },
 }));
 

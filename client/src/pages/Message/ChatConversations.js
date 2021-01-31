@@ -9,10 +9,17 @@ import { GET_AUTH_USER } from "../../graphql/user";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: "#dedede",
+    backgroundColor: theme.palette.primary.main,
     width: "100%",
     height: "calc(100% - 50px)",
     position: "relative",
+  },
+  placeholder: {
+    color: "#aba7a7",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   },
   submit: {
     position: "absolute",
@@ -67,7 +74,7 @@ const ChatConversations = ({ chatUser, messages, authUser }) => {
 
 
   if (!chatUser) {
-    return <h3> error </h3>;
+    return <h3 className={classes.placeholder} > Your Conversations </h3>
   }
 
   const sendMessage = async () => {

@@ -7,10 +7,12 @@ import useDebounce from "../../hooks/useDebounce";
 import headerStyles from "../App/AppHeader/headerStyles";
 import SearchResult from "./searchResult";
 import PropTypes from "prop-types";
+import { useStore } from "../../store";
 
 const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   const client = useApolloClient();
   const classes = headerStyles();
+  const [{ auth }] = useStore();
   const theme = useTheme();
   const text_color = theme.palette.primary.contrastText;
 
@@ -20,10 +22,7 @@ const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  const inputBaseClasses = {
-    // root: classes.inputRoot,
-    input: classes.inputInput,
-  };
+
 
   const debounceSearchQuery = useDebounce(searchQuery, 500);
 
@@ -49,7 +48,8 @@ const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
       });
 
       setLoading(false);
-      setFoundUsers(data.searchUsers);
+      const users = data.searchUsers.filter( u => u.id !== auth.user.id)
+      setFoundUsers(users);
       setIsSearchOpen(debounceSearchQuery != "");
     };
 

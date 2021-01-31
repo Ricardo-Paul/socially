@@ -41,12 +41,9 @@ const useStyles = makeStyles(theme => ({
 const Image = ({ image }) => {
   const imageRef = React.useRef(null);
   const classes = useStyles();
-  function handleMouseOver(){
-    imageRef.current.style.transform = "scale(0.9)"
-  }
-  function handleMouseOut(){
-    imageRef.current.style.transform = "scale(1)"
-  }
+  const handleMouseOver = () => imageRef.current.style.transform = "scale(0.9)";
+  const handleMouseOut = () => imageRef.current.style.transform = "scale(1)";
+  
   return(
     <Box className={classes.image_container}>
       <img ref={imageRef} alt="image" src={image} className={classes.image} />

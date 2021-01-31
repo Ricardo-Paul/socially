@@ -83,7 +83,6 @@ const MessageUsers = ({ closeMenu }) => {
   });
 
 
-
   // const notSeen = user.seen === false && user.lastMessageSender === false;
   // let notSeen;
 
