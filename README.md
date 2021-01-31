@@ -3,11 +3,11 @@
 ### Work In Progress (Client Side)
 ### Some screenshots in the meantime
 
-<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20home%20page.png" />
+<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/S%5BUPDATE%5D_HOME.png" />
 
-<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20message%20development.png" />
+<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/S%5BUPDATE%5D_PREVIEW.png" />
 
-<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20Upload%20Preview.png" />
+<img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/S%5BUPDATE%5D_HOME2.png" />
 
 <img src="https://github.com/Ricardo-Paul/socially/blob/client/development%20screenshots/socially%20-%20search.png" />
 
