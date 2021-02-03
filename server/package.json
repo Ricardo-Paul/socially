@@ -26,7 +26,6 @@
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "generate-unique-id": "^2.0.1",
-    "graphql": "^0.10.5",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "mongoose": "^5.10.11",
@@ -40,8 +39,8 @@
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2"
   },
+
   "engines": {
-    "node": "12.18.4",
-    "npm": "6.14.6"
+    "node": "12.18.4"
   }
 }
