@@ -22,7 +22,6 @@ const LOCAL_DB = `${MONGO_URL}/${DB_NAME}`;
 const MONGODB_ATLAS = process.env.MONGODB_ATLAS;
 const isDev = process.env.NODE_ENV === 'development'
 
-
 // ditch the resolver object by passing the
 // resolvers as an array
 
