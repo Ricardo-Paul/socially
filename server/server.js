@@ -48,7 +48,7 @@ apolloServer.installSubscriptionHandlers(httpServer);
 // });
 
 // now we're listening to the httpServer rather than app
-httpServer.listen({ port: PORT || 8080}, () => {
+httpServer.listen({ port: process.env.PORT || 8000}, () => {
     console.log(`API is running on port: ${HOST}${PORT}
     graphQL Playground: ${HOST}${PORT}/${apolloServer.graphqlPath}
 
