@@ -24,6 +24,9 @@
     "express",
     "react"
   ],
+  "engines": {
+    "node": "12.18.4"
+  },
   "author": "Ricardo Paul",
   "license": "ISC",
   "bugs": {
