@@ -12,6 +12,9 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { themes } from './constants/AppTheme';
 const { DARK_THEME, LIGHT_THEME, DEFAULT_THEME } = themes;
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+const REACT_APP_WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL;
+
 const getMuiTheme = SELECTED_THEME => createMuiTheme({
   palette: APP_THEMES[SELECTED_THEME],
   overrides: {
@@ -104,7 +107,7 @@ if(SELECTED_THEME === DARK_THEME || SELECTED_THEME === LIGHT_THEME ){
 // http and websockekt links
 const apiUrl = "http://localhost:8080/graphql";
 const webSocketApiUrl = "ws://localhost:8080/graphql";
-const client = createApolloClient(apiUrl, webSocketApiUrl);
+const client = createApolloClient(apiUrl, REACT_APP_WEBSOCKET_URL);
 
 render(
   <ApolloProvider client={client}>
