@@ -7,8 +7,10 @@
     "lib": "lib"
   },
   "scripts": {
+    "start:server": "npm start --prefix server",
+    "start:client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start:api\" \"npm run start:frontend\"",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "deploy:api": "git subtree push --prefix server heroku master"
   },
   "repository": {
