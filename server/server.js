@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 
 // env var
-const API_PORT = process.env.API_PORT;
+const PORT = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
 const DB_NAME = process.env.DB_NAME;
 const HOST =   process.env.HOST;
@@ -41,18 +41,18 @@ apolloServer.applyMiddleware({ app })
 apolloServer.installSubscriptionHandlers(httpServer);
 
 // express sever
-// app.listen(API_PORT, ()=>{
-//     console.log(`API is running on port: ${HOST}${API_PORT}
-//     graphQL Playground: ${HOST}${API_PORT}/${apolloServer.graphqlPath}
+// app.listen(PORT, ()=>{
+//     console.log(`API is running on port: ${HOST}${PORT}
+//     graphQL Playground: ${HOST}${PORT}/${apolloServer.graphqlPath}
 //     `);
 // });
 
 // now we're listening to the httpServer rather than app
-httpServer.listen({ port: API_PORT}, () => {
-    console.log(`API is running on port: ${HOST}${API_PORT}
-    graphQL Playground: ${HOST}${API_PORT}/${apolloServer.graphqlPath}
+httpServer.listen({ port: PORT || 8080}, () => {
+    console.log(`API is running on port: ${HOST}${PORT}
+    graphQL Playground: ${HOST}${PORT}/${apolloServer.graphqlPath}
 
-    Subscriptions: ${'ws://'}${API_PORT}/${apolloServer.subscriptionsPath}
+    Subscriptions: ${'ws://'}${PORT}/${apolloServer.subscriptionsPath}
     `)
 })
 
