@@ -381,13 +381,13 @@ const Mutation = {
       { new: true } //returns the document with the new update
     );
 
-    const CLIENT_URL = process.env.CLIENT_URL;
+    const FRONTEND_URL = process.env.FRONTEND_URL;
 
     const mailOptions = {
       to: updatedUser.email,
       subject: 'Socially | Password Reset',
       html: `Click the following link to reset your password: 
-            ${CLIENT_URL}/reset-password?email=${updatedUser.email}&&passwordResetToken=${updatedUser.passwordResetToken}`,
+            ${FRONTEND_URL}/reset-password?email=${updatedUser.email}&&passwordResetToken=${updatedUser.passwordResetToken}`,
     };
 
     sendEmail(mailOptions);
