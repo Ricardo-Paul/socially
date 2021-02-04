@@ -40,12 +40,7 @@ apolloServer.applyMiddleware({ app })
 // add Subscription handler to our apolloServer
 apolloServer.installSubscriptionHandlers(httpServer);
 
-// express sever
-// app.listen(PORT, ()=>{
-//     console.log(`API is running on port: ${HOST}${PORT}
-//     graphQL Playground: ${HOST}${PORT}/${apolloServer.graphqlPath}
-//     `);
-// });
+
 
 // now we're listening to the httpServer rather than app
 httpServer.listen({ port: process.env.PORT || 8000}, () => {
@@ -55,6 +50,11 @@ httpServer.listen({ port: process.env.PORT || 8000}, () => {
     Subscriptions: ${'ws://'}${PORT}/${apolloServer.subscriptionsPath}
     `)
 })
+
+app.get('/', (req, res) => {
+    res.send('Deployed')
+})
+
 
 mongoose.connect(MONGODB_ATLAS, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
