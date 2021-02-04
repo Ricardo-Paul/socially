@@ -19,7 +19,7 @@ const DB_NAME = process.env.DB_NAME;
 const HOST =   process.env.HOST;
 
 const LOCAL_DB = `${MONGO_URL}/${DB_NAME}`;
-const MONGODB_ATLAS = process.env.MONGODB_ATLAS;
+const MONGODB_URL = process.env.MONGODB_URL;
 const isDev = process.env.NODE_ENV === 'development'
 
 // ditch the resolver object by passing the
@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
 })
 
 
-mongoose.connect('mongodb+srv://ricardo:ricardo00@cluster0.ryic9.mongodb.net/sociallyv1?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log(`API Connected to the databse: ${DB_NAME}`)
 })
