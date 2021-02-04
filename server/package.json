@@ -19,6 +19,7 @@
   "dependencies": {
     "apollo-server": "^2.19.0",
     "apollo-server-express": "^2.18.2",
+    "bcryptjs": "^2.4.3",
     "cloudinary": "^1.23.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -39,7 +40,6 @@
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2"
   },
-
   "engines": {
     "node": "12.18.4"
   }
