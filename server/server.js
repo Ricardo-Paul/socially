@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
 })
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/sociallydb', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://ricardo:ricardo00@cluster0.ryic9.mongodb.net/sociallyv1?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log(`API Connected to the databse: ${DB_NAME}`)
 })
