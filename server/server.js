@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
 })
 
 
-mongoose.connect(MONGODB_ATLAS, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(LOCAL_DB, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log(`API Connected to the databse: ${DB_NAME}`)
 })
