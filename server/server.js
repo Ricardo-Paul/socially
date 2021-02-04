@@ -56,7 +56,7 @@ httpServer.listen({ port: process.env.PORT || 8000}, () => {
     `)
 })
 
-mongoose.connect(isDev ? LOCAL_DB : MONGODB_ATLAS, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(LOCAL_DB, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log(`API Connected to the databse: ${DB_NAME}`)
 })
