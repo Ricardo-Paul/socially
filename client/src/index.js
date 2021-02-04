@@ -105,8 +105,8 @@ if(SELECTED_THEME === DARK_THEME || SELECTED_THEME === LIGHT_THEME ){
 }
 
 // http and websockekt links
-const apiUrl = "http://localhost:8000/graphql";
-const webSocketApiUrl = "ws://localhost:8080/graphql";
+const apiUrl = "https://polar-sands-95468.herokuapp.com/graphql";
+const webSocketApiUrl = "ws://polar-sands-95468.herokuapp.com/graphql";
 const client = createApolloClient(apiUrl, webSocketApiUrl);
 
 render(
