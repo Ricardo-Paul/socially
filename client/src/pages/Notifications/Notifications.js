@@ -6,23 +6,15 @@ import Notification from "../../components/App/Notification";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import LoadingIndicator from "../../components/LoadingIndicator";
-import { Grid } from "@material-ui/core";
+import HelperMessages from "../../components/HelperMessages";
+import { helperText } from "../../constants/HelperText";
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexDirection: "column"
-  },
   notifications: {
     backgroundColor: theme.palette.primary.main,
-    padding: ".5rem"
-  },
-  no_notifications: {
-    color: theme.palette.primary.contrastText,
     padding: ".5rem",
-    borderRadius:".5rem",
-    border: theme.palette.shape.borderColor
-  }
+    width: 350
+  },
 }))
 
 const Notifications = () => {
@@ -46,7 +38,7 @@ const Notifications = () => {
 
     if (!loading && networkStatus != 1) {
       const notifications = data.getUserNotifications.notifications;
-      if (!notifications.length) return <Box className={classes.no_notifications}> We'll display your notifications here when your followers interact with your posts or someone new starts following you  </Box>
+      if (!notifications.length) return <HelperMessages text={helperText.NO_NOTIFICATIONS} />
 
       return notifications.map((n) => (
         <Notification key={n.id} loading={loading} notification={n} />
@@ -56,16 +48,9 @@ const Notifications = () => {
 
   return (
     <React.Fragment>
-        <Grid container className={classes.container}>
-          <Grid item md={8} lg={7} xs={12}>
-            <Box className={classes.notifications} >
-              {renderContent()}
-            </Box>
-          </Grid>
-          <Grid item md={4} lg={5} xs={12}>
-            Useless
-          </Grid>
-        </Grid>
+      <Box className={classes.notifications} >
+        {renderContent()}
+      </Box>
     </React.Fragment>
   );
 };

@@ -13,6 +13,7 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
       transition
       disablePortal
       {...rest}
+      style={{position: "absolute", left: "5px"}}
     >
       {({ TransitionProps, placement }) => (
         <ClickAwayListener onClickAway={closeMenu}>

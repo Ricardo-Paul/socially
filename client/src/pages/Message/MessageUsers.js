@@ -18,15 +18,21 @@ import {
 import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
 import MessageCard from "../../components/MessageCard";
+import { helperText } from "../../constants/HelperText";
+import HelperMessages from "../../components/HelperMessages";
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: 330,
+    width: 350,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     borderColor: "#d0d0d0",
     backgroundColor: theme.palette.primary.main,
+    // [theme.breakpoints.down("sm")]:{
+    //   width: "100%"
+    // }
   },
   header: {
     display: "flex",
@@ -83,6 +89,8 @@ const MessageUsers = ({ closeMenu }) => {
   });
 
 
+  const noConversations = data && !data.getConversations.length;
+
   // const notSeen = user.seen === false && user.lastMessageSender === false;
   // let notSeen;
 
@@ -133,6 +141,7 @@ const MessageUsers = ({ closeMenu }) => {
         messageSearch
         placeholder="Chat users..."
       />
+      {noConversations && <HelperMessages text={helperText.NO_MESSAGES} style={{width: "95%", marginTop: "1rem"}} />}
       <Box className={classes.user_list} >
         <List>
           {!loading &&

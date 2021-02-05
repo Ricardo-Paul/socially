@@ -65,8 +65,9 @@ const headerStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     borderRadius: "1rem",
     boxShadow: theme.palette.custom.boxShadow,
-    padding: "1rem",
+    padding: ".5rem",
     [theme.breakpoints.down("sm")]:{
+      position: "absolute",
       top: "-16px",
       left: "-10px"
     }
