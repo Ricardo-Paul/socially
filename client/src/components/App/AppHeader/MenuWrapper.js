@@ -1,5 +1,5 @@
 import React from "react";
-import { Popper, Grow, Box, ClickAwayListener } from "@material-ui/core";
+import { Popper, Grow, Box, ClickAwayListener, Fade } from "@material-ui/core";
 import headerStyles from "./headerStyles";
 
 const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
@@ -16,17 +16,17 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
     >
       {({ TransitionProps, placement }) => (
         <ClickAwayListener onClickAway={closeMenu}>
-          <Grow
+          {/* <Fade
             {...TransitionProps}
             style={{
               transformOrigin:
                 placement === "top" ? "center bottom" : "center top",
             }}
-          >
+          > */}
             <Box fontSize="1rem">
               {children}
             </Box>
-          </Grow>
+          {/* </Fade> */}
         </ClickAwayListener>
       )}
     </Popper>

@@ -54,7 +54,7 @@ const PostCardOptions = ({ closeMenu, postId, postAuthor, deletePost }) => {
     // paddingRight: "5rem",
     border: theme.palette.custom.border
   }
-
+ 
   const copyUrl=()=> {
     let absUrl = `${process.env.REACT_APP_CLIENT_URL}${generatePath(Routes.POST,{id: postId,})}`;
     navigator.clipboard.writeText(absUrl);
