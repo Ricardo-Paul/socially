@@ -1,10 +1,9 @@
 import { Avatar, Box, Button, makeStyles } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { useStore } from "../store";
 import { MAX_POST_IMAGE_SIZE } from "../constants/ImageSizeLimit";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
-// mutation
 import { CREATE_POST } from "../graphql/post";
 import { useMutation } from "@apollo/client";
 import UploadPostImage from "./UploadPostImage";
@@ -15,6 +14,7 @@ import { GET_AUTH_USER, GET_USER_POSTS } from "../graphql/user";
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT, USER_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
 import { withRouter } from "react-router-dom";
+import LoadingIndicator from "./LoadingIndicator";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -85,15 +85,24 @@ const useStyles = makeStyles((theme) => ({
     "& :Mui-disabled": {
       backgroundColor: "red"
     }
+  },
+  cancel_button: {
+    color: theme.palette.primary.contrastText
+  },
+  uploading: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    color: theme.palette.primary.contrastText
   }
 }));
 
-const CreatePost = ({ match }) => {
-
+const CreatePost = () => {
   const [isFocused, setIsFocused] = useState(null);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [uploadError, setUploadError] = useState("");
+  const [uploading, setUploading] = useState(false);
   const [{ auth }] = useStore();
   const classes = useStyles();
 
@@ -110,48 +119,42 @@ const CreatePost = ({ match }) => {
       },
     ],
   });
-  const isUploadDisabled = loading || (!loading && !title && !image);
-
-  // title change
+  const noData = (!loading && !title && !image);
   const handleChange = (e) => setTitle(e.target.value);
 
   const handleReset = () => {
     setIsFocused(false);
     setTitle("");
     setImage("");
+    setUploadError("");
   };
 
-  // image change
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (!file) {
-      return;
-    }
-    if (file.size >= MAX_POST_IMAGE_SIZE) {
-      setUploadError(
-        `Image is size should not exceed ${MAX_POST_IMAGE_SIZE / 1000000} mb`
-      );
-    }
+    if (!file) return;
+    if (file.size >= MAX_POST_IMAGE_SIZE)
+      setUploadError(`Image is size should not exceed ${MAX_POST_IMAGE_SIZE / 1000000} mb`);
     setImage(file);
   };
 
   const handleSubmit = async (e) => {
-    if (!title && !image) {
-      return;
-    }
     e.preventDefault();
+    if (noData) return setUploadError(`You need to upload a photo or tell your followers what's on your mind`);
+    setUploading(true);
     try {
-      const res = await createPost({
+       await createPost({
         variables: { input: { title, authorId: auth.user.id, image } },
       });
+      setUploading(false)
     } catch (error) {
       console.log(error);
+      setUploading(false)
     }
     handleReset();
   };
 
   return (
-    <>
+    <Fragment>
       <form style={{border: "none"}} onSubmit={(e) => handleSubmit(e, createPost)}>
         <Box className={classes.container}>
           <div className={classes.row1}>
@@ -176,11 +179,10 @@ const CreatePost = ({ match }) => {
           </div>
 
           {image && <ImagePreview imageSource={URL.createObjectURL(image)} />}
-          {uploadError}
           {isFocused && (
             <div className={classes.buttons}>
               <Button
-                color="secondary"
+                className={classes.cancel_button}
                 size="small"
                 onClick={handleReset}
                 variant="outlined"
@@ -194,11 +196,10 @@ const CreatePost = ({ match }) => {
                 style={{ marginLeft: 5 }}
                 type="submit"
                 classes={{
-                  disabled: classes.button_disabled,
-                  
+                  ["Mui-disabled"]: classes.button_disabled,
                 }}
                 className={classes.upload_button}
-                disabled={isUploadDisabled}
+                onClick={handleSubmit}
               >
                 SHARE
               </Button>
@@ -206,7 +207,14 @@ const CreatePost = ({ match }) => {
           )}
         </Box>
       </form>
-    </>
+      <Box color="red" mt={".3rem"} > {uploadError} </Box>
+      { uploading && 
+        <Box className={classes.uploading}>
+          <LoadingIndicator />
+          Uploading...
+        </Box>
+       }
+    </Fragment>
   );
 };
 export default withRouter(CreatePost);
