@@ -21,6 +21,7 @@ const inputStyles = makeStyles({
       padding: 3,
       margin: 0,
       borderRadius: 2,
+      backgroundColor: "transparent"
     },
   },
 });

@@ -1,4 +1,4 @@
-import { Box, Grid, Hidden, makeStyles } from "@material-ui/core";
+import { Box, Grid, Hidden, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 import React, { Fragment } from "react";
 import CreatePost from "../../components/CreatePost";
 import PostCard from "../../components/Postcard";
@@ -8,6 +8,7 @@ import { useStore } from "../../store";
 import PostPopUp from "../../components/PostPopUp";
 import * as Routes from "../../routes";
 import { generatePath, withRouter } from "react-router-dom";
+
 
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
 import { theme } from "../../utils/theme";
@@ -37,6 +38,8 @@ const useStyles = makeStyles(theme => ({
 const Home = ({ history }) => {
   const [{ auth }] = useStore();
   const [postId, setPostId] = React.useState(null);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   // kind of a hack
   // prevent app from crashing when logout
@@ -132,7 +135,7 @@ const Home = ({ history }) => {
 
   return (
       <div className={classes.home}>
-        <Grid container spacing={2} className={classes.grid}>
+        <Grid container spacing={!matches && 2} className={classes.grid}>
           <Grid item md="8" lg="7" xs="12">
               <CreatePost />
               {renderContent()}

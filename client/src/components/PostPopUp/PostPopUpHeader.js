@@ -39,7 +39,7 @@ const PostPopUpHeader = ({ image }) => {
         <NotificationsNoneOutlinedIcon />
       </IconButton>
       <IconButton className={classes.right_header_icons}>
-        <Avatar src={image} />
+        {/* <Avatar src={image} /> */}
       </IconButton>
     </Box>
     )

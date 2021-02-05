@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     boxShadow: theme.palette.custom.boxShadow,
     padding: 10,
-    [theme.breakpoints.down("sm")]: {
-      padding: 0,
-    },
   },
   row1: {
     display: "flex",
@@ -38,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     padding: 5,
     color: colors.lighRed,
+    [theme.breakpoints.down("sm")]:{
+      // width: "2.3rem",
+      // height: "2.3rem"
+    }
   },
   textarea: {
     marginLeft: 10,
@@ -57,14 +58,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       margin: 0,
       width: "100%",
-      height: 50,
-      paddingLeft: 5,
+      height: "3rem",
+      paddingLeft: 10,
     },
   },
   uploadIcon: {
     padding: 5,
     color: "white",
-  },
+  }, 
   buttons: {
     borderTop: "0.11rem solid #424242",
     paddingTop: 10,
@@ -155,7 +156,6 @@ const CreatePost = ({ match }) => {
         <Box className={classes.container}>
           <div className={classes.row1}>
             <div className={classes.avatar}>
-              {/* <AccountCircle fontSize="large" /> */}
               <Avatar src={auth.user.image} />
             </div>
 

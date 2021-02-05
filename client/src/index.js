@@ -118,6 +118,6 @@ render(
     </MuiThemeProvider>
   </ApolloProvider>,
     document.getElementById("root")
-  );
+);
 
  

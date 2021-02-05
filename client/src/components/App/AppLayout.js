@@ -80,7 +80,7 @@ const AppLayout = ({ authUser }) => {
   const renderRoutes = () => {
     return (
       <React.Fragment>
-        <AppHeader />
+        {/* <AppHeader /> */}
           <CssBaseline />
           <Grid container className={classes.grid}>
             {/* hidden on mobile */}
