@@ -29,7 +29,7 @@ const navStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navigation = () => {
+const Navigation = ({ closeDrawer }) => {
   const classes = navStyles();
   const [{ auth }] = useStore();
 
@@ -47,7 +47,7 @@ const Navigation = () => {
   ];
 
   const list = options.map((item, index) => (
-    <NavItem key={index} icon={item.icon} title={item.title} href={item.to} />
+    <NavItem key={index} icon={item.icon} title={item.title} href={item.to} onClick={closeDrawer} />
   ));
 
   return (

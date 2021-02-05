@@ -71,6 +71,10 @@ const headerStyles = makeStyles((theme) => ({
       left: "-10px"
     }
   },
+  mobileDrawer: {
+    backgroundColor: theme.palette.custom.palette.drawerBackground,
+    width: "90%"
+  }
 }));
  
 export default headerStyles;

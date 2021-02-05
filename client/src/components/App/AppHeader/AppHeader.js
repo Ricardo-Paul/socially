@@ -148,8 +148,8 @@ const AppHeader = () => {
       />
 
       {/* mobile drawer */}
-      <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-        <Navigation />
+      <Drawer classes={{ paper: classes.mobileDrawer }} open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+        <Navigation closeDrawer={() => setIsDrawerOpen(false)} />
       </Drawer>
     </>
   );

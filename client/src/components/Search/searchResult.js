@@ -41,10 +41,9 @@ const SearchResult = ({
     <MenuWrapper
       isOpen={isOpen}
       anchorEl={searchAnchorEl}
-      style={{ marginLeft: -50 }}
+      style={{ marginLeft: -50, top: 14 }}
       closeMenu={closeMenu}
     >
-
 
       <Box style={{ width: 250, padding: ".5rem", backgroundColor: bg_color }}>
       {loading && <ListItem className={classes.list_item} > searching... </ListItem>}
