@@ -65,7 +65,7 @@ const AppHeader = () => {
 
   const openDropDown = (event) =>
     setAnchorEl(
-      anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget
+      anchorEl && anchorEl.contains(event.currentTarget) ? null : event.currentTarget
     );
 
   const closeDropDown = () => {

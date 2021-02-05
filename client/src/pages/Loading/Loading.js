@@ -3,9 +3,9 @@ import Logo from "../../assets/logo.svg"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box"
 import PropTypes from "prop-types";
-import { useTheme } from "@material-ui/core";
+import { CircularProgress, useTheme } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     container: {
         height: "95vh",
         display: "flex",
@@ -17,8 +17,11 @@ const useStyles = makeStyles({
         width: "4rem",
         height: "4rem",
         marginBottom: "0.5rem"
+    },
+    progress: {
+        color: theme.palette.primary.contrastText
     }
-})
+}))
 
 const Loading = ({ text }) => {
     const classes = useStyles();
@@ -30,11 +33,7 @@ const Loading = ({ text }) => {
 
     return(
         <div style={style} className={classes.container}> 
-            <img className={classes.logo} src={Logo} />
-            {text &&
-            <Box fontFamily="monospace">
-                {/* { text } ... */}
-            </Box>}
+            <CircularProgress variant="indeterminate" className={classes.progress} />
         </div>
     )
 };

@@ -123,7 +123,7 @@ const App = () => {
 
   return (
     <Router>
-      <Suspense fallback={<Loading text={`Socially V1.0.0`} />} >
+      <Suspense fallback={<Loading />} >
       <Switch>
           {data.getAuthUser ?
             (<Route exact render={() => <AppLayout authUser={data.getAuthUser} />} />) : 

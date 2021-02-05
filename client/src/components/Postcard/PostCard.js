@@ -8,6 +8,7 @@ import {
   Divider,
   Popper,
   Box,
+  ClickAwayListener,
 } from "@material-ui/core";
 import { MoreVert, Comment } from "@material-ui/icons";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -99,8 +100,7 @@ const PostCard = ({
 }) => {
   const classes = useStyles();
   const [{ auth }] = useStore();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = React.useState(false);
   const [recentComments, setRecentComments] = useState([]);
   const [isCreateCommentOpen, setCreateCommentOpen] = React.useState(false);
   const isMoreComments = comments && comments.length > 1;
@@ -122,9 +122,12 @@ const PostCard = ({
 
   // if anchorEl has any value set it to null
   // otherwise add the event currentTarget to it
-  const openPopOver = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-  };
+  const openPopOver = (event) =>
+    setAnchorEl(
+      anchorEl && anchorEl.contains(event.target) ? null : event.currentTarget
+    );
+
+  const closePopOver = () => setAnchorEl(null);
 
   const [remove] = useMutation(DELETE_POST, {
     refetchQueries: [
@@ -159,14 +162,16 @@ const PostCard = ({
 
   return (
     <Fragment>
-      <Popper open={open} anchorEl={anchorEl} placement="bottom-end">
-        <PostCardOptions
-          closeMenu={() => setAnchorEl(null)}
-          postId={postId}
-          postAuthor={postAuthor}
-          imagePublicId={imagePublicId}
-          deletePost={deletePost}
-        />
+      <Popper open={Boolean(anchorEl)} anchorEl={anchorEl} placement="bottom-end">
+        <ClickAwayListener onClickAway={() => setAnchorEl(null)} >
+          <PostCardOptions
+            closeMenu={() => setAnchorEl(null)}
+            postId={postId}
+            postAuthor={postAuthor}
+            imagePublicId={imagePublicId}
+            deletePost={deletePost}
+          />
+        </ClickAwayListener>
       </Popper>
       <div className={classes.post_card}>
         <Box className={classes.card_header}>
