@@ -35,10 +35,11 @@ const ProfileStyles = makeStyles((theme) => ({
   info: {
     display: "flex",
     justifyContent: "space-between",
-    backgroundColor: "#ececec",
-    border: "1px solid #d0d0d0",
+    // backgroundColor: "#ececec",
+    // border: "1px solid #d0d0d0",
     marginBottom: 10,
     padding: 15,
+    color: theme.palette.primary.contrastText
   },
   imgContainer: {
     display: "flex",
@@ -110,15 +111,15 @@ const ProfileInfo = ({ user }) => {
       <Box style={{ width: "100%" }} >
         <h1 style={{ textAlign: "center", color:"#d2d2d2", fontSize: "2rem" }}> {user.fullName} </h1>
         <Box className={classes.info}>
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography variant="subtitle2">
             {" "}
             {user.posts.length} Posts{" "}
           </Typography>
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography variant="subtitle2">
             {" "}
             {user.following.length} Following{" "}
           </Typography>
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography variant="subtitle2">
             {" "}
             {user.followers.length} Followers{" "}
           </Typography>
