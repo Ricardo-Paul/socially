@@ -34,7 +34,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: ".8rem"
   },
   icon_button: {
-    padding: 0
+    padding: 0,
+    [theme.breakpoints.down("sm")]:{
+      padding: 0
+    }
   }
 }))
 
@@ -88,7 +91,7 @@ const AppHeader = () => {
     setDropDownOpen(dropdownType);
   };
 
-  return (
+  return ( 
     <>
       <AppBar position="sticky" className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
@@ -96,18 +99,18 @@ const AppHeader = () => {
             color="secondary"
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
             className={classes.menuIcon}
+            style={{paddingLeft: ".5rem"}}
           >
             <MenuIcon />
           </IconButton>
           {/* partial styling */}
-          <Typography variant="h6">
             <Box style={{
               borderRadius: "1rem",
               padding: ".35rem"
-            }} >
+            }} className={classes.appName}
+            >
               {AppInfo.name}
             </Box>
-          </Typography>
           <Search
             fullWidth={false}
             placeholder="Search users..."
@@ -116,26 +119,20 @@ const AppHeader = () => {
           <div className={classes.grow} />
 
           {/* Right Side */}
-          <IconButton classes={{ root: classes.icon_button }} color="inherit" onClick={(event) => handleIconClick(event, "NOTIFICATION")} >
-            {/* <IconWrapper> */}
+          <IconButton classes={{ root: classes.icon_button }} color="inherit" onClick={(event) => handleIconClick(event, "NOTIFICATION")} style={{padding: ".3rem"}} >
               <Badge max={10} classes={{ badge: badge_override.badge }}  badgeContent={notifications ? notifications.length : 10} color="secondary">
                   <NotificationIcon style={{color: "white"}} fontSize="small" />
               </Badge>
-            {/* </IconWrapper> */}
           </IconButton>
 
-          <IconButton classes={{ root: classes.icon_button }}  color="inherit" onClick={(event) => handleIconClick(event, "MESSAGE")}> 
-            {/* <IconWrapper> */}
+          <IconButton classes={{ root: classes.icon_button }}  color="inherit" onClick={(event) => handleIconClick(event, "MESSAGE")} style={{padding: ".3rem"}} > 
               <Badge max={10} badgeContent={conversations.length } classes={{ badge: badge_override.badge }} >
                 <MailIcon style={{color: "white"}} fontSize="small" />
               </Badge>
-            {/* </IconWrapper> */}
           </IconButton>
 
-          <IconButton className={classes.icon_button}  color="inherit" onClick={(event) => handleIconClick(event, "USER")}>
-            {/* <IconWrapper> */}
+          <IconButton className={classes.icon_button}  color="inherit" onClick={(event) => handleIconClick(event, "USER")} style={{padding: ".3rem"}}>
               <AccountCircle style={{color: "white"}} />
-            {/* </IconWrapper> */}
           </IconButton>
         </Toolbar>
       </AppBar>

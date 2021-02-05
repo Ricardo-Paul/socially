@@ -47,7 +47,12 @@ const commenStyles = makeStyles(theme => ({
     position: "absolute",
     right: "-3px",
     bottom: "4px",
-    borderRadius: "50%"
+    borderRadius: "50%",
+
+    [theme.breakpoints.down("sm")]:{
+      right: 0,
+      bottom: 7
+    }
   }
 }));
 

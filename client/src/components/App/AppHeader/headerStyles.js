@@ -13,7 +13,7 @@ const headerStyles = makeStyles((theme) => ({
     display: "flex",
     width: "70%",
     margin: "0 auto",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("sm")]: { 
       width: "100%",
       padding: 0,
     },
@@ -48,6 +48,7 @@ const headerStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
+    padding: 0
   },
   appName: {
     [theme.breakpoints.down("sm")]: {
@@ -64,7 +65,11 @@ const headerStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     borderRadius: "1rem",
     boxShadow: theme.palette.custom.boxShadow,
-    padding: "1rem"
+    padding: "1rem",
+    [theme.breakpoints.down("sm")]:{
+      top: "-16px",
+      left: "-10px"
+    }
   },
 }));
  

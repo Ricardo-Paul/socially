@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 80,
     paddingLeft: theme.palette.custom.drawerWidth,
     [theme.breakpoints.down("sm")]: {
-      padding: 0,
+      padding: 5,
+      paddingTop: 56
     },
   },
   extreme: {
@@ -80,7 +81,7 @@ const AppLayout = ({ authUser }) => {
   const renderRoutes = () => {
     return (
       <React.Fragment>
-        {/* <AppHeader /> */}
+        <AppHeader />
           <CssBaseline />
           <Grid container className={classes.grid}>
             {/* hidden on mobile */}

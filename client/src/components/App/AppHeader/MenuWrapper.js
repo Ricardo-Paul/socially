@@ -7,7 +7,6 @@ const MenuWrapper = ({ isOpen, anchorEl, closeMenu, children, ...rest }) => {
  
   return (
     <Popper
-      style={{willChange: "auto"}}
       className={classes.popper}
       anchorEl={anchorEl}
       open={isOpen}
