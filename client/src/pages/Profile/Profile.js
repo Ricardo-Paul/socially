@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/client";
 import { withRouter } from "react-router-dom";
 import { useStore } from "../../store";
 import ProfilePosts from "./ProfilePosts";
+import LoadingIndicator from "../../components/LoadingIndicator";
  
 const ProfileStyles = makeStyles((theme) => ({
   info: {
@@ -39,23 +40,30 @@ const Profile = ({ match }) => {
   });
 
   if (loading) {
-    return <h3> Loading... </h3>;
+    return(
+      <Grid container>
+        <Grid item md={6} xs={12}>
+          <Box display="flex" justifyContent="center" > <LoadingIndicator /> </Box>
+        </Grid>
+      </Grid>
+    )
   }
+
 
   return (
     <Grid container>
       <Grid item md={6} xs={12}>
         <Box>
-        <CoverPhotoUpload user={data.getUser} />
-        <ProfileInfo user={data.getUser} className={classes.info} />
-        <Box className={classes.content}>
-          {isAuthUser && (
-            <Box className={classes.postContainer}>
-              <CreatePost />
-            </Box>
-          )} 
-        </Box>
-        <ProfilePosts username={username} />
+          <CoverPhotoUpload user={data.getUser} />
+          <ProfileInfo user={data.getUser} className={classes.info} />
+          <Box className={classes.content}>
+            {isAuthUser && (
+              <Box className={classes.postContainer}>
+                <CreatePost />
+              </Box>
+            )} 
+          </Box>
+          <ProfilePosts username={username} />
       </Box>
       </Grid>
     </Grid>

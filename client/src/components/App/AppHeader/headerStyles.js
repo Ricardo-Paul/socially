@@ -66,11 +66,6 @@ const headerStyles = makeStyles((theme) => ({
     borderRadius: "1rem",
     boxShadow: theme.palette.custom.boxShadow,
     padding: ".5rem",
-    [theme.breakpoints.down("sm")]:{
-      position: "absolute",
-      top: "-16px",
-      left: "-10px"
-    }
   },
   mobileDrawer: {
     backgroundColor: theme.palette.custom.palette.drawerBackground,
