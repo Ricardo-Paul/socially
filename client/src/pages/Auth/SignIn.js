@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../../graphql/user";
 import * as Routes from "../../routes";
-
 import PropTypes from "prop-types";
 
-// components
 import TextField from "../../components/TextField";
 import { Button, Typography } from "@material-ui/core";
 import { MainContainer } from "../../components/Layout";
