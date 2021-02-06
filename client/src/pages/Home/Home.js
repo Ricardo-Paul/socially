@@ -155,7 +155,7 @@ const Home = ({ history }) => {
           </Grid>
           <Hidden smDown>
             <Grid item md="4" lg="4" xs="12">
-              <PeopleSuggestions />
+              {/* <PeopleSuggestions /> */}
             </Grid>
           </Hidden>
         </Grid>
