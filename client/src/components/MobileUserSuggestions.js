@@ -1,11 +1,13 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
-import { makeStyles, Paper } from "@material-ui/core";
+import { Button, IconButton, makeStyles, Paper } from "@material-ui/core";
 import { useApolloClient } from "@apollo/client";
 import { SUGGEST_PEOPLE } from "../graphql/user";
 import { useStore } from "../store";
 import LoadingIndicator from "./LoadingIndicator";
 import defaultAvatar from "../ressources/defaultAvatar.jpg";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Follow from "./Follow";
 
 const useStyles = makeStyles(theme => ({
   "@global":{
@@ -15,18 +17,45 @@ const useStyles = makeStyles(theme => ({
     }
   },
   container: {
-    width: "100%",
-    overflowX: "auto"
+    maxWidth: "100%",
+    height: 220,
+    overflowX: "auto",
+    padding: ".5rem",
+    position: "relative"
   },
-  image_container: {
-    width: 300,
+  user_item: {
+    width: 120,
     height: 200,
-    backgroundColor: "#424040",
-    border: "1px solid black"
+    marginRight: ".5rem",
+    borderRadius: ".5rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "#333333",
+    boxShadow: "1px 1px 11px 0px black"
+  },
+  image_container:{
+    width: 70,
+    height: 70,
+    marginTop: "1rem",
   },
   image: {
     width: "100%",
-    height: "100%"
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: "50%"
+  },
+  card_bottom: {
+    position: "absolute",
+    bottom: "1.5rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  name: {
+    fontWeight: 400,
+    marginBottom: ".5rem",
+    color: theme.palette.primary.contrastText
   }
 }))
 
@@ -59,26 +88,27 @@ const MobileUserSuggestions = () => {
 
   if (!people.length > 0) return null;
   if(loading){
-    return <h3> LOADING ... </h3>
+    return <Box display="flex" justifyContent="center"> <LoadingIndicator /> </Box>
   }
-
+  const image =  "https://res.cloudinary.com/socially/image/upload/v1611174110/postimages/3lm22bzkvgmz8fs3x1vm.jpg"
   console.log('PEOPLE', people)
-
+// a width of 700px if there's more than 3 items
   return (
     <div className={classes.container}>
-          <div style={{ width: "2000px", display: "flex" }}>
-            <div className={classes.image_container} style={{width: "500px"}}> 
-                {/* <img src={p.image || defaultAvatar} className={classes.image} /> */}
-              </div>
-              <div className={classes.image_container} style={{width: "500px"}}> 
-                {/* <img src={p.image || defaultAvatar} className={classes.image} /> */}
-              </div>
-              <div className={classes.image_container} style={{width: "500px"}}> 
-                {/* <img src={p.image || defaultAvatar} className={classes.image} /> */}
-              </div>
-              <div className={classes.image_container} style={{width: "500px"}}> 
-                {/* <img src={p.image || defaultAvatar} className={classes.image} /> */}
-              </div>
+          <div style={{ width: "700px", display: "flex" }}>
+            {people.map(p => {
+              return(
+                <Box className={classes.user_item}> 
+                  <Box className={classes.image_container}>
+                    <img src={p.image || defaultAvatar} className={classes.image} />
+                  </Box>
+                  <Box className={classes.card_bottom}>
+                    <Box className={classes.name}> {p.fullName} </Box>
+                    <Follow user={p} icon={AddCircleIcon} style={{ textTransform: "lowercase" }} />
+                  </Box>
+                </Box>  
+              )
+            })}
           </div>
     </div>
   );

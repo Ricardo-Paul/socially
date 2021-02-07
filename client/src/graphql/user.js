@@ -125,9 +125,16 @@ export const SUGGEST_PEOPLE = gql`
     suggestPeople(userId: $userId){
       count
       users{
+        id
         fullName
         username
         image
+        following{
+          id
+        }
+        followers{
+          id
+        }
       }
     }
   }

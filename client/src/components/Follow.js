@@ -10,8 +10,9 @@ import * as Routes from "./../routes";
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
 import { GET_AUTH_USER, GET_USERS, SUGGEST_PEOPLE } from "../graphql/user";
 import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
+import LoadingIndicator from "./LoadingIndicator";
 
-const Follow = ({ user, icon: Icon }) => {
+const Follow = ({ user, icon: Icon, style }) => {
   const [{ auth }] = useStore();
 
   const isFollowing = user.followers.find((f) => f.follower === auth.user.id);
@@ -28,13 +29,13 @@ const Follow = ({ user, icon: Icon }) => {
     delete: {
       mutation: DELETE_FOLLOW,
       variables: {
-        followId: isFollowing ? isFollowing.id : null,
+        followId: isFollowing ? isFollowing.id : null,Follow
       },
     },
   };
 
   // TODO: refetch some queries
-  const [mutate] = useMutation(options[operation].mutation, {
+  const [mutate, { loading }] = useMutation(options[operation].mutation, {
     refetchQueries: [
       {
         query: GET_FOLLOWED_POSTS,
@@ -72,9 +73,11 @@ const Follow = ({ user, icon: Icon }) => {
         size="small"
         onClick={handleButtonClick}
         fullWidth
+        style={style}
       >
-        {Icon && <Icon style={{ marginRight: 10 }} />}
         {!isFollowing ? "Follow" : "Unfollow"}
+        {Icon && <Icon style={{ marginLeft: 10 }} />}
+        {loading && <LoadingIndicator /> }
       </Button>
     </React.Fragment>
   );
