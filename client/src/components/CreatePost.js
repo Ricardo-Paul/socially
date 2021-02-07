@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     boxShadow: theme.palette.custom.boxShadow,
     padding: 10,
+    [theme.breakpoints.down("sm")]:{
+      borderRadius: 0
+    }
   },
   row1: {
     display: "flex",
@@ -105,6 +108,7 @@ const CreatePost = () => {
   const [uploading, setUploading] = useState(false);
   const [{ auth }] = useStore();
   const classes = useStyles();
+  const showButtons = isFocused || image !="";
 
   const [createPost, { loading }] = useMutation(CREATE_POST, {
     refetchQueries: [
@@ -179,29 +183,28 @@ const CreatePost = () => {
           </div>
 
           {image && <ImagePreview imageSource={URL.createObjectURL(image)} />}
-          {isFocused && (
+          {showButtons && (
             <div className={classes.buttons}>
               <Button
                 className={classes.cancel_button}
                 size="small"
                 onClick={handleReset}
                 variant="outlined"
+                style={{textTransform: "none"}}
               >
-                {!title && !image ? `CLOSE` : `CANCEL`}
+                {!title && !image ? `Close` : `Cancel`}
               </Button>
               <Button
                 size="small"
                 startIcon={<CloudUploadIcon />}
                 variant="contained"
-                style={{ marginLeft: 5 }}
+                style={{ marginLeft: 5, textTransform: "none" }}
                 type="submit"
-                classes={{
-                  ["Mui-disabled"]: classes.button_disabled,
-                }}
                 className={classes.upload_button}
                 onClick={handleSubmit}
+                
               >
-                SHARE
+                Share
               </Button>
             </div>
           )}

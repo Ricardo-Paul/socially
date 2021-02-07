@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 80,
     paddingLeft: theme.palette.custom.drawerWidth,
     [theme.breakpoints.down("sm")]: {
-      padding: 5,
+      padding: 0,
       paddingTop: 56
     },
   },

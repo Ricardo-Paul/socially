@@ -155,7 +155,7 @@ const MessageUsers = ({ closeMenu }) => {
       </Box>
     </Box>
   );
-}; 
+};
 
 export default MessageUsers;
 

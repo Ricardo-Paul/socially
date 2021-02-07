@@ -37,11 +37,12 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     borderRadius: theme.palette.shape.borderRadius,
     border: theme.palette.shape.borderColor,
-    marginTop: 20,
+    marginTop: ".5rem",
     width: "100%",
     height: "auto",
     [theme.breakpoints.down("sm")]: {
       maxWidth: "100%",
+      borderRadius: 0
     },
   },
   cardData: {
