@@ -1,5 +1,5 @@
 import React, { useEffect, lazy, Suspense } from "react";
-import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory, withRouter } from "react-router-dom";
 import Hidden from "@material-ui/core/Hidden";
 import * as Routes from "../../routes";
 import Navigation from "./Navigation";
@@ -67,8 +67,12 @@ const useStyles = makeStyles((theme) => ({
  *
  */
 const AppLayout = ({ authUser }) => {
+
   const [, dispatch] = useStore();
   const classes = useStyles();
+  const history = useHistory();
+
+
 
   // auth user available in app global store
   useEffect(() => {

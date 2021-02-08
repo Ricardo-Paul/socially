@@ -48,8 +48,7 @@ const Browse = () => {
   const openModal = (postId) => setPostId(postId);
   const closeModal = () => setPostId(null);
 
-  if(loading || !data.getPosts) return <LoadingIndicator />
-  console.log("POSTS PHOTOS", data);
+  if(loading || !data.getPosts) return <Box display="flex" color="white" justifyContent="center"> <LoadingIndicator /></Box>
 
   const { posts, count } = data.getPosts;
 

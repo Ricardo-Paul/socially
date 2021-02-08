@@ -44,13 +44,7 @@ const Home = ({ history }) => {
 
   // kind of a hack
   // prevent app from crashing when logout
-  React.useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      history.push(Routes.SIGNIN);
-      return;
-    }
-  }, [auth.user]);
+
 
   const openModal = (postId) => {
     setPostId(postId);
@@ -78,6 +72,14 @@ const Home = ({ history }) => {
   const renderContent = () => {
     if (loading && networkStatus === 1) {
       return <PostSkeleton />
+    }
+
+    if(data === undefined){
+      const token = localStorage.getItem("token");
+      if (!token) {
+        history.push(Routes.SIGNIN);
+        return;
+      }
     }
 
     const { posts, count } = data.getFollowedPosts;

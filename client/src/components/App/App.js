@@ -1,16 +1,18 @@
 import React, { useEffect, Suspense } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
 import { GET_AUTH_USER } from "../../graphql/user";
 import { useQuery } from "@apollo/client";
 import { NOTIFICATION_CREATED_OR_DELETED } from "../../graphql/notification";
 import { GET_NEW_CONVERSATIONS } from "../../graphql/message";
 import Loading from "../../pages/Loading/Loading";
 import { useTheme } from "@material-ui/core";
+import * as Routes from "./../../routes";
 
 const AppLayout = React.lazy(() => import("./AppLayout"));
 const AuthLayout = React.lazy(() => import("../../pages/Auth/AuthLayout"))
 
 const App = () => {
+
   const { loading, data, error, subscribeToMore, refetch } = useQuery(GET_AUTH_USER);
   console.log("AUTH USER", data);
 
@@ -102,6 +104,8 @@ const App = () => {
       unsubscribe();
     };
   }, [subscribeToMore]);
+
+
 
   if (error) {
     return (
