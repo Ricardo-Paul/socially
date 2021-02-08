@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
     res.send('Deployed')
 })
 
-
+//change local_db to mongodb for prod..
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log(`API Connected to the databse: ${DB_NAME}`)

@@ -26,6 +26,7 @@ const checkAuth = (token) => {
 
 export const createApolloServer = (schema, resolvers, models) => {
     return new ApolloServer({
+        playground: "true",
         typeDefs: schema,
         resolvers,
         context: async ({ req, connection }) => {

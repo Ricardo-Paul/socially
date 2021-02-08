@@ -74,6 +74,7 @@ const Follow = ({ user, icon: Icon, style }) => {
         onClick={handleButtonClick}
         fullWidth
         style={style}
+        disabled={loading}
       >
         {!isFollowing ? "Follow" : "Unfollow"}
         {Icon && !loading && <Icon style={{ marginLeft: 10 }} />}

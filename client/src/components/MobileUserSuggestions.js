@@ -8,6 +8,8 @@ import LoadingIndicator from "./LoadingIndicator";
 import defaultAvatar from "../ressources/defaultAvatar.jpg";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Follow from "./Follow";
+import { generatePath, Link } from "react-router-dom";
+import * as Routes from "../routes";
 
 const useStyles = makeStyles(theme => ({
   "@global":{
@@ -99,7 +101,12 @@ const MobileUserSuggestions = () => {
             {people.map(p => {
               return(
                 <Box className={classes.user_item}> 
-                  <Box className={classes.image_container}>
+                  <Box className={classes.image_container} 
+                    component={Link}
+                    to={generatePath(Routes.PROFILE, {
+                      username: p.username
+                    })}
+                  >
                     <img src={p.image || defaultAvatar} className={classes.image} />
                   </Box>
                   <Box className={classes.card_bottom}>

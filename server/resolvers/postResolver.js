@@ -15,7 +15,7 @@ const Query = {
   getPosts: async (_, { authUserId, skip, limit }, { Post }) => {
     // TODO: also search for posts where image is non-nul
     // that's why the $and operator
-    const query = { $and: [{ author: { $ne: authUserId } }] };
+    const query = { $and: [{ author: { $ne: authUserId } }, { image: { $ne: null } }] };
 
     // countDocument is applied directly on the query
     const posts = await Post.find(query).skip(skip).limit(limit);

@@ -271,7 +271,7 @@ const Query = {
     const followedUsers = [];
     const follow = await Follow.find({ follower: userId }, { _id: 0 }).select('following');
     follow.map((f) => followedUsers.push(f.following)); //the array contains ids
-    followedUsers.push(userId); // we'll also exclude the user from the suggestions
+    followedUsers.push(userId); // we'll also exclude the user from the suggestions 
 
     const query = { _id: { $nin: followedUsers } };
     // await User.find(query).countDocuments();

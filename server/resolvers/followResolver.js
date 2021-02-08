@@ -9,18 +9,21 @@ const Mutation = {
   //  the user that send the request is following
   // in other words the active user
   createFollow: async (_, { input: { currentUserId, followedUserId } }, { Follow, User }) => {
+    const follow = await Follow.findOne({ following: followedUserId, follower: currentUserId });
+    if(follow) throw new Error(`You're already following this user`);
+
     const newFollow = await new Follow({
       following: followedUserId,
       follower: currentUserId,
     }).save();
 
+    // const user = await User.findOne({ _id: currentUserId });
+
+
     // push the relationship to the followedUser
     await User.findOneAndUpdate({ _id: followedUserId }, { $push: { followers: newFollow._id } });
-
     // push the relationship to the current user
     await User.findOneAndUpdate({ _id: currentUserId }, { $push: { following: newFollow._id } });
-
-    // TODO: cannot follow a user more than once
 
     return newFollow;
   },
