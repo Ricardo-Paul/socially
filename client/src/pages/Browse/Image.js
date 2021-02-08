@@ -38,14 +38,14 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Image = ({ image }) => {
+const Image = ({ image, openModal }) => {
   const imageRef = React.useRef(null);
   const classes = useStyles();
   const handleMouseOver = () => imageRef.current.style.transform = "scale(0.9)";
   const handleMouseOut = () => imageRef.current.style.transform = "scale(1)";
   
   return(
-    <Box className={classes.image_container}>
+    <Box className={classes.image_container} onClick={openModal} >
       <img ref={imageRef} alt="image" src={image} className={classes.image} />
       <Box className={classes.image_overlay} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} >
         View Post

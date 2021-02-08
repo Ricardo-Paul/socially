@@ -125,6 +125,7 @@ export const GET_POST_PHOTOS = gql`
       getPosts(authUserId: $authUserId){
         count
         posts{
+          id
           image
         }
       }

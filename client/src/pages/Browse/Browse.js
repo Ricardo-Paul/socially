@@ -1,12 +1,15 @@
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import React from "react";
+import React, { Fragment } from "react";
 import Image from "./Image";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { GET_POST_PHOTOS } from "../../graphql/post";
 import { useQuery } from "@apollo/client";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import { useStore } from "../../store";
+import AppDialog from "../../components/AppDialog";
+import InfiniteScrolling from "../../components/InfiniteScrolling";
+import PostPopUp from "../../components/PostPopUp";
 
 // each 4 photos
 // nth-child(5n + )
@@ -32,48 +35,63 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const images = [
-  "https://res.cloudinary.com/socially/image/upload/v1611174110/postimages/3lm22bzkvgmz8fs3x1vm.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1611255538/postimages/iy00f7y9e8wqy34flwmx.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1611371707/postimages/xex4rqniw6apmiczlwtg.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1608221758/postimages/q6b673szi04yqi4e5i6l.jpg",
-
-  "https://res.cloudinary.com/socially/image/upload/v1611174110/postimages/3lm22bzkvgmz8fs3x1vm.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1611255538/postimages/iy00f7y9e8wqy34flwmx.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1611371707/postimages/xex4rqniw6apmiczlwtg.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1608221758/postimages/q6b673szi04yqi4e5i6l.jpg",
-
-  "https://res.cloudinary.com/socially/image/upload/v1611174110/postimages/3lm22bzkvgmz8fs3x1vm.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1611255538/postimages/iy00f7y9e8wqy34flwmx.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1611174110/postimages/3lm22bzkvgmz8fs3x1vm.jpg",
-  "https://res.cloudinary.com/socially/image/upload/v1611255538/postimages/iy00f7y9e8wqy34flwmx.jpg",
-];
-
 
 const Browse = () => {
   const classes = useStyles();
   const [{ auth }] = useStore();
-  const { data, loading } = useQuery(GET_POST_PHOTOS, {
-    variables: {
-      authUserId: auth.user.id
-    }
+  const variables = { authUserId: auth.user.id }
+  const { data, loading, fetchMore } = useQuery(GET_POST_PHOTOS, {
+    variables
   });
 
+  const [postId, setPostId] = React.useState(null);
+  const openModal = (postId) => setPostId(postId);
+  const closeModal = () => setPostId(null);
 
   if(loading || !data.getPosts) return <LoadingIndicator />
   console.log("POSTS PHOTOS", data);
 
+  const { posts, count } = data.getPosts;
+
   return(
     <Grid container>
       <Grid item md="8" lg="7" xs="12">
-        <Box className={classes.image_grid}>
-          { data.getPosts.posts.map(p => (
-            <Image image={p.image} />
-          ))}
+        <Box className={classes.image_grid} >
+          <InfiniteScrolling
+          data={posts}
+          fetchMore={fetchMore}
+          count={parseInt(count, 10)}
+          variables={variables}
+          dataKey="getPosts.posts"
+          >
+            {
+              (data) => {
+                return(
+                  <Fragment>
+                    {
+                      data.map(p => (
+                        <Fragment>
+                          <AppDialog open={postId === p.id} onClose={closeModal} >
+                            <PostPopUp id={p.id} closeModal={closeModal} />
+                          </AppDialog>
+                          <Image image={p.image} openModal={() => openModal(p.id)} />
+                        </Fragment>
+                      ))
+                    }
+                  </Fragment>
+                )
+              }
+            }
+          </InfiniteScrolling>
         </Box>
       </Grid>
-    </Grid>
+    </Grid> 
   )
 };
 
 export default Browse;
+
+
+// { data.getPosts.posts.map(p => (
+//   <Image image={p.image} />
+// ))}
