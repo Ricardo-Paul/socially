@@ -3,10 +3,13 @@ import Box from "@material-ui/core/Box";
 import React from "react";
 import Image from "./Image";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import { GET_POST_PHOTOS } from "../../graphql/post";
+import { useQuery } from "@apollo/client";
+import LoadingIndicator from "../../components/LoadingIndicator";
+import { useStore } from "../../store";
 
 // each 4 photos
 // nth-child(5n + )
-
 const useStyles = makeStyles(theme => ({
   image_grid: {
     display: "grid",
@@ -27,7 +30,7 @@ const useStyles = makeStyles(theme => ({
       gridColumn: "1 / span 3"
     }
   }
-}))
+}));
 
 const images = [
   "https://res.cloudinary.com/socially/image/upload/v1611174110/postimages/3lm22bzkvgmz8fs3x1vm.jpg",
@@ -44,16 +47,28 @@ const images = [
   "https://res.cloudinary.com/socially/image/upload/v1611255538/postimages/iy00f7y9e8wqy34flwmx.jpg",
   "https://res.cloudinary.com/socially/image/upload/v1611174110/postimages/3lm22bzkvgmz8fs3x1vm.jpg",
   "https://res.cloudinary.com/socially/image/upload/v1611255538/postimages/iy00f7y9e8wqy34flwmx.jpg",
-]
+];
+
 
 const Browse = () => {
   const classes = useStyles();
+  const [{ auth }] = useStore();
+  const { data, loading } = useQuery(GET_POST_PHOTOS, {
+    variables: {
+      authUserId: auth.user.id
+    }
+  });
+
+
+  if(loading || !data.getPosts) return <LoadingIndicator />
+  console.log("POSTS PHOTOS", data);
+
   return(
     <Grid container>
       <Grid item md="8" lg="7" xs="12">
         <Box className={classes.image_grid}>
-          { images.map(i => (
-            <Image image={i} />
+          { data.getPosts.posts.map(p => (
+            <Image image={p.image} />
           ))}
         </Box>
       </Grid>

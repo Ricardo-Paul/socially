@@ -119,3 +119,14 @@ export const GET_POST = gql`
         }
     }
 `
+
+export const GET_POST_PHOTOS = gql`
+    query($authUserId: ID!){
+      getPosts(authUserId: $authUserId){
+        count
+        posts{
+          image
+        }
+      }
+    }
+`
