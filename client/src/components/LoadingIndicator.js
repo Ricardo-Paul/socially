@@ -7,10 +7,11 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const LoadingIndicator =() => {
+const LoadingIndicator =({ style }) => {
     const classes = useStyles();
     return(
         <CircularProgress
+        style={style}
         variant="indeterminate" 
         className={classes.progress}
         />

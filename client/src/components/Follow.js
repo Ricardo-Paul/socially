@@ -10,7 +10,7 @@ import * as Routes from "./../routes";
 import { GET_FOLLOWED_POSTS } from "../graphql/post";
 import { GET_AUTH_USER, GET_USERS, SUGGEST_PEOPLE } from "../graphql/user";
 import { HOME_PAGE_POSTS_LIMIT } from "../constants/DataLimit";
-import LoadingIndicator from "./LoadingIndicator";
+import LoadingIndicator from "./LoadingIndicator"; 
 
 const Follow = ({ user, icon: Icon, style }) => {
   const [{ auth }] = useStore();
@@ -76,8 +76,8 @@ const Follow = ({ user, icon: Icon, style }) => {
         style={style}
       >
         {!isFollowing ? "Follow" : "Unfollow"}
-        {Icon && <Icon style={{ marginLeft: 10 }} />}
-        {loading && <LoadingIndicator /> }
+        {Icon && !loading && <Icon style={{ marginLeft: 10 }} />}
+        {loading && <LoadingIndicator style={{width: 20, height: 20}} /> }
       </Button>
     </React.Fragment>
   );

@@ -95,7 +95,7 @@ const MobileUserSuggestions = () => {
 // a width of 700px if there's more than 3 items
   return (
     <div className={classes.container}>
-          <div style={{ width: "700px", display: "flex" }}>
+          <div style={{ width: "700px", display: "flex" }}> 
             {people.map(p => {
               return(
                 <Box className={classes.user_item}> 
