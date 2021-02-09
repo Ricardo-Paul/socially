@@ -6,13 +6,15 @@ import Navigation from "./Navigation";
 import { colors as appColors } from "../../utils/theme";
 import { SET_AUTH_USER } from "../../store/auth";
 import { useStore } from "../../store";
-import AppHeader from "./AppHeader/AppHeader";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import { PageContainer } from "../pageContainer";
 import Loading from "../../pages/Loading/Loading";
+import BottomAppBar from "../BottomAppBar";
+import AppHeader from "./AppHeader/AppHeader";
+
 
 const Profile = lazy(() => import("../../pages/Profile"));
 const Home = lazy(() => import("../../pages/Home"));
@@ -108,6 +110,7 @@ const AppLayout = ({ authUser }) => {
               </PageContainer>
             </Grid>
           </Grid>
+          <BottomAppBar />
       </React.Fragment>
     );
   }
