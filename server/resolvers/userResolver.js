@@ -274,19 +274,12 @@ const Query = {
     followedUsers.push(userId); // we'll also exclude the user from the suggestions 
 
     const query = { _id: { $nin: followedUsers } };
-    // await User.find(query).countDocuments();
-
-    // skip a random amount of users from the total
-    // and make sure we return only six
-    // const random = Math.floor(Math.random() * usersCount);
-
-    // let usersLeft = usersCount - random;
-    // if(usersLeft < 6){
-    //   random = random - ()
-    // }
-
-    // a quick one liner solution
-    const usersFound = await User.find(query);
+ 
+    const usersFound = await User.find(query)
+      .populate("following")
+      .populate("followers")
+      .populate("posts")
+      
     let randomUsers = usersFound.sort(() => Math.random() - Math.random()).slice(0, LIMIT); //that will cut it
 
     return {
