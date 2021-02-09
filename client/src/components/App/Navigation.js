@@ -10,6 +10,7 @@ import Divider from "@material-ui/core/Divider";
 import HomeIcon from "@material-ui/icons/Home";
 import WebIcon from "@material-ui/icons/Web";
 import PeopleIcon from "@material-ui/icons/People";
+import SettingsIcon from '@material-ui/icons/Settings';
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import MessageIcon from "@material-ui/icons/Message";
 import InfoIcon from "@material-ui/icons/Info";
@@ -44,6 +45,7 @@ const Navigation = ({ closeDrawer }) => {
     },
     { title: "Messages", icon: MessageIcon, to: Routes.MESSAGE },
     { title: "About", icon: InfoIcon, to: Routes.ABOUT },
+    { title: "Preferences", icon: SettingsIcon, to: Routes.PREFERENCES },
   ];
 
   const list = options.map((item, index) => (

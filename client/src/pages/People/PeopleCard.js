@@ -55,9 +55,8 @@ const PeopleCard = ({ user, showFollow, showProfile, boxStyle }) => {
         </Typography>
        { showFollow && <Follow user={user} />}
        { showProfile && <Button 
-        color="secondary" 
         variant="contained" 
-        style={{textTransform:"none", backgroundColor: "#5c0067"}}
+        style={{textTransform:"none", backgroundColor: "#5c0067", color:"white"}}
         component={Link}
         to={generatePath(Routes.PROFILE, {
           username: user.username,

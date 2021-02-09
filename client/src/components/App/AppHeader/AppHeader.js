@@ -34,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     fontSize: ".8rem"
   },
   icon_button: {
-    padding: 0,
+    padding: ".4rem",
+    color: theme.palette.custom.palette.thirdColorText,
     [theme.breakpoints.down("sm")]:{
       padding: 0
     }

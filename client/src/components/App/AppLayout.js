@@ -24,6 +24,7 @@ const Notifications = lazy(() => import("../../pages/Notifications"));
 const About = lazy(() => import("../../pages/About"));
 const Browse = lazy(() => import("../../pages/Browse"));
 const Post = lazy(() => import("../../pages/Post"));
+const Preferences = lazy(() => import("../../pages/Preferences"));
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -105,6 +106,7 @@ const AppLayout = ({ authUser }) => {
                   <Route exact path={Routes.BROWSE} render={() => <Browse />} />
                   <Route exact path={Routes.ABOUT} render={() => <About />} />
                   <Route exact path={Routes.POST} render={() => <Post />} />
+                  <Route exact path={Routes.PREFERENCES} render={() => < Preferences />} />
                   <Redirect to={Routes.HOME} />
                 </Switch>
               </PageContainer>
