@@ -11,6 +11,8 @@ import { formStyles } from "../../styles/formStyles";
 import { Link, withRouter } from "react-router-dom";
 
 const SignIn = ({ location, history, refetch }) => {
+  document.body.style.backgroundColor = "#f3f3f3"
+
   const [error, setError] = useState("");
   const [values, setValues] = useState({
     emailOrUsername: "",

@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { Button } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { CREATE_FOLLOW, DELETE_FOLLOW } from "../graphql/follow";
 import { useStore } from "../store";
 import PropTypes from "prop-types";
@@ -14,6 +14,8 @@ import LoadingIndicator from "./LoadingIndicator";
 
 const Follow = ({ user, icon: Icon, style }) => {
   const [{ auth }] = useStore();
+  const [error, setError] = useState(""); // use global message for that
+  const [follow, setFollow] = useState(false)
 
   const isFollowing = user.followers.find((f) => f.follower === auth.user.id);
   const operation = isFollowing ? "delete" : "create";
@@ -54,14 +56,20 @@ const Follow = ({ user, icon: Icon, style }) => {
   const handleButtonClick = async () => {
     console.log("USER", user);
     console.log("ISFOLLOWING", isFollowing);
+    setFollow(false)
     try {
-      await mutate({
+      const r = await mutate({
         variables: {
           input: { ...options[operation].variables },
         },
       });
+      if(r.data.createFollow){
+        setFollow(true)
+      }
+      console.log('RESPONSE', r)
     } catch (err) {
       console.log(err);
+
     }
   };
 
@@ -76,9 +84,9 @@ const Follow = ({ user, icon: Icon, style }) => {
         style={style}
         disabled={loading}
       >
-        {!isFollowing ? "Follow" : "Unfollow"}
+        {isFollowing && !loading ? "Unfollow" : "Follow"}
         {Icon && !loading && <Icon style={{ marginLeft: 10 }} />}
-        {loading && <LoadingIndicator style={{width: 20, height: 20}} /> }
+        {loading || !operation && <LoadingIndicator style={{width: 20, height: 20}} /> }
       </Button>
     </React.Fragment>
   );

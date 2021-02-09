@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Box from "@material-ui/core/Box";
 import { Button, IconButton, makeStyles, Paper } from "@material-ui/core";
 import { useApolloClient } from "@apollo/client";
@@ -10,6 +10,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Follow from "./Follow";
 import { generatePath, Link } from "react-router-dom";
 import * as Routes from "../routes";
+import PeopleCard from "../pages/People/PeopleCard";
 
 const useStyles = makeStyles(theme => ({
   "@global":{
@@ -20,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     maxWidth: "100%",
-    height: 220,
+    height: 290,
     overflowX: "auto",
     padding: ".5rem",
     position: "relative"
@@ -58,7 +59,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 400,
     marginBottom: ".5rem",
     color: theme.palette.primary.contrastText
-  }
+  },
 }))
 
 const MobileUserSuggestions = () => {
@@ -68,13 +69,15 @@ const MobileUserSuggestions = () => {
   const [loading, setLoading] = React.useState(false);
   const classes = useStyles();
 
+  console.log('AUTH USER ID:', auth.user.id)
+
   React.useEffect(() => {
     const getSuggestedPeople = async () => {
       try {
         const {data} = await client.query({
           query: SUGGEST_PEOPLE,
           variables: {
-            userId: auth.user.id,
+            userId: auth.user.id
           },
         });
         setPeople(data.suggestPeople.users);
@@ -98,22 +101,11 @@ const MobileUserSuggestions = () => {
   return (
     <div className={classes.container}>
           <div style={{ width: "700px", display: "flex" }}> 
-            {people.map(p => {
+            {people.map((p, i) => {
               return(
-                <Box className={classes.user_item}> 
-                  <Box className={classes.image_container} 
-                    component={Link}
-                    to={generatePath(Routes.PROFILE, {
-                      username: p.username
-                    })}
-                  >
-                    <img src={p.image || defaultAvatar} className={classes.image} />
-                  </Box>
-                  <Box className={classes.card_bottom}>
-                    <Box className={classes.name}> {p.fullName} </Box>
-                    <Follow user={p} icon={AddCircleIcon} style={{ textTransform: "lowercase" }} />
-                  </Box>
-                </Box>  
+                <Fragment>
+                  <PeopleCard index={i} user={p} showFollow={false} showProfile={true} />
+                </Fragment>
               )
             })}
           </div>

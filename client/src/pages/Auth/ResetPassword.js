@@ -11,6 +11,7 @@ import {
 import AuthHeader from "./AuthHeader";
 
 const ResetPassword = ({ location }) => {
+  document.body.style.backgroundColor = "#f3f3f3"
   const url = new URLSearchParams(location.search);
   const email = url.get("email");
   const token = url.get("passwordResetToken");

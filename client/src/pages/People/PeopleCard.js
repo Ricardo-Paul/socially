@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
+import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
 import Proptypes from "prop-types";
 import Follow from "../../components/Follow";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PeopleCard = ({ user }) => {
+const PeopleCard = ({ user, showFollow, showProfile, boxStyle }) => {
   const classes = useStyles();
 
   return (
@@ -43,6 +43,7 @@ const PeopleCard = ({ user }) => {
         to={generatePath(Routes.PROFILE, {
           username: user.username,
         })}
+        style={{boxStyle}}
       >
         <img src={user.image || defaultAvatar} className={classes.avatar} />
       </Box>
@@ -52,14 +53,31 @@ const PeopleCard = ({ user }) => {
           {" "}
           @{user.username}{" "}
         </Typography>
-        <Follow user={user} />
+       { showFollow && <Follow user={user} />}
+       { showProfile && <Button 
+       color="#6c6c6d" 
+       variant="contained" 
+       style={{textTransform:"none"}}
+       component={Link}
+       to={generatePath(Routes.PROFILE, {
+         username: user.username,
+       })}
+       > 
+       View profile 
+       </Button>}
       </Box>
     </Paper>
   );
 };
 
+PeopleCard.defaultProps = {
+  showFollow: true,
+  showProfile: false
+}
+
 PeopleCard.propTypes = {
   user: Proptypes.object.isRequired,
+  showFollow: Proptypes.bool
 };
 
 export default PeopleCard;

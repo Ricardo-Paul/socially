@@ -9,6 +9,7 @@ import * as Routes from "../../routes";
 import { REQUEST_PASS_RESET } from "../../graphql/user";
 
 const ForgotPassword = () => {
+  document.body.style.backgroundColor = "#f3f3f3"
   const text = `We will email you a link to reset your password`;
 
   const [email, setEmail] = useState("");

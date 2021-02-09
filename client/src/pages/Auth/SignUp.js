@@ -17,6 +17,8 @@ import { Link, withRouter } from "react-router-dom";
 import { SIGNIN } from "../../routes";
 
 const SignUp = ({ refetch, location, history }) => {
+  document.body.style.backgroundColor = "#f3f3f3"
+
   const [values, setValues] = useState({
     fullName: "",
     username: "",

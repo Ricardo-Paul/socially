@@ -129,11 +129,11 @@ export const SUGGEST_PEOPLE = gql`
         fullName
         username
         image
-        following{
+        followers{
           id
           follower
         }
-        followers{
+        following{
           id
           follower
         }

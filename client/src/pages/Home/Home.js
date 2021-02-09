@@ -8,6 +8,8 @@ import { useStore } from "../../store";
 import PostPopUp from "../../components/PostPopUp";
 import * as Routes from "../../routes";
 import { generatePath, withRouter } from "react-router-dom";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+
 
 
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
@@ -33,6 +35,9 @@ const useStyles = makeStyles(theme => ({
   grid: {
     display: "flex",
     // alignContent: "flex-end",
+  },
+  see_all: {
+    color: theme.palette.primary.contrastText
   }
 }));
 
@@ -152,12 +157,14 @@ const Home = ({ history }) => {
         <Grid container spacing={!matches && 2} className={classes.grid}>
           <Grid item md="8" lg="7" xs="12">
               <CreatePost />
+
               <MobileUserSuggestions />
+              <Box className={classes.see_all} > <SupervisorAccountIcon /> More users </Box>
               {renderContent()}
           </Grid>
           <Hidden smDown>
             <Grid item md="4" lg="4" xs="12">
-              <PeopleSuggestions />
+              {/* <PeopleSuggestions /> */}
             </Grid>
           </Hidden>
         </Grid>

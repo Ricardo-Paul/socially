@@ -18,9 +18,9 @@ const App = () => {
 
   const theme = useTheme();
 
-  useEffect(() => {
-    document.body.style.backgroundColor = theme.palette.primary.dark;
-  }, [document])
+  // useEffect(() => {
+        document.body.style.backgroundColor = theme.palette.primary.dark
+  // }, [document])
 
   // we use subscribeToMore to execute our subscriptions
   // and push updates to the original query result (data.getAuthUser)

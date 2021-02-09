@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   grid: {
     height: "100%",
-    backgroundColor: theme.palette.primary.dark,
+    // backgroundColor: "red",
   },
   middle: {
     paddingTop: 80,
@@ -70,9 +70,6 @@ const AppLayout = ({ authUser }) => {
 
   const [, dispatch] = useStore();
   const classes = useStyles();
-  const history = useHistory();
-
-
 
   // auth user available in app global store
   useEffect(() => {
@@ -86,8 +83,8 @@ const AppLayout = ({ authUser }) => {
     return (
       <React.Fragment>
         <AppHeader />
-          <CssBaseline />
           <Grid container className={classes.grid}>
+          <CssBaseline />
             {/* hidden on mobile */}
             <Hidden smDown>
               <Drawer open variant="persistent" classes={{ paper: classes.desktopDrawer }}>

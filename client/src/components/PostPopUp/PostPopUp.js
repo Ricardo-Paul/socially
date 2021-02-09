@@ -10,6 +10,7 @@ import PostPopUpInfo from "./PostPopUpInfo";
 import CreateComment from "../CreateComment";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../../graphql/post";
+import LoadingIndicator from "../LoadingIndicator";
 
 const text_color = "#e4e6eb"
 const light_background = "#545454"
@@ -78,7 +79,7 @@ const PostPopUp = ({ closeModal, id }) => {
   }
 
   if(loading){
-    return <h3> loading... </h3>
+    return <Box display="flex" color="white" justifyContent="center"> <LoadingIndicator /></Box>
   }
 
   const post = data && data.getPost;
