@@ -11,6 +11,8 @@ import Follow from "./Follow";
 import { generatePath, Link } from "react-router-dom";
 import * as Routes from "../routes";
 import PeopleCard from "../pages/People/PeopleCard";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+
 
 const useStyles = makeStyles(theme => ({
   "@global":{
@@ -60,6 +62,13 @@ const useStyles = makeStyles(theme => ({
     marginBottom: ".5rem",
     color: theme.palette.primary.contrastText
   },
+  see_all: {
+    color: theme.palette.primary.contrastText,
+    display: "flex",
+    alignItems: "center",
+    textDecoration: "underline",
+    cursor: "pointer"
+  }
 }))
 
 const MobileUserSuggestions = () => {
@@ -99,17 +108,24 @@ const MobileUserSuggestions = () => {
   console.log('PEOPLE', people)
 // a width of 700px if there's more than 3 items
   return (
-    <div className={classes.container}>
-          <div style={{ width: "700px", display: "flex" }}> 
-            {people.map((p, i) => {
-              return(
-                <Fragment>
-                  <PeopleCard index={i} user={p} showFollow={false} showProfile={true} />
-                </Fragment>
-              )
-            })}
-          </div>
-    </div>
+    <Fragment>
+      <div className={classes.container}>
+            <div style={{ width: "700px", display: "flex" }}> 
+              {people.map((p, i) => {
+                return(
+                  <Fragment>
+                    <PeopleCard index={i} user={p} showFollow={false} showProfile={true} />
+                  </Fragment>
+                )
+              })}
+            </div>
+      </div>
+      <Box 
+      className={classes.see_all}
+      component={Link}
+      to={generatePath(Routes.PEOPLE)}
+       > <SupervisorAccountIcon style={{marginRight: ".3rem"}} /> More people </Box>
+    </Fragment>
   );
 };
 

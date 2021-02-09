@@ -5,6 +5,7 @@ import Follow from "../../components/Follow";
 import defaultAvatar from "../../ressources/defaultAvatar.jpg";
 import { generatePath, Link } from "react-router-dom";
 import * as Routes from "../../routes";
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -50,20 +51,20 @@ const PeopleCard = ({ user, showFollow, showProfile, boxStyle }) => {
       <Box className={classes.cardInfo}>
         <Typography> {user.fullName} </Typography>
         <Typography style={{ marginBottom: 10 }}>
-          {" "}
-          @{user.username}{" "}
+          @{user.username}
         </Typography>
        { showFollow && <Follow user={user} />}
        { showProfile && <Button 
-       color="#6c6c6d" 
-       variant="contained" 
-       style={{textTransform:"none"}}
-       component={Link}
-       to={generatePath(Routes.PROFILE, {
-         username: user.username,
-       })}
+        color="secondary" 
+        variant="contained" 
+        style={{textTransform:"none", backgroundColor: "#5c0067"}}
+        component={Link}
+        to={generatePath(Routes.PROFILE, {
+          username: user.username,
+        })}
+        startIcon={<PersonOutlineIcon />}
        > 
-       View profile 
+       See profile
        </Button>}
       </Box>
     </Paper>

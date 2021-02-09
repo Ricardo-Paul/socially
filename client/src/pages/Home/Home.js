@@ -8,7 +8,6 @@ import { useStore } from "../../store";
 import PostPopUp from "../../components/PostPopUp";
 import * as Routes from "../../routes";
 import { generatePath, withRouter } from "react-router-dom";
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 
 
@@ -36,9 +35,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     // alignContent: "flex-end",
   },
-  see_all: {
-    color: theme.palette.primary.contrastText
-  }
 }));
 
 const Home = ({ history }) => {
@@ -159,7 +155,6 @@ const Home = ({ history }) => {
               <CreatePost />
 
               <MobileUserSuggestions />
-              <Box className={classes.see_all} > <SupervisorAccountIcon /> More users </Box>
               {renderContent()}
           </Grid>
           <Hidden smDown>
