@@ -33,17 +33,18 @@ const useStyles = makeStyles(theme => ({
       },
 }))
 
-const PostLikeComment = ({ handleCommentClick, likeProps }) => {
+const PostLikeComment = ({ handleCommentClick, likeProps, comments }) => {
+    
     const classes = useStyles();
     const theme = useTheme();
     const inner_color = {color: theme.palette.primary.contrastText}
-    // const { likes, postId, author } = likeProps;
+    const { likes, postId, author } = likeProps;
 
   return (
     <Fragment>
       <Box fontSize="0.9rem" className={classes.like_comment_info}>
-        <span> {"508K Likes"} </span>
-        <span> {"20K Comments"} </span>
+        <span> {likes.length} Like(s) </span>
+        <span> {comments && comments.length} Comments </span>
         <span> {"8.3K Shares"} </span>
       </Box>
       <Box className={classes.like_comment_buttons}>

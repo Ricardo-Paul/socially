@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: ".8rem"
   },
   icon_button: {
-    padding: ".4rem",
+    margin: ".2rem",
     color: theme.palette.custom.palette.thirdColorText,
     [theme.breakpoints.down("sm")]:{
       padding: 0
@@ -127,13 +127,13 @@ const AppHeader = () => {
                 <div className={classes.grow} />
 
                 {/* Right Side */}
-                <IconButton classes={{ root: classes.icon_button }} color="inherit" onClick={(event) => handleIconClick(event, "NOTIFICATION")} style={{padding: ".3rem"}} >
+                <IconButton classes={{ colorInherit: classes.icon_button }} color="inherit" onClick={(event) => handleIconClick(event, "NOTIFICATION")} style={{padding: ".3rem"}} >
                     <Badge max={10} classes={{ badge: badge_override.badge }}  badgeContent={notifications ? notifications.length : 10} color="secondary">
                         <NotificationIcon style={{color: "white"}} fontSize="small" />
                     </Badge>
                 </IconButton>
 
-                <IconButton classes={{ root: classes.icon_button }}  color="inherit" onClick={(event) => handleIconClick(event, "MESSAGE")} style={{padding: ".3rem"}} > 
+                <IconButton classes={{ colorInherit: classes.icon_button }}  color="inherit" onClick={(event) => handleIconClick(event, "MESSAGE")} style={{padding: ".3rem"}} > 
                     <Badge max={10} badgeContent={conversations.length } classes={{ badge: badge_override.badge }} >
                       <MailIcon style={{color: "white"}} fontSize="small" />
                     </Badge>

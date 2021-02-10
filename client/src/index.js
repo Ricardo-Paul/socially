@@ -1,5 +1,5 @@
 // That's the very root of the app
-import React from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { render } from 'react-dom';
 import { ApolloProvider } from '@apollo/client';
 import { createApolloClient } from './utils/createApolloClient';
@@ -7,7 +7,7 @@ import { createApolloClient } from './utils/createApolloClient';
 
 // root component
 import App from './components/App/App';
-import { StoreProvider } from './store/store';
+import { StoreProvider, useStore } from './store/store';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { themes } from './constants/AppTheme';
 const { DARK_THEME, LIGHT_THEME, DEFAULT_THEME } = themes;
@@ -93,32 +93,63 @@ const APP_THEMES = {
     }
   }
 }
-
-let theme;
-
-const SELECTED_THEME = localStorage.getItem("theme");
-if(!SELECTED_THEME){
-  theme = getMuiTheme(DEFAULT_THEME);
-  localStorage.setItem("theme", DEFAULT_THEME)
-}
-
-if(SELECTED_THEME === DARK_THEME || SELECTED_THEME === LIGHT_THEME ){
-  theme = getMuiTheme(SELECTED_THEME)
-  localStorage.setItem("theme", SELECTED_THEME)
-}
-
 // http and websockekt links
 const apiUrl = process.env.REACT_APP_API_URL;
 const webSocketApiUrl = process.env.REACT_APP_WEBSOCKET_URL;
 const client = createApolloClient(apiUrl, webSocketApiUrl);
 
+
+const CustomThemeContext = createContext({
+  currentTheme: DEFAULT_THEME, //analogous to a store (themeName)
+  setTheme: null // analogous to dispatch (setThemeName)
+});
+
+function CustomThemeProvider(props){
+  const { children } = props;
+  let theme;
+
+  const currentThemeName = localStorage.getItem("theme");
+  if(!currentThemeName){
+    theme = getMuiTheme(DEFAULT_THEME);
+    localStorage.setItem("theme", DEFAULT_THEME)
+  }
+
+  if(currentThemeName === DARK_THEME || currentThemeName === LIGHT_THEME ){
+    theme = getMuiTheme(currentThemeName)
+    localStorage.setItem("theme", currentThemeName)
+  }
+
+  const [ themeName, _setThemeName ] = useState(currentThemeName);
+
+  // a wrapper around _setThemeName to also save the theme to localStora
+  const setThemeName = (name) => {
+     localStorage.setItem("theme", name)
+    _setThemeName(name)
+  }
+
+  const contexValue = {
+    currentTheme: themeName,
+    setTheme: setThemeName
+  };
+
+  return(
+     <CustomThemeContext.Provider value={contexValue} >
+        <MuiThemeProvider theme={theme} >
+          {children}
+        </MuiThemeProvider>
+     </CustomThemeContext.Provider>
+  )
+}
+
+export const useThemeContext = () => useContext(CustomThemeContext);
+
 render(
   <ApolloProvider client={client}>
-    <MuiThemeProvider theme={theme}>
-      <StoreProvider>
-            <App />
-        </StoreProvider>
-    </MuiThemeProvider>
+    <StoreProvider>
+      <CustomThemeProvider>
+        <App />
+      </CustomThemeProvider>
+    </StoreProvider>
   </ApolloProvider>,
     document.getElementById("root")
 );

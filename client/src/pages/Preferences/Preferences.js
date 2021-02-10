@@ -13,6 +13,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { themes } from "../../constants/AppTheme";
+import { useThemeContext } from "../..";
 
 const useStyles = makeStyles(theme =>({
     preferences: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles(theme =>({
 
 const currentTheme = localStorage.getItem("theme");
 const convertTheme = { Default: themes.DEFAULT_THEME, Light: themes.LIGHT_THEME, Dark: themes.DARK_THEME }
+
 
 
 function SettingsDialog({ open, onClose }){
@@ -71,12 +73,15 @@ const Preferences = () => {
     const [open, setOpen] = useState(false);
     const handleItemClick = () => setOpen(true);
 
+    const { currentTheme, setTheme } = useThemeContext();
+    console.log("CONTEXT ELEMENTS", currentTheme, setTheme)
+
     const onClose = (newValue) => {
       setOpen(false)
       if(newValue){
         const SELECTED_THEME = convertTheme[newValue];
           if(SELECTED_THEME !== currentTheme){
-            localStorage.setItem("theme", SELECTED_THEME);
+            setTheme(SELECTED_THEME);
             console.log('THEME VALUE', SELECTED_THEME)
           } else {
             console.log('SAME THEME')

@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useReducer } from 'react';
-// useReducer reuturn [state, dispatch]
 
 /**
  * intitial state and reducers imports
  */
 import { authInitialState, authReducer } from './auth';
 import { messageInitialState, messageReducer } from './message';
+import { prefrencesInitialState, preferencesReducer } from "./preferences";
 
 /**
  * create context
@@ -17,7 +17,8 @@ const StoreContext = createContext();
  */
 const store = {
     auth: authInitialState,
-    message: messageInitialState
+    message: messageInitialState,
+    preferences: prefrencesInitialState
 }
 
 /**
@@ -27,7 +28,8 @@ const store = {
  */
 const reducers = (store, action) => ({
     auth: authReducer(store.auth, action),
-    message: messageReducer(store.message, action)
+    message: messageReducer(store.message, action),
+    preferences: preferencesReducer(store.preferences, action)
 });
 
 
@@ -58,5 +60,5 @@ export const StoreProvider = ({children}) => {
 //sort of a custom useStore
 // when importing into a file
 // we can access the state by destructuring like
-// const [{auth, message}] = useStore();
+// const [store: {auth: {}, message:{}, preferences:{}}, dispatch] = useStore();
 //meaning it returns our init state in an array

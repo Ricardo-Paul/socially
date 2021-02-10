@@ -118,7 +118,12 @@ const Home = ({ history }) => {
                 <Fragment key={post.id}>
                   {/* modal postId === post.id*/}
                   <AppDialog open={postId === post.id} onClose={closeModal}>
-                    <PostPopUp id={post.id} closeModal={closeModal} />
+                    <PostPopUp 
+                    id={post.id} 
+                    closeModal={closeModal} 
+                    avatar={post.author.image}
+                    fullName={post.author.fullName}
+                    />
                   </AppDialog> 
 
                   {/* regualar post card */}
@@ -153,8 +158,7 @@ const Home = ({ history }) => {
         <Grid container spacing={!matches && 2} className={classes.grid}>
           <Grid item md="8" lg="7" xs="12">
               <CreatePost />
-
-              <MobileUserSuggestions />
+              <MobileUserSuggestions /> 
               {renderContent()}
           </Grid>
           <Hidden smDown>

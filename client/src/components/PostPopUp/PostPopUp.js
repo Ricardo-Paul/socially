@@ -74,22 +74,12 @@ const PostPopUp = ({ closeModal, id }) => {
     variables: { id }
   });
 
-  if(!loading){
-    console.log('POST DATA', data)
-  }
-
-  if(loading){
-    return <Box display="flex" color="white" justifyContent="center"> <LoadingIndicator /></Box>
-  }
-
+  if(!loading) console.log('POST DATA', data)
+  if(loading) return <Box display="flex" color="white" justifyContent="center"> <LoadingIndicator /></Box>
+  
   const post = data && data.getPost;
-  const { id: postId, image, comments, likes, author: { image: authorImage, fullName, username } } = post;
-
-  const dummyText = "A new Administration means a new lunch partner. My first weekly lunch with Vice President Kamala Harris is in the books!"
-  const avatar = "https://material-ui.com/static/images/avatar/3.jpg";
-  const name_and_hour = ["President Joe Biden", "12h"]
-
-  const inner_color = {color: `${text_color}`}
+  const { id: postId, image, title, comments, likes, author: { image: authorImage, fullName, username } } = post;
+  console.log('COMMENTS', comments)
 
   const likeProps = {
     likes,
@@ -118,13 +108,15 @@ const PostPopUp = ({ closeModal, id }) => {
               <PostPopUpHeader image={authorImage} />
               <Box className={classes.right_body}>
                 <PostPopUpInfo 
-                authorImage={avatar} 
-                authorName={name_and_hour[0]} 
-                createdAt={name_and_hour[1]}
+                authorImage={authorImage} 
+                authorName={fullName} 
+                createdAt={'12h'}
                 username={username}
                 likeProps={likeProps}
+                title={title}
+                comments={comments}
                 />
-                <PostPopUpComments comments={post.comments} />
+                <PostPopUpComments comments={comments} />
               </Box>
               <Box className={classes.create_comment}>
                 <CreateComment focus={true} postId={post.id} />
