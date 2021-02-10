@@ -11,12 +11,15 @@ const headerStyles = makeStyles((theme) => ({
   toolBar: { 
     zIndex: 700,
     display: "flex",
-    width: "70%",
+    width: "100%",
     margin: "0 auto",
+    padding: 0,
     [theme.breakpoints.down("sm")]: { 
       width: "100%",
-      padding: 0,
     },
+  },
+  middle: {
+    paddingLeft: theme.palette.custom.drawerWidth, //keep header in sync with the body
   },
   search: {
     backgroundColor: theme.palette.primary.light,
@@ -70,6 +73,9 @@ const headerStyles = makeStyles((theme) => ({
   mobileDrawer: {
     backgroundColor: theme.palette.custom.palette.drawerBackground,
     width: "90%"
+  },
+  toolbar_container: {
+    display: "flex"
   }
 }));
  

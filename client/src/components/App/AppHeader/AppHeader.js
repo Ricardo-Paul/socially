@@ -6,6 +6,8 @@ import {
   Typography,
   Badge,
   makeStyles,
+  Grid,
+  Hidden,
 } from "@material-ui/core";
 
 import {
@@ -26,6 +28,7 @@ import Search from "../../Search";
 import Box from "@material-ui/core/Box";
 import useTheme from "@material-ui/core/styles/useTheme";
 import { IconWrapper } from "../../IconWrapper";
+import { PageContainer } from "../../pageContainer";
 
 const useStyles = makeStyles(theme => ({
   badge: {
@@ -39,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]:{
       padding: 0
     }
-  }
+  },
 }))
 
 const AppHeader = () => {
@@ -55,7 +58,6 @@ const AppHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [dropDownData, setDropDownData] = useState([]);
   const [dropDownOpen, setDropDownOpen] = useState(null);
-
 
   React.useEffect(() => {
     if (auth.user != null) {
@@ -95,47 +97,62 @@ const AppHeader = () => {
   return ( 
     <>
       <AppBar position="sticky" className={classes.appBar}>
-        <Toolbar className={classes.toolBar}>
-          <IconButton
-            color="secondary"
-            onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-            className={classes.menuIcon}
-            style={{paddingLeft: ".5rem"}}
-          >
-            <MenuIcon />
-          </IconButton>
-          {/* partial styling */}
-            <Box style={{
-              borderRadius: "1rem",
-              padding: ".35rem"
-            }} className={classes.appName}
-            >
-              {AppInfo.name}
-            </Box>
-          <Search
-            fullWidth={false}
-            placeholder="Search users..."
-            style={{ marginLeft: 20 }}
-          />
-          <div className={classes.grow} />
+          <Grid item xl={10} lg={11} xs={12} className={classes.middle}>
+            <PageContainer>
+              <div className={classes.home}>
+                <Grid container spacing={2} className={classes.grid}>
+                  <Grid item md="8" lg="7" xs="12">
+                    <Toolbar className={classes.toolBar}>
+                    <IconButton
+                color="secondary"
+                onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+                className={classes.menuIcon}
+                style={{paddingLeft: ".5rem"}}
+                >
+                  <MenuIcon />
+                </IconButton>
+                {/* partial styling */}
+                  <Box style={{
+                    borderRadius: "1rem",
+                    padding: ".35rem"
+                  }} className={classes.appName}
+                  >
+                    {AppInfo.name}
+                  </Box>
+                <Search
+                  fullWidth={false}
+                  placeholder="Search users..."
+                  style={{ marginLeft: 20 }}
+                />
+                <div className={classes.grow} />
 
-          {/* Right Side */}
-          <IconButton classes={{ root: classes.icon_button }} color="inherit" onClick={(event) => handleIconClick(event, "NOTIFICATION")} style={{padding: ".3rem"}} >
-              <Badge max={10} classes={{ badge: badge_override.badge }}  badgeContent={notifications ? notifications.length : 10} color="secondary">
-                  <NotificationIcon style={{color: "white"}} fontSize="small" />
-              </Badge>
-          </IconButton>
+                {/* Right Side */}
+                <IconButton classes={{ root: classes.icon_button }} color="inherit" onClick={(event) => handleIconClick(event, "NOTIFICATION")} style={{padding: ".3rem"}} >
+                    <Badge max={10} classes={{ badge: badge_override.badge }}  badgeContent={notifications ? notifications.length : 10} color="secondary">
+                        <NotificationIcon style={{color: "white"}} fontSize="small" />
+                    </Badge>
+                </IconButton>
 
-          <IconButton classes={{ root: classes.icon_button }}  color="inherit" onClick={(event) => handleIconClick(event, "MESSAGE")} style={{padding: ".3rem"}} > 
-              <Badge max={10} badgeContent={conversations.length } classes={{ badge: badge_override.badge }} >
-                <MailIcon style={{color: "white"}} fontSize="small" />
-              </Badge>
-          </IconButton>
+                <IconButton classes={{ root: classes.icon_button }}  color="inherit" onClick={(event) => handleIconClick(event, "MESSAGE")} style={{padding: ".3rem"}} > 
+                    <Badge max={10} badgeContent={conversations.length } classes={{ badge: badge_override.badge }} >
+                      <MailIcon style={{color: "white"}} fontSize="small" />
+                    </Badge>
+                </IconButton>
 
-          <IconButton className={classes.icon_button}  color="inherit" onClick={(event) => handleIconClick(event, "USER")} style={{padding: ".3rem"}}>
-              <AccountCircle style={{color: "white"}} />
-          </IconButton>
-        </Toolbar>
+                <IconButton className={classes.icon_button}  color="inherit" onClick={(event) => handleIconClick(event, "USER")} style={{padding: ".3rem"}}>
+                    <AccountCircle style={{color: "white"}} />
+                </IconButton>
+                    </Toolbar>
+                  </Grid>
+                  <Hidden smDown>
+                    <Grid item md="4" lg="4" xs="12">
+                      {/* <PeopleSuggestions /> */}
+                    </Grid>
+                  </Hidden>
+                </Grid>
+              </div>
+            </PageContainer>
+          </Grid>
       </AppBar>
 
       <HeaderDropDowns
