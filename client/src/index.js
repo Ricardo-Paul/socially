@@ -54,7 +54,6 @@ const APP_THEMES = {
       likeColor: "#0b80ef",
       thirdColor: "#5e2367",
       thirdColorText: "#efefef"
-
     },
     drawerWidth: 300,
     peopleBoxWidth: 450,
@@ -85,7 +84,9 @@ const APP_THEMES = {
         drawerBackground: "#ffffff",
         paleNuance: "#ffffff",
         helperText: "#a9482a",
-        likeColor: "#0b80ef"
+        likeColor: "#0b80ef",
+        thirdColor: "#5e2367",
+        thirdColorText: "#efefef"
       },
       drawerWidth: 300,
       peopleBoxWidth: 450,

@@ -32,7 +32,7 @@ const navItemStyles = makeStyles((theme) => ({
     marginRight: "auto",
   },
   active: {
-    color: "#fdfdfd",
+    color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.light,
   },
 }));

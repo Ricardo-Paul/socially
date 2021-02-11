@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -34,15 +34,13 @@ const useStyles = makeStyles(theme =>({
     }
 }));
 
-const currentTheme = localStorage.getItem("theme");
-const convertTheme = { Default: themes.DEFAULT_THEME, Light: themes.LIGHT_THEME, Dark: themes.DARK_THEME }
-
-
+const convertTheme = { default: themes.DEFAULT_THEME, light: themes.LIGHT_THEME, dark: themes.DARK_THEME }
 
 function SettingsDialog({ open, onClose }){
-  const themeValue = currentTheme === "dark"? "Dark": "light";
-  const [value, setValue] = useState(themeValue);
+  const { currentTheme } = useThemeContext();
+  const [value, setValue] = useState(currentTheme);
   const handleChange = (e) => setValue(e.target.value);
+
 
   // onLClose func is used for both for Ok and Cancel
   const handleCancel = () => onClose();
@@ -50,7 +48,7 @@ function SettingsDialog({ open, onClose }){
     onClose(value);
   }
 
-  const options = ["Dark", "Light", "Default"];
+  const options = ["dark", "light", "default"];
   return(
     <Dialog open={open} >
       <DialogContent>
@@ -69,12 +67,11 @@ function SettingsDialog({ open, onClose }){
 }
 
 const Preferences = () => {
+    const { currentTheme, setTheme } = useThemeContext();
+
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const handleItemClick = () => setOpen(true);
-
-    const { currentTheme, setTheme } = useThemeContext();
-    console.log("CONTEXT ELEMENTS", currentTheme, setTheme)
 
     const onClose = (newValue) => {
       setOpen(false)
@@ -82,9 +79,6 @@ const Preferences = () => {
         const SELECTED_THEME = convertTheme[newValue];
           if(SELECTED_THEME !== currentTheme){
             setTheme(SELECTED_THEME);
-            console.log('THEME VALUE', SELECTED_THEME)
-          } else {
-            console.log('SAME THEME')
           }
       }
     }
@@ -97,17 +91,11 @@ const Preferences = () => {
                 open={open} 
                 onClose={onClose}
                 />
-
                 <Box className={classes.theme_settings} onClick={handleItemClick} >
                   Application theme
                   <span className={classes.span} > Select your favorite theme </span>
                 </Box>
           </Grid>
-          <Hidden smDown>
-            <Grid item md="4" lg="4" xs="12">
-              B
-            </Grid>
-          </Hidden>
         </Grid>
       </div>
     )

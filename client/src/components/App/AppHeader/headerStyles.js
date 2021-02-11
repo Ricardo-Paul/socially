@@ -3,7 +3,7 @@ const { makeStyles } = require("@material-ui/core");
 const headerStyles = makeStyles((theme) => ({
   appBar: {
     position: "fixed",
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.custom.palette.thirdColor,
     display: "flex",
     justifyContent: "center",
     borderBottom: theme.palette.custom.border
@@ -20,6 +20,9 @@ const headerStyles = makeStyles((theme) => ({
   },
   middle: {
     paddingLeft: theme.palette.custom.drawerWidth, //keep header in sync with the body
+    [theme.breakpoints.down("sm")]: {
+      padding: 0,
+    },
   },
   search: {
     backgroundColor: theme.palette.primary.light,
@@ -54,6 +57,7 @@ const headerStyles = makeStyles((theme) => ({
     padding: 0
   },
   appName: {
+    color: theme.palette.custom.palette.thirdColorText,
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
