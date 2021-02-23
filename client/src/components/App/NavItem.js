@@ -21,12 +21,13 @@ const navItemStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     textTransform: "none",
     letterSpacing: 0.1,
+    padding: ".5rem"
   },
   icon_container: {
     backgroundColor: "red"
   },
   icon: {
-
+    marginRight: ".3rem"
   },
   title: {
     marginRight: "auto",
@@ -52,9 +53,9 @@ const NavItem = ({ icon: Icon, title, href, className, ...rest }) => {
         className={classes.button}
         activeClassName={classes.active}
       >
-        <IconWrapper>
+        {/* <IconWrapper> */}
           {Icon && <Icon className={classes.icon} />}
-        </IconWrapper>
+        {/* </IconWrapper> */}
         <span className={classes.title}>{title}</span>
       </Button>
     </ListItem>

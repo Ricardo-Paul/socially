@@ -12,9 +12,9 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   notifications: {
-    backgroundColor: theme.palette.primary.main,
+    // backgroundColor: theme.palette.primary.main,
     padding: ".5rem",
-    width: "100%"
+    width: 350
   },
 }))
 

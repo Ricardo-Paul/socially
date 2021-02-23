@@ -4,6 +4,7 @@ import PeopleCard from "./PeopleCard";
 import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
 import {
+  Grid,
   GridList,
   GridListTile,
   ListSubheader,
@@ -51,23 +52,27 @@ const People = () => {
     }
 
     return (
-      <div className={classes.root}>
-        <GridList cellHeight={300} className={classes.gridList}>
-          <GridListTile cols={2} style={{ height: "auto" }}>
-            <ListSubheader> PEOPLE </ListSubheader>
-          </GridListTile>
+      <Grid container>
+        <Grid item md="8" lg="7" xs="12">
+            <div className={classes.root}>
+            <GridList cellHeight={300} className={classes.gridList}>
+              <GridListTile cols={2} style={{ height: "auto" }}>
+                <ListSubheader> PEOPLE </ListSubheader>
+              </GridListTile>
 
-          {users.map((user, index) => (
-            <GridListTile
-              key={index}
-              className={classes.gridListTile}
-              style={{ width: "230px", height: "100%" }}
-            >
-              <PeopleCard key={index} user={user} />
-            </GridListTile>
-          ))}
-        </GridList>
-      </div>
+              {users.map((user, index) => (
+                <GridListTile
+                  key={index}
+                  className={classes.gridListTile}
+                  style={{ width: "168px", height: "100%" }}
+                >
+                  <PeopleCard key={index} user={user} />
+                </GridListTile>
+              ))}
+            </GridList>
+          </div>
+        </Grid>
+      </Grid>
     );
   };
 

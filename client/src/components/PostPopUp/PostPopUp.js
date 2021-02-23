@@ -105,7 +105,8 @@ const PostPopUp = ({ closeModal, id }) => {
         </Grid>
         <Grid item md={4} xl={3} xs={12}>
           <Box className={classes.right}>
-              <PostPopUpHeader image={authorImage} />
+              {/* TODO: if features are implemented show header */}
+              {/* <PostPopUpHeader image={authorImage} /> */}
               <Box className={classes.right_body}>
                 <PostPopUpInfo 
                 authorImage={authorImage} 

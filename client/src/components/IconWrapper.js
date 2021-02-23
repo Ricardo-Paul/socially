@@ -1,3 +1,4 @@
+import React from "react";
 import { withStyles, Box} from "@material-ui/core";
 let gradient;
 const theme = localStorage.getItem('theme');
@@ -8,17 +9,22 @@ if(!theme || theme === 'dark'){
     gradient = "linear-gradient( 59deg, rgb(255 255 255) 0%, rgb(214 214 214) 50%, rgb(255 255 255) 100%)"
 }
 
+// export const IconWrapper = withStyles({
+//     root: {
+//         backgroundImage: gradient,
+//         width: "3rem",
+//         height: "3rem",
+//         borderRadius: "50%",
+//         display: "flex",
+//         justifyContent: "center",
+//         alignItems: "center",
+//         marginRight: ".5rem"
+//     }
+// })(Box);
 
-
-export const IconWrapper = withStyles({
-    root: {
-        backgroundImage: gradient,
-        width: "3rem",
-        height: "3rem",
-        borderRadius: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginRight: ".5rem"
-    }
-})(Box);
+export const IconWrapper = (props) => {
+    const { children } = props;
+    return <Box backgroundColor="red" >
+        {children}
+    </Box>
+}
