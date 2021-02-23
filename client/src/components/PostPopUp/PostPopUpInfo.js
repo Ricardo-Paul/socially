@@ -11,17 +11,16 @@ const useStyles = makeStyles(theme => ({
       borderRadius: 10,
       marginBottom: "0.7rem"
     }
-}))
+}));
 
 const dummyText = "A new Administration means a new lunch partner. My first weekly lunch with Vice President Kamala Harris is in the books!"
-
 
 const PostPopUpInfo = ({ authorImage, authorName, createdAt, username, likeProps, title, comments }) => {
   const classes = useStyles();
   
   return(
       <Box className={classes.post_info}>
-        <PostUserInfo 
+        <PostUserInfo
           authorImage={authorImage} 
           authorName={authorName} 
           createdAt={createdAt} 
@@ -33,6 +32,6 @@ const PostPopUpInfo = ({ authorImage, authorName, createdAt, username, likeProps
         <PostLikeComment likeProps={likeProps} comments={comments} />
       </Box>
     )
-    }
+  }
 
 export default PostPopUpInfo;

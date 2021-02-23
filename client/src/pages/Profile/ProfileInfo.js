@@ -57,6 +57,9 @@ const ProfileStyles = makeStyles((theme) => ({
   connect: {
     display: "flex",
   },
+  fullName: {
+    color: theme.palette.primary.contrastText
+  }
 }));
 
 const ProfileInfo = ({ user }) => {
@@ -109,7 +112,7 @@ const ProfileInfo = ({ user }) => {
         )}
       </Box>
       <Box style={{ width: "100%" }} >
-        <h1 style={{ textAlign: "center", color:"#d2d2d2", fontSize: "2rem" }}> {user.fullName} </h1>
+        <h1 className={classes.fullName} style={{ textAlign: "center", fontSize: "2rem" }}> {user.fullName} </h1>
         <Box className={classes.info}>
           <Typography variant="subtitle2">
             {" "}

@@ -14,6 +14,7 @@ const CoverStyles = makeStyles((theme) => ({
     borderRadius: "0 0 .5rem .5rem"
   },
   uploadIcon: {
+    display:"none",
     borderRadius: 1,
     marginTop: 5,
     marginLeft: 5,
@@ -45,7 +46,8 @@ const CoverPhotoUpload = ({ user }) => {
       <label>
         {isAuthUser && (
           <IconButton className={classes.uploadIcon} onClick={handleIconClick}>
-            <PhotoCamera />
+            {/* TODO: implement feature and unhide */}
+            {/* <PhotoCamera /> */}
           </IconButton>
         )}
       </label>
