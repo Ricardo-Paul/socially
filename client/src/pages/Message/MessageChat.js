@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, makeStyles } from "@material-ui/core";
+import { Box, makeStyles, Grid } from "@material-ui/core";
 import ChatHeading from "./ChatHeading";
 import ChatConversations from "./ChatConversations";
 import { useStore } from "../../store";
@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../../graphql/user";
 import { GET_MESSAGES, GET_NEW_MESSAGE } from "../../graphql/message";
+import { Fragment } from "react";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -70,14 +71,16 @@ const MessageChat = ({ match }) => {
   }, [ subscribeToMore, userId ])
 
   return (
-    <Box className={classes.container}>
-      <ChatHeading chatUser={data ? data.getUser : null} />
-      <ChatConversations
-        messages={messagesData ? messagesData.getMessages : []}
-        authUser={auth.user}
-        chatUser={data ? data.getUser : null}
-      />
-    </Box>
+      <Fragment>
+        <div className={classes.container}>
+          <ChatHeading chatUser={data ? data.getUser : null} />
+          <ChatConversations
+            messages={messagesData ? messagesData.getMessages : []}
+            authUser={auth.user}
+            chatUser={data ? data.getUser : null}
+          />
+        </div>
+      </Fragment>
   );
 };
 export default withRouter(MessageChat);

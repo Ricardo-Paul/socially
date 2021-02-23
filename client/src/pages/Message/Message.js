@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, makeStyles } from "@material-ui/core";
+import { Box, makeStyles, Grid } from "@material-ui/core";
 import MessageChat from "./MessageChat";
 import MessageUsers from "./MessageUsers";
 
@@ -16,10 +16,14 @@ const Message = () => {
 
   return (
     <React.Fragment>
+   <Grid container>
+    <Grid item md="8" lg="7" xs="12">
       <Box className={classes.container}>
         <MessageUsers />
         <MessageChat />
       </Box>
+      </Grid>
+      </Grid>
     </React.Fragment>
   );
 };

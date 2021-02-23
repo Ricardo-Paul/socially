@@ -8,12 +8,13 @@ import Box from "@material-ui/core/Box";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import HelperMessages from "../../components/HelperMessages";
 import { helperText } from "../../constants/HelperText";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   notifications: {
     backgroundColor: theme.palette.primary.main,
     padding: ".5rem",
-    width: 350
+    width: "100%"
   },
 }))
 
@@ -47,11 +48,13 @@ const Notifications = () => {
   };
 
   return (
-    <React.Fragment>
-      <Box className={classes.notifications} >
-        {renderContent()}
-      </Box>
-    </React.Fragment>
+    <Grid container>
+      <Grid item md="8" lg="7" xs="12">
+        <Box className={classes.notifications} >
+          {renderContent()}
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 
