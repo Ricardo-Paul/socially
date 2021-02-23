@@ -49,12 +49,10 @@ const Profile = ({ match }) => {
     )
   }
 
-
   return (
     <Grid container>
       <Grid item md="8" lg="7" xs="12">
         <Box>
-          {/* TODO: implement feature and unhide */}
           <CoverPhotoUpload user={data.getUser} />
           <ProfileInfo user={data.getUser} className={classes.info} />
           <Box className={classes.content}>

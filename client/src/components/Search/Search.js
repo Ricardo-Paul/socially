@@ -14,7 +14,7 @@ const Search = ({ placeholder, messageSearch, fullWidth, ...rest }) => {
   const classes = headerStyles();
   const [{ auth }] = useStore();
   const theme = useTheme();
-  const text_color = theme.palette.primary.contrastText;
+  const text_color = theme === "dark" ? "#ffffff" : "#a0a0a0" ;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchQuery, setSearchQuery] = React.useState("");

@@ -25,18 +25,18 @@ const headerStyles = makeStyles((theme) => ({
     },
   },
   search: {
-    backgroundColor: theme.palette.primary.light,
+    // backgroundColor: theme.palette.primary.light,
+    border: "solid #923891 3px",
     display: "flex",
     borderRadius: theme.palette.shape.inputBorderRadius,
     [theme.breakpoints.down("sm")]: {
       marginLeft: 5,
     },
     '&::placeholder':{
-      color: theme.palette.primary.contrastText
+      color: "#ffffff"
     }
   },
   searchIcon: {
-    color: "black",
     padding: 5,
     display: "flex",
     alignItems: "center",
@@ -72,6 +72,7 @@ const headerStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     borderRadius: "1rem",
     boxShadow: theme.palette.custom.boxShadow,
+    // boxShadow: "1px 2px 3px 4px #ececec",
     padding: ".5rem",
   },
   mobileDrawer: {

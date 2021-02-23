@@ -90,7 +90,7 @@ const APP_THEMES = {
       },
       drawerWidth: 300,
       peopleBoxWidth: 450,
-      boxShadow: "rgb(255 255 255) 0px 0px 0px",
+      boxShadow: "1px 1px 12px 1px #e8e8e8",
     }
   }
 }
