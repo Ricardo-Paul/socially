@@ -7,13 +7,9 @@ import { useQuery } from "@apollo/client";
 import { useStore } from "../../store";
 import PostPopUp from "../../components/PostPopUp";
 import * as Routes from "../../routes";
-import { generatePath, withRouter } from "react-router-dom";
-
-
+import { withRouter } from "react-router-dom";
 
 import { GET_FOLLOWED_POSTS } from "../../graphql/post";
-import { theme } from "../../utils/theme";
-import PeopleSuggestions from "../../components/peopleSuggestions";
 import InfiniteScrolling from "../../components/InfiniteScrolling";
 import AppDialog from "../../components/AppDialog";
 import PostSkeleton from "../../components/PostSkeleton";
@@ -45,7 +41,6 @@ const Home = ({ history }) => {
 
   // kind of a hack
   // prevent app from crashing when logout
-
 
   const openModal = (postId) => {
     setPostId(postId);
