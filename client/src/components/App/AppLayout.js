@@ -112,7 +112,7 @@ const AppLayout = ({ authUser }) => {
               </PageContainer>
             </Grid>
           </Grid>
-          <BottomAppBar />
+          {/* <BottomAppBar /> */}
       </React.Fragment>
     );
   }
